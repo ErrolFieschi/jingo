@@ -15,14 +15,21 @@ class FormBuilder
 
 
 		foreach ($form["inputs"] as $name => $configInput) {
+
+		    $html .= "<div class='form_input_wrapper'>";
+
 			$html .="<label for='".($configInput["id"]??"")."'>".($configInput["label"]??"")." </label>";
 
 
 			if($configInput["type"] == "select"){
 				$html .= self::renderSelect($name, $configInput);
-			}else{
-				$html .= self::renderInput($name, $configInput);
-			}
+			} else if ($configInput["type"] == "checkbox" || $configInput["type"] == "radio") {
+                $html .= self::renderOption($name, $configInput);
+            } else {
+                $html .= self::renderInput($name, $configInput);
+            }
+
+            $html .= "</div>";
 
 		}
 
@@ -51,7 +58,8 @@ class FormBuilder
 
 	public static function renderSelect($name, $configInput){
 		$html = "<select name='".$name."' id='".($configInput["id"]??"")."'
-						class='".($configInput["class"]??"")."'>";
+		                 id='".($configInput["id"]??"")."'
+						 class='".($configInput["class"]??"")."'>";
 
 
 		foreach ($configInput["options"] as $key => $value) {
@@ -62,5 +70,21 @@ class FormBuilder
 
 		return $html;
 	}
+
+	public static function renderOption($name, $configInput){
+
+	    $html = "<br>";
+
+        foreach ($configInput["options"] as $key => $value) {
+            $html .= "<input type='".($configInput["type"]??"")."'
+                             name='".$name."' 
+                             class='".($configInput["class"]??"")."'
+                             value='".$key."'> $key <br>";
+        }
+
+        $html .= "<br>";
+
+        return $html;
+    }
 
 }
