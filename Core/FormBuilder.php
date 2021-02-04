@@ -45,6 +45,7 @@ class FormBuilder
 
 	}
 
+
 	public static function renderInput($name, $configInput){
 		return "<input 
 						name='".$name."' 
@@ -55,6 +56,9 @@ class FormBuilder
 						".(!empty($configInput["required"])?"required='required'":"")."
 					>";
 	}
+
+
+
 
 	public static function renderSelect($name, $configInput){
 		$html = "<select name='".$name."' id='".($configInput["id"]??"")."'
@@ -70,7 +74,8 @@ class FormBuilder
 
 		return $html;
 	}
-
+  
+  
 	public static function renderCheckboxRadio($name, $configInput){
 
 	    $html = "";

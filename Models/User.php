@@ -17,9 +17,16 @@ class User extends Database
 	protected $status = 0;
 	protected $isDeleted = 0;
 
+	protected $bdd ;
+
 	public function __construct(){
-		parent::__construct();
+		$this->bdd = parent::getInstance();
+        $getCalledClassExploded = explode("\\", get_called_class()); //App\Models\User
+        $this->bdd->setTable(DBPREFIXE.end($getCalledClassExploded));
+
 	}
+
+
 
 	/**
      * @return mixed
@@ -143,13 +150,7 @@ class User extends Database
         return $this->isDeleted;
     }
 
-    /**
-     * @param int $idDeleted
-     */
-    public function setIsDeleted(int $isDeleted)
-    {
-        $this->isDeleted = $isDeleted;
-    }
+
 
     /**
      * @return int
