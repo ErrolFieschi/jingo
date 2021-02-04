@@ -5,16 +5,20 @@ namespace App\Core;
 class Security
 {
 
-	public function isConnected($user){
+	public static function isConnected(){
 
-	    $this->checkToken($user);
+        echo "Connecter !";
 
-		return true;
+		return self::checkToken();
 	}
 
-    private function checkToken($user) {
+    private static function checkToken() {
 
-	    return ($user->getToken() == $user->getOneRowWithId('token', $user->getId()));
+	    if (isset($_SESSION['user'])) {
+            return ($_SESSION['user']->getToken() == $_SESSION['user']->getOneRowWithId('token', $_SESSION['user']->getId()));
+        }
+
+	    return false;
 
     }
 

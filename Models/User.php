@@ -23,7 +23,7 @@ class User extends Database
 	public function __construct(){
 		$this->bdd = parent::getInstance();
         $getCalledClassExploded = explode("\\", get_called_class()); //App\Models\User
-        $this->bdd->setTable(DBPREFIXE.end($getCalledClassExploded));
+        $this->bdd->setTable(strtolower(DBPREFIXE.end($getCalledClassExploded)));
         $this->setToken();
 	}
 
@@ -180,7 +180,7 @@ class User extends Database
 
     public function setToken()
     {
-        $this->token = \OAuthProvider::generateToken(4096);
+        $this->token = bin2hex(random_bytes(64));
         $this->updateOneRow("token", $this->token);
     }
 

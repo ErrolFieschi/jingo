@@ -5,6 +5,7 @@ namespace App;
 use App\Core\Router;
 use App\Core\ConstantMaker;
 use App\Core\Helpers as h;
+use App\Core\Security;
 
 //require "Core/Router.php";
 //require "Core/Security.php";
@@ -25,35 +26,45 @@ $uri = $uriExploded[0];
 
 $router = new Router($uri);
 
-$c = $router->getController();
-$a = $router->getAction();
+$controller = $router->getController();
+$action = $router->getAction();
+$auth = $router->getAuth();
 
 
 
-if( file_exists("./Controllers/".$c.".php")){
+if( file_exists("./Controllers/".$controller.".php")){
 
-	include "./Controllers/".$c.".php";
+	include "./Controllers/".$controller.".php";
 	// SecurityController =>  App\Controller\SecurityController
 
-	$c = "App\\Controller\\".$c;
-	if(class_exists($c)){
-		// $controller ====> SecurityController
-		$cObjet = new $c();
-		if(method_exists($cObjet, $a)){
-			$cObjet->$a();
+	$controller = "App\\Controller\\".$controller;
+	if(class_exists($controller)){
+		// $controllerontroller ====> SecurityController
+		$controllerObjet = new $controller();
+		if(method_exists($controllerObjet, $action)){
+		    if ($auth === true) {
+                if (Security::isConnected()) {
+                    $controllerObjet->$action();
+                } else {
+                    echo "RIEN A FOUTRE";
+//                    header("location : /"); // RIEN A FOUTRE
+                }
+            } else {
+                $controllerObjet->$action();
+            }
 
 		}else{
-			die("L'action' : ".$a." n'existe pas");
+			die("L'action' : ".$action." n'existe pas");
 		}
 
 	}else{
 	
-		die("La classe controller : ".$c." n'existe pas");
+		die("La classe controller : ".$controller." n'existe pas");
 	}
 
 
 }else{
-	die("Le fichier controller : ".$c." n'existe pas");
+	die("Le fichier controller : ".$controller." n'existe pas");
 }
 
 

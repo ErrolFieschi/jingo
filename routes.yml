@@ -2,26 +2,31 @@
 /:
   controller: Main
   action: default
+  auth: false
 
 /admin:
   controller: Security
   action: default
+  auth: true
 
 /s-inscrire:
   controller: Security
   action: register
+  auth: false
 
 /se-connecter:
   controller: Security
   action: login
+  auth: false
 
 /login:
   controller: Security
-  action: login  
-
+  action: login
+  auth: false
 
 /se-deconnecter:
   controller: Security
   action: logout
+  auth: true
 
 

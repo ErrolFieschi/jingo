@@ -92,13 +92,8 @@ class Security{
 
 	public function logoutAction(){
 
-		$security = new Secu();
-		if($security->isConnected()){
-			echo "OK";
-		}else{
-			echo "NOK";
-		}
-		
+	    echo "Logout action";
+
 	}
 
 

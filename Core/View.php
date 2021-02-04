@@ -2,6 +2,8 @@
 
 namespace App\Core;
 
+use App\Core\Security;
+
 class View
 {
 
@@ -27,9 +29,6 @@ class View
 
 	public function setView($view){
 		if(file_exists("Views/".$view.".view.php")){
-
-
-
 			$this->view = "Views/".$view.".view.php";
 		}else{
 			die("Erreur de vue");
@@ -59,9 +58,3 @@ class View
 
 
 }
-
-
-
-
-
-

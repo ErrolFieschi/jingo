@@ -8,6 +8,7 @@ class Router
 	private $routesPath = "routes.yml";
 	private $controller;
 	private $action;
+	private $auth;
 
 	public function __construct($uri){
 		$this->setUri($uri);
@@ -19,6 +20,7 @@ class Router
 
 				$this->setController($this->routes[$this->uri]["controller"]);
 				$this->setAction($this->routes[$this->uri]["action"]);
+                $this->setAuth($this->routes[$this->uri]["auth"]);
 			}else{
 				die("Chemin inexistant : 404");
 			}
@@ -52,5 +54,21 @@ class Router
 	public function getAction(){
 		return $this->action;
 	}
+
+    /**
+     * @return mixed
+     */
+    public function getAuth()
+    {
+        return $this->auth;
+    }
+
+    /**
+     * @param mixed $auth
+     */
+    public function setAuth($auth)
+    {
+        $this->auth = $auth;
+    }
 
 }

@@ -67,10 +67,9 @@ class Database
 
 	public function updateOneRow($col, $value) {
 
-	    $query = $this->bdd->pdo->prepare("UPDATE ".$this->bdd->table." SET :col = :value ;");
+	    $query = $this->bdd->pdo->prepare("UPDATE ".$this->bdd->table." SET ".$col." = :value ;");
 
 	    $query->execute([
-	        "col" => $col,
             "value" => $value
         ]);
 
