@@ -16,8 +16,8 @@ class User extends Database
 	protected $role = 0;
 	protected $status = 0;
 	protected $isDeleted = 0;
+    protected $token;
 
-	protected $bdd ;
 
 	public function __construct(){
 		$this->bdd = parent::getInstance();
@@ -25,7 +25,6 @@ class User extends Database
         $this->bdd->setTable(DBPREFIXE.end($getCalledClassExploded));
 
 	}
-
 
 
 	/**
@@ -167,6 +166,24 @@ class User extends Database
     {
         $this->role = $role;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getToken()
+    {
+        return $this->token;
+    }
+
+    /**
+     * @param mixed $token
+     */
+    public function setToken($token)
+    {
+        $this->token = $token;
+    }
+
+    protected $bdd ;
 
 
     public function formRegister(){

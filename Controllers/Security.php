@@ -22,6 +22,7 @@ class Security{
 	}
 
 
+
 	public function registerAction(){
 
 
@@ -77,17 +78,12 @@ class Security{
 			}else{
 				$view->assign("errors", $errors);
 			}
-
-
-
 		}
 
 		$view->assign("form", $form);
 		$view->assign("formLogin", $formLogin);
 
 	}
-
-
 
 	public function logoutAction(){
 
@@ -99,8 +95,4 @@ class Security{
 		}
 		
 	}
-
-
-	
-
 }
