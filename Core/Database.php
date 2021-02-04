@@ -57,15 +57,59 @@ class Database
             $query = "" ;
 
 		}
-        var_dump($this);
 		$query->execute($columns);
         if(is_null($this->getId()))
             $this->setId($this->bdd->pdo->lastInsertId()) ;
-        echo $this->getId() ;
 		
 
 
 	}
+
+	public function updateOneRow($col, $value) {
+
+	    $query = $this->bdd->pdo->prepare("UPDATE ".$this->bdd->table." SET :col = :value ;");
+
+	    $query->execute([
+	        "col" => $col,
+            "value" => $value
+        ]);
+
+    }
+
+    public function getAllRow() {
+
+        $query = $this->bdd->pdo->prepare("SELECT * FROM ".$this->bdd->table." ;");
+
+        $query->execute();
+
+        return $query->fetchAll();
+
+    }
+
+    public function getRowWithId($id) {
+
+        $query = $this->bdd->pdo->prepare("SELECT * FROM ".$this->bdd->table." WHERE id = :id ;");
+
+        $query->execute([
+            "id" => $id
+        ]);
+
+        return $query->fetch();
+
+    }
+
+    public function getOneRowWithId($col, $id) {
+
+        $query = $this->bdd->pdo->prepare("SELECT :col FROM ".$this->bdd->table." WHERE id = :id ;");
+
+        $query->execute([
+            "col" => $col,
+            "id" => $id
+        ]);
+
+        return $query->fetch();
+
+    }
 
 }
 

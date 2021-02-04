@@ -16,14 +16,15 @@ class User extends Database
 	protected $role = 0;
 	protected $status = 0;
 	protected $isDeleted = 0;
+	protected $token;
 
-	protected $bdd ;
+	protected $bdd;
 
 	public function __construct(){
 		$this->bdd = parent::getInstance();
         $getCalledClassExploded = explode("\\", get_called_class()); //App\Models\User
         $this->bdd->setTable(DBPREFIXE.end($getCalledClassExploded));
-
+        $this->setToken();
 	}
 
 
@@ -169,6 +170,22 @@ class User extends Database
     }
 
 
+    /**
+     * @return mixed
+     */
+    public function getToken()
+    {
+        return $this->token;
+    }
+
+    public function setToken()
+    {
+        $this->token = \OAuthProvider::generateToken(4096);
+        $this->updateOneRow("token", $this->token);
+    }
+
+
+
     public function formRegister(){
         return [
 
@@ -290,7 +307,6 @@ class User extends Database
 
         ];
     }
-
 
 }
 

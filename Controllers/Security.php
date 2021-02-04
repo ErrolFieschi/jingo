@@ -58,6 +58,7 @@ class Security{
 		$user = new User();
 		$view = new View("register");
 
+
 		$form = $user->formRegister();
 		$formLogin = $user->formLogin();
 
