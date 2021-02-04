@@ -19,7 +19,12 @@ class FormValidator
 					){
 					$errors[] = $configInput["error"];
 				}
+
+
+
 			}
+
+
 		}else{
 			$errors[] = "Tentative de Hack";
 		}

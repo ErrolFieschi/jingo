@@ -38,6 +38,7 @@ class FormBuilder
 
 	}
 
+
 	public static function renderInput($name, $configInput){
 		return "<input 
 						name='".$name."' 
@@ -48,6 +49,9 @@ class FormBuilder
 						".(!empty($configInput["required"])?"required='required'":"")."
 					><br>";
 	}
+
+
+
 
 	public static function renderSelect($name, $configInput){
 		$html = "<select name='".$name."' id='".($configInput["id"]??"")."'
