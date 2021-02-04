@@ -234,13 +234,13 @@ class User extends Database
                     "required"=>true
                 ],
                 "country"=>[ 
-                    "type"=>"select",
+                    "type"=>"radio",
                     "label"=>"Votre pays",
                     "options" => [ 
-                                    "fr"=>"France",
-                                    "ru"=>"Russie",
-                                    "pl"=>"Pologne",
-                                    ],
+                        "fr"=>"France",
+                        "ru"=>"Russie",
+                        "pl"=>"Pologne",
+                    ],
                     "minLength"=>2,
                     "maxLength"=>2,
                     "id"=>"country",
