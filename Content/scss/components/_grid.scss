@@ -1,0 +1,56 @@
+@import "colors";
+$container-width: 1170px;
+$columns: 12;
+$gutter: 20px;
+$container-width-lg: 1280px;
+$container-width-md: 900px;
+$container-width-sm: 750px;
+
+@for $i from 1 through $columns {
+  .col-#{$i} {
+    width: ((100 / $columns) * $i) * 1%;
+    height: 30px;
+    padding: 0 calc(#{$gutter} / 2);
+  }
+}
+* {
+  box-sizing: border-box;
+}
+
+/* sass --watch file/fille.scss:file/file.css*/
+@mixin container-content ($width) {
+  max-width: $width;
+  margin: auto;
+}
+
+.color-red{
+  background-color: red;
+}
+.color-purple{
+  background-color: purple;
+}
+.color-orange{
+  background-color: orange;
+}
+.color-blue{
+  background-color: blue;
+}
+.color-green{
+  background-color: green;
+}
+.color-yellow{
+  background-color: yellow;
+}
+.row{
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0 calc(#{$gutter} /-2);
+}
+
+.container {
+  @include container-content($container-width-lg);
+}
+
+.col-inner {
+  height: 25px;
+}
