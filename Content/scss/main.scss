@@ -1,3 +1,99 @@
+@import "components/_fonts";
 @import "components/grid";
-@import "components/color";
+@import "components/colors";
+@import "components/_global.scss";
+@import "components/_button.scss";
 
+
+
+.div_image_register{
+  background-color: #B4DEE8;
+  height: 100vh;
+  display: flex;
+}
+
+.image_register{
+  height: 600px;
+  width: 600px;
+}
+
+.div_colo_register{
+  background-color: #F2F2F2;
+  height: 100vh;
+  display: flex;
+}
+.div_register{
+  padding: 40px;
+  background-color: white;
+  height: 500px;
+  width: 55%;
+  border-radius: 10px;
+  box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+}
+.form_input{
+  margin-bottom: 20px;
+}
+
+.card_title{
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.center_center{
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+
+.form_input{
+  border: none;
+  border-bottom: solid 1px;
+  width: 80%;
+  padding-bottom: 12px;
+}
+
+.radio_input{
+  margin-bottom: 10px;
+}
+
+/* retire le focus de google sur les inputs */
+textarea:focus, input:focus{
+  outline: none;
+}
+
+@media only screen and (max-width: 1000px) {
+  .div_image_register{
+    display: none;
+  }
+
+  .div_colo_register{
+    width: 100%!important;
+    background-color: #B4DEE8;
+  }
+}
+
+.bloc1{
+  background-color: red;
+  height: 400px;
+}
+.bloc2{
+  background-color: blue;
+  height: 400px;
+}
+.bloc3{
+  background-color: black;
+  height: 400px;
+}
+.bloc4{
+  background-color: green;
+  height: 400px;
+}
+
+.flexer{
+  width: 100vh;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+}
+
+/* TEST FRAMEWORK CSS */

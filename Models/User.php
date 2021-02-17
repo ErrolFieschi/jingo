@@ -194,7 +194,7 @@ class User extends Database
                 "action"=>"",
                 "id"=>"form_register",
                 "class"=>"form_builder",
-                "submit"=>"S'inscrire"
+                "submit"=>"Continuer"
             ],
             "inputs"=>[
                 "firstname"=>[ 
@@ -204,7 +204,7 @@ class User extends Database
                     "maxLength"=>55,
                     "id"=>"firstname",
                     "class"=>"form_input",
-                    "placeholder"=>"Exemple: Yves",
+                    "placeholder"=>"Prénom",
                     "error"=>"Votre prénom doit faire entre 2 et 55 caractères",
                     "required"=>true
                 ],
@@ -215,7 +215,7 @@ class User extends Database
                     "maxLength"=>255,
                     "id"=>"lastname",
                     "class"=>"form_input",
-                    "placeholder"=>"Exemple: SKRZYPCZYK",
+                    "placeholder"=>"Nom",
                     "error"=>"Votre nom doit faire entre 2 et 255 caractères",
                     "required"=>true
                 ],
@@ -226,7 +226,7 @@ class User extends Database
                     "maxLength"=>320,
                     "id"=>"email",
                     "class"=>"form_input",
-                    "placeholder"=>"Exemple: nom@gmail.com",
+                    "placeholder"=>"Email",
                     "error"=>"Votre email doit faire entre 8 et 320 caractères",
                     "required"=>true
                 ],
@@ -236,7 +236,7 @@ class User extends Database
                     "minLength"=>8,
                     "id"=>"pwd",
                     "class"=>"form_input",
-                    "placeholder"=>"",
+                    "placeholder"=>"Mot de passe",
                     "error"=>"Votre mot de passe doit faire au minimum 8 caractères",
                     "required"=>true
                 ],
@@ -246,7 +246,7 @@ class User extends Database
                     "confirm"=>"pwd",
                     "id"=>"pwdConfirm",
                     "class"=>"form_input",
-                    "placeholder"=>"",
+                    "placeholder"=>"Confirmer mot de passe",
                     "error"=>"Votre mot de mot de passe de confirmation ne correspond pas",
                     "required"=>true
                 ],
@@ -261,7 +261,7 @@ class User extends Database
                     "minLength"=>2,
                     "maxLength"=>2,
                     "id"=>"country",
-                    "class"=>"form_input",
+                    "class"=>"radio_input",
                     "placeholder"=>"Exemple: fr",
                     "error"=>"Votre pays doit faire 2 caractères"
                 ]

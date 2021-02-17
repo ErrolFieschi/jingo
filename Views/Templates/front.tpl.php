@@ -1,17 +1,18 @@
 <!DOCTYPE html>
 <html lang="FR">
 <head>
-	<meta charset="UTF-8">
-	<title>Template de FRONT</title>
-	<meta name="description" content="ceci est la description de ma page">
+    <meta charset="UTF-8">
+    <title>Template de FRONT</title>
+    <meta name="description" content="ceci est la description de ma page">
+    <link href="/Content/dist/main.css" rel="stylesheet"> <!-- temporary will be removed -->
 </head>
 <body>
-	<header>
-		<h1>Template du front</h1>
-	</header>
 
-	<!-- intégration de la vue -->
-	<?php include $this->view ;?>
+<header>
+</header>
+
+    <!-- intégration de la vue -->
+    <?php include $this->view; ?>
 
 </body>
 </html>

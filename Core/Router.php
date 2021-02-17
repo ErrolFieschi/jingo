@@ -23,6 +23,7 @@ class Router
                 $this->setAuth($this->routes[$this->uri]["auth"]);
 			}else{
 				die("Chemin inexistant : 404");
+				//remplacer par un header location
 			}
 
 		}else{
