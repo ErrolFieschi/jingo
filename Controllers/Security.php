@@ -18,7 +18,8 @@ class Security{
 
 
 	public function loginAction(){
-		echo "Controller security action login";
+		//echo "Controller security action login";
+        $view = new View("login");
 	}
 
 
