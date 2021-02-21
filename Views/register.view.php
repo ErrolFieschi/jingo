@@ -18,33 +18,5 @@ endif; ?>
     </div>
 </div>
 
-<div class="container">
-    <div class="row flexer">
-        <div class="col-6 col-md-6 col-sm-12 bloc1">
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-        </div>
-        <div class="col-4 col-md-6 col-sm-12 bloc2">
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-        </div>
-        <div class="col-2 col-md-6 col-sm-12 bloc3">
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-        </div>
-        <div class="col-2 col-md-6 col-sm-12 bloc4">
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-        </div>
-    </div>
-</div>
 
 
