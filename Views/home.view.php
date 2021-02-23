@@ -1,6 +1,4 @@
-<!--<section>-->
-<!--	<h2>Welcome --><?//= $pseudo;?><!--</h2>-->
-<!--	<small>Vous avez --><?//= $age;?><!-- ans et votre email c'est --><?//= $email ?><!--</small>-->
-<!--</section>-->
-<!---->
+<section>
+    <h2>Bienvenue sur la page d'accueil de Jingo</h2>
+</section>
 

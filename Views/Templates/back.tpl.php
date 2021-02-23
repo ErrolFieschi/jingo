@@ -9,12 +9,11 @@
 </head>
 <body>
 	<header>
-<!--            <img src="#" alt="logo Jingo">-->
-            <nav style="width: 20%; background-color: #181933; min-height: 100vh; color: white;">
-                <div style="text-align: center; padding-top: 8%;">
-                    <a href="#" class="brand">Jingo</a>
+            <nav class="nav vertical-nav">
+                <div class="nav-brand">
+                    <a href="#">JINGO</a>
                 </div>
-                <ul class="nav vertical-nav">
+                <ul>
                     <li class="nav-item">
                         <img src="/Content/svg/board.svg" alt="icon">
                         <a class="nav-link" href="#">Tableau de bord</a>
@@ -39,7 +38,7 @@
                         <img src="/Content/svg/user.svg" alt="icon">
                         <a class="nav-link " href="#">Utilisateurs</a>
                     </li>
-<!--                    separation à créer-->
+                    <hr class="nav-separator">
                     <li class="nav-item">
                         <img src="/Content/svg/setting.svg" alt="icon">
                         <a class="nav-link " href="#">Paramètres</a>
@@ -54,5 +53,6 @@
 
     <?php include $this->view; ?>
 
+    <script type="text/javascript" src="https://kit.fontawesome.com/19c1e7b3bd.js" crossorigin="anonymous"></script>
 </body>
 </html>

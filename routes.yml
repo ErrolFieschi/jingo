@@ -9,6 +9,11 @@
   action: default
   auth: true
 
+/dashboard:
+  controller: Security
+  action: admin
+  auth: false
+
 /s-inscrire:
   controller: Security
   action: register

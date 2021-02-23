@@ -282,12 +282,18 @@ p {
   padding-left: 0;
   margin-bottom: 0;
   list-style: none;
+  color: white;
+}
+.nav ul {
+  padding: 0;
 }
 
 .vertical-nav {
   flex-direction: column;
-  margin-top: 25%;
   align-content: center;
+  width: 294px;
+  background-color: #24242d;
+  min-height: 100vh;
 }
 
 .nav-link {
@@ -302,15 +308,21 @@ p {
   cursor: default;
 }
 
-.brand {
+.nav-brand {
+  text-align: center;
+  padding: 40px 0 25px;
+}
+.nav-brand a {
   color: #ffffff;
-  font-size: 4em;
+  font-size: 3em;
   text-decoration: none;
 }
 
 .nav-item {
   display: flex;
-  margin: 3%;
+  margin-top: 18px;
+  white-space: nowrap;
+  font-size: 0.9rem;
 }
 
 .nav-fill > .nav-link,
@@ -331,6 +343,11 @@ p {
 }
 .tab-content > .active {
   display: block;
+}
+
+.nav-separator {
+  margin: 20% 0;
+  background-color: white;
 }
 
 .div_image_register {

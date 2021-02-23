@@ -16,6 +16,10 @@ class Security{
 		echo "Controller security action default";
 	}
 
+    public function adminAction(){
+        $view = new View("dashboard","back");
+    }
+
 
 	public function loginAction(){
 		//echo "Controller security action login";

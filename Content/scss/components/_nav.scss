@@ -4,12 +4,19 @@
   padding-left: 0;
   margin-bottom: 0;
   list-style: none;
+  color: white;
+
+  ul{
+    padding: 0;
+  }
 }
 
 .vertical-nav{
   flex-direction: column;
-  margin-top: 25%;
   align-content: center;
+  width: 294px;
+  background-color: $nav-back-color;
+  min-height: 100vh;
 }
 
 .nav-link {
@@ -32,15 +39,22 @@
   }
 }
 
-.brand{
-  color: #ffffff;
-  font-size: 4em;
-  text-decoration: none;
+.nav-brand{
+  text-align: center;
+  padding: 40px 0 25px;
+
+  a{
+    color: #ffffff;
+    font-size: 3em;
+    text-decoration: none;
+  }
 }
 
 .nav-item{
   display: flex;
-  margin: 3%;
+  margin-top: 18px;
+  white-space: nowrap;
+  font-size: 0.9rem;
 }
 
 .nav-fill {
@@ -67,4 +81,9 @@
   > .active {
     display: block;
   }
+}
+
+.nav-separator{
+  margin: 20% 0;
+  background-color: white;
 }

@@ -8,10 +8,8 @@ class Main{
 
 
 	public function defaultAction(){
-		
 
-
-		$view = new View("home", "back");
+		$view = new View("home");
 	}
 
 
