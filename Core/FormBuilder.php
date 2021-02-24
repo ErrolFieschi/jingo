@@ -34,7 +34,7 @@ class FormBuilder
 
         }
 
-        $html .= "<input class='button ' type='submit' value=\"" . ($form["config"]["submit"] ?? "Valider") . "\">";
+        $html .= "<input class='button-con' type='submit' value=\"" . ($form["config"]["submit"] ?? "Valider") . "\">";
         $html .= "</form>";
 
         echo $html;
@@ -49,8 +49,10 @@ class FormBuilder
 						id='" . ($configInput["id"] ?? "") . "'
 						class='" . ($configInput["class"] ?? "") . "'
 						placeholder='" . ($configInput["placeholder"] ?? "") . "'
-						" . (!empty($configInput["required"]) ? "required='required'" : "") . "
-					>";
+						" . ($configInput["type"] === "date" && !empty($configInput["minDate"]) ? "min=" . $configInput["minDate"] : "") . "
+                        " . ($configInput["type"] === "date" && !empty($configInput["maxDate"]) ? "max=" . $configInput["maxDate"] : "") . "
+
+						" . (!empty($configInput["required"]) ? "required='required'" : "") . ">";
     }
 
 
@@ -58,7 +60,8 @@ class FormBuilder
     {
         $html = "<select name='" . $name . "' id='" . ($configInput["id"] ?? "") . "'
 		                 id='" . ($configInput["id"] ?? "") . "'
-						 class='" . ($configInput["class"] ?? "") . "'>";
+						 class='" . ($configInput["class"] ?? "") .
+            (!empty($configInput["required"]) ? "required='required'" : "") . "'>";
 
         foreach ($configInput["options"] as $key => $value) {
             $html .= "<option value='" . $key . "'>" . $value . "</option>";
@@ -74,12 +77,15 @@ class FormBuilder
         $html = "";
 
         foreach ($configInput["options"] as $key => $value) {
-            $html .= "<input type='" . ($configInput["type"] ?? "") . "'
+            $html .= "<input " . (!empty($configInput["required"]) ? "required='required'" : "") . "
+             type='" . ($configInput["type"] ?? "") . "'
                              name='" . $name . "' 
                              class='" . ($configInput["class"] ?? "") . "'
                              value='" . $key . "'> $key";
         }
         return $html;
     }
+
+
 
 }

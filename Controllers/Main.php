@@ -16,8 +16,10 @@ class Main{
 		$view->assign("age", 18);
 		$view->assign("email", "y.skrzypczyk@gmail.com");
 
-
 	}
+    public function homeAction(){
+        $view = new View("home","back");
+    }
 
 
 }

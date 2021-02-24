@@ -11,6 +11,7 @@
 <header>
 </header>
 
+<h1>FRONT</h1>
     <!-- intégration de la vue -->
     <?php include $this->view; ?>
 

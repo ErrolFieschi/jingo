@@ -54,16 +54,17 @@ class Database
 				." );");	
 		}else{
 			//UPDATE
-            $query = "" ;
-
+            $query = $this->bdd->pdo->prepare("UPDATE ".$this->bdd->table." (".
+                implode("SET ", array_keys($columns), "=") . implode(":", array_keys($columns),",")
+                ." );");
 		}
 		$query->execute($columns);
         if(is_null($this->getId()))
             $this->setId($this->bdd->pdo->lastInsertId()) ;
-		
-
 
 	}
+
+
 
 	public function updateOneRow($col, $value) {
 

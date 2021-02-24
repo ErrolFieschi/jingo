@@ -1,5 +1,5 @@
 
-.button{
+.button-con{
     padding: 1em 2em;
     display: inline-block;
     border-radius: 25px;
@@ -12,7 +12,7 @@
     @media screen and (max-width: 760px){
         font-size: rem(12);
     }
-    button:hover{
+    button-con:hover{
         background-color: lighten($grey, 10%);
     }
     &--alert{
@@ -29,5 +29,40 @@
     }
     &--center{
         text-align: center;
+    }
+}
+
+.button{
+    display: inline-block;
+    color: $white;
+    background-color: $marine-blue;
+    border-color: $marine-blue;
+    text-decoration: none;
+    font-weight: 400;
+    text-align: center;
+    vertical-align: middle;
+    border: 1px solid transparent;
+    padding: .375rem .75rem;
+    font-size: 1rem;
+    line-height: 1.5;
+    border-radius: .25rem;
+    transition: background-color 0.3s;
+    @media screen and (max-width: 760px){
+        font-size: rem(12);
+    }
+    button:hover{
+        background-color: lighten($marine-blue, 10%);
+    }
+    &--alert{
+        background-color: $red;
+        &:hover{
+            background-color: lighten($red, 10%);
+        }
+    }
+    &--success{
+        background-color: $green;
+        &:hover{
+            background-color: lighten($green, 10%);
+        }
     }
 }

@@ -16,43 +16,11 @@ class Security{
 		echo "Controller security action default";
 	}
 
-
 	public function loginAction(){
-		echo "Controller security action login";
+	    $view = new View("login");
 	}
 
-
 	public function registerAction(){
-
-
-		
-		//Vérification des valeurs en POST
-
-
-		/*
-		$user = new User();
-		$user->setFirstname("Yves");
-		$user->setLastname("SKRZYPCZYK");
-		$user->setEmail("y.skrzypczyk@gmail.com");
-		$user->setPwd("Test1234");
-		$user->setCountry("fr");
-
-		$user->save();
-
-
-		$log = new Log();
-		$log->user("y.skrzypczyk@gmail.com");
-		$log->date(time());
-		$log->success(false);
-		$log->save();
-
-		$user = new User();
-		print_r($user) // VIDE
-		$user->setId(2); // double action de peupler l'objet avec ce qu'il y a en bdd
-		print_r($user) // J'ai le user en bdd
-		$user->setFirstname("Toto");
-		$user->save();
-		*/
 
 
 		$user = new User();
@@ -78,17 +46,10 @@ class Security{
 			}else{
 				$view->assign("errors", $errors);
 			}
-
-
-
 		}
-
 		$view->assign("form", $form);
 		$view->assign("formLogin", $formLogin);
-
 	}
-
-
 
 	public function logoutAction(){
 

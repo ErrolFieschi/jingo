@@ -29,4 +29,8 @@
   action: logout
   auth: true
 
+/home:
+  controller: Main
+  action: home
+  auth: false
 
