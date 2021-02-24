@@ -7,10 +7,8 @@ use App\Core\View;
 class Main{
 
 
-	public function defaultAction(){
+	public function homeAction(){
 
-		$view = new View("home");
+		$view = new View("home","back");
 	}
-
-
 }

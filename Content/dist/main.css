@@ -222,6 +222,11 @@
   padding: 20px 0;
 }
 
+.container-fluid {
+  max-width: 100%;
+  margin: auto;
+}
+
 .col-inner {
   height: 25px;
 }
@@ -347,6 +352,80 @@ p {
 .card-body {
   flex: 1 1 auto;
   padding: 1.25rem;
+}
+
+.nav {
+  display: flex;
+  flex-wrap: wrap;
+  padding-left: 0;
+  margin-bottom: 0;
+  list-style: none;
+  color: white;
+}
+.nav ul {
+  padding: 0;
+}
+
+.vertical-nav {
+  flex-direction: column;
+  align-content: center;
+  width: 294px;
+  background-color: #24242d;
+  min-height: 100vh;
+}
+
+.nav-link {
+  display: block;
+  padding: 0.5rem 1rem;
+  color: #ffffff;
+  text-decoration: none;
+}
+.nav-link.disabled {
+  color: #6c757d;
+  pointer-events: none;
+  cursor: default;
+}
+
+.nav-brand {
+  text-align: center;
+  padding: 40px 0 25px;
+}
+.nav-brand a {
+  color: #ffffff;
+  font-size: 3em;
+  text-decoration: none;
+}
+
+.nav-item {
+  display: flex;
+  margin-top: 18px;
+  white-space: nowrap;
+  font-size: 0.9rem;
+}
+
+.nav-fill > .nav-link,
+.nav-fill .nav-item {
+  flex: 1 1 auto;
+  text-align: center;
+}
+
+.nav-justified > .nav-link,
+.nav-justified .nav-item {
+  flex-basis: 0;
+  flex-grow: 1;
+  text-align: center;
+}
+
+.tab-content > .tab-pane {
+  display: none;
+}
+.tab-content > .active {
+  display: block;
+}
+
+.nav-separator {
+  margin: 20% 0;
+  background-color: white;
 }
 
 /*# sourceMappingURL=main.css.map */
