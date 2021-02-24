@@ -1,0 +1,89 @@
+.nav {
+  display: flex;
+  flex-wrap: wrap;
+  padding-left: 0;
+  margin-bottom: 0;
+  list-style: none;
+  color: white;
+
+  ul{
+    padding: 0;
+  }
+}
+
+.vertical-nav{
+  flex-direction: column;
+  align-content: center;
+  width: 294px;
+  background-color: $nav-back-color;
+  min-height: 100vh;
+}
+
+.nav-link {
+  display: block;
+  padding: $nav-link-padding-y $nav-link-padding-x;
+  font-weight: $nav-link-font-weight;
+  color: $nav-link-color;
+  text-decoration: if($link-decoration == none, null, none);
+
+  &:hover,
+  &:focus {
+    color: $nav-link-hover-color;
+    text-decoration: if($link-hover-decoration == underline, none, null);
+  }
+
+  &.disabled {
+    color: $nav-link-disabled-color;
+    pointer-events: none;
+    cursor: default;
+  }
+}
+
+.nav-brand{
+  text-align: center;
+  padding: 40px 0 25px;
+
+  a{
+    color: #ffffff;
+    font-size: 3em;
+    text-decoration: none;
+  }
+}
+
+.nav-item{
+  display: flex;
+  margin-top: 18px;
+  white-space: nowrap;
+  font-size: 0.9rem;
+}
+
+.nav-fill {
+  > .nav-link,
+  .nav-item {
+    flex: 1 1 auto;
+    text-align: center;
+  }
+}
+
+.nav-justified {
+  > .nav-link,
+  .nav-item {
+    flex-basis: 0;
+    flex-grow: 1;
+    text-align: center;
+  }
+}
+
+.tab-content {
+  > .tab-pane {
+    display: none;
+  }
+  > .active {
+    display: block;
+  }
+}
+
+.nav-separator{
+  margin: 20% 0;
+  background-color: white;
+}

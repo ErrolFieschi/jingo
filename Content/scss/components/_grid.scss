@@ -1,5 +1,6 @@
 @import "colors";
 $container-width: 1170px;
+$container-fluid-width: 100%;
 $columns: 12;
 $gutter: 20px;
 $container-width-lg: 1280px;
@@ -41,6 +42,11 @@ $container-width-sm: 750px;
   margin: auto;
 }
 
+@mixin container-fluid-content ($width) {
+  max-width: $width;
+  margin: auto;
+}
+
 .row{
   display: flex;
   flex-wrap: wrap;
@@ -74,6 +80,10 @@ $container-width-sm: 750px;
   & > section{
     padding: 20px 0;
   }
+}
+
+.container-fluid {
+  @include container-fluid-content($container-fluid-width);
 }
 
 .col-inner {

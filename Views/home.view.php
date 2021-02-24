@@ -1,3 +1,8 @@
+<section>
+    <h2>Bienvenue sur la page d'accueil de Jingo</h2>
+</section>
+
+
 <div class="container">
     <section>
         <div class="row">
