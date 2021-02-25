@@ -28,3 +28,25 @@
     box-shadow: 0 0 8px 2px rgba(0, 0, 0, 0.1);
   }
 }
+
+.card-header {
+  padding: 0;
+  margin-bottom: 0;
+  color: white;
+  background-color: rgba(#000000, .03);
+}
+
+.card-title {
+  margin-bottom: 1rem / 2;
+}
+
+.card-text:last-child {
+  margin-bottom: 0;
+}
+
+.card-footer {
+  padding: 0.5rem 1rem;
+  color: white;
+  background-color: rgba(#000000, .03);
+  border-top: 1px solid rgba(#000000, .125);
+}

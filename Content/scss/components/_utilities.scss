@@ -9,7 +9,11 @@
     flex-direction: column;
 }
 
-.flex-row {
+.flex-wrap{
+    flex-wrap: wrap;
+}
+
+.flex-row{
     flex-direction: row;
 }
 
@@ -85,7 +89,6 @@ $sides: (top, bottom, left, right);
     margin-top: auto;
     margin-bottom: auto;
 }
-
 
 /* Height and Width */
 

@@ -14,7 +14,7 @@
 .vertical-nav{
   flex-direction: column;
   align-content: center;
-  width: 294px;
+  min-width: 294px;
   background-color: $nav-back-color;
   min-height: 100vh;
 

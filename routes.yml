@@ -44,3 +44,8 @@
   action: home
   auth: false
 
+/training:
+  controller: Main
+  action: training
+  auth: false
+
