@@ -281,8 +281,6 @@ class User extends Database
                     "class"=>"form_check"
                 ]
             ]
-
-            ]
         ];
     }
 

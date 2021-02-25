@@ -35,7 +35,7 @@ class FormBuilder
         }
 
         $html .= "<div class='flex justify-center'>
-                    <button class='button' type='submit'> ". ($form["config"]["submit"] ?? "Valider") ." </button>
+                    <button class='button-con' type='submit'> ". ($form["config"]["submit"] ?? "Valider") ." </button>
                   </div>";
                   
         $html .= "</form>";
