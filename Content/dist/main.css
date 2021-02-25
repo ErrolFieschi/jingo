@@ -513,23 +513,63 @@ hr {
   box-shadow: 0 0 8px 2px rgba(0, 0, 0, 0.1);
 }
 
+.card-center:hover {
+  transition: ease 1s;
+  background-color: #e7e7e7;
+}
+
 .svg-dashboard {
   height: 8rem;
 }
 
+.svg-dashboard--formation {
+  height: 6rem;
+}
+
 .card-header {
   padding: 0;
+  margin-right: 20px;
   margin-bottom: 0;
   color: white;
   background-color: rgba(0, 0, 0, 0.03);
+  align-items: stretch;
+  display: flex;
+}
+.card-header img {
+  opacity: 0.7;
+  object-fit: cover;
+  border-radius: 5px 0 0 5px;
+}
+.card-header img:hover {
+  transition: ease 1s;
+  opacity: 0.4;
 }
 
 .card-title {
-  margin-bottom: 1rem/2;
+  margin: 1rem 0;
+  font-size: 23px;
 }
 
-.card-text:last-child {
-  margin-bottom: 0;
+.card--inverse {
+  flex-direction: column-reverse;
+  display: flex;
+}
+.card--inverse p {
+  margin-bottom: 5px;
+  color: #B0B0B0;
+  font-size: 0.9em;
+}
+
+.card-text {
+  font-size: 14px;
+}
+
+.card-icon {
+  align-items: center;
+  align-self: center;
+}
+.card-icon img {
+  height: 25px;
 }
 
 .card-footer {
@@ -537,6 +577,20 @@ hr {
   color: white;
   background-color: rgba(0, 0, 0, 0.03);
   border-top: 1px solid rgba(0, 0, 0, 0.125);
+}
+
+.card-block {
+  width: 50%;
+  padding-bottom: 10px;
+}
+.card-block a {
+  font-size: 15px;
+}
+
+.card-button {
+  display: flex;
+  flex-basis: 20%;
+  justify-content: space-evenly;
 }
 
 .nav {
