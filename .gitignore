@@ -8,6 +8,7 @@
 Content/dist/main.css
 Content/dist/main.css.map
 
+sass
 .sass-cache/
 package-lock.json
 node_modules/
