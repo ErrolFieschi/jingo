@@ -4,8 +4,11 @@
     <meta charset="UTF-8">
     <title>Template de BACK</title>
     <meta name="description" content="ceci est la description de ma page">
-    <link href="/Content/dist/main.css" rel="stylesheet">
+    <link href="./Content/dist/main.css" rel="stylesheet">
     <script src="./node_modules/chart.js/dist/Chart.js"></script>
+    <script src="./Content/js/jquery-3.5.1.min.js"></script>
+    <script src="./Content/js/nav.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
 <div class="container-back">

@@ -7,7 +7,6 @@
         </div>
 
         <div class="row mt-8">
-
             <div class="col-3 col-md-6 col-sm-12">
                 <div class="stats-block flex flex-col align-center">
                     <span class="big-number">20</span>

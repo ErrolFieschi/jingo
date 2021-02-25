@@ -10,7 +10,7 @@ $container-width-sm: 750px;
 $breakpoint-xl: 1500px ;
 $breakpoint-lg: 1200px ;
 $breakpoint-md: 1000px ;
-$breakpoint-sm: 750px ;
+$breakpoint-sm: 0px ;
 $bp: (($breakpoint-sm,"sm"),($breakpoint-md,"md"),($breakpoint-lg,"lg"),($breakpoint-xl,"xl"));
 
 
@@ -103,6 +103,7 @@ $gutter: 10px;
 .container-back-wrap{
   width: 100%;    // peut-être à changer pour une container-width
   flex-wrap: wrap;
+  margin-left: 300px;
 }
 
 .container-fluid {

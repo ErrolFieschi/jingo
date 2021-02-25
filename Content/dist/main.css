@@ -1,6 +1,6 @@
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,700;1,400;1,700&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,400;0,700;1,400;1,700&display=swap");
-@media screen and (min-width: 750px) {
+@media screen and (min-width: 0px) {
   .col-sm-1 {
     width: 8.3333333333%;
     padding: 0 calc(10px / 2);
@@ -347,6 +347,7 @@
 .container-back-wrap {
   width: 100%;
   flex-wrap: wrap;
+  margin-left: 300px;
 }
 
 .container-fluid {
@@ -544,21 +545,42 @@ hr {
   margin-bottom: 0;
   list-style: none;
   color: white;
+  position: fixed;
 }
 .nav ul {
   padding: 0;
 }
 
+@media screen and (max-width: 900px) {
+  .nav-link {
+    display: none;
+  }
+
+  .nav-brand {
+    display: none;
+  }
+
+  .vertical-nav {
+    width: 100px !important;
+  }
+
+  .vertical-nav > ul {
+    margin-top: 200px;
+  }
+
+  .container-back-wrap {
+    margin-left: 100px;
+  }
+}
 .vertical-nav {
   flex-direction: column;
   align-content: center;
-  min-width: 294px;
+  width: 294px;
   background-color: #24242d;
   min-height: 100vh;
 }
 
 .nav-link {
-  display: block;
   padding: 0.5rem 1rem;
   color: #ffffff;
   text-decoration: none;

@@ -5,23 +5,43 @@
   margin-bottom: 0;
   list-style: none;
   color: white;
+  position: fixed;
 
   ul{
     padding: 0;
   }
 }
 
+@media screen and (max-width: 900px) {
+  .nav-link {
+    display: none;
+  }
+  .nav-brand{
+    display: none;
+  }
+  .vertical-nav{
+    width: 100px!important;
+  }
+  .vertical-nav > ul{
+    margin-top: 200px;
+  }
+  .container-back-wrap{
+    margin-left: 100px;
+  }
+}
+
+
+
 .vertical-nav{
   flex-direction: column;
   align-content: center;
-  min-width: 294px;
+  width: 294px;
   background-color: $nav-back-color;
   min-height: 100vh;
 
 }
 
 .nav-link {
-  display: block;
   padding: $nav-link-padding-y $nav-link-padding-x;
   font-weight: $nav-link-font-weight;
   color: $nav-link-color;

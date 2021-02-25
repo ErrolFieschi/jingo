@@ -3,7 +3,7 @@
         <div class="banner banner--text banner--header" style="background-image: url('https://i.pinimg.com/originals/26/ae/12/26ae1241ca65ba8e8ff4a4d442c92566.png');">
             <div class="bg">
                 <h4>Tableau de bord</h4>
-                <p>L'endroit pour configurer ton site comme tu le souhaites</p>
+                <p class="my-0">L'endroit pour configurer ton site comme tu le souhaites</p>
             </div>
         </div>
     </section>
