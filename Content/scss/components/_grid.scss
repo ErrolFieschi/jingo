@@ -74,12 +74,24 @@ $container-width-sm: 750px;
   justify-content: space-between;
 }
 
-
 .container {
   @include container-content($container-width-lg);
   & > section{
     padding: 20px 0;
   }
+  flex-basis: 75%;
+}
+
+.container-back{
+  display: flex;
+  flex-direction: row;
+  section{
+    padding: 20px;
+  }
+}
+
+.container-back-wrap{
+  flex-wrap: wrap;
 }
 
 .container-fluid {

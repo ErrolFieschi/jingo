@@ -217,9 +217,22 @@
 .container {
   max-width: 1280px;
   margin: auto;
+  flex-basis: 75%;
 }
 .container > section {
   padding: 20px 0;
+}
+
+.container-back {
+  display: flex;
+  flex-direction: row;
+}
+.container-back section {
+  padding: 20px;
+}
+
+.container-back-wrap {
+  flex-wrap: wrap;
 }
 
 .container-fluid {
@@ -352,6 +365,18 @@ p {
 .card-body {
   flex: 1 1 auto;
   padding: 1.25rem;
+}
+
+.card-center {
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  position: relative;
+  flex-direction: column;
+  border: 1px solid rgba(0, 0, 0, 0.125);
+}
+.card-center--shadow {
+  box-shadow: 0 0 8px 2px rgba(0, 0, 0, 0.1);
 }
 
 .nav {
