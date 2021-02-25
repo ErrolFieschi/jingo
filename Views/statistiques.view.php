@@ -1,13 +1,8 @@
 <div class="container-back-wrap stats-wrapper">
     <section>
-        <div class="banner banner--text" style="background-image: url('https://i.pinimg.com/originals/26/ae/12/26ae1241ca65ba8e8ff4a4d442c92566.png'); height: 100px;
-            color: white;
-            font-weight: bold;
-            font-size: 1.5rem;
-            width: 100%;
-            border-radius: .3em;">
+        <div class="banner banner--text banner--header" style="background-image: url('https://i.pinimg.com/originals/26/ae/12/26ae1241ca65ba8e8ff4a4d442c92566.png');">
             <div class="bg">
-                <p>DASHBOARD</p>
+                <h4>DASHBOARD</h4>
             </div>
         </div>
 
