@@ -1,5 +1,4 @@
 .env
-<<<<<<< HEAD
 .env.prod
 .env.dev
 .idea
@@ -12,12 +11,3 @@ Content/dist/main.css.map
 .sass-cache/
 package-lock.json
 node_modules/
-=======
-.env.dev
-.env.prod
-package-lock.json
-package.json
-node_modules
-/node_modules
-.idea
->>>>>>> 5ba18da420ce01ff72fedbc0c5037cdf01aea915

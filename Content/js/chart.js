@@ -6,7 +6,7 @@ let options = {
         position: 'bottom',
         onClick: null
     },
-    mainAspectRatio: false,
+    maintainAspectRatio: false,
 }
 
 if(document.getElementById('chart-line-users')!= null){
