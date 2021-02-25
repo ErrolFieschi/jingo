@@ -2055,6 +2055,10 @@ textarea:focus, input:focus {
   padding-bottom: 10rem;
 }
 
+.tc {
+  text-align: center;
+}
+
 .mx-auto {
   margin-left: auto;
   margin-right: auto;
@@ -2176,6 +2180,7 @@ textarea:focus, input:focus {
   margin: 0;
   font-size: 2.1875rem;
   font-weight: 700;
+  text-align: center;
 }
 .banner--text .bg p {
   font-size: 0.875rem;
