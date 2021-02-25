@@ -14,6 +14,11 @@
   action: admin
   auth: false
 
+/stats:
+  controller: Main
+  action: stats
+  auth: false
+
 /s-inscrire:
   controller: Security
   action: register
@@ -37,5 +42,10 @@
 /home:
   controller: Main
   action: home
+  auth: false
+
+/training:
+  controller: Main
+  action: training
   auth: false
 

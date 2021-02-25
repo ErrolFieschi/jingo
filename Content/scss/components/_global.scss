@@ -3,7 +3,7 @@
 }
 
 
-html, body, .row {
+html, body {
     height: 100%;
 }
 
@@ -29,6 +29,10 @@ p{
     line-height: 1.4;
 }
 
+a {
+    text-decoration: none;
+}
+
 hr {
     border: 0.5px solid lighten($grey, 15%);
     width: 80%;
@@ -36,6 +40,7 @@ hr {
 }
 
 .container{
+    width: 100%;
     max-width: 1280px;
     margin: auto;
     & > section{
