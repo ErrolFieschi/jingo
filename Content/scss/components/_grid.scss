@@ -7,10 +7,11 @@ $container-width-lg: 1280px;
 $container-width-md: 900px;
 $container-width-sm: 750px;
 
+$breakpoint-xl: 1800px ;
 $breakpoint-lg: 1500px ;
 $breakpoint-md: 1200px ;
 $breakpoint-sm: 750px ;
-$bp: (($breakpoint-sm,"sm"),($breakpoint-md,"md"),($breakpoint-lg,"lg"));
+$bp: (($breakpoint-sm,"sm"),($breakpoint-md,"md"),($breakpoint-lg,"lg"),($breakpoint-xl,"xl"));
 
 
 // GRID
