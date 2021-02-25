@@ -1,0 +1,47 @@
+.div_image_register{
+    background-color: #f2f2f2;
+    display: flex;
+  }
+  
+  .image_register{
+    max-width: 100%;
+  }
+  
+  .div_colo_register{
+    background-color: #83A6C6;
+    display: flex;
+  }
+  
+  .div_register{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 400px;
+    padding: 2.5em;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+  }
+  
+  .card_title{
+    text-align: center;
+    margin-bottom: 40px;
+  }
+  
+  .center_center{
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  @media only screen and (max-width: 1100px) {
+    .div_image_register{
+      display: none;
+    }
+  
+    .div_colo_register{
+      width: 100%!important;
+      background-color: #83A6C6;
+    }
+  }
+  

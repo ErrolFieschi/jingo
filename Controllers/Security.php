@@ -22,7 +22,27 @@ class Security{
 
 
 	public function loginAction(){
-	    $view = new View("login");
+
+		$user = new User();
+		$view = new View("login");
+
+		$formLogin = $user->formLogin();
+
+		if(!empty($_POST)){
+
+			$errors = FormValidator::check($formLogin, $_POST);
+
+			if(empty($errors)){
+				
+				print_r("Connected");
+
+			}else{
+				$view->assign("errors", $errors);
+			}
+		}
+
+		$view->assign("formLogin", $formLogin);
+
 	}
 
 	public function registerAction(){
@@ -63,7 +83,6 @@ class Security{
 
 
 		$form = $user->formRegister();
-		$formLogin = $user->formLogin();
 
 		if(!empty($_POST)){
 
@@ -83,7 +102,6 @@ class Security{
 			}
 		}
 		$view->assign("form", $form);
-		$view->assign("formLogin", $formLogin);
 	}
 
 	public function logoutAction(){

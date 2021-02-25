@@ -34,7 +34,10 @@ class FormBuilder
 
         }
 
-        $html .= "<input class='button-con' type='submit' value=\"" . ($form["config"]["submit"] ?? "Valider") . "\">";
+        $html .= "<div class='flex justify-center'>
+                    <button class='button-con' type='submit'> ". ($form["config"]["submit"] ?? "Valider") ." </button>
+                  </div>";
+                  
         $html .= "</form>";
 
         echo $html;
@@ -49,10 +52,10 @@ class FormBuilder
 						id='" . ($configInput["id"] ?? "") . "'
 						class='" . ($configInput["class"] ?? "") . "'
 						placeholder='" . ($configInput["placeholder"] ?? "") . "'
-						" . ($configInput["type"] === "date" && !empty($configInput["minDate"]) ? "min=" . $configInput["minDate"] : "") . "
-                        " . ($configInput["type"] === "date" && !empty($configInput["maxDate"]) ? "max=" . $configInput["maxDate"] : "") . "
-
-						" . (!empty($configInput["required"]) ? "required='required'" : "") . ">";
+                        " . ($configInput["type"] === "date" && !empty($configInput["minDate"])  ? "min=".$configInput["minDate"] : "") . "
+                        " . ($configInput["type"] === "date" && !empty($configInput["maxDate"])  ? "max=".$configInput["maxDate"] : "") . "
+						" . (!empty($configInput["required"]) ? "required='required'" : "") . "
+					>";
     }
 
 
@@ -77,11 +80,13 @@ class FormBuilder
         $html = "";
 
         foreach ($configInput["options"] as $key => $value) {
-            $html .= "<input " . (!empty($configInput["required"]) ? "required='required'" : "") . "
-             type='" . ($configInput["type"] ?? "") . "'
-                             name='" . $name . "' 
-                             class='" . ($configInput["class"] ?? "") . "'
-                             value='" . $key . "'> $key";
+            $html .= "<label class='form_check_label' for='". ($configInput["id"] ?? "") ."'> 
+                        <input type='" . ($configInput["type"] ?? "") . "'
+                                name='" . ($configInput["id"] ?? "") . "' 
+                                id='" . $name . "' 
+                                class='" . ($configInput["class"] ?? "") . "'
+                                value='" . $value . "'>";
+            $html .= $key ." </label>";
         }
         return $html;
     }

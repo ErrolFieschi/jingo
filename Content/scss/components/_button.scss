@@ -6,14 +6,16 @@
     min-width: 150px;
     border: none;
     color: $white;
+    outline: none;
     background-color: $button_color;
     text-decoration: none;
     transition: background-color 0.3s;
+    cursor: pointer;
     @media screen and (max-width: 760px){
         font-size: rem(12);
     }
-    button-con:hover{
-        background-color: lighten($grey, 10%);
+    &:hover{
+        background-color: lighten($button_color, 5%);
     }
     &--alert{
         background-color: $red;
