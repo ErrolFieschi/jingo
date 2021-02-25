@@ -1750,6 +1750,11 @@ textarea:focus, input:focus {
   background-color: white;
   border-radius: 5px;
   padding: 2em; }
+  @media screen and (max-width: 900px) {
+    .stats-wrapper .stats-block > h1 {
+      font-size: 16px; } }
+  .stats-wrapper .stats-block .canvas-wrapper {
+    min-height: 250px; }
   .stats-wrapper .stats-block .big-number {
     font-weight: 700;
     font-size: 55px; }

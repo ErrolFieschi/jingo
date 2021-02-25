@@ -1,0 +1,13 @@
+.env
+.env.prod
+.env.dev
+.idea
+.idea/workspace.xml
+.gitignore
+
+Content/dist/main.css
+Content/dist/main.css.map
+
+.sass-cache/
+package-lock.json
+node_modules/
