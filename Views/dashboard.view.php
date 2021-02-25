@@ -56,7 +56,9 @@
                     <div class="col-sm-12">
                         <div class="card-center card--shadow" style="height: 710px;">
                             <h4 class="mt-0">Nombres de formations par thèmes</h4>
-                            <canvas id="chart-line-course"></canvas>
+                            <div style="min-height: 250px;">
+                                <canvas id="chart-line-course"></canvas>
+                            </div>
                         </div>
                     </div>
                 </div>
