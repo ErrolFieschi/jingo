@@ -44,14 +44,18 @@
             <div class="col-xl-6 col-sm-12">
                 <div class="stats-block">
                     <h1 class="pt-2 mt-0">Nombres d'utilisateurs inscrits</h1>
-                    <canvas id="chart-line-users"></canvas> 
+                    <div class="canvas-wrapper">
+                        <canvas id="chart-line-users"></canvas> 
+                    </div>
                 </div>
             </div>
 
             <div class="col-xl-6 col-sm-12">
                 <div class="stats-block">
                     <h1 class="pt-2 mt-0">Nombres de formations par thèmes</h1>
-                    <canvas id="chart-line-course"></canvas> 
+                    <div class="canvas-wrapper">
+                        <canvas id="chart-line-course" style="min-height: 200px;"></canvas> 
+                    </div>
                 </div>
             </div>
 
