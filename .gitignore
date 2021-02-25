@@ -1,0 +1,8 @@
+.env
+.env.dev
+.env.prod
+package-lock.json
+package.json
+node_modules
+/node_modules
+.idea
