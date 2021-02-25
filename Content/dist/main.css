@@ -2182,11 +2182,21 @@ textarea:focus, input:focus {
   font-weight: 400;
 }
 .banner--header {
-  padding-top: 0%;
+  padding-top: 0;
   height: 110px;
   border-radius: 1rem;
 }
 
+@media screen and (max-width: 900px) {
+  .banner--text .bg h4 {
+    margin: 0;
+    font-size: 1.25rem;
+    font-weight: 700;
+  }
+  .banner--text .bg p {
+    display: none;
+  }
+}
 .div_image_register {
   background-color: #f2f2f2;
   display: flex;

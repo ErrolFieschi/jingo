@@ -1,6 +1,7 @@
 <div class="container-back-wrap">
     <section>
-        <div class="banner banner--text banner--header" style="background-image: url('https://i.pinimg.com/originals/26/ae/12/26ae1241ca65ba8e8ff4a4d442c92566.png');">
+        <div class="banner banner--text banner--header"
+             style="background-image: url('https://i.pinimg.com/originals/26/ae/12/26ae1241ca65ba8e8ff4a4d442c92566.png');">
             <div class="bg">
                 <h4>Tableau de bord</h4>
                 <p class="my-0">L'endroit pour configurer ton site comme tu le souhaites</p>
@@ -53,12 +54,9 @@
             <section class="col-lg-5 col-sm-12">
                 <div class="row">
                     <div class="col-sm-12">
-                        <div class="card card--shadow" style="height: 710px;">
-                            <div class="card-body">
-                                <p>Ceci est du text pour entrer à
-                                    l'interieur de ma card !</p>
-                                <a href="#" class="button">Go somewhere</a>
-                            </div>
+                        <div class="card-center card--shadow" style="height: 710px;">
+                            <h4 class="mt-0">Nombres de formations par thèmes</h4>
+                            <canvas id="chart-line-course"></canvas>
                         </div>
                     </div>
                 </div>
