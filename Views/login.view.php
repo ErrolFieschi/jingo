@@ -1,12 +1,23 @@
-<?php if (isset($errors)):
-    foreach ($errors as $error):?>
-        <li style="color:red"><?= $error; ?></li>
-    <?php endforeach;
-endif; ?>
-
-<section>
-    <h2>Se connecter</h2>
-    <div class="col-6">
-        <?php App\Core\FormBuilder::render($formLogin) ?>
+<div class="row no-container">
+    <div class="col-5 div_colo_register center_center">
+        <div class="div_register">
+            <h2 class="card_title">Connexion</h2>
+            <?php App\Core\FormBuilder::render($formLogin) ?>
+            <?php if (isset($errors)):
+                foreach ($errors as $error):?>
+                    <li style="color:red"><?= $error; ?></li>
+                <?php endforeach;
+            endif; ?>
+            <hr />
+            <div class="flex justify-center">
+                <span class="description">Pas de compte ? <span class="text-main">S’enregister</span></span>
+            </div>
+        </div>
     </div>
-</section>
+
+    <div class="col-7 div_image_register center_center">
+        <img src="Content/Images/register.svg" alt="register" class="image_register"/>
+    </div>
+</div>
+
+

@@ -44,6 +44,12 @@ class FormValidator
                         $errors[] = "Mdp doit contenir un chiffre";
                     }
                 }
+
+                if (!empty($configInput["minDate"]) &&
+                    $data[$name] > $configInput["minDate"]) {
+                    $errors[] = $configInput["error"];
+                }
+
             }
         } else {
             $errors[] = "Tentative de Hack";

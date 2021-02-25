@@ -188,12 +188,12 @@ class User extends Database
     {
         return [
 
-            "config" => [
-                "method" => "POST",
-                "action" => "",
-                "id" => "form_register",
-                "class" => "form_builder",
-                "submit" => "Continuer"
+            "config"=>[
+                "method"=>"POST",
+                "action"=>"",
+                "id"=>"form_register",
+                "class"=>"form_builder",
+                "submit"=>"S'inscrire"
             ],
             "inputs" => [
                 "firstname" => [
@@ -207,16 +207,25 @@ class User extends Database
                     "error" => "Votre prénom doit faire entre 2 et 55 caractères",
                     "required" => true
                 ],
-                "lastname" => [
-                    "type" => "text",
-                    "label" => "Votre nom",
-                    "minLength" => 2,
-                    "maxLength" => 255,
-                    "id" => "lastname",
-                    "class" => "form_input",
-                    "placeholder" => "Nom",
-                    "error" => "Votre nom doit faire entre 2 et 255 caractères",
-                    "required" => true
+                "lastname"=>[ 
+                    "type"=>"text",
+                    "label"=>"Votre nom",
+                    "minLength"=>2,
+                    "maxLength"=>55,
+                    "id"=>"lastname",
+                    "class"=>"form_input",
+                    "placeholder"=>"Nom",
+                    "error"=>"Votre nom doit faire entre 2 et 55 caractères",
+                    "required"=>true
+                ],
+                "birthday"=>[ 
+                    "type"=>"date",
+                    "label"=>"Votre date de naissance",
+                    "maxDate"=> date("Y-m-d", strtotime("-18 year", time())),
+                    "id"=>"birthday",
+                    "class"=>"form_input",
+                    "error"=>"Votre date de naissance est obligatoire",
+                    "required"=>true
                 ],
                 "email" => [
                     "type" => "email",
@@ -251,22 +260,27 @@ class User extends Database
                     "error" => "Votre mot de mot de passe de confirmation ne correspond pas",
                     "required" => true
                 ],
-                "country" => [
-                    "type" => "radio",
-                    "label" => "Votre pays",
-                    "options" => [
-                        "fr" => "France",
-                        "ru" => "Russie",
-                        "pl" => "Pologne",
+                "checkCondition"=>[ 
+                    "type"=>"checkbox",
+                    "label"=>"",
+                    "options" => [ 
+                        "J’ai lu et j’accepte les condition générales d’utilisations et la Politique de Protection des Données Personnelles"=>true,
                     ],
-                    "minLength" => 2,
-                    "maxLength" => 2,
-                    "id" => "country",
-                    "class" => "radio_input",
-                    "placeholder" => "Exemple: fr",
-                    "error" => "Votre pays doit faire 2 caractères",
-                    "required" => true
+                    "id"=>"checkCondition",
+                    "class"=>"form_check",
+                    "error"=>"Vous devez accepter les condition générales d’utilisations et la Politique de Protection des Données Personnelles",
+                    "required"=>true
                 ],
+                "checkNewsletter"=>[ 
+                    "type"=>"checkbox",
+                    "label"=>"",
+                    "options" => [ 
+                        "Me tenir informé !"=> true,
+                    ],
+                    "id"=>"checkNewsletter",
+                    "class"=>"form_check"
+                ]
+            ]
 
             ]
         ];
@@ -284,28 +298,37 @@ class User extends Database
                 "class" => "form_builder",
                 "submit" => "Se connecter"
             ],
-            "inputs" => [
-                "email" => [
-                    "type" => "email",
-                    "label" => "Votre email",
-                    "minLength" => 8,
-                    "maxLength" => 320,
-                    "id" => "email",
-                    "class" => "form_input",
-                    "placeholder" => "Exemple: nom@gmail.com",
-                    "error" => "Votre email doit faire entre 8 et 320 caractères",
-                    "required" => true
+            "inputs"=>[
+                "email"=>[ 
+                    "type"=>"email",
+                    "label"=>"Votre email",
+                    "minLength"=>8,
+                    "maxLength"=>320,
+                    "id"=>"email",
+                    "class"=>"form_input",
+                    "placeholder"=>"Adresse mail",
+                    "error"=>"Votre email doit faire entre 8 et 320 caractères",
+                    "required"=>true
                 ],
-                "pwd" => [
-                    "type" => "password",
-                    "label" => "Votre mot de passe",
-                    "minLength" => 8,
-                    "id" => "pwd",
-                    "class" => "form_input",
-                    "placeholder" => "",
-                    "error" => "Votre mot de passe doit faire au minimum 8 caractères",
-                    "required" => true
-                ]
+                "pwd"=>[ 
+                    "type"=>"password",
+                    "label"=>"Votre mot de passe",
+                    "minLength"=>8,
+                    "id"=>"pwd",
+                    "class"=>"form_input",
+                    "placeholder"=>"Mot de passe",
+                    "error"=>"Votre mot de passe doit faire au minimum 8 caractères",
+                    "required"=>true
+                ],
+                "checkLogin"=>[ 
+                    "type"=>"checkbox",
+                    "label"=>"",
+                    "options" => [ 
+                        "Se souvenir de moi"=>true,
+                    ],
+                    "id"=>"checkLogin",
+                    "class"=>"form_check"
+                ],
             ]
 
         ];

@@ -2,6 +2,11 @@
     box-sizing: border-box;
 }
 
+
+html, body, .row {
+    height: 100%;
+}
+
 body{
     margin: 0;
     font-family: $font1;
@@ -22,6 +27,12 @@ h2{
 
 p{
     line-height: 1.4;
+}
+
+hr {
+    border: 0.5px solid lighten($grey, 15%);
+    width: 80%;
+    margin: 25px 0;
 }
 
 .container{
