@@ -7,30 +7,35 @@ $container-width-lg: 1280px;
 $container-width-md: 900px;
 $container-width-sm: 750px;
 
-@for $i from 1 through $columns {
-  .col-#{$i} {
-    width: ((100 / $columns) * $i) * 1%;
-    padding: 0 calc(#{$gutter} / 2);
-  }
-}
+$breakpoint-lg: 1500px ;
+$breakpoint-md: 1200px ;
+$breakpoint-sm: 750px ;
+$bp: (($breakpoint-sm,"sm"),($breakpoint-md,"md"),($breakpoint-lg,"lg"));
 
-@media only screen and (max-width: 766px) {
-  @for $i from 1 through $columns {
-    .col-sm-#{$i} {
-      width: ((100 / $columns) * $i) * 1%;
-      padding: 0 calc(#{$gutter} / 2);
+
+// GRID
+$nb_col:12;
+$marginB:10px;
+$row-height: 50px ;
+$gutter: 10px;
+
+
+@each $breakpoint,$name in $bp {
+
+  @media screen and (min-width: #{$breakpoint}) {
+
+    @for $i from 1 through $nb_col {
+
+      .col-#{$name}-#{$i} {
+        width: ((100 / $nb_col) * $i) * 1%;
+        padding: 0 calc(#{$gutter} / 2);
+        margin-bottom: $marginB;
+      }
     }
   }
+
 }
 
-@media only screen and (max-width: 578px) {
-  @for $i from 1 through $columns {
-    .col-md-#{$i} {
-      width: ((100 / $columns) * $i) * 1%;
-      padding: 0 calc(#{$gutter} / 2);
-    }
-  }
-}
 
 * {
   box-sizing: border-box;
@@ -95,12 +100,15 @@ $container-width-sm: 750px;
 }
 
 .container-back-wrap{
+  width: 100%;    // peut-être à changer pour une container-width
   flex-wrap: wrap;
 }
 
 .container-fluid {
   @include container-fluid-content($container-fluid-width);
 }
+
+
 
 .col-inner {
   height: 25px;
