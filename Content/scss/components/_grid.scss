@@ -16,7 +16,7 @@ $container-width-sm: 750px;
 
 @media only screen and (max-width: 766px) {
   @for $i from 1 through $columns {
-    .col-sm-#{$i} {
+    .col-md-#{$i} {
       width: ((100 / $columns) * $i) * 1%;
       padding: 0 calc(#{$gutter} / 2);
     }
@@ -25,15 +25,11 @@ $container-width-sm: 750px;
 
 @media only screen and (max-width: 578px) {
   @for $i from 1 through $columns {
-    .col-md-#{$i} {
+    .col-sm-#{$i} {
       width: ((100 / $columns) * $i) * 1%;
       padding: 0 calc(#{$gutter} / 2);
     }
   }
-}
-
-* {
-  box-sizing: border-box;
 }
 
 /* sass --watch file/fille.scss:file/file.css*/
@@ -95,6 +91,7 @@ $container-width-sm: 750px;
 }
 
 .container-back-wrap{
+  width: 100%;
   flex-wrap: wrap;
 }
 

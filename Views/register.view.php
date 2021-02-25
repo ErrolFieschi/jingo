@@ -1,4 +1,4 @@
-<div class="row no-container">
+<div class="row no-container h-100">
     <div class="col-5 div_colo_register center_center">
         <div class="div_register">
             <h2 class="card_title">Inscription</h2>
@@ -10,7 +10,7 @@
             endif; ?>
             <hr />
             <div class="flex justify-center">
-                <span class="description">Déjà un compte ? <span class="text-main">Se connecter</span></span>
+                <span class="description">Déjà un compte ? <a class="text-main" href="/se-connecter">Se connecter</a></span>
             </div>
         </div>
     </div>

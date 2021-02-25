@@ -5,7 +5,7 @@
     <title>Template de BACK</title>
     <meta name="description" content="ceci est la description de ma page">
     <link href="/Content/dist/main.css" rel="stylesheet">
-
+    <script src="./node_modules/chart.js/dist/Chart.js"></script>
 </head>
 <body>
 <div class="container-back">
@@ -16,11 +16,15 @@
         <ul>
             <li class="nav-item">
                 <img src="/Content/svg/board.svg" alt="icon">
-                <a class="nav-link" href="#">Tableau de bord</a>
+                <a class="nav-link" href="/dashboard">Tableau de bord</a>
+            </li>
+            <li class="nav-item">
+                <img src="/Content/svg/stats.svg" alt="icon">
+                <a class="nav-link " href="/stats">Statistiques</a>
             </li>
             <li class="nav-item">
                 <img src="/Content/svg/page.svg" alt="icon">
-                <a class="nav-link" href="#">Pages</a>
+                <a class="nav-link" href="/pages">Pages</a>
             </li>
             <li class="nav-item">
                 <img src="/Content/svg/formation.svg" alt="icon">
@@ -45,7 +49,7 @@
             </li>
             <li class="nav-item">
                 <img src="/Content/svg/logout.svg" alt="icon">
-                <a class="nav-link " href="#">Déconnexion</a>
+                <a class="nav-link " href="/se-connecter">Déconnexion</a>
             </li>
         </ul>
     </nav>

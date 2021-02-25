@@ -5,6 +5,14 @@
     display: flex;
 }
 
+.flex-col {
+    flex-direction: column;
+}
+
+.flex-row {
+    flex-direction: row;
+}
+
 $justify-contents: 'end', 'center', 'space-between', 'space-around';
 
 @each $justify-content in $justify-contents {
@@ -25,4 +33,66 @@ $align-items: 'center', 'stretch';
 
 /* Margin and Padding */
 
-$spaces: '0', '0.25', '0.5', '0.75', '1', '1.25', '1.5', '1.75', '2', '2.25', '2.5', '2.75', '3', '3.5', '4', '5', '6', '7', '8', '9', '10';
+$spaces: ((0, 0), (1, 0.25), (2, 0.5), (3, 0.75), (4, 1), (5, 1.25), (6, 1.5), (7, 1.75), (8, 2), (9, 2.25), (10, 2.5), (11, 2.75), (12, 3), (14, 3.5), (16, 4), (20, 5), (24, 6), (28, 7), (32, 8), (36, 9), (40, 10));
+$sides: (top, bottom, left, right);
+
+@each $i, $space in $spaces {
+  @each $side in $sides {
+    .m#{str-slice($side, 0, 1)}-#{$i} {
+      margin-#{$side}: #{$space}em !important;
+    }
+  
+    .p#{str-slice($side, 0, 1)}-#{$i} {
+      padding-#{$side}: #{$space}px !important;
+    }
+  }
+}
+
+@each $i,$space in $spaces {
+    .m-#{$i} {
+        margin: #{$space}rem;
+    }
+    .p-#{$i} {
+        padding: #{$space}rem;
+    }
+}
+
+@each $i,$space in $spaces {
+    .mx-#{$i} {
+        margin-left: #{$space}rem;
+        margin-right: #{$space}rem;
+    }
+    .px-#{$i} {
+        padding-left: #{$space}rem;
+        padding-right: #{$space}rem;
+    }
+
+    .my-#{$i} {
+        margin-top: #{$space}rem;
+        margin-bottom: #{$space}rem;
+    }
+    .py-#{$i} {
+        padding-top: #{$space}rem;
+        padding-bottom: #{$space}rem;
+    }
+}
+
+.mx-auto {
+    margin-left: auto;
+    margin-right: auto;
+}
+.my-auto {
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
+
+/* Height and Width */
+
+.h-100 {
+    height: 100%;
+}
+
+.w-100 {
+    width: 100%;
+}

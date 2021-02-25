@@ -11,4 +11,9 @@ class Main{
 
 		$view = new View("home","back");
 	}
+
+	public function statsAction(){
+
+		$view = new View("statistiques","back");
+	}
 }
