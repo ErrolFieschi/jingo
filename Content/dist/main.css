@@ -2300,12 +2300,24 @@ textarea:focus, input:focus {
 .stats-wrapper .stats-block {
   background-color: white;
   border-radius: 5px;
+<<<<<<< HEAD
+  padding: 2em; }
+  @media screen and (max-width: 900px) {
+    .stats-wrapper .stats-block > h1 {
+      font-size: 16px; } }
+  .stats-wrapper .stats-block .canvas-wrapper {
+    min-height: 250px; }
+  .stats-wrapper .stats-block .big-number {
+    font-weight: 700;
+    font-size: 55px; }
+=======
   padding: 2em;
 }
 .stats-wrapper .stats-block .big-number {
   font-weight: 700;
   font-size: 55px;
 }
+>>>>>>> 5ba18da420ce01ff72fedbc0c5037cdf01aea915
 
 .settings-wrapper .logo-border {
   border: solid 3px black;
