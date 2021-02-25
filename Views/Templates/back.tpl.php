@@ -61,7 +61,7 @@
             </li>
             <hr class="nav-separator">
             <li class="nav-item">
-                <a class="nav-link " href="#">
+                <a class="nav-link " href="/settings">
                 <img src="/Content/svg/setting.svg" alt="icon">
                     <span>Paramètres</span>
                 </a>
