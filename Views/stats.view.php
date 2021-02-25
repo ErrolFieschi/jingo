@@ -64,6 +64,7 @@
     </section>
 
 </div>
+<<<<<<< HEAD
 
 <script>
 
@@ -110,3 +111,5 @@ new Chart(document.getElementById('chart-line-course').getContext('2d'), {
 
 
 </script>
+=======
+>>>>>>> 5ba18da420ce01ff72fedbc0c5037cdf01aea915
