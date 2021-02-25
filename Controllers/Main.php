@@ -15,11 +15,16 @@ class Main{
 
 	public function statsAction(){
 
-		$view = new View("statistiques","back");
+		$view = new View("stats","back");
 	}
 
     public function trainingAction(){
 
         $view = new View("training", "back");
+    }
+
+	public function settingsAction(){
+
+        $view = new View("settings", "back");
     }
 }

@@ -19,6 +19,11 @@
   action: stats
   auth: false
 
+/settings:
+  controller: Main
+  action: settings
+  auth: false
+
 /s-inscrire:
   controller: Security
   action: register

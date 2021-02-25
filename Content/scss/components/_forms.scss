@@ -31,9 +31,21 @@
     
     }
 }
-  
-  
-  /* retire le focus de google sur les inputs */
-  textarea:focus, input:focus {
-    outline: none;
+
+.form_input_back {
+  width: 100%;
+  background-color: lighten($grey, 25%);
+  border: solid 1px transparent;
+  border-radius: 5px;
+  padding: 0.75em;
+
+  &:focus {
+    border-color: $button_color;
   }
+}
+  
+  
+/* retire le focus de google sur les inputs */
+textarea:focus, input:focus {
+  outline: none;
+}
