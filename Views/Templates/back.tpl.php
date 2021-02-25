@@ -37,7 +37,7 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">
+                <a class="nav-link" href="/training">
                 <img src="/Content/svg/formation.svg" alt="icon">
                     <span>Formations</span>
                 </a>
