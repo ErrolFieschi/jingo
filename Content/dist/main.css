@@ -348,6 +348,7 @@
   width: 100%;
   flex-wrap: wrap;
   margin-left: 300px;
+  overflow-x: hidden;
 }
 
 .container-fluid {
@@ -552,7 +553,7 @@ hr {
 }
 
 @media screen and (max-width: 900px) {
-  .nav-link {
+  .nav-link > span {
     display: none;
   }
 
@@ -561,7 +562,7 @@ hr {
   }
 
   .vertical-nav {
-    width: 100px !important;
+    width: 60px !important;
   }
 
   .vertical-nav > ul {
@@ -569,9 +570,24 @@ hr {
   }
 
   .container-back-wrap {
-    margin-left: 100px;
+    margin-left: 60px;
+  }
+
+  .nav-separator {
+    width: 50% !important;
+    margin: auto !important;
+    margin-top: 10px !important;
+  }
+
+  .nav-link > img {
+    margin: 0;
   }
 }
+a > img {
+  vertical-align: middle;
+  margin-right: 10px;
+}
+
 .vertical-nav {
   flex-direction: column;
   align-content: center;
@@ -630,6 +646,7 @@ hr {
 
 .nav-separator {
   margin: 20% 0;
+  width: 100%;
   background-color: white;
 }
 

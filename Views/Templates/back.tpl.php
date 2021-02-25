@@ -18,41 +18,59 @@
         </div>
         <ul>
             <li class="nav-item">
+                <a class="nav-link" href="/dashboard">
                 <img src="/Content/svg/board.svg" alt="icon">
-                <a class="nav-link" href="/dashboard">Tableau de bord</a>
+                    <span>Tableau de bord</span>
+                </a>
             </li>
             <li class="nav-item">
+                <a class="nav-link " href="/stats">
                 <img src="/Content/svg/stats.svg" alt="icon">
-                <a class="nav-link " href="/stats">Statistiques</a>
+                    <span>Statistiques</span>
+                </a>
             </li>
             <li class="nav-item">
+                <a class="nav-link" href="/pages">
                 <img src="/Content/svg/page.svg" alt="icon">
-                <a class="nav-link" href="/pages">Pages</a>
+                    <span>Pages</span>
+                </a>
             </li>
             <li class="nav-item">
+                <a class="nav-link" href="#">
                 <img src="/Content/svg/formation.svg" alt="icon">
-                <a class="nav-link" href="#">Formations</a>
+                    <span>Formations</span>
+                </a>
             </li>
             <li class="nav-item">
+                <a class="nav-link " href="#">
                 <img src="/Content/svg/lecon.svg" alt="icon">
-                <a class="nav-link " href="#">Leçons</a>
+                    <span>Leçons</span>
+                </a>
             </li>
             <li class="nav-item">
+                <a class="nav-link " href="#">
                 <img src="/Content/svg/article.svg" alt="icon">
-                <a class="nav-link " href="#">Articles</a>
+                    <span>Articles</span>
+                </a>
             </li>
             <li class="nav-item">
+                <a class="nav-link " href="#">
                 <img src="/Content/svg/user.svg" alt="icon">
-                <a class="nav-link " href="#">Utilisateurs</a>
+                    <span>Utilisateurs</span>
+                </a>
             </li>
             <hr class="nav-separator">
             <li class="nav-item">
+                <a class="nav-link " href="#">
                 <img src="/Content/svg/setting.svg" alt="icon">
-                <a class="nav-link " href="#">Paramètres</a>
+                    <span>Paramètres</span>
+                </a>
             </li>
             <li class="nav-item">
+                <a class="nav-link " href="/se-connecter">
                 <img src="/Content/svg/logout.svg" alt="icon">
-                <a class="nav-link " href="/se-connecter">Déconnexion</a>
+                    <span>Déconnexion</span>
+                </a>
             </li>
         </ul>
     </nav>

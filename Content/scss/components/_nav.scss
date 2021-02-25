@@ -13,24 +13,35 @@
 }
 
 @media screen and (max-width: 900px) {
-  .nav-link {
+  .nav-link > span{
     display: none;
   }
   .nav-brand{
     display: none;
   }
   .vertical-nav{
-    width: 100px!important;
+    width: 60px!important;
   }
   .vertical-nav > ul{
     margin-top: 200px;
   }
   .container-back-wrap{
-    margin-left: 100px;
+    margin-left: 60px;
+  }
+  .nav-separator{
+    width: 50%!important;
+    margin: auto!important;
+    margin-top: 10px!important;
+  }
+  .nav-link > img{
+    margin: 0;
   }
 }
 
-
+ a > img{
+  vertical-align: middle;
+  margin-right: 10px;
+}
 
 .vertical-nav{
   flex-direction: column;
@@ -106,5 +117,6 @@
 
 .nav-separator{
   margin: 20% 0;
+  width: 100%;
   background-color: white;
 }
