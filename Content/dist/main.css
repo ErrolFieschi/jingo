@@ -593,6 +593,15 @@ hr {
   justify-content: space-evenly;
 }
 
+.dashboard-stats {
+  height: 728px;
+}
+
+@media screen and (max-width: 900px) {
+  .dashboard-stats {
+    height: auto;
+  }
+}
 .nav {
   display: flex;
   flex-wrap: wrap;
