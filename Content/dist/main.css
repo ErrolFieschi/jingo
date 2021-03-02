@@ -508,6 +508,7 @@ hr {
   flex-direction: column;
   border: 1px solid rgba(0, 0, 0, 0.125);
   min-height: 200px;
+  background-color: #F2F2F2;
 }
 .card-center--shadow {
   box-shadow: 0 0 8px 2px rgba(0, 0, 0, 0.1);
@@ -2274,7 +2275,7 @@ textarea:focus, input:focus {
   max-width: 100%;
 }
 
-.div_colo_register {
+.log_reg {
   background-color: #83A6C6;
   display: flex;
 }
