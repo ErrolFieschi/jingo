@@ -10,6 +10,7 @@
     <script src="./Content/js/nav.js"></script>
     <script defer src="./Content/js/chart.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://kit.fontawesome.com/d59c1d4dbf.js" crossorigin="anonymous"></script>
 </head>
 <body>
 <div class="container-back">

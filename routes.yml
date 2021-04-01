@@ -54,3 +54,9 @@
   action: training
   auth: false
 
+/pages:
+  controller: Pages
+  action: pages
+  auth: false
+
+

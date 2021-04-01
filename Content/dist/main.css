@@ -598,6 +598,10 @@ hr {
   height: 728px;
 }
 
+.fas_card {
+  font-size: 3em;
+}
+
 @media screen and (max-width: 900px) {
   .dashboard-stats {
     height: auto;
@@ -2361,6 +2365,12 @@ textarea:focus, input:focus {
 .settings-wrapper .logo-select .select.times {
   border-color: #ce0a0a;
   background-color: #fba9a9;
+}
+
+@media screen and (max-width: 1000px) {
+  .pages_card {
+    margin-left: 0 !important;
+  }
 }
 
 /*# sourceMappingURL=main.css.map */
