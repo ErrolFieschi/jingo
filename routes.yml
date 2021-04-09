@@ -59,8 +59,30 @@
   action: pages
   auth: false
 
+/model:
+  controller: Front
+  action: model
+  auth: false
+
 # LINKS FOR THE FRONT - PUT THE CONFIG ON THE TOP
 /form:
   controller: Front
   action: form
   auth: false
+
+/rdv:
+  controller: Front
+  action: rdv
+  auth: false
+
+/anniversaire:
+  controller: Front
+  action: anniversaire
+  auth: false
+
+/calendrier:
+  controller: Front
+  action: calendrier
+  auth: false
+
+

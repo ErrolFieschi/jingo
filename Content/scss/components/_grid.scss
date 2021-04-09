@@ -60,6 +60,12 @@ $gutter: 10px;
   &.no-container {
     margin: 0;
   }
+  &--around{
+    justify-content: space-around;
+  }
+  &--between{
+    justify-content: space-between;
+  }
 }
 
 .row-end{
@@ -91,6 +97,7 @@ $gutter: 10px;
   flex-basis: 75%;
 }
 
+
 .container-back{
   display: flex;
   flex-direction: row;
@@ -106,10 +113,22 @@ $gutter: 10px;
   overflow-x: hidden;
 }
 
+.container-fluid-nm{
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+}
+
 .container-fluid {
   @include container-fluid-content($container-fluid-width);
 }
 
 .col-inner {
   height: 25px;
+}
+
+.container-front{
+  margin-left: 5%;
+  margin-right: 5%;
 }

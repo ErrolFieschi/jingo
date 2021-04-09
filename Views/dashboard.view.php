@@ -11,7 +11,7 @@
     <section>
         <div class="row">
             <section class="col-lg-7">
-                <div class="row">
+                <div class="row row--space-around">
                     <div class="col-md-6 col-sm-12">
                         <div class="card-center card--shadow">
                             <img class="svg-dashboard" src="/Content/Images/create_courses.svg" alt="register">

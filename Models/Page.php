@@ -50,17 +50,23 @@ class Page
         // verifier os du serveur pour création de chemin probleme des "/" ?
         $cursor = -2;
 
+        //FILE PHP
         $create = fopen("Views/Front/" . $this->name . ".view.php", "a+");
+        // write the basic code inside the page
+        fputs($create, "<h1> Bienvenue sur la page $this->name");
         fclose($create);
 
+        // CONTROLLERS
         $addController = fopen("Controllers/" . $this->controller . ".php", "r+");
         fseek($addController, $cursor, SEEK_END);
-        fputs($addController, PHP_EOL . PHP_EOL . "public function " . $this->name . 'Action(){ $view = new View("' . $this->name . '", "front"); }' . PHP_EOL . "}");
+        fputs($addController, PHP_EOL . PHP_EOL . "public function " . $this->name . 'Action(){ $view = new View("Front/' . $this->name . '", "front"); }' . PHP_EOL . "}");
         fclose($addController);
 
+        //YAML
         $addYaml = fopen("routes.yml", "r+");
         fseek($addYaml, 0, SEEK_END);
-        fputs($addYaml, "/$this->name:" .
+        fputs($addYaml, PHP_EOL .
+            "/$this->name:" .
             PHP_EOL . "  controller: " . $this->controller .
             PHP_EOL . "  action: " . $this->name .
             PHP_EOL . "  auth: " . "false"

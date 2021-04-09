@@ -1,3 +1,14 @@
+.img-fit{
+  padding-top: 0;
+  object-fit: cover;
+
+  &--header{
+    height: 300px;
+  }
+  &--info{
+    height: 220px;
+  }
+}
 
 .pages_icons{
   display: flex;
