@@ -59,4 +59,8 @@
   action: pages
   auth: false
 
-
+# LINKS FOR THE FRONT - PUT THE CONFIG ON THE TOP
+/form:
+  controller: Front
+  action: form
+  auth: false

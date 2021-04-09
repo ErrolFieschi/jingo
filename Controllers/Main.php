@@ -27,4 +27,5 @@ class Main{
 
         $view = new View("settings", "back");
     }
+
 }
