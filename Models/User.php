@@ -7,21 +7,29 @@ use App\Core\Database;
 class User extends Database
 {
 
-	private $id = null;
-	protected $firstname;
-	protected $lastname;
-	protected $email;
-	protected $pwd;
-	protected $country = "fr";
-	protected $role = 0;
-	protected $status = 0;
-	protected $isDeleted = 0;
+    private $id = null;
+    protected $firstname;
+    protected $lastname;
+    protected $email;
+    protected $pwd;
+    protected $country = "fr";
+    protected $role = 0;
+    protected $status = 0;
+    protected $isDeleted = 0;
+    protected $token;
 
-	public function __construct(){
-		parent::__construct();
-	}
+    protected $bdd;
 
-	/**
+    public function __construct()
+    {
+        $this->bdd = parent::getInstance();
+        $getCalledClassExploded = explode("\\", get_called_class()); //App\Models\User
+        $this->bdd->setTable(strtolower(DBPREFIXE . end($getCalledClassExploded)));
+        $this->setToken();
+    }
+
+
+    /**
      * @return mixed
      */
     public function getId()
@@ -143,13 +151,6 @@ class User extends Database
         return $this->isDeleted;
     }
 
-    /**
-     * @param int $idDeleted
-     */
-    public function setIsDeleted(int $isDeleted)
-    {
-        $this->isDeleted = $isDeleted;
-    }
 
     /**
      * @return int
@@ -168,7 +169,23 @@ class User extends Database
     }
 
 
-    public function formRegister(){
+    /**
+     * @return mixed
+     */
+    public function getToken()
+    {
+        return $this->token;
+    }
+
+    public function setToken()
+    {
+        $this->token = bin2hex(random_bytes(64));
+        $this->updateOneRow("token", $this->token);
+    }
+
+
+    public function formRegister()
+    {
         return [
 
             "config"=>[
@@ -178,90 +195,106 @@ class User extends Database
                 "class"=>"form_builder",
                 "submit"=>"S'inscrire"
             ],
-            "inputs"=>[
-                "firstname"=>[ 
-                    "type"=>"text",
-                    "label"=>"Votre prénom",
-                    "minLength"=>2,
-                    "maxLength"=>55,
-                    "id"=>"firstname",
-                    "class"=>"form_input",
-                    "placeholder"=>"Exemple: Yves",
-                    "error"=>"Votre prénom doit faire entre 2 et 55 caractères",
-                    "required"=>true
+            "inputs" => [
+                "firstname" => [
+                    "type" => "text",
+                    "label" => "Votre prénom",
+                    "minLength" => 2,
+                    "maxLength" => 55,
+                    "id" => "firstname",
+                    "class" => "form_input",
+                    "placeholder" => "Prénom",
+                    "error" => "Votre prénom doit faire entre 2 et 55 caractères",
+                    "required" => true
                 ],
                 "lastname"=>[ 
                     "type"=>"text",
                     "label"=>"Votre nom",
                     "minLength"=>2,
-                    "maxLength"=>255,
+                    "maxLength"=>55,
                     "id"=>"lastname",
                     "class"=>"form_input",
-                    "placeholder"=>"Exemple: SKRZYPCZYK",
-                    "error"=>"Votre nom doit faire entre 2 et 255 caractères",
+                    "placeholder"=>"Nom",
+                    "error"=>"Votre nom doit faire entre 2 et 55 caractères",
                     "required"=>true
                 ],
-                "email"=>[ 
-                    "type"=>"email",
-                    "label"=>"Votre email",
-                    "minLength"=>8,
-                    "maxLength"=>320,
-                    "id"=>"email",
+                "birthday"=>[ 
+                    "type"=>"date",
+                    "label"=>"Votre date de naissance",
+                    "maxDate"=> date("Y-m-d", strtotime("-18 year", time())),
+                    "id"=>"birthday",
                     "class"=>"form_input",
-                    "placeholder"=>"Exemple: nom@gmail.com",
-                    "error"=>"Votre email doit faire entre 8 et 320 caractères",
+                    "error"=>"Votre date de naissance est obligatoire",
                     "required"=>true
                 ],
-                "pwd"=>[ 
-                    "type"=>"password",
-                    "label"=>"Votre mot de passe",
-                    "minLength"=>8,
-                    "id"=>"pwd",
-                    "class"=>"form_input",
-                    "placeholder"=>"",
-                    "error"=>"Votre mot de passe doit faire au minimum 8 caractères",
-                    "required"=>true
+                "email" => [
+                    "type" => "email",
+                    "label" => "Votre email",
+                    "minLength" => 8,
+                    "maxLength" => 320,
+                    "id" => "email",
+                    "class" => "form_input",
+                    "placeholder" => "Email",
+                    "error" => "Votre email doit faire entre 8 et 320 caractères",
+                    "required" => true
                 ],
-                "pwdConfirm"=>[ 
-                    "type"=>"password",
-                    "label"=>"Confirmation",
-                    "confirm"=>"pwd",
-                    "id"=>"pwdConfirm",
-                    "class"=>"form_input",
-                    "placeholder"=>"",
-                    "error"=>"Votre mot de mot de passe de confirmation ne correspond pas",
-                    "required"=>true
+                "pwd" => [
+                    "type" => "password",
+                    "label" => "Votre mot de passe",
+                    "minLength" => 8,
+                    "maj"=> true,
+                    "num_verif" => true,
+                    "id" => "pwd",
+                    "class" => "form_input",
+                    "placeholder" => "Mot de passe",
+                    "error" => "Votre mot de passe doit faire au minimum 8 caractères",
+                    "required" => true
                 ],
-                "country"=>[ 
-                    "type"=>"select",
-                    "label"=>"Votre pays",
+                "pwdConfirm" => [
+                    "type" => "password",
+                    "label" => "Confirmation",
+                    "confirm" => "pwd",
+                    "id" => "pwdConfirm",
+                    "class" => "form_input",
+                    "placeholder" => "Confirmer mot de passe",
+                    "error" => "Votre mot de mot de passe de confirmation ne correspond pas",
+                    "required" => true
+                ],
+                "checkCondition"=>[ 
+                    "type"=>"checkbox",
+                    "label"=>"",
                     "options" => [ 
-                                    "fr"=>"France",
-                                    "ru"=>"Russie",
-                                    "pl"=>"Pologne",
-                                    ],
-                    "minLength"=>2,
-                    "maxLength"=>2,
-                    "id"=>"country",
-                    "class"=>"form_input",
-                    "placeholder"=>"Exemple: fr",
-                    "error"=>"Votre pays doit faire 2 caractères"
+                        "J’ai lu et j’accepte les condition générales d’utilisations et la Politique de Protection des Données Personnelles"=>true,
+                    ],
+                    "id"=>"checkCondition",
+                    "class"=>"form_check",
+                    "error"=>"Vous devez accepter les condition générales d’utilisations et la Politique de Protection des Données Personnelles",
+                    "required"=>true
+                ],
+                "checkNewsletter"=>[ 
+                    "type"=>"checkbox",
+                    "label"=>"",
+                    "options" => [ 
+                        "Me tenir informé !"=> true,
+                    ],
+                    "id"=>"checkNewsletter",
+                    "class"=>"form_check"
                 ]
             ]
-
         ];
     }
 
 
-    public function formLogin(){
+    public function formLogin()
+    {
         return [
 
-            "config"=>[
-                "method"=>"POST",
-                "action"=>"",
-                "id"=>"form_login",
-                "class"=>"form_builder",
-                "submit"=>"Se connecter"
+            "config" => [
+                "method" => "POST",
+                "action" => "",
+                "id" => "form_login",
+                "class" => "form_builder",
+                "submit" => "Se connecter"
             ],
             "inputs"=>[
                 "email"=>[ 
@@ -271,7 +304,7 @@ class User extends Database
                     "maxLength"=>320,
                     "id"=>"email",
                     "class"=>"form_input",
-                    "placeholder"=>"Exemple: nom@gmail.com",
+                    "placeholder"=>"Adresse mail",
                     "error"=>"Votre email doit faire entre 8 et 320 caractères",
                     "required"=>true
                 ],
@@ -281,15 +314,23 @@ class User extends Database
                     "minLength"=>8,
                     "id"=>"pwd",
                     "class"=>"form_input",
-                    "placeholder"=>"",
+                    "placeholder"=>"Mot de passe",
                     "error"=>"Votre mot de passe doit faire au minimum 8 caractères",
                     "required"=>true
-                ]
+                ],
+                "checkLogin"=>[ 
+                    "type"=>"checkbox",
+                    "label"=>"",
+                    "options" => [ 
+                        "Se souvenir de moi"=>true,
+                    ],
+                    "id"=>"checkLogin",
+                    "class"=>"form_check"
+                ],
             ]
 
         ];
     }
-
 
 }
 
