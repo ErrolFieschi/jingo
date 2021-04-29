@@ -54,3 +54,13 @@
   controller: Training
   action: lesson
   auth: false
+
+/pages:
+  controller: Pages
+  action: pages
+  auth: false
+
+/model:
+  controller: Front
+  action: model
+  auth: false

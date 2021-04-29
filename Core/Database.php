@@ -41,9 +41,11 @@ class Database
 						get_object_vars($this),
 						get_class_vars(get_class())
 					);
-
+		
+		//INSERT OU UPDATE
+		// $id == null -> INSERT SINON UPDATE
 		if( is_null($this->getId()) ){
-
+			//INSERT
 			$query = $this->bdd->pdo->prepare("INSERT INTO ".$this->bdd->table." (".
 					implode(",", array_keys($columns))
 				.") 

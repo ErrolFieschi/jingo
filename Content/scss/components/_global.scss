@@ -47,3 +47,10 @@ hr {
         padding:20px 0;
     }
 }
+
+.flex-end{
+    display: flex;
+    justify-content: flex-end;
+    flex-direction: row;
+    flex-wrap: wrap;
+}

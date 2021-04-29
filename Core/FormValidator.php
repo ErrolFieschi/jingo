@@ -11,8 +11,7 @@ class FormValidator
 
 
         if (count($data) == count($form["inputs"])) {
-            echo "<pre>";
-            var_dump($form);
+
             foreach ($form["inputs"] as $name => $configInput) {
 
                 if (!empty($configInput["minLength"]) &&

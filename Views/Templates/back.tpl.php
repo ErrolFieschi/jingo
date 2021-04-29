@@ -12,6 +12,7 @@
     <script src="https://cdn.tiny.cloud/1/freuyvh2imwvcgh8t7h0vd36xd3iessaj34fcjuiypccegr3/tinymce/5/tinymce.min.js"
             referrerpolicy="origin"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://kit.fontawesome.com/d59c1d4dbf.js" crossorigin="anonymous"></script>
 </head>
 <body>
 <div class="container-back">

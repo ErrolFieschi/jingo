@@ -1,0 +1,27 @@
+.img-fit{
+  padding-top: 0;
+  object-fit: cover;
+
+  &--header{
+    height: 300px;
+  }
+  &--info{
+    height: 220px;
+  }
+}
+
+.pages_icons{
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-end;
+}
+.pages_card{
+  cursor: pointer;
+}
+@media screen and (max-width: 1000px) {
+  .pages_card {
+    margin-left: 0!important;
+  }
+}
