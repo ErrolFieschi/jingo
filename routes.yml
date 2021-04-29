@@ -24,14 +24,9 @@
   action: settings
   auth: false
 
-/s-inscrire:
+/register:
   controller: Security
   action: register
-  auth: false
-
-/se-connecter:
-  controller: Security
-  action: login
   auth: false
 
 /login:
@@ -39,7 +34,7 @@
   action: login
   auth: false
 
-/se-deconnecter:
+/logout:
   controller: Security
   action: logout
   auth: true
@@ -48,9 +43,14 @@
   controller: Main
   action: home
   auth: false
+  role: user
 
 /training:
   controller: Main
   action: training
   auth: false
 
+/lesson:
+  controller: Training
+  action: lesson
+  auth: false
