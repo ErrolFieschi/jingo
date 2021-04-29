@@ -25,6 +25,7 @@
         margin: 0;
         font-size: rem(35);
         font-weight: 700;
+        text-align: center;
       }
 
       & p {
@@ -50,12 +51,10 @@
           font-size: rem(20);
           font-weight: 700;
         }
-
         & p {
           display: none;
         }
       }
     }
   }
-
 }
