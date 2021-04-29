@@ -111,6 +111,25 @@ class Database
 
     }
 
+    public function searchOneColWithOneRow($table, $search, $whereCondition, $whereValue) {
+	    $query = $this->bdd->pdo->prepare("SELECT " . $search . " FROM ".DBPREFIXE.$table." WHERE ".$whereCondition. " = :find ;");
+
+        $query->execute([
+            "find" => $whereValue
+        ]);
+
+        return $query->fetch();
+    }
+
+    public function countRow($table, $search, $whereCondition, $whereValue){
+        $query = $this->bdd->pdo->prepare("SELECT " . $search . " FROM ".DBPREFIXE.$table." WHERE ".$whereCondition. " = :find LIMIT 1;");
+
+        $query->execute([
+            "find" => $whereValue
+        ]);
+
+        return $query->rowCount();
+    }
 }
 
 

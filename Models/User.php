@@ -92,7 +92,7 @@ class User extends Database
      */
     public function setEmail($email)
     {
-        $this->email = $email;
+        $this->email = mb_strtolower($email);
     }
 
     /**
@@ -108,7 +108,7 @@ class User extends Database
      */
     public function setPwd($pwd)
     {
-        $this->pwd = $pwd;
+        $this->pwd = password_hash($pwd, PASSWORD_DEFAULT);
     }
 
     /**
@@ -180,7 +180,6 @@ class User extends Database
     public function setToken()
     {
         $this->token = bin2hex(random_bytes(64));
-        $this->updateOneRow("token", $this->token);
     }
 
 
@@ -236,7 +235,9 @@ class User extends Database
                     "class" => "form_input",
                     "placeholder" => "Email",
                     "error" => "Votre email doit faire entre 8 et 320 caractères",
-                    "required" => true
+                    "required" => true,
+                    "unique" => true,
+                    "unique_error" => "Cet email est déjà utilisé."
                 ],
                 "pwd" => [
                     "type" => "password",

@@ -48,36 +48,6 @@ class Security{
 	public function registerAction(){
 
 
-		
-		//Vérification des valeurs en POST
-
-
-		/*
-		$user = new User();
-		$user->setFirstname("Yves");
-		$user->setLastname("SKRZYPCZYK");
-		$user->setEmail("y.skrzypczyk@gmail.com");
-		$user->setPwd("Test1234");
-		$user->setCountry("fr");
-
-		$user->save();
-
-
-		$log = new Log();
-		$log->user("y.skrzypczyk@gmail.com");
-		$log->date(time());
-		$log->success(false);
-		$log->save();
-
-		$user = new User();
-		print_r($user) // VIDE
-		$user->setId(2); // double action de peupler l'objet avec ce qu'il y a en bdd
-		print_r($user) // J'ai le user en bdd
-		$user->setFirstname("Toto");
-		$user->save();
-		*/
-
-
 		$user = new User();
 		$view = new View("register");
 
@@ -85,18 +55,16 @@ class Security{
 		$form = $user->formRegister();
 
 		if(!empty($_POST)){
-
+            Secu::userExist($user, $_POST["email"]);
 			$errors = FormValidator::check($form, $_POST);
 
 			if(empty($errors)){
-				
-				$user->setFirstname($_POST["firstname"]);
-				$user->setLastname($_POST["lastname"]);
-				$user->setEmail($_POST["email"]);
-				$user->setPwd($_POST["pwd"]);
-				$user->setCountry($_POST["country"]);
-				$user->save();
-
+				    $user->setFirstname($_POST["firstname"]);
+                    $user->setLastname($_POST["lastname"]);
+                    $user->setEmail($_POST["email"]);
+                    $user->setPwd($_POST["pwd"]);
+                    $user->setCountry($_POST["country"]??$user->getCountry());
+                    $user->save();
 			}else{
 				$view->assign("errors", $errors);
 			}

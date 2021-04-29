@@ -29,6 +29,9 @@ class FormValidator
                 }
                 if ($name == "email" && !filter_var($data[$name], FILTER_VALIDATE_EMAIL)) {
                     $errors[] = "email non valide";
+                }else if(!empty($configInput['unique']) && $configInput['unique'] == true){
+                    if(isset($_SESSION["userExist"]) && $_SESSION["userExist"] == true)
+                        $errors[] = "Cet email est déjà pris";
                 }
                 if ($name == "pwd" && !empty($data[$name]) && !empty($data["pwdConfirm"]) && $data[$name] != $data["pwdConfirm"]) {
                     $errors[] = "Mdp différent";

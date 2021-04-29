@@ -2,6 +2,8 @@
 
 namespace App\Core;
 
+use App\Models\User;
+
 class Security
 {
 
@@ -20,6 +22,19 @@ class Security
 
 	    return false;
 
+    }
+
+    public static function userExist(User $user, String $email) {
+        $test = $user->countRow("user", "email", "email", $email);
+
+        echo "count " . $test . " :: ";
+        if ($test == 0) {
+            $_SESSION["userExist"] = false;
+            return true;
+        }
+        $_SESSION["userExist"] = true;
+        //var_dump($_SESSION);
+        return false;
     }
 
 }
