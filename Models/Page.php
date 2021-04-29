@@ -43,34 +43,10 @@ class Page
         $this->title = $title;
     }
 
+
     public function createPage()
     {
 
-        // IMPORTANT supprimer tout les caractères spéciaux et les espaces
-        // verifier os du serveur pour création de chemin probleme des "/" ?
-        $cursor = -2;
-
-        //FILE PHP
-        $create = fopen("Views/Front/" . $this->name . ".view.php", "a+");
-        // write the basic code inside the page
-        fputs($create, "<h1> Bienvenue sur la page $this->name");
-        fclose($create);
-
-        // CONTROLLERS
-        $addController = fopen("Controllers/" . $this->controller . ".php", "r+");
-        fseek($addController, $cursor, SEEK_END);
-        fputs($addController, PHP_EOL . PHP_EOL . "public function " . $this->name . 'Action(){ $view = new View("Front/' . $this->name . '", "front"); }' . PHP_EOL . "}");
-        fclose($addController);
-
-        //YAML
-        $addYaml = fopen("routes.yml", "r+");
-        fseek($addYaml, 0, SEEK_END);
-        fputs($addYaml, PHP_EOL .
-            "/$this->name:" .
-            PHP_EOL . "  controller: " . $this->controller .
-            PHP_EOL . "  action: " . $this->name .
-            PHP_EOL . "  auth: " . "false"
-        );
     }
 
     public function addPages()
@@ -93,6 +69,17 @@ class Page
                     "class" => "form_input",
                     "placeholder" => "Nom de la page",
                     "error" => "Le nom de la page doit faire entre 2 et 55 caractères",
+                    "required" => true
+                ],
+                "url" => [
+                    "type" => "text",
+                    "label" => "URL de la page",
+                    "minLength" => 2,
+                    "maxLength" => 100,
+                    "id" => "url_page",
+                    "class" => "form_input",
+                    "placeholder" => "URL de la page",
+                    "error" => "L'URL doit faire entre 2 et 100 caractères",
                     "required" => true
                 ],
                 "title" => [
