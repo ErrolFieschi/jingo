@@ -7,13 +7,6 @@ use App\Models\Lesson;
 
 class Main{
 
-
-	public function defaultAction(){
-
-		$view = new View("home");
-	}
-
-
 	public function statsAction(){
 
 		$view = new View("stats","back");

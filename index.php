@@ -7,10 +7,10 @@ use App\Core\ConstantMaker;
 use App\Core\Helpers as h;
 use App\Core\Security;
 
-//require "Core/Router.php";
-//require "Core/Security.php";
+session_start() ;
 
 require "Autoload.php";
+
 
 Autoload::register();
 
@@ -29,6 +29,7 @@ $router = new Router($uri);
 $controller = $router->getController();
 $action = $router->getAction();
 $auth = $router->getAuth();
+
 
 
 

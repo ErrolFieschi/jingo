@@ -59,9 +59,11 @@ class Database
 			    if(!empty($value))
 			        $sql.= $col ." = '". $value . "' , " ;
             }
+
             $query = $this->bdd->pdo->prepare("UPDATE ". $this->bdd->table . " SET " . rtrim($sql, " , ")."WHERE id =" .$this->getId() . ";");
+
 		}
-		$query->execute($columns);
+		$query->execute();
 
 	}
 
@@ -113,7 +115,7 @@ class Database
     }
 
     public function searchOneColWithOneRow($table, $search, $whereCondition, $whereValue) {
-        $query = $this->bdd->pdo->prepare("SELECT " . $search . " FROM ".DBPREFIXE.$table." WHERE ".$whereCondition. " = :find ;");
+        $query = self::getInstance()->pdo->prepare("SELECT " . $search . " FROM ".DBPREFIXE.$table." WHERE ".$whereCondition. " = :find ;");
 
         $query->execute([
             "find" => $whereValue

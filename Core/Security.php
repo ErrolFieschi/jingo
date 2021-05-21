@@ -8,14 +8,17 @@ class Security
 {
 
 	public static function isConnected(){
-
-		return self::checkToken();
+        if(isset($_SESSION['connected']) && $_SESSION['connected'] == true)
+		    return self::checkToken();
+        return false ;
 	}
 
     private static function checkToken() {
 
-	    if (isset($_SESSION['user'])) {
-            return ($_SESSION['user']->getToken() == $_SESSION['user']->getOneRowWithId('token', $_SESSION['user']->getId()));
+	    if (isset($_SESSION['token']) && isset($_SESSION['id'])) {
+            $bd = Database::getInstance() ;
+            $token = $bd->searchOneColWithOneRow("user","token","id",$_SESSION['id']);
+            return ($_SESSION['token'] == $token[0] ) ;
         }
 
 	    return false;
@@ -25,8 +28,11 @@ class Security
 
 	    if(self::userExist($user,$user->getEmail())) {
 	        $tmp = $user->searchOneColWithOneRow("user","pwd","email",$user->getEmail()) ;
-	        if(password_verify($pwd,$tmp['pwd']))
-	            return true ;
+	        if(password_verify($pwd,$tmp['pwd'])) {
+	            $_SESSION['connected'] = true ;
+                return true ;
+            }
+
 	        return false ;
         }
     }

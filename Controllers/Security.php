@@ -5,24 +5,20 @@ namespace App\Controller;
 use App\Core\Security as Secu;
 use App\Core\View;
 use App\Core\FormValidator;
-use App\Core\ConstantMaker as c;
 
 use App\Models\User;
 
 class Security{
 
-
-
     public function adminAction(){
+
         $view = new View("dashboard","back");
     }
 
 	public function loginAction(){
 
 		$user = new User();
-
 		$view = new View("login");
-
 		$formLogin = $user->formLogin();
 
 		if(!empty($_POST)){
@@ -34,45 +30,33 @@ class Security{
 
 			    if(Secu::userExist($user,$user->getEmail())) {
                     if(Secu::userTestConnection($user,$_POST['pwd'])) {
-                        $tmp = $user->searchOneColWithOneRow("user","*","email",$user->getEmail()) ;
 
-                       // $user->setToken() ;
+                        $tmp = $user->searchOneColWithOneRow("user","id","email",$user->getEmail()) ;
+
+                        $user->setToken() ;
                         $user->setId($tmp['id']) ;
 
                         $user->save() ;
+                        $_SESSION['token'] = $user->getToken() ;
+                        $_SESSION['id'] = $user->getId() ;
 
-                        $user->setLastname($tmp['lastname']) ;
-                        $user->setCountry($tmp['country']) ;
-                        $user->setFirstname($tmp['firstname']) ;
-                        $user->setRole($tmp['role']);
-                        $user->setStatus($tmp['status']) ;
-
-                        $_SESSION['user'] = $user ;
+                        header('Status: 301 Permanently', false, 301);
                         header('Location: /dashboard');
                     } else {
-
                         $view->assign("pwd","Mot de passe incorrect");
                     }
                 }
-
-
-
 			}else{
 				$view->assign("errors", $errors);
 			}
 		}
-
 		$view->assign("formLogin", $formLogin);
 
 	}
 
 	public function registerAction(){
-
-
 		$user = new User();
 		$view = new View("register");
-
-
 		$form = $user->formRegister();
 
 		if(!empty($_POST)){
@@ -94,8 +78,9 @@ class Security{
 	}
 
 	public function logoutAction(){
-
-	    echo "Logout action";
+        unset($_SESSION) ;
+        header('Status: 301 Permanently', false, 301);
+        header('Location: /login');
 
 	}
 
