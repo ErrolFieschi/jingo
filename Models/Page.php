@@ -4,13 +4,24 @@
 namespace App\Models;
 
 
-class Page
+use App\Core\Database;
+
+class Page extends Database
 {
     private $name;
     private $title;
     private $controller = "Front";
     private $action = "defaultAction";
 
+    protected $bdd;
+
+    public function __construct()
+    {
+        $this->bdd = parent::getInstance();
+        $getCalledClassExploded = explode("\\", get_called_class()); //App\Models\User
+        $this->bdd->setTable(strtolower(DBPREFIXE . end($getCalledClassExploded)));
+
+    }
     /**
      * @return mixed
      */

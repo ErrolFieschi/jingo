@@ -9,9 +9,6 @@ class FormValidator
     {
         $errors = [];
 
-
-        if (count($data) == count($form["inputs"])) {
-
             foreach ($form["inputs"] as $name => $configInput) {
 
                 if (!empty($configInput["minLength"]) &&
@@ -52,10 +49,14 @@ class FormValidator
                     $errors[] = $configInput["error"];
                 }
 
+                if(empty($data[$name]) && !empty($configInput["required"])){
+                    $errors[] = "Tentative de Hack";
+
+                }
+
             }
-        } else {
-            $errors[] = "Tentative de Hack";
-        }
+
+
         return $errors;
     }
 

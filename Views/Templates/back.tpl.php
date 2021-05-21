@@ -71,7 +71,7 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link " href="/se-connecter">
+                <a class="nav-link " href="/logout">
                 <img src="/Content/svg/logout.svg" alt="icon">
                     <span>Déconnexion</span>
                 </a>

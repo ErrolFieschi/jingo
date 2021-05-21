@@ -9,8 +9,6 @@ class Security
 
 	public static function isConnected(){
 
-        echo "Connecter !";
-
 		return self::checkToken();
 	}
 
@@ -23,18 +21,24 @@ class Security
 	    return false;
 
     }
+    public static function userTestConnection(User $user, String $pwd) {
 
-    public static function userExist(User $user, String $email) {
+	    if(self::userExist($user,$user->getEmail())) {
+	        $tmp = $user->searchOneColWithOneRow("user","pwd","email",$user->getEmail()) ;
+	        if(password_verify($pwd,$tmp['pwd']))
+	            return true ;
+	        return false ;
+        }
+    }
+    public static function userExist(User $user, String $email): bool {
+
         $test = $user->countRow("user", "email", "email", $email);
-
-        echo "count " . $test . " :: ";
         if ($test == 0) {
             $_SESSION["userExist"] = false;
-            return true;
+            return false;
         }
         $_SESSION["userExist"] = true;
-        //var_dump($_SESSION);
-        return false;
+        return true;
     }
 
 }

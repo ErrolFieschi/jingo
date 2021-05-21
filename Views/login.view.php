@@ -7,10 +7,14 @@
                 foreach ($errors as $error):?>
                     <li style="color:red"><?= $error; ?></li>
                 <?php endforeach;
-            endif; ?>
+            endif;
+
+            if(!empty($pwd)): ?>
+              <li style="color:red"><?= $pwd; ?></li>
+            <?php endif; ?>
             <hr />
             <div class="flex justify-center">
-                <span class="description">Pas de compte ? <a class="text-main" href="/s-inscrire">S’enregister</a></span>
+                <span class="description">Pas de compte ? <a class="text-main" href="/register">S’enregister</a></span>
             </div>
         </div>
     </div>

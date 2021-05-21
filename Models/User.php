@@ -26,6 +26,7 @@ class User extends Database
         $getCalledClassExploded = explode("\\", get_called_class()); //App\Models\User
         $this->bdd->setTable(strtolower(DBPREFIXE . end($getCalledClassExploded)));
         $this->setToken();
+
     }
 
 

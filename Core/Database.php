@@ -53,12 +53,13 @@ class Database
 					implode(",:", array_keys($columns))
 				." );");	
 		}else{
+
 			$sql = "";
 			foreach ($columns as $col => $value) {
-			    $sql.= $col ." = ". $value . "," ;
+			    if(!empty($value))
+			        $sql.= $col ." = '". $value . "' , " ;
             }
-
-            $query = $this->bdd->pdo->prepare("UPDATE ". $this->bdd->table . "SET" .rtrim($sql,",")."WHERE id =" .$this->getId() . ";");
+            $query = $this->bdd->pdo->prepare("UPDATE ". $this->bdd->table . " SET " . rtrim($sql, " , ")."WHERE id =" .$this->getId() . ";");
 		}
 		$query->execute($columns);
 

@@ -305,6 +305,12 @@
 .row.no-container {
   margin: 0;
 }
+.row--around {
+  justify-content: space-around;
+}
+.row--between {
+  justify-content: space-between;
+}
 
 .row-end {
   display: flex;
@@ -351,6 +357,13 @@
   overflow-x: hidden;
 }
 
+.container-fluid-nm {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+}
+
 .container-fluid {
   max-width: 100%;
   margin: auto;
@@ -358,6 +371,11 @@
 
 .col-inner {
   height: 25px;
+}
+
+.container-front {
+  margin-left: 5%;
+  margin-right: 5%;
 }
 
 * {
@@ -407,6 +425,13 @@ hr {
 }
 .container > section {
   padding: 20px 0;
+}
+
+.flex-end {
+  display: flex;
+  justify-content: flex-end;
+  flex-direction: row;
+  flex-wrap: wrap;
 }
 
 .button-con {
@@ -495,6 +520,18 @@ hr {
   border: none;
 }
 
+.card-row {
+  border-radius: 0.25rem;
+  display: flex;
+  position: relative;
+  flex-direction: row;
+  border: 1px solid rgba(0, 0, 0, 0.125);
+}
+.card-row--shadow {
+  box-shadow: 0 0 8px 2px rgba(0, 0, 0, 0.1);
+  border: none;
+}
+
 .card-body {
   flex: 1 1 auto;
   padding: 1.25rem;
@@ -508,6 +545,7 @@ hr {
   flex-direction: column;
   border: 1px solid rgba(0, 0, 0, 0.125);
   min-height: 200px;
+  background-color: #F2F2F2;
 }
 .card-center--shadow {
   box-shadow: 0 0 8px 2px rgba(0, 0, 0, 0.1);
@@ -516,6 +554,20 @@ hr {
 .card-center:hover {
   transition: ease 1s;
   background-color: #e7e7e7;
+}
+
+.card_title_left {
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  position: relative;
+  flex-direction: column;
+  border: 1px solid rgba(0, 0, 0, 0.125);
+  min-height: 200px;
+  background-color: #F2F2F2;
+}
+.card_title_left--shadow {
+  box-shadow: 0 0 8px 2px rgba(0, 0, 0, 0.1);
 }
 
 .svg-dashboard {
@@ -593,6 +645,19 @@ hr {
   justify-content: space-evenly;
 }
 
+.dashboard-stats {
+  height: 728px;
+}
+
+.fas_card {
+  font-size: 3em;
+}
+
+@media screen and (max-width: 900px) {
+  .dashboard-stats {
+    height: auto;
+  }
+}
 .nav {
   display: flex;
   flex-wrap: wrap;
@@ -604,6 +669,30 @@ hr {
 }
 .nav ul {
   padding: 0;
+}
+
+.horizontal-nav {
+  display: flex;
+  flex-wrap: wrap;
+  list-style: none;
+  color: white;
+  width: 100%;
+  height: 70px;
+}
+
+.nav-front {
+  padding: 0.625rem 1rem;
+}
+
+.navbar-nav {
+  display: flex;
+  flex-direction: row;
+  list-style: none;
+}
+
+.nav-front-font {
+  font-weight: 500;
+  color: black !important;
 }
 
 @media screen and (max-width: 900px) {
@@ -2127,6 +2216,10 @@ textarea:focus, input:focus {
   padding-bottom: 10rem;
 }
 
+.tc {
+  text-align: center;
+}
+
 .mx-auto {
   margin-left: auto;
   margin-right: auto;
@@ -2215,6 +2308,12 @@ textarea:focus, input:focus {
   color: #565B9F;
 }
 
+.site-title {
+  font-weight: bolder;
+  font-size: 2rem;
+  color: black;
+}
+
 .description {
   font-size: 14px;
 }
@@ -2229,6 +2328,31 @@ textarea:focus, input:focus {
 }
 .banner--text {
   position: relative;
+}
+.banner--text .bg-left {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  color: black;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  font-size: 3.125rem;
+  font-weight: 700;
+  padding-left: 100px;
+}
+.banner--text .bg-left h4 {
+  margin: 0;
+  font-size: 2.1875rem;
+  font-weight: 500;
+  text-align: center;
+}
+.banner--text .bg-left p {
+  font-size: 0.875rem;
+  font-weight: 400;
 }
 .banner--text .bg {
   position: absolute;
@@ -2248,6 +2372,7 @@ textarea:focus, input:focus {
   margin: 0;
   font-size: 2.1875rem;
   font-weight: 700;
+  text-align: center;
 }
 .banner--text .bg p {
   font-size: 0.875rem;
@@ -2278,7 +2403,7 @@ textarea:focus, input:focus {
   max-width: 100%;
 }
 
-.div_colo_register {
+.log_reg {
   background-color: #83A6C6;
   display: flex;
 }
@@ -2364,6 +2489,35 @@ textarea:focus, input:focus {
 .settings-wrapper .logo-select .select.times {
   border-color: #ce0a0a;
   background-color: #fba9a9;
+}
+
+.img-fit {
+  padding-top: 0;
+  object-fit: cover;
+}
+.img-fit--header {
+  height: 300px;
+}
+.img-fit--info {
+  height: 220px;
+}
+
+.pages_icons {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.pages_card {
+  cursor: pointer;
+}
+
+@media screen and (max-width: 1000px) {
+  .pages_card {
+    margin-left: 0 !important;
+  }
 }
 
 /*# sourceMappingURL=main.css.map */

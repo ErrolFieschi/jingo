@@ -10,7 +10,7 @@
             endif; ?>
             <hr />
             <div class="flex justify-center">
-                <span class="description">Déjà un compte ? <a class="text-main" href="/se-connecter">Se connecter</a></span>
+                <span class="description">Déjà un compte ? <a class="text-main" href="/login">Se connecter</a></span>
             </div>
         </div>
     </div>
