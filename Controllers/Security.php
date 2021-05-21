@@ -78,7 +78,7 @@ class Security{
 	}
 
 	public function logoutAction(){
-        unset($_SESSION) ;
+        session_destroy();
         header('Status: 301 Permanently', false, 301);
         header('Location: /login');
 
