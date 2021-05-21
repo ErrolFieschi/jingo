@@ -19,7 +19,6 @@ class Database
 		}catch(\Exception $e){
 			die("Erreur SQL " . $e->getMessage());
 		}
-
 	}
 
     public static function getInstance() {
@@ -41,7 +40,8 @@ class Database
 						get_object_vars($this),
 						get_class_vars(get_class())
 					);
-		
+
+
 		//INSERT OU UPDATE
 		// $id == null -> INSERT SINON UPDATE
 		if( is_null($this->getId()) ){
@@ -53,14 +53,14 @@ class Database
 					implode(",:", array_keys($columns))
 				." );");	
 		}else{
-			//UPDATE
-            $query = $this->bdd->pdo->prepare("UPDATE ".$this->bdd->table." (".
-                implode("SET ", array_keys($columns), "=") . implode(":", array_keys($columns),",")
-                ." );");
+			$sql = "";
+			foreach ($columns as $col => $value) {
+			    $sql.= $col ." = ". $value . "," ;
+            }
+
+            $query = $this->bdd->pdo->prepare("UPDATE ". $this->bdd->table . "SET" .rtrim($sql,",")."WHERE id =" .$this->getId() . ";");
 		}
 		$query->execute($columns);
-        if(is_null($this->getId()))
-            $this->setId($this->bdd->pdo->lastInsertId()) ;
 
 	}
 
@@ -112,7 +112,7 @@ class Database
     }
 
     public function searchOneColWithOneRow($table, $search, $whereCondition, $whereValue) {
-	    $query = $this->bdd->pdo->prepare("SELECT " . $search . " FROM ".DBPREFIXE.$table." WHERE ".$whereCondition. " = :find ;");
+        $query = $this->bdd->pdo->prepare("SELECT " . $search . " FROM ".DBPREFIXE.$table." WHERE ".$whereCondition. " = :find ;");
 
         $query->execute([
             "find" => $whereValue
@@ -130,6 +130,7 @@ class Database
 
         return $query->rowCount();
     }
+
 }
 
 

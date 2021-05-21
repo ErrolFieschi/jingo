@@ -217,7 +217,7 @@ class User extends Database
                     "error"=>"Votre nom doit faire entre 2 et 55 caractères",
                     "required"=>true
                 ],
-                "birthday"=>[ 
+                "birthday"=>[
                     "type"=>"date",
                     "label"=>"Votre date de naissance",
                     "maxDate"=> date("Y-m-d", strtotime("-18 year", time())),
@@ -261,10 +261,10 @@ class User extends Database
                     "error" => "Votre mot de mot de passe de confirmation ne correspond pas",
                     "required" => true
                 ],
-                "checkCondition"=>[ 
+                "checkCondition"=>[
                     "type"=>"checkbox",
                     "label"=>"",
-                    "options" => [ 
+                    "options" => [
                         "J’ai lu et j’accepte les condition générales d’utilisations et la Politique de Protection des Données Personnelles"=>true,
                     ],
                     "id"=>"checkCondition",
@@ -272,7 +272,7 @@ class User extends Database
                     "error"=>"Vous devez accepter les condition générales d’utilisations et la Politique de Protection des Données Personnelles",
                     "required"=>true
                 ],
-                "checkNewsletter"=>[ 
+                "checkNewsletter"=>[
                     "type"=>"checkbox",
                     "label"=>"",
                     "options" => [ 
@@ -319,10 +319,10 @@ class User extends Database
                     "error"=>"Votre mot de passe doit faire au minimum 8 caractères",
                     "required"=>true
                 ],
-                "checkLogin"=>[ 
+                "checkLogin"=>[
                     "type"=>"checkbox",
                     "label"=>"",
-                    "options" => [ 
+                    "options" => [
                         "Se souvenir de moi"=>true,
                     ],
                     "id"=>"checkLogin",
@@ -332,6 +332,7 @@ class User extends Database
 
         ];
     }
+
 
 }
 
