@@ -12,7 +12,12 @@
                 <section>
                     <div class="row mb-4" style="background-color: white;">
                         <div class="col-sm-12">
-                                <?php App\Core\FormBuilder::render($formLesson) ?>
+                                <?php App\Core\FormBuilder::render($form) ?>
+                            <?php if (isset($errors)):
+                                foreach ($errors as $error):?>
+                                    <li style="color:red"><?= $error; ?></li>
+                                <?php endforeach;
+                            endif; ?>
                         </div>
                     </div>
                 </section>

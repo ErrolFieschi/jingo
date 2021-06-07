@@ -8,22 +8,23 @@ class Lesson extends Database
 {
 
     private $id = null;
+    protected $createby;
     protected $title;
-    protected $description;
-    protected $tags;
+    protected $icon;
+    protected $code;
+    protected $part_id;
 
     protected $bdd;
 
     public function __construct()
     {
         $this->bdd = parent::getInstance();
-        $getCalledClassExploded = explode("\\", get_called_class()); //App\Models\User
+        $getCalledClassExploded = explode("\\", get_called_class());
         $this->bdd->setTable(strtolower(DBPREFIXE . end($getCalledClassExploded)));
     }
 
-
     /**
-     * @return mixed
+     * @return null
      */
     public function getId()
     {
@@ -36,6 +37,22 @@ class Lesson extends Database
     public function setId($id)
     {
         $this->id = $id;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getCreateby()
+    {
+        return $this->createby;
+    }
+
+    /**
+     * @param mixed $createby
+     */
+    public function setCreateby($createby)
+    {
+        $this->createby = $createby;
     }
 
     /**
@@ -57,33 +74,65 @@ class Lesson extends Database
     /**
      * @return mixed
      */
-    public function getDescription()
+    public function getIcon()
     {
-        return $this->description;
+        return $this->icon;
     }
 
     /**
-     * @param mixed $description
+     * @param mixed $icon
      */
-    public function setDescription($description)
+    public function setIcon($icon)
     {
-        $this->description = $description;
+        $this->icon = $icon;
     }
 
     /**
      * @return mixed
      */
-    public function getTags()
+    public function getCode()
     {
-        return $this->tags;
+        return $this->code;
     }
 
     /**
-     * @param mixed $tags
+     * @return mixed
      */
-    public function setTags($tags)
+    public function getPartId()
     {
-        $this->tags = $tags;
+        return $this->part_id;
+    }
+
+    /**
+     * @param mixed $part_id
+     */
+    public function setPartId($part_id)
+    {
+        $this->part_id = $part_id;
+    }
+
+    /**
+     * @param mixed $code
+     */
+    public function setCode($code)
+    {
+        $this->code = $code;
+    }
+
+    /**
+     * @return Database|null
+     */
+    public function getBdd(): Database
+    {
+        return $this->bdd;
+    }
+
+    /**
+     * @param Database|null $bdd
+     */
+    public function setBdd(Database $bdd)
+    {
+        $this->bdd = $bdd;
     }
 
     public function formLesson()
@@ -109,20 +158,20 @@ class Lesson extends Database
                     "error" => "Le titre doit faire entre 2 et 55 caractères",
                     "required" => true
                 ],
-                "description" => [
-                    "type" => "textarea",
-                    "label" => "Ma leçon",
-                    "id" => "description",
+                "icon" => [
+                    "type" => "text",
+                    "label" => "Mes icons",
+                    "id" => "icon",
                     "class" => "form-control",
                     "placeholder" => "Tapez votre cours ici",
                     "required" => true
                 ],
-                "tags"=>[
-                    "type"=>"text",
-                    "label"=>"tags",
-                    "id"=>"tags",
-                    "class"=>"form-control",
-                    "required"=>false
+                "code" => [
+                    "type" => "textarea",
+                    "label" => "Ma leçon",
+                    "id" => "code",
+                    "class" => "form-control",
+                    "placeholder" => "Tapez votre cours ici"
                 ]
             ]
         ];

@@ -1,28 +1,38 @@
 <?php
 
-
 namespace App\Controller;
-use App\Core\FormValidator;
+
 use App\Core\View;
-use App\Models\Page;
+use App\Core\FormValidator;
+use App\Core\ConstantMaker as c;
+
+use App\Models\Lesson;
+
 
 class Pages
 {
 
-    public function pagesAction(){
+    public function lessonAction(){
 
-        $view = new View("pages","back");
-        $page = new Page();
-        $form = $page->addPages();
+        $view = new View("lesson", "back");
+        $lesson = new Lesson();
+
+        $form = $lesson->formLesson();
+
+
+
         if(!empty($_POST)){
 
             $errors = FormValidator::check($form, $_POST);
 
             if(empty($errors)){
 
-                $page->setName($_POST["name"]);
-                $page->setTitle($_POST["title"]);
-                $page->createPage(); //remplacer par une fonction file_puts_content
+                $lesson->setCreateby('user');
+                $lesson->setTitle($_POST["title"]);
+                $lesson->setIcon($_POST["icon"]);
+                $lesson->setCode($_POST["code"]);
+                $lesson->setPartId(1);
+                $lesson->save();
 
             }else{
                 $view->assign("errors", $errors);
@@ -30,5 +40,7 @@ class Pages
         }
         $view->assign("form", $form);
     }
+
+
 
 }

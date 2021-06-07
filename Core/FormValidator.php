@@ -56,7 +56,7 @@ class FormValidator
 
             }
 
-
+echo count($data) . '-- nbrInput: ' . count($form['inputs']);
         return $errors;
     }
 

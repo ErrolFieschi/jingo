@@ -51,7 +51,9 @@ class Database
 				.") 
 				VALUES ( :".
 					implode(",:", array_keys($columns))
-				." );");	
+				." );");
+
+            $query->execute($columns);
 		}else{
 
 			$sql = "";
@@ -61,9 +63,8 @@ class Database
             }
 
             $query = $this->bdd->pdo->prepare("UPDATE ". $this->bdd->table . " SET " . rtrim($sql, " , ")."WHERE id =" .$this->getId() . ";");
-
+            $query->execute();
 		}
-		$query->execute();
 
 	}
 
