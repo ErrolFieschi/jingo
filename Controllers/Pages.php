@@ -5,7 +5,6 @@ namespace App\Controller;
 use App\Core\View;
 use App\Core\FormValidator;
 use App\Core\ConstantMaker as c;
-
 use App\Models\Lesson;
 
 
@@ -40,6 +39,7 @@ class Pages
         }
         $view->assign("form", $form);
     }
+
 
 
 

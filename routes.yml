@@ -46,7 +46,7 @@
   role: user
 
 /training:
-  controller: Main
+  controller: Training
   action: training
   auth: false
 
