@@ -54,6 +54,7 @@ class Database
 				." );");
 
             $query->execute($columns);
+
 		}else{
 
 			$sql = "";
