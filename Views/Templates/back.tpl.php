@@ -87,6 +87,7 @@
         selector: 'textarea',
         height: 500,
         menubar: false,
+        editor_selector : "jingoEditor",
         plugins: [
             'advlist autolink lists link image charmap print preview anchor',
             'searchreplace visualblocks code fullscreen',
