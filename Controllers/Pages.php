@@ -33,6 +33,8 @@ class Pages
                 $lesson->setPartId(1);
                 $lesson->save();
 
+                header('Location: /training');
+
             }else{
                 $view->assign("errors", $errors);
             }
@@ -40,7 +42,19 @@ class Pages
         $view->assign("form", $form);
     }
 
+    public function lessonListAction(){
 
 
+        if(isset($_GET['id'])){
+            $lesson = new Lesson();
+            $data = $lesson->getRowWithId($_GET['id']) ;
 
+            //$training =
+            $view = new View("lesson-list", "back");
+            $view->assign("data", $data);
+        }else{
+            header('Location: /training');
+        }
+
+    }
 }

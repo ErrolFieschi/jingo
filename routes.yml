@@ -55,6 +55,11 @@
   action: lesson
   auth: false
 
+/lesson-list:
+  controller: Pages
+  action: lessonList
+  auth: false
+
 /pages:
   controller: Pages
   action: pages

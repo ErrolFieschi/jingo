@@ -93,13 +93,13 @@ class Database
 
     public function getRowWithId($id) {
 
-        $query = $this->bdd->pdo->prepare("SELECT * FROM ".$this->bdd->table." WHERE id = :id ;");
+        $query = $this->bdd->pdo->prepare("SELECT * FROM ".$this->bdd->table." WHERE part_id = :id ;");
 
         $query->execute([
             "id" => $id
         ]);
 
-        return $query->fetch();
+        return $query->fetchAll();
 
     }
 

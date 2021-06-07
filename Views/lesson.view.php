@@ -10,6 +10,7 @@
                 </section>
 
                 <section>
+                    <?php if(isset($_GET['success']) && $_GET['success'] == 'ok') echo '<b style="color: #1fad1f;">Insertion réussi</b>'; ?>
                     <div class="row mb-4" style="background-color: white;">
                         <div class="col-sm-12">
                                 <?php App\Core\FormBuilder::render($form) ?>

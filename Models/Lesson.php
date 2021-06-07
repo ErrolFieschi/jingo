@@ -11,6 +11,7 @@ class Lesson extends Database
     protected $createby;
     protected $title;
     protected $icon;
+    //protected $image;
     protected $code;
     protected $part_id;
 
@@ -117,22 +118,6 @@ class Lesson extends Database
     public function setCode($code)
     {
         $this->code = $code;
-    }
-
-    /**
-     * @return Database|null
-     */
-    public function getBdd(): Database
-    {
-        return $this->bdd;
-    }
-
-    /**
-     * @param Database|null $bdd
-     */
-    public function setBdd(Database $bdd)
-    {
-        $this->bdd = $bdd;
     }
 
     public function formLesson()
