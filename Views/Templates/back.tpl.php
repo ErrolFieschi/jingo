@@ -84,8 +84,6 @@
 </div>
 <script>
     tinymce.init({
-        //mode : "textareas",
-        selector: 'textarea',
         height: 500,
         menubar: false,
         mode : "specific_textareas",

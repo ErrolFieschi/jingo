@@ -85,6 +85,7 @@ class FormBuilder
         return "<textarea 
 						name='" . $name . "' 
 						id='" . ($configInput["id"] ?? "") . "'
+						class='" . ($configInput["class"] ?? "") . "'
 						placeholder='" . ($configInput["placeholder"] ?? "") . "'
 						" . (!empty($configInput["required"]) ? "required='required'" : "") . "
 					></textarea>";
