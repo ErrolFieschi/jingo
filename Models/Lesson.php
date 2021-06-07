@@ -155,7 +155,7 @@ class Lesson extends Database
                     "type" => "textarea",
                     "label" => "Ma leçon",
                     "id" => "code",
-                    "class" => "form-control",
+                    "class" => "form-control jingoEditor",
                     "placeholder" => "Tapez votre cours ici"
                 ]
             ]

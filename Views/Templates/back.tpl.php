@@ -84,9 +84,12 @@
 </div>
 <script>
     tinymce.init({
+        //mode : "textareas",
+        theme : "simple"
         selector: 'textarea',
         height: 500,
         menubar: false,
+        mode : "specific_textareas",
         editor_selector : "jingoEditor",
         plugins: [
             'advlist autolink lists link image charmap print preview anchor',
