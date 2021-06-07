@@ -85,7 +85,6 @@
 <script>
     tinymce.init({
         //mode : "textareas",
-        theme : "simple"
         selector: 'textarea',
         height: 500,
         menubar: false,
