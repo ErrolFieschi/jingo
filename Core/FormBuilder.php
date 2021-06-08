@@ -12,7 +12,8 @@ class FormBuilder
 				method='" . ($form["config"]["method"] ?? "GET") . "' 
 				id='" . ($form["config"]["id"] ?? "") . "' 
 				class='" . ($form["config"]["class"] ?? "") . "' 
-				action='" . ($form["config"]["action"] ?? "") . "'>";
+				action='" . ($form["config"]["action"] ?? "") . "'
+                enctype='" . ($form["config"]["enctype"] ?? "") . "'>";
 
 
         foreach ($form["inputs"] as $name => $configInput) {
@@ -82,13 +83,17 @@ class FormBuilder
 
     public static function renderTextArea($name, $configInput)
     {
-        return "<textarea 
+        $html = "<label>". ($configInput["label"] ?? "text")  ."</label>";
+
+        $html .= "<textarea 
 						name='" . $name . "' 
 						id='" . ($configInput["id"] ?? "") . "'
 						class='" . ($configInput["class"] ?? "") . "'
 						placeholder='" . ($configInput["placeholder"] ?? "") . "'
 						" . (!empty($configInput["required"]) ? "required='required'" : "") . "
 					></textarea>";
+
+        return $html;
     }
 
 

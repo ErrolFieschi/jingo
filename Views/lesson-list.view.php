@@ -42,13 +42,11 @@
             <div class="col-sm-12">
                 <div class="card flex-row flex-wrap card--shadow justify-content-between">
                     <div class="card-header">
-                        <img src="/Content/Images/formation.png" alt="title image" style="object-fit: cover;">
+                        <img src="<?= $rowData['image'] ?>" alt="title image" style="object-fit: cover;">
                     </div>
                     <div class="card-block">
                         <h4 class="card-title"><?= $rowData['title'] ?></h4>
-                        <p class="card-text mb-10">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-                            incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet...
-                        </p>
+                        <p class="card-text mb-10"><?= $rowData['resume'] ?></p>
                         <a href="#" style="color: #c56f43;">Développement </a>
                     </div>
                     <div class="card-button">

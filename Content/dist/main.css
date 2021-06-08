@@ -532,18 +532,6 @@ hr {
   border: none;
 }
 
-.card-row {
-  border-radius: 0.25rem;
-  display: flex;
-  position: relative;
-  flex-direction: row;
-  border: 1px solid rgba(0, 0, 0, 0.125);
-}
-.card-row--shadow {
-  box-shadow: 0 0 8px 2px rgba(0, 0, 0, 0.1);
-  border: none;
-}
-
 .card-body {
   flex: 1 1 auto;
   padding: 1.25rem;
@@ -602,6 +590,7 @@ hr {
 .card-header img {
   opacity: 0.7;
   object-fit: cover;
+  height: 150px;
   border-radius: 5px 0 0 5px;
 }
 .card-header img:hover {
@@ -626,6 +615,7 @@ hr {
 
 .card-text {
   font-size: 14px;
+  height: 20px;
 }
 
 .card-icon {
