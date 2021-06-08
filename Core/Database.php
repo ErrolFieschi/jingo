@@ -116,8 +116,8 @@ class Database
 
     }
 
-    public function searchOneColWithOneRow($table, $search, $whereCondition, $whereValue) {
-        $query = self::getInstance()->pdo->prepare("SELECT " . $search . " FROM ".DBPREFIXE.$table." WHERE ".$whereCondition. " = :find ;");
+    public function searchOneColWithOneRow($table, $select, $whereCondition, $whereValue) {
+        $query = self::getInstance()->pdo->prepare("SELECT " . $select . " FROM ".DBPREFIXE.$table." WHERE ".$whereCondition. " = :find ;");
 
         $query->execute([
             "find" => $whereValue

@@ -18,8 +18,6 @@ class Pages
 
         $form = $lesson->formLesson();
 
-
-
         if(!empty($_POST)){
 
 
@@ -55,6 +53,10 @@ class Pages
     }
 
     public function lessonListAction(){
+
+    public function testAction() {
+        echo "CA MARCHE GG" ;
+    }
 
 
         if(isset($_GET['id'])){
