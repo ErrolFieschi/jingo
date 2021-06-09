@@ -4,7 +4,6 @@ namespace App\Controller;
 
 use App\Core\View;
 use App\Core\FormValidator;
-use App\Core\ConstantMaker as c;
 use App\Models\Lesson;
 
 
@@ -52,14 +51,13 @@ class Pages
         $view->assign("form", $form);
     }
 
-    public function lessonListAction(){
-
     public function testAction() {
         echo "CA MARCHE GG" ;
     }
 
+    public function lessonListAction(){
 
-        if(isset($_GET['id'])){
+           if(isset($_GET['id'])){
             $lesson = new Lesson();
             $data = $lesson->getRowWithId($_GET['id']) ;
 
