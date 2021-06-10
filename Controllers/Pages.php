@@ -19,14 +19,9 @@ class Pages
         $form = $lesson->formLesson();
 
         if(!empty($_POST)){
-
-
-            var_dump($_FILES);
-            //echo "<script>console.log('h1')</script>";
             $errors = FormValidator::check($form, $_POST, $_FILES);
 
             if(empty($errors)){
-
                 $picture_name = 'lesson-photo-' . date('Y-m-d-H-i-s');
                 $filename = basename($_FILES["photo"]["name"]);
                 $temp_array = explode(".", $filename);
@@ -52,20 +47,50 @@ class Pages
         $view->assign("form", $form);
     }
 
-    public function lessonListAction(){
-
     public function testAction() {
         echo "CA MARCHE GG" ;
     }
 
+    public function lessonListAction(){
 
         if(isset($_GET['id'])){
             $lesson = new Lesson();
             $data = $lesson->getRowWithId($_GET['id']) ;
+            $lesson = new Lesson();
+            $form = $lesson->formLesson();
 
             //$training =
             $view = new View("lesson-list", "back");
             $view->assign("data", $data);
+            $view->assign("form", $form);
+
+
+            if(!empty($_POST)){
+                $errors = FormValidator::check($form, $_POST, $_FILES);
+
+                if(empty($errors)){
+                    $picture_name = 'lesson-photo-' . date('Y-m-d-H-i-s');
+                    $filename = basename($_FILES["photo"]["name"]);
+                    $temp_array = explode(".", $filename);
+                    $extension = end($temp_array);
+                    $link = 'Content/Images/lesson/' . $picture_name . '.' . $extension;
+                    move_uploaded_file($_FILES["photo"]["tmp_name"], $link);
+
+                    $lesson->setCreateby('user');
+                    $lesson->setTitle($_POST["title"]);
+                    $lesson->setResume($_POST["resume"]);
+                    $lesson->setIcon($_POST["icon"]);
+                    $lesson->setImage($link);
+                    $lesson->setCode($_POST["code"]);
+                    $lesson->setPartId(1);
+                    $lesson->save();
+
+                    header('Location: /training');
+
+                }else{
+                    $view->assign("errors", $errors);
+                }
+            }
         }else{
             header('Location: /training');
         }

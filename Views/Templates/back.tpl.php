@@ -82,6 +82,7 @@
 
     <?php include $this->view; ?>
 </div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
     tinymce.init({
         height: 500,
@@ -98,6 +99,24 @@
             'alignright alignjustify | bullist numlist outdent indent | ' +
             'removeformat | help',
         content_style: 'body { font-family:Helvetica,Arial,sans-serif; font-size:14px }'
+    });
+
+    $(document).ready(function(){
+        $('#modal-btn').on('click', function(){
+            $('#modal').css('display' , '');
+            $('#modal').css('display' , 'block');
+            $('#modal').css('padding-right' , '16px');
+        });
+
+        $('.modal-content').find('.close').on('click',function(){
+            $('#modal').css('display' , 'none');
+        });
+
+        $(document).on('click',function(e){
+            if(!(($(e.target).closest("#modal-content").length > 0 ) || ($(e.target).closest("#modal-btn").length > 0))){
+                $('#modal').css('display' , 'none');
+            }
+        });
     });
 </script>
     <script type="text/javascript" src="https://kit.fontawesome.com/19c1e7b3bd.js" crossorigin="anonymous"></script>

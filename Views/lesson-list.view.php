@@ -10,8 +10,8 @@
     <section>
         <div class="row">
             <div class="col-xl-3 col-md-3 col-sm-12 card--inverse">
-                <div class="card-center card--shadow">
-                    <img class="svg-dashboard--formation" src="/Content/Images/create_courses.svg" alt="register">
+                <div class="card-center card--shadow" id="modal-btn">
+                    <a href="javascript:void(0);"><img class="svg-dashboard--formation" src="/Content/Images/create_courses.svg" alt="register"></a>
                 </div>
                 <p>Ajouter une leçon</p>
             </div>
@@ -62,5 +62,19 @@
         </div>
         <?php endforeach; ?>
     </section>
+</div>
+
+<div class="modal fade show" id="modal" tabindex="-1" role="dialog" aria-labelledby="modal-form" aria-modal="true" style="display: none;">
+    <div class="modal-dialog modal- modal-dialog-centered modal-sm" role="document">
+        <div class="modal-content" id="modal-content">
+            <?php App\Core\FormBuilder::render($form) ?>
+            <?php if (isset($errors)):
+                foreach ($errors as $error):?>
+                    <li style="color:red"><?= $error; ?></li>
+                <?php endforeach;
+            endif; ?>
+            </div>
+        </div>
+    </div>
 </div>
 
