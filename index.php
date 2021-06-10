@@ -4,7 +4,6 @@ namespace App;
 
 use App\Core\Router;
 use App\Core\ConstantMaker;
-use App\Core\Helpers as h;
 use App\Core\Security;
 
 session_start() ;
@@ -21,7 +20,6 @@ new ConstantMaker();
 
 // $uri  => /se-connecter?user_id=2 => /se-connecter
 $uriExploded = explode("?", $_SERVER["REQUEST_URI"]);
-
 $uri = $uriExploded[0];
 
 $router = new Router($uri);

@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Core\Database;
+use App\Core\Helpers;
 
 class Lesson extends Database
 {
@@ -15,6 +16,7 @@ class Lesson extends Database
     protected $resume;
     protected $code;
     protected $part_id;
+    protected $url ;
 
     protected $bdd;
 
@@ -23,6 +25,22 @@ class Lesson extends Database
         $this->bdd = parent::getInstance();
         $getCalledClassExploded = explode("\\", get_called_class());
         $this->bdd->setTable(strtolower(DBPREFIXE . end($getCalledClassExploded)));
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getUrl()
+    {
+        return $this->url;
+    }
+
+    /**
+     * @param mixed $url
+     */
+    public function setUrl($url): void
+    {
+        $this->url = Helpers::stringify($url);
     }
 
     /**

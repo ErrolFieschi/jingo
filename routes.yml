@@ -69,8 +69,3 @@
   controller: Front
   action: model
   auth: false
-
-/php/basic/init:
-  controller: Pages
-  action: oui
-  auth: false

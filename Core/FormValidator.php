@@ -5,7 +5,7 @@ namespace App\Core;
 class FormValidator
 {
 
-    public static function check($form, $data, $import)
+    public static function check($form, $data, $import = null)
     {
         $errors = [];
 

@@ -1,7 +1,7 @@
 <?php
 namespace App\Core;
 
-use App\Core\Middleware ;
+
 
 
 class Router
@@ -31,32 +31,32 @@ class Router
                 $uris = explode("/",$this->uri) ;
                 $tmp = count($uris) ;
 
-                $this->setAuth(\App\Core\Middleware::isAuthNeeded());
+                $this->setAuth(Middleware::isAuthNeeded());
                 $this->setAction(Middleware::getAction());
 
                 if($tmp == 1) {
                     // GET FORMATION CONTROLLER AND SHOW ACTION
-                    if(\App\Core\Middleware::isFormationExist($uris[$tmp-1])) {
+                    if(Middleware::isFormationExist($uris[$tmp-1])) {
                         if (! $this->getAuth() ) {
                             $this->setController(Middleware::getControllerFormation());
                         }
-                    } else die("Chemin inexistant : 404");
+                    } else $this->redirect404();
 
                 } else if ($tmp == 2 ) {
                     // GET PART CONTROLLER AND SHOW ACTION
-                    if(\App\Core\Middleware::isPartExist($uris[$tmp-1])) {
+                    if(Middleware::isPartExist($uris[$tmp-1],$uris[$tmp-2])) {
                         if (!$this->getAuth()) {
                             $this->setController(Middleware::getControllerPart());
                         }
-                    } else  die("Chemin inexistant : 404");
+                    } else  $this->redirect404();
 
                 } else if ($tmp == 3) {
                     // GET LESSON CONTROLLER AND SHOW ACTION
-                    if(\App\Core\Middleware::isLessonExist($uris[$tmp-1])) {
+                    if(Middleware::isLessonExist($uris[$tmp-1],$uris[$tmp-2],$uris[$tmp-3])) {
                         if (!$this->getAuth()) {
                             $this->setController(Middleware::getControllerLesson());
                         }
-                    } else  die("Chemin inexistant : 404");
+                    } else $this->redirect404();
                 }
 
                 //die("Chemin inexistant : 404");
@@ -76,6 +76,9 @@ class Router
 
 	}
 
+	public function redirect404() {
+        die("Chemin inexistant : 404");
+    }
 
 	public function setController($controller){
 		$this->controller = $controller;

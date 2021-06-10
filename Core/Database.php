@@ -34,6 +34,7 @@ class Database
     }
 
 
+
 	public function save(){
 
 		$columns = array_diff_key (
@@ -134,6 +135,20 @@ class Database
         ]);
 
         return $query->rowCount();
+    }
+
+    public static function customSelectOneFromATable(String $BDDTableName, String $customSelect , String $tableRowInWhereCondition, String $tableRowValue) {
+        $query = self::getInstance()->pdo->prepare(
+            "SELECT " . $customSelect .
+            " FROM ".DBPREFIXE.$BDDTableName.
+            " WHERE ".$tableRowInWhereCondition. " = :find LIMIT 1;");
+
+        $query->execute([
+            "find" => $tableRowValue
+        ]);
+
+        return $query->fetch() ;
+
     }
 
 }

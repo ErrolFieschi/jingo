@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Core\Helpers;
 use App\Core\View;
 use App\Core\FormValidator;
 use App\Models\Lesson;
@@ -35,9 +36,12 @@ class Pages
                 $lesson->setImage($link);
                 $lesson->setCode($_POST["code"]);
                 $lesson->setPartId(1);
+                $lesson->setUrl($lesson->getTitle());
                 $lesson->save();
 
-                header('Location: /training');
+                Helpers::generateUrlAndSave($lesson) ;
+
+                //header('Location: /training');
 
             }else{
                 $view->assign("errors", $errors);
