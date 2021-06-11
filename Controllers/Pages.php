@@ -88,6 +88,8 @@ class Pages
                     $lesson->setPartId(1);
                     $lesson->save();
 
+
+                    echo "test" ;
                     header('Location: /training');
 
                 }else{
