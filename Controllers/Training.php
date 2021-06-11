@@ -32,7 +32,6 @@ class Training
                 $training->setUrl($training->getTitle());
                 $training->save();
 
-                Helpers::generateUrlAndSave($training) ;
             }
             }else{
                 $view->assign("errors", $errors);

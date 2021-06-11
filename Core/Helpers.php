@@ -39,4 +39,9 @@ class Helpers
         }
     }
 
+    public static function getUrlAsArray() {
+       // $uri = substr($_SERVER["REQUEST_URI"],1) ;
+        return explode("/",substr($_SERVER["REQUEST_URI"],1) ) ;
+    }
+
 }
