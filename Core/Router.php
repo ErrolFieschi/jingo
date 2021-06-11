@@ -27,10 +27,8 @@ class Router
 
 			}else{
 
-
                 $uris = Helpers::getUrlAsArray() ;
                 $tmp = count($uris) ;
-
                 $this->setAuth(Middleware::isAuthNeeded());
                 $this->setAction(Middleware::getAction());
 

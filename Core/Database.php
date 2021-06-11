@@ -33,7 +33,9 @@ class Database
         self::$_instance->table = $table ;
     }
 
-
+    public static function getLastInsertId() {
+	    return self::getInstance()->pdo->lastInsertId() ;
+    }
 
 	public function save(){
 

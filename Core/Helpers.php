@@ -32,8 +32,8 @@ class Helpers
         $class = mb_strtolower($class[2]) ;
 
         if($class != "training" || $class != "part" || $class != "lesson") {
-            $id = Database::customSelectOneFromATable("$class","id","title",$object->getTitle());
-            $object->setId($id['id']) ;
+            $id = Database::getLastInsertId() ;
+            $object->setId($id) ;
             $object->setUrl(self::generateUrl($object->getId(),$object->getUrl()));
             $object->save();
         }
