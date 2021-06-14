@@ -15,6 +15,7 @@ class Training  extends Database
     protected $template = 'default';
     protected $role;
     protected $active = 1;
+    protected $fk_training_tag;
 
     protected $bdd;
 
@@ -24,6 +25,25 @@ class Training  extends Database
         $getCalledClassExploded = explode("\\", get_called_class());
         $this->bdd->setTable(strtolower(DBPREFIXE . end($getCalledClassExploded)));
     }
+
+    /**
+     * @return mixed
+     */
+    public function getFkTrainingTag()
+    {
+        return $this->fk_training_tag;
+    }
+
+    /**
+     * @param mixed $fk_training_tag
+     */
+    public function setFkTrainingTag($fk_training_tag): void
+    {
+        $this->fk_training_tag = $fk_training_tag;
+    }
+
+
+
 
     /**
      * @return mixed

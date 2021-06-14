@@ -67,34 +67,33 @@
         </div>
     </section>
     <section>
-        <div class="row mb-4">
-            <div class="col-sm-12">
-                <a href="#">
-                <div class="card flex-row flex-wrap card--shadow justify-content-between">
-                    <div class="card-header">
-                        <img src="/Content/Images/formation.png" alt="title image" style="object-fit: cover;">
-                    </div>
-                    <div class="card-block">
-                        <h4 class="card-title">Prenez en main Bootstrap</h4>
-                        <p class="card-text mb-10">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                            eiusmod tempor
-                            incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet...
-                        </p>
-                        <a href="#" style="color: #c56f43;">Développement </a>
-                        <a href="#" style="color: #bfbfbf;">| 3 leçons associées</a>
-                    </div>
-                    <div class="card-button">
-                        <div class="card-icon">
-                            <a href="#"><img src="/Content/svg/edit.svg" alt="edit button"></a>
+        <?php
+        foreach ($data as $rowData): ?>
+            <div class="row mb-4">
+                <div class="col-sm-12">
+                    <div class="card flex-row flex-wrap card--shadow justify-content-between">
+                        <div class="card-header">
+                            <img src="/Content/Images/formation.png" alt="title image" style="object-fit: cover;">
                         </div>
-                        <div class="card-icon">
-                            <a href="#"><img src="/Content/svg/setting-bis.svg" alt="setting button"></a>
+                        <div class="card-block">
+                            <h4 class="card-title"><?= $rowData['title'] ?></h4>
+                            <p class="card-text mb-10"><?= $rowData['description'] ?>
+                            </p>
+                            <a href="#" style="color: #c56f43;"> </a>
+                        </div>
+                        <div class="card-button">
+                            <?= $rowData['name'] ?>
+                            <div class="card-icon">
+                                <a href="#"><img src="/Content/svg/edit.svg" alt="edit button"></a>
+                            </div>
+                            <div class="card-icon">
+                                <a href="#"><img src="/Content/svg/setting-bis.svg" alt="setting button"></a>
+                            </div>
                         </div>
                     </div>
                 </div>
-                </a>
             </div>
-        </div>
+        <?php endforeach; ?>
     </section>
 </div>
 

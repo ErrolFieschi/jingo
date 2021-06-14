@@ -55,6 +55,5 @@ class Pages
         }else{
             header('Location: /training');
         }
-
     }
 }
