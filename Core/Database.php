@@ -2,6 +2,8 @@
 
 namespace App\Core;
 
+use PDO;
+
 class Database
 {
     protected static $_instance = null ;
