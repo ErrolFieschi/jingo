@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Core\Database;
+use App\Core\Helpers;
 
 class Lesson extends Database
 {
@@ -11,9 +12,11 @@ class Lesson extends Database
     protected $createby;
     protected $title;
     protected $icon;
-    //protected $image;
+    protected $image;
+    protected $resume;
     protected $code;
     protected $part_id;
+    protected $url ;
 
     protected $bdd;
 
@@ -22,6 +25,22 @@ class Lesson extends Database
         $this->bdd = parent::getInstance();
         $getCalledClassExploded = explode("\\", get_called_class());
         $this->bdd->setTable(strtolower(DBPREFIXE . end($getCalledClassExploded)));
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getUrl()
+    {
+        return $this->url;
+    }
+
+    /**
+     * @param mixed $url
+     */
+    public function setUrl($url): void
+    {
+        $this->url = Helpers::stringify($url);
     }
 
     /**
@@ -38,6 +57,38 @@ class Lesson extends Database
     public function setId($id)
     {
         $this->id = $id;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getResume()
+    {
+        return $this->resume;
+    }
+
+    /**
+     * @param mixed $resume
+     */
+    public function setResume($resume)
+    {
+        $this->resume = $resume;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getImage()
+    {
+        return $this->image;
+    }
+
+    /**
+     * @param mixed $image
+     */
+    public function setImage($image)
+    {
+        $this->image = $image;
     }
 
     /**
@@ -127,6 +178,7 @@ class Lesson extends Database
             "config"=>[
                 "method"=>"POST",
                 "action"=>"",
+                "enctype"=>"multipart/form-data",
                 "id"=>"form_lesson",
                 "class"=>"form_input",
                 "submit"=>"Ajouter une lesson"
@@ -143,6 +195,13 @@ class Lesson extends Database
                     "error" => "Le titre doit faire entre 2 et 55 caractères",
                     "required" => true
                 ],
+                "resume" => [
+                    "type" => "textarea",
+                    "label" => "Résumé de la leçon",
+                    "id" => "resume",
+                    "class" => "form-control",
+                    "placeholder" => "Tapez votre résumé ici"
+                ],
                 "icon" => [
                     "type" => "text",
                     "label" => "Mes icons",
@@ -157,6 +216,12 @@ class Lesson extends Database
                     "id" => "code",
                     "class" => "jingoEditor",
                     "placeholder" => "Tapez votre cours ici"
+                ],
+                "photo" => [
+                    "type" => "file",
+                    "label" => "Image de la leçon",
+                    "id" => "photoImport",
+                    "class" => "form-control"
                 ]
             ]
         ];

@@ -5,7 +5,7 @@ namespace App\Core;
 class FormValidator
 {
 
-    public static function check($form, $data)
+    public static function check($form, $data, $import = null)
     {
         $errors = [];
 
@@ -44,6 +44,30 @@ class FormValidator
                     }
                 }
 
+                if($name == "photo") {
+                    if(!empty($import[$name]['size'])){
+                        $maxsize = 2097152; // 2mo = 2*1024*1024
+
+                        if ($import[$name]['size'] > $maxsize || $import[$name]['size'] == 0) {
+                            $errors[] = "Taille du fichier incorrecte";
+                        }
+
+                        $fileType = array(
+                            'image/jpeg',
+                            'image/jpg',
+                            'image/gif',
+                            'image/png'
+                        );
+
+                        if ((!in_array($import[$name]['type'], $fileType)) && (!empty($import[$name]["type"]))) {
+                            $errors[] = "Type de fichier non autorisé";
+                        }
+
+                    }else{
+                        $errors[] = "Champ photo vide";
+                    }
+                }
+
                 if (!empty($configInput["minDate"]) &&
                     $data[$name] > $configInput["minDate"]) {
                     $errors[] = $configInput["error"];
@@ -56,9 +80,147 @@ class FormValidator
 
             }
 
-echo count($data) . '-- nbrInput: ' . count($form['inputs']);
         return $errors;
     }
 
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

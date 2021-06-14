@@ -5,6 +5,7 @@ namespace App\Models;
 
 
 use App\Core\Database;
+use App\Core\Helpers;
 
 class Training  extends Database
 {
@@ -15,6 +16,7 @@ class Training  extends Database
     protected $template = 'default';
     protected $role;
     protected $active = 1;
+    protected $url ;
     protected $fk_training_tag;
 
     protected $bdd;
@@ -26,6 +28,21 @@ class Training  extends Database
         $this->bdd->setTable(strtolower(DBPREFIXE . end($getCalledClassExploded)));
     }
 
+    /**
+     * @return mixed
+     */
+    public function getUrl()
+    {
+        return $this->url;
+    }
+
+    /**
+     * @param mixed $url
+     */
+    public function setUrl($url): void
+    {
+        $this->url = Helpers::stringify($url);
+    }
     /**
      * @return mixed
      */
