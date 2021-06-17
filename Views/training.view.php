@@ -19,50 +19,55 @@
 
     <section>
         <div class="row">
-            <div class="col-xl-3 col-md-3 col-sm-12 card--inverse">
+            <div class="col-xl-3 col-md-3 col-sm-12 card--inverse show ">
                 <div class="card-center card--shadow">
                     <img class="svg-dashboard--formation" src="/Content/Images/create_courses.svg" alt="register">
                 </div>
-                <p>Ajouter un cours</p>
+                <p>Ajouter une formation</p>
             </div>
             <div class="col-xl-3 col-md-3 col-sm-12 card--inverse">
                 <div class="card-center card--shadow">
                     <img class="svg-dashboard--formation" src="/Content/Images/create_lesson.svg" alt="lesson">
                 </div>
-                <p>Cours favoris</p>
+                <p>Formations favoris</p>
             </div>
 
             <div class="col-xl-3 col-md-3 col-sm-12 card--inverse">
                 <div class="card-center card--shadow">
                     <img class="svg-dashboard--formation" src="/Content/Images/create_page.svg" alt="import page">
                 </div>
-                <p>Dernier cours modifié</p>
+                <p>Derniere formation modifié</p>
             </div>
             <div class="col-xl-3 col-md-3 col-sm-12 card--inverse">
                 <div class="card-center card--shadow">
                     <img class="svg-dashboard--formation" src="/Content/Images/import_file.svg" alt="files">
                 </div>
-                <p>Cours à la une</p>
+                <p>Formation à la une</p>
             </div>
         </div>
     </section>
     <section>
-        <div class="row mb-4" style="background-color: white;">
-            <div class="col-sm-12">
+        <div class="row mb-12 ">
+            <div class="col-sm-7 popup-form">
+
                 <?php App\Core\FormBuilder::render($formTraining);
+                ?>
+                <i class="far fa-times-circle unshow"></i>
+                <?php
                 $dir = 'Views/FrontTemplate';
                 foreach (scandir($dir) as $svg) {
                     $svg_name = substr($svg, 0, strpos($svg, '.'));
                     ?>
+
                     <img src="<?= $dir . '/' . $svg_name . '.svg' ?>" alt="title image" style="object-fit: cover;">
                     <?php
                 }
-
                 if (isset($errors)):
                     foreach ($errors as $error):?>
                         <li style="color:red"><?= $error; ?></li>
                     <?php endforeach;
                 endif; ?>
+
             </div>
         </div>
     </section>

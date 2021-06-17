@@ -8,6 +8,7 @@
     <script src="./node_modules/chart.js/dist/Chart.js"></script>
     <script src="./Content/js/jquery-3.5.1.min.js"></script>
     <script src="./Content/js/nav.js"></script>
+    <script src="./Content/js/global.js"></script>
     <script defer src="./Content/js/chart.js"></script>
     <script src="https://cdn.tiny.cloud/1/freuyvh2imwvcgh8t7h0vd36xd3iessaj34fcjuiypccegr3/tinymce/5/tinymce.min.js"
             referrerpolicy="origin"></script>

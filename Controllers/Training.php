@@ -10,31 +10,36 @@ use App\Models\Training as T;
 
 class Training
 {
-    public function trainingAction(){
+    public function trainingAction()
+    {
 
         $view = new View("training", "back");
         $training = new T();
 
         $formTraining = $training->formTraining();
 
-        $data = $training->globalFind('SELECT * FROM wlms_training LEFT JOIN wlms_training_tag ON wlms_training.training_tag_id = wlms_training_tag.id',[]);
+        $data = $training->globalFind('SELECT * FROM wlms_training LEFT JOIN wlms_training_tag 
+        ON wlms_training.training_tag_id = wlms_training_tag.id ORDER BY update_date', []);
+
         $view->assign("data", $data);
 
-        if(!empty($_POST)){
+        if (!empty($_POST)) {
 
             $errors = FormValidator::check($formTraining, $_POST);
-            if($training->countRow('training','id','title',$_POST["title"]) != 1){
-            if(empty($errors) ){
+            if ($training->countRow('training', 'id', 'title', $_POST["title"]) != 1) {
+                if (empty($errors)) {
 
-                $training->setCreateby(1);
-                $training->setTitle($_POST["title"]);
-                $training->setDescription($_POST['description']);
-                $training->setRole(1);
-                $training->setUrl($training->getTitle());
-                $training->save();
+                    $training->setCreateby(1);
+                    $training->setTitle($_POST["title"]);
+                    $training->setDescription($_POST['description']);
+                    $training->setTrainingTagId(1);
+                    $training->setRole(1);
+                    $training->setTemplate('sideNavTop.php');
+                    $training->setUrl($training->getTitle());
+                    $training->save();
 
-            }
-            }else{
+                }
+            } else {
                 $view->assign("errors", $errors);
             }
         }

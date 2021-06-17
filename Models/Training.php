@@ -13,11 +13,11 @@ class Training  extends Database
     protected $description;
     protected $title;
     protected $createby;
-    protected $template = 'default';
+    protected $template = 'sideNavRight';
     protected $role;
     protected $active = 1;
     protected $url ;
-    protected $fk_training_tag;
+    protected $training_tag_id;
 
     protected $bdd;
 
@@ -46,17 +46,17 @@ class Training  extends Database
     /**
      * @return mixed
      */
-    public function getFkTrainingTag()
+    public function getTrainingTagId()
     {
-        return $this->fk_training_tag;
+        return $this->training_tag_id;
     }
 
     /**
-     * @param mixed $fk_training_tag
+     * @param mixed $TrainingTagId
      */
-    public function setFkTrainingTag($fk_training_tag): void
+    public function setTrainingTagId($training_tag_id)
     {
-        $this->fk_training_tag = $fk_training_tag;
+        $this->training_tag_id = $training_tag_id;
     }
 
 
