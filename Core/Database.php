@@ -105,9 +105,9 @@ class Database
 
     }
 
-    public function globalFind(string $sql, array $params = []): ?array
+    static public function globalFind(string $sql, array $params = []): ?array
     {
-        $statement = $this->internalExec($sql, $params);
+        $statement = self::internalExec($sql, $params);
         if ($statement === null) {
             return [];
         }

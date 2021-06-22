@@ -48,9 +48,8 @@
     </section>
     <section>
         <div class="row mb-12 ">
-            <div class="col-sm-7 popup-form">
-
-                <?php App\Core\FormBuilder::render($formTraining);
+            <div class="row col-sm-7 popup-form">
+                <?php App\Core\FormBuilder::render($formTraining,"popup_form_builder col-md-6");
                 ?>
                 <i class="far fa-times-circle unshow"></i>
                 <?php
@@ -59,7 +58,7 @@
                     $svg_name = substr($svg, 0, strpos($svg, '.'));
                     ?>
 
-                    <img src="<?= $dir . '/' . $svg_name . '.svg' ?>" alt="template" style="object-fit: cover;">
+                    <img id="<?= $svg_name ?>" src="<?= $dir . '/' . $svg_name . '.svg' ?>" alt="template" style="object-fit: cover;">
                     <?php
                 }
                 if (isset($errors)):

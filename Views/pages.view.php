@@ -41,7 +41,7 @@
             <div class="col-sm-12">
                 <p>Ajouter une page</p>
                 <div class="card-center card--shadow pages_card">
-                    <?php App\Core\FormBuilder::render($form) ?>
+                    <?php App\Core\FormBuilder::render($form, 'form_input_wrapper') ?>
                     <?php if (isset($errors)):
                         foreach ($errors as $error):?>
                             <li style="color:red"><?= $error; ?></li>

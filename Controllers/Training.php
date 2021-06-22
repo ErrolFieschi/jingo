@@ -3,6 +3,7 @@
 
 namespace App\Controller;
 
+use App\Core\Database;
 use App\Core\FormValidator;
 use App\Core\Helpers;
 use App\Core\View;
@@ -18,7 +19,8 @@ class Training
 
         $formTraining = $training->formTraining();
 
-        $data = $training->globalFind('SELECT * FROM wlms_training LEFT JOIN wlms_training_tag 
+
+        $data = Database::globalFind('SELECT * FROM wlms_training LEFT JOIN wlms_training_tag 
         ON wlms_training.training_tag_id = wlms_training_tag.id ORDER BY update_date', []);
 
         $view->assign("data", $data);

@@ -7,16 +7,16 @@ namespace App\Models;
 use App\Core\Database;
 use App\Core\Helpers;
 
-class Training  extends Database
+class Training extends Database
 {
     private $id = null;
     protected $description;
     protected $title;
     protected $createby;
-    protected $template = 'sideNavRight';
+    protected $template = 'sideNavRight.php';
     protected $role;
     protected $active = 1;
-    protected $url ;
+    protected $url;
     protected $training_tag_id;
 
     protected $bdd;
@@ -43,6 +43,7 @@ class Training  extends Database
     {
         $this->url = Helpers::stringify($url);
     }
+
     /**
      * @return mixed
      */
@@ -58,8 +59,6 @@ class Training  extends Database
     {
         $this->training_tag_id = $training_tag_id;
     }
-
-
 
 
     /**
@@ -178,38 +177,57 @@ class Training  extends Database
         $this->template = $template;
     }
 
-   public function formTraining(){
+    public function formTraining()
+    {
 
-       return [
-           "config" => [
-               "method" => "POST",
-               "action" => "",
-               "id" => "form_training",
-               "class" => "add_trainings",
-               "submit" => "Ajouter une Leçon"
-           ],
-           "inputs" => [
-               "title" => [
-                   "type" => "text",
-                   "label" => "Nom de la formation",
-                   "minLength" => 2,
-                   "maxLength" => 55,
-                   "id" => "training_name",
-                   "class" => "form_input",
-                   "placeholder" => "Nom de la formation",
-                   "error" => "Le nom de la page doit faire entre 2 et 55 caractères",
-                   "required" => true
-               ],
-               "description" => [
-                   "type" => "textarea",
-                   "label" => "Description de la formation",
-                   "id" => "training_description",
-                   "class" => "form_input",
-                   "placeholder" => "Description de la formation",
-                   "error" => "",
-                   "required" => true
-               ],
-           ],
-       ];
-   }
+        return [
+            "config" => [
+                "method" => "POST",
+                "action" => "",
+                "id" => "form_training",
+                "class" => "add_trainings col-sm-12 row",
+                "submit" => "Ajouter une Leçon"
+            ],
+            "inputs" => [
+                "title" => [
+                    "type" => "text",
+                    "label" => "Nom de la formation",
+                    "minLength" => 2,
+                    "maxLength" => 55,
+                    "id" => "training_name",
+                    "class" => "popup_form_input",
+                    "placeholder" => "",
+                    "error" => "Le nom de la page doit faire entre 2 et 55 caractères",
+                    "required" => true
+                ],
+                "description" => [
+                    "type" => "textarea",
+                    "label" => "Description de la formation",
+                    "id" => "training_description",
+                    "class" => "popup_form_input",
+                    "placeholder" => "",
+                    "error" => "",
+                    "required" => true
+                ],
+
+                "themes" => [
+                    "type" => "select",
+                    "label" => "Themes",
+                    "id" => "training_themes",
+                    "class" => "popup_form_input",
+                    "options" => [
+
+                    ],
+                    "minLength"=>2,
+                    "maxLength"=>2,
+                    "placeholder"=>"",
+                    "error"=>"Votre themes doit faire 2 caractères"
+                ],
+            ],
+        ];
+    }
+
+    private function getListThemes(){
+
+    }
 }
