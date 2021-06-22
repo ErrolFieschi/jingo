@@ -167,19 +167,27 @@ class Database
         return $query->rowCount();
     }
 
-    public static function customSelectOneFromATable(String $BDDTableName, String $customSelect , String $tableRowInWhereCondition, String $tableRowValue) {
-        $query = self::getInstance()->pdo->prepare(
-            "SELECT " . $customSelect .
-            " FROM ".DBPREFIXE.$BDDTableName.
-            " WHERE ".$tableRowInWhereCondition. " = :find LIMIT 1;");
+    public static function customSelectFromATable(String $BDDTableName, String $customSelect , String $tableRowInWhereCondition =null, String $tableRowValue=null, Bool $limit = false) {
 
-        $query->execute([
-            "find" => $tableRowValue
-        ]);
+	    $sql = "SELECT " . $customSelect .
+            " FROM ".DBPREFIXE.$BDDTableName ;
+	    if($tableRowValue != null && $tableRowInWhereCondition != null)
+            $sql .= " WHERE ".$tableRowInWhereCondition. " = :find " ;
+	    if ($limit)
+          $sql .= "LIMIT 1;" ;
+
+	    $query = self::getInstance()->pdo->prepare($sql);
+
+	    if($tableRowValue != null)
+            $query->execute([
+                "find" => $tableRowValue
+            ]);
+	    else  $query->execute();
 
         return $query->fetch() ;
 
     }
+
 
 }
 
