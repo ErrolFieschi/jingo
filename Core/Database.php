@@ -184,7 +184,9 @@ class Database
             ]);
 	    else  $query->execute();
 
-        return $query->fetch() ;
+	    if($limit)
+            return $query->fetch() ;
+        return $query->fetchAll() ;
 
     }
 
