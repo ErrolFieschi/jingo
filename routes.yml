@@ -69,3 +69,8 @@
   controller: Front
   action: model
   auth: false
+
+/forget-password:
+  controller: Security
+  action: forgetPassword
+  auth: false

@@ -183,6 +183,30 @@ class User extends Database
         $this->token = bin2hex(random_bytes(64));
     }
 
+    public function formForgetPassword() {
+        return [
+            "config"=>[
+                "method"=>"POST",
+                "action"=>"",
+                "id"=>"form_forget_password",
+                "class"=>"form_builder",
+                "submit"=>"Retrouver"
+            ],
+            "inputs"=>[
+                "email"=>[
+                    "type" => "email",
+                    "label" => "Votre email",
+                    "minLength" => 8,
+                    "maxLength" => 320,
+                    "id" => "email",
+                    "class" => "form_input",
+                    "placeholder" => "votre email",
+                    "error" => "email non valide ou n'existe pas!",
+                    "required" => true
+                ]
+            ]
+        ];
+    }
 
     public function formRegister()
     {
