@@ -31,7 +31,7 @@ class FormValidator
                         $errors[] = "Cet email est déjà pris";
                 }
                 if ($name == "pwd" && !empty($data[$name]) && !empty($data["pwdConfirm"]) && $data[$name] != $data["pwdConfirm"]) {
-                    $errors[] = "Mdp différent";
+                    $errors[] = $form["inputs"]["pwdConfirm"]["error"];
                 }
                 if (!empty($configInput["maj"]) && $configInput["maj"] == true) {
                     if (!preg_match("~[A-Z]~", $data[$name]) || !preg_match("~[a-z]~", $data[$name])) {

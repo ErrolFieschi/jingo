@@ -14,10 +14,11 @@ class Security
 	}
 
     private static function checkToken() {
-
+        echo "<pre>" ; var_dump($_SESSION);
 	    if (isset($_SESSION['token']) && isset($_SESSION['id'])) {
             $bd = Database::getInstance() ;
             $token = $bd->searchOneColWithOneRow("user","token","id",$_SESSION['id']);
+            var_dump($token);
             return ($_SESSION['token'] == $token[0] ) ;
         }
 
@@ -36,6 +37,11 @@ class Security
 	        return false ;
         }
     }
+
+    public static function userTestConnectionByToken(User $user ,String $token) : bool {
+	    return $user->getToken() == $token ;
+    }
+
     public static function userExist(User $user, String $email): bool {
 
         $test = $user->countRow("user", "email", "email", $email);
