@@ -31,8 +31,6 @@ class FormBuilder
                 $html .= self::renderTextArea($name, $configInput);
             } else if ($configInput["type"] == "radio") {
                 $html .= self::renderRadio($name, $configInput);//$img = 'Views/FrontTemplate/sideNavRight.svg'
-            } else if ($configInput["type"] == "image") {
-                $html .= self::renderImg($configInput, $value);//$img = 'Views/FrontTemplate/sideNavRight.svg'
             } else {
                 $html .= self::renderInput($name, $configInput);
             }
@@ -144,19 +142,5 @@ class FormBuilder
 
         return $html;
     }
-
-    public static function renderImg($configInput, $value, $img = null)
-    {
-        $html = "
-            <input
-            type='" . ($configInput["type"] ?? "text") . "'
-            src='" . ($img ?? "text") . "'
-            alt='" . ($configInput["alt"] ?? "text") . "'
-            id='" . ($configInput["id"] ?? "text") . "' 
-            class='" . ($configInput["class"] ?? "") . "'
-            value='" . $value . "'>";
-        return $html;
-    }
-
 
 }

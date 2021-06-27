@@ -248,30 +248,6 @@ class Training extends Database
         ];
     }
 
-    public function suppTraining()
-    {
-        return [
-            "config" => [
-                "method" => "POST",
-                "action" => "",
-                "id" => "supp_training",
-                "class" => "add_trainings col-sm-12 row",
-                "submit" => "Ajouter une Formation"
-            ],
-            "inputs" => [
-                "showTraining" => [
-                    "type" => "image",
-                    "src" => "",
-                    "alt" => "supprimer formation",
-                    "id" => "training_trash",
-                    "value"=>"",
-                    "class" => "",
-                    "required" => true
-                ],
-            ],
-        ];
-    }
-
 
     private function getListThemes()
     {
