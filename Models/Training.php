@@ -13,7 +13,7 @@ class Training extends Database
     protected $description;
     protected $title;
     protected $createby;
-    protected $template = 'sideNavRight.php';
+    protected $template;
     protected $role;
     protected $active = 1;
     protected $url;
@@ -186,7 +186,7 @@ class Training extends Database
                 "action" => "",
                 "id" => "form_training",
                 "class" => "add_trainings col-sm-12 row",
-                "submit" => "Ajouter une Leçon"
+                "submit" => "Ajouter une Formation"
             ],
             "inputs" => [
                 "title" => [
@@ -209,25 +209,90 @@ class Training extends Database
                     "error" => "",
                     "required" => true
                 ],
-
                 "themes" => [
                     "type" => "select",
                     "label" => "Themes",
                     "id" => "training_themes",
                     "class" => "popup_form_input",
+                    "options" => self::getListThemes(),
+                    "minLength" => 0,
+                    "maxLength" => 1000,
+                    "placeholder" => "",
+                    "error" => "Votre themes doit faire 2 caractères"
+                ],
+                "template" => [
+                    "type" => "radio",
+                    "label" => "",
+                    "id" => "template",
+                    "name" => "templating",
+                    "class" => "popup_form_input",
+                    "options" => self::getListTemplates(),
+                    "placeholder" => "",
+                    "error" => "Votre themes doit faire 2 caractères",
+                    "required" => true
+                ],
+                "visible" => [
+                    "type" => "radio",
+                    "label" => "Rendre la formation visible",
+                    "id" => "visible",
+                    "name" => "showForm",
+                    "class" => "",
                     "options" => [
-
+                        "oui" => 1,
+                        "non" => 0,
                     ],
-                    "minLength"=>2,
-                    "maxLength"=>2,
-                    "placeholder"=>"",
-                    "error"=>"Votre themes doit faire 2 caractères"
+                    "placeholder" => "",
+                    "error" => "Votre themes doit faire 2 caractères"
                 ],
             ],
         ];
     }
 
-    private function getListThemes(){
+    public function suppTraining()
+    {
+        return [
+            "config" => [
+                "method" => "POST",
+                "action" => "",
+                "id" => "supp_training",
+                "class" => "add_trainings col-sm-12 row",
+                "submit" => "Ajouter une Formation"
+            ],
+            "inputs" => [
+                "showTraining" => [
+                    "type" => "image",
+                    "src" => "",
+                    "alt" => "supprimer formation",
+                    "id" => "training_trash",
+                    "value"=>"",
+                    "class" => "",
+                    "required" => true
+                ],
+            ],
+        ];
+    }
 
+
+    private function getListThemes()
+    {
+        $data = Database::customSelectFromATable('training_tag', 'name');
+        $themes = [];
+        foreach ($data as $key => $datas) {
+            $themes [$key + 1] = $datas['name'];
+        }
+        return $themes;
+    }
+
+    private function getListTemplates()
+    {
+        $dir = 'Views/FrontTemplate';
+        $templates = [];
+        foreach (scandir($dir) as $key => $svg) {
+            $svg_name = substr($svg, 0, strpos($svg, '.'));
+            if ($svg_name != null) {
+                $templates [$key + 1] = $svg_name;
+            }
+        }
+        return $templates;
     }
 }

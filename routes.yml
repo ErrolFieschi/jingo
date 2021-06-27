@@ -50,6 +50,11 @@
   action: training
   auth: false
 
+/training/options:
+  controller: Training
+  action: trainingOptions
+  auth: false
+
 /lesson:
   controller: Pages
   action: lesson

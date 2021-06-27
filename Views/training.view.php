@@ -49,18 +49,10 @@
     <section>
         <div class="row mb-12 ">
             <div class="row col-sm-7 popup-form">
-                <?php App\Core\FormBuilder::render($formTraining,"popup_form_builder col-md-6");
+                <?php App\Core\FormBuilder::render($formTraining, "popup_form_builder col-md-6");
                 ?>
                 <i class="far fa-times-circle unshow"></i>
                 <?php
-                $dir = 'Views/FrontTemplate';
-                foreach (scandir($dir) as $svg) {
-                    $svg_name = substr($svg, 0, strpos($svg, '.'));
-                    ?>
-
-                    <img id="<?= $svg_name ?>" src="<?= $dir . '/' . $svg_name . '.svg' ?>" alt="template" style="object-fit: cover;">
-                    <?php
-                }
                 if (isset($errors)):
                     foreach ($errors as $error):?>
                         <li style="color:red"><?= $error; ?></li>
@@ -72,6 +64,7 @@
     </section>
     <section>
         <?php
+
         foreach ($data as $rowData): ?>
             <div class="row mb-4">
                 <div class="col-sm-12">
@@ -87,12 +80,30 @@
                         </div>
                         <div class="card-button">
                             <?= $rowData['name'] ?>
+
                             <div class="card-icon">
                                 <a href="#"><img src="/Content/svg/edit.svg" alt="edit button"></a>
                             </div>
                             <div class="card-icon">
                                 <a href="#"><img src="/Content/svg/setting-bis.svg" alt="setting button"></a>
                             </div>
+                            <div class="card-icon">
+                                <a href="/training/options?id=<?= $rowData['training_id'] ?>"><img src="/Content/svg/trash.svg"
+                                                 alt="Trash button"></a>
+                            </div>
+                            <?php if ($rowData['active'] == 1) { ?>
+                                <div class="card-icon">
+                                    <a href="/training/options?id=<?= $rowData['training_id'] ?>&visible=<?= $rowData['active'] ?>"><img src="/Content/svg/active_eye.svg"
+                                                     id="<?= $rowData['training_id'] ?>"
+                                                     alt="Trash button"></a>
+                                </div>
+                            <?php } else { ?>
+                                <div class="card-icon">
+                                    <a href="/training/options?id=<?= $rowData['training_id'] ?>&visible=<?= $rowData['active'] ?>"><img src="/Content/svg/no_active_eye.svg"
+                                                     id="<?= $rowData['training_id'] ?>"
+                                                     alt="Trash button"></a>
+                                </div>
+                            <?php } ?>
                         </div>
                     </div>
                 </div>

@@ -73,14 +73,22 @@ class Database
 
 
 
-	public function updateOneRow($col, $value) {
+	public static function updateOneRow(String $BDDTableName, String $col, $value, $where, $valueWhere) {
 
-	    $query = $this->bdd->pdo->prepare("UPDATE ".$this->bdd->table." SET ".$col." = :value ;");
+	    $query = self::getInstance()->pdo->prepare("UPDATE ".DBPREFIXE.$BDDTableName ." SET ".$col." = :value WHERE ".$where." = :valueWhere;");
 
 	    $query->execute([
-            "value" => $value
+            "value" => $value,
+            "valueWhere" => $valueWhere
         ]);
 
+    }
+
+    public static function deleteFromId(String $BDDTableName, String $where, $value){
+        $query = self::getInstance()->pdo->prepare("DELETE FROM ".DBPREFIXE.$BDDTableName ." WHERE ".$where." = :value ;");
+        $query->execute([
+            "value" => $value
+        ]);
     }
 
     public function getAllRow() {
@@ -105,7 +113,7 @@ class Database
 
     }
 
-    static public function globalFind(string $sql, array $params = []): ?array
+    public function globalFind(string $sql, array $params = []): ?array
     {
         $statement = self::internalExec($sql, $params);
         if ($statement === null) {
