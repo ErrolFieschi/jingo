@@ -93,6 +93,7 @@ class Security{
                     $user->setLastname($_POST["lastname"]);
                     $user->setEmail($_POST["email"]);
                     $user->setPwd($_POST["pwd"]);
+                    $user->setBirthday($_POST["birthday"]);
                     $user->setCountry($_POST["country"]??$user->getCountry());
                     $user->save();
 			}else{

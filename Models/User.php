@@ -12,11 +12,28 @@ class User extends Database
     protected $lastname;
     protected $email;
     protected $pwd;
+    protected $birthday;
     protected $country = "fr";
     protected $role = 0;
     protected $status = 0;
     protected $isDeleted = 0;
     protected $token;
+
+    /**
+     * @return mixed
+     */
+    public function getBirthday()
+    {
+        return $this->birthday;
+    }
+
+    /**
+     * @param mixed $birthday
+     */
+    public function setBirthday($birthday): void
+    {
+        $this->birthday = $birthday;
+    }
 
     protected $bdd;
 
