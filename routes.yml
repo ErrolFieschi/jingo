@@ -79,3 +79,7 @@
   controller: Security
   action: forgetPassword
   auth: false
+
+/admin-user:
+  controller: User
+
