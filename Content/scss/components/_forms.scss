@@ -32,6 +32,41 @@
     }
 }
 
+.popup-form{
+  background-color: white;
+  position: absolute;
+  z-index: 1;
+  border-radius: 10px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-33%, -50%);
+  padding: 2%;
+  overflow-x: auto;
+  height: 700px;
+}
+@media only screen and (max-width: 1300px) {
+  .popup-form {
+    transform: translate(-30%, -50%);
+    height: 600px;
+  }
+}
+@media only screen and (max-width: 500px) {
+.popup-form{
+  transform: translate(-40%, -50%);
+  height: 600px;
+  width: 300px;
+  padding: 5%;
+  }
+}
+.fa-times-circle{
+  color: red;
+  font-size: 1.3rem;
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  cursor: pointer;
+}
+
 .form_input_back {
   width: 100%;
   background-color: lighten($grey, 25%);

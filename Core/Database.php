@@ -2,6 +2,8 @@
 
 namespace App\Core;
 
+use PDO;
+
 class Database
 {
     protected static $_instance = null ;
@@ -104,7 +106,36 @@ class Database
 
     }
 
-    public function getOneRowWithId($col, $id) {
+    public function globalFind(string $sql, array $params = []): ?array
+    {
+        $statement = $this->internalExec($sql, $params);
+        if ($statement === null) {
+            return [];
+        }
+        return $statement->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+
+    private function internalExec(string $sql, array $params)
+    {
+        $statement = $this->bdd->pdo->prepare($sql);
+        if ($statement === false) {
+            return null;
+        }
+        if(count($params) > 0){
+        $res = $statement->execute($params);
+        }else{
+            $res = $statement->execute();
+        }
+        if ($res === false) {
+            return null;
+        }
+        return $statement;
+    }
+
+
+    public function getOneRowWithId($col, $id)
+    {
 
         $query = $this->bdd->pdo->prepare("SELECT :col FROM ".$this->bdd->table." WHERE id = :id ;");
 
@@ -137,30 +168,25 @@ class Database
         return $query->rowCount();
     }
 
-    public static function customSelectOneFromATable(String $BDDTableName, String $customSelect , String $tableRowInWhereCondition, String $tableRowValue) {
-        $query = self::getInstance()->pdo->prepare(
-            "SELECT " . $customSelect .
-            " FROM ".DBPREFIXE.$BDDTableName.
-            " WHERE ".$tableRowInWhereCondition. " = :find LIMIT 1;");
+    public static function customSelectFromATable(String $BDDTableName, String $customSelect , String $tableRowInWhereCondition =null, String $tableRowValue=null, Bool $limit = false) {
 
-        $query->execute([
-            "find" => $tableRowValue
-        ]);
+	    $sql = "SELECT " . $customSelect .
+            " FROM ".DBPREFIXE.$BDDTableName ;
+	    if($tableRowValue != null && $tableRowInWhereCondition != null)
+            $sql .= " WHERE ".$tableRowInWhereCondition. " = :find " ;
+	    if ($limit)
+          $sql .= "LIMIT 1;" ;
 
-        return $query->fetch() ;
+	    $query = self::getInstance()->pdo->prepare($sql);
 
-    }
+	    if($tableRowValue != null)
+            $query->execute([
+                "find" => $tableRowValue
+            ]);
+	    else  $query->execute();
 
-    public static function customSelectFromATable(String $BDDTableName, String $customSelect , String $tableRowInWhereCondition, String $tableRowValue) {
-        $query = self::getInstance()->pdo->prepare(
-            "SELECT " . $customSelect .
-            " FROM ".DBPREFIXE.$BDDTableName.
-            " WHERE ".$tableRowInWhereCondition. " = :find ;");
-
-        $query->execute([
-            "find" => $tableRowValue
-        ]);
-
+	    if($limit)
+            return $query->fetch() ;
         return $query->fetchAll() ;
 
     }

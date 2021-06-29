@@ -42,6 +42,22 @@
                 </div>
             </div>
 
+            <div class="col-md-6 col-sm-12 mt-12 pt-4">
+                <div class="p-6 logo-border  align-center">
+                    <?php App\Core\FormBuilder::render($form) ?>
+                    <?php if (isset($errors)):
+                        foreach ($errors as $error):?>
+                            <li style="color:red"><?= $error; ?></li>
+                        <?php endforeach;
+                    endif; ?>
+                    <?php if (isset($success)):
+                        foreach ($success as $s):?>
+                            <li style="color:green"><?= $s; ?></li>
+                        <?php endforeach;
+                    endif; ?>
+                </div>
+            </div>
+
         </div>
 
     </section>

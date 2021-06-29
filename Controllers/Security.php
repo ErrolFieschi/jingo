@@ -2,6 +2,8 @@
 
 namespace App\Controller;
 
+use App\Core\Database;
+use App\Core\Helpers;
 use App\Core\Security as Secu;
 use App\Core\View;
 use App\Core\FormValidator;
@@ -17,6 +19,21 @@ class Security{
 
 	public function loginAction(){
 
+        if( isset($_COOKIE["connectionUser"])  ) {
+            $user = new User();
+            $data = $user->searchOneColWithOneRow("user","token,email","token",$_COOKIE['connectionUser']);
+            echo "<pre>"; var_dump($data);
+            $user->setEmail($data["email"]) ;
+            if(Secu::userExist($user,$user->getEmail())) {
+                $user->setToken($data["token"]);
+                if(Secu::userTestConnectionByToken($user,$data["token"])) {
+                    self::setTokenWhenConnectionOK($user);
+                    header('Status: 301 Permanently', false, 301);
+                    header('Location: /dashboard');
+                }
+            }
+        }
+
 		$user = new User();
 		$view = new View("login");
 		$formLogin = $user->formLogin();
@@ -27,18 +44,15 @@ class Security{
 
 			if(empty($errors)){
                 $user->setEmail($_POST['email']) ;
-
 			    if(Secu::userExist($user,$user->getEmail())) {
                     if(Secu::userTestConnection($user,$_POST['pwd'])) {
 
-                        $tmp = $user->searchOneColWithOneRow("user","id","email",$user->getEmail()) ;
+                        self::setTokenWhenConnectionOK($user);
 
-                        $user->setToken() ;
-                        $user->setId($tmp['id']) ;
+                        if( isset($_POST['checkLogin']) ) {
 
-                        $user->save() ;
-                        $_SESSION['token'] = $user->getToken() ;
-                        $_SESSION['id'] = $user->getId() ;
+                            setcookie("connectionUser",  $user->getToken() ,time()+3600*24) ;
+                        }
 
                         header('Status: 301 Permanently', false, 301);
                         header('Location: /dashboard');
@@ -53,6 +67,17 @@ class Security{
 		$view->assign("formLogin", $formLogin);
 
 	}
+
+	private function setTokenWhenConnectionOK(User $user) {
+        $tmp = $user->searchOneColWithOneRow("user","id","email",$user->getEmail()) ;
+
+        $user->setToken() ;
+        $user->setId($tmp['id']) ;
+
+        $user->save() ;
+        $_SESSION['token'] = $user->getToken() ;
+        $_SESSION['id'] = $user->getId() ;
+    }
 
 	public function registerAction(){
 		$user = new User();
@@ -79,10 +104,50 @@ class Security{
 
 	public function logoutAction(){
         session_destroy();
+        setcookie("connectionUser",null,-1);
+        setcookie("connectionPWD",null,-1);
         header('Status: 301 Permanently', false, 301);
         header('Location: /login');
 
 	}
+
+	public function forgetPasswordAction() {
+        $user = new User();
+        $view = new View("forgetPWD") ;
+        $form = $user->formForgetPassword();
+
+        if(!empty($_POST)) {
+            if(Secu::userExist($user, $_POST["email"])) {
+                $errors = FormValidator::check($form, $_POST);
+                if(empty($errors)) {
+
+                    $pwd = uniqid() ;
+                    $user->setPwd($pwd) ;
+                    $to      = $_POST['email'];
+                    $subject = 'JINGO - RESET PASSWORD REQUEST';
+                    $url =  $_SERVER["HTTP_ORIGIN"] . "/login" ;
+                    $message = "Bonjour, " . PHP_EOL .
+                    "Vous venez de nous soumettre une demande de mot de passe oublié." . PHP_EOL .
+                    "Afin de pouvoir vous connecter de nouveau, voici votre mot de passe temporaire : <b>" . $pwd ."</b>" . PHP_EOL .
+                    " !" . PHP_EOL.
+                    "Rendez-vous ici pour vous connecter <b>" . $url . " </b>." ;
+
+                    $id = Database::customSelectFromATable("user","id","email",$_POST['email'],true);
+                    $user->setId($id['id']) ;
+                    $user->save();
+
+
+                    Helpers::sendMail($subject,$message,$to);
+                } else
+                    $view->assign("errors", $errors);
+
+            } else $view->assign("errors",["L'email n'existe pas"]);
+
+        }
+        $view->assign("form", $form);
+
+    }
+
 
 
 	

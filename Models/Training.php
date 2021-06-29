@@ -13,10 +13,11 @@ class Training  extends Database
     protected $description;
     protected $title;
     protected $createby;
-    protected $template = 'default';
+    protected $template = 'sideNavRight';
     protected $role;
     protected $active = 1;
     protected $url ;
+    protected $training_tag_id;
 
     protected $bdd;
 
@@ -42,6 +43,25 @@ class Training  extends Database
     {
         $this->url = Helpers::stringify($url);
     }
+    /**
+     * @return mixed
+     */
+    public function getTrainingTagId()
+    {
+        return $this->training_tag_id;
+    }
+
+    /**
+     * @param mixed $TrainingTagId
+     */
+    public function setTrainingTagId($training_tag_id)
+    {
+        $this->training_tag_id = $training_tag_id;
+    }
+
+
+
+
     /**
      * @return mixed
      */

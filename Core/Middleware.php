@@ -7,11 +7,11 @@ class Middleware
 {
     public static function isLessonExist(String $lessonName, String $partName, String $formationName) : bool {
 
-        $exist = Database::customSelectOneFromATable("lesson","url, part_id","url",Helpers::stringify($lessonName));
+        $exist = Database::customSelectFromATable("lesson","url, part_id","url",Helpers::stringify($lessonName),true);
         if(! empty($exist)) {
-            $partNameFromDB = Database::customSelectOneFromATable("part","url, training_id","id",$exist['part_id']);
+            $partNameFromDB = Database::customSelectFromATable("part","url, training_id","id",$exist['part_id'],true);
             if(!empty($partNameFromDB)) {
-                $formationNameFromDB = Database::customSelectOneFromATable("training","url","id",$partNameFromDB['training_id']);
+                $formationNameFromDB = Database::customSelectFromATable("training","url","id",$partNameFromDB['training_id'],true);
                 if(!empty($formationNameFromDB)) {
                     if($formationName == Helpers::stringify($formationNameFromDB['url']))
                         if(self::isFormationExist($formationNameFromDB['url']))
@@ -26,9 +26,9 @@ class Middleware
 
     public static function isPartExist(String $partName, String $formationName) : bool {
 
-        $exist =  Database::customSelectOneFromATable("part","url, training_id","url",$partName);
+        $exist =  Database::customSelectFromATable("part","url, training_id","url",$partName,true);
         if(!empty($exist)) {
-            $formationNameFromDB = Database::customSelectOneFromATable("training","url","id", $exist['training_id']);
+            $formationNameFromDB = Database::customSelectFromATable("training","url","id", $exist['training_id'],true);
             if(!empty($formationNameFromDB))
                 if(Helpers::stringify($formationName) == Helpers::stringify($formationNameFromDB['url'])) {
                     return true ;
@@ -38,7 +38,7 @@ class Middleware
     }
 
     public static function isFormationExist(String $formationName) : bool {
-        $formationNameFromDB = Database::customSelectOneFromATable("training","url","url", Helpers::stringify($formationName));
+        $formationNameFromDB = Database::customSelectFromATable("training","url","url", Helpers::stringify($formationName),true);
         return !empty($formationNameFromDB) ;
 
     }

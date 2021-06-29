@@ -27,10 +27,8 @@ class Router
 
 			}else{
 
-                $this->uri = substr($this->uri,1);
-                $uris = explode("/",$this->uri) ;
+                $uris = Helpers::getUrlAsArray() ;
                 $tmp = count($uris) ;
-
                 $this->setAuth(Middleware::isAuthNeeded());
                 $this->setAction(Middleware::getAction());
 

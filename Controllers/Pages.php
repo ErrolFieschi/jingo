@@ -99,7 +99,6 @@ class Pages
         }else{
             header('Location: /training');
         }
-
     }
 
     public function showAction(){
