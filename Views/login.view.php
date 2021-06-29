@@ -2,7 +2,7 @@
     <div class="col-lg-5 col-sm-12 mb-0 log_reg center_center">
         <div class="div_register">
             <h2 class="card_title">Connexion</h2>
-            <?php App\Core\FormBuilder::render($formLogin) ?>
+            <?php App\Core\FormBuilder::render($formLogin, 'form_input_wrapper') ?>
             <?php if (isset($errors)):
                 foreach ($errors as $error):?>
                     <li style="color:red"><?= $error; ?></li>

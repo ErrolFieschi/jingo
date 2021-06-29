@@ -50,6 +50,11 @@
   action: training
   auth: false
 
+/training/options:
+  controller: Training
+  action: trainingOptions
+  auth: false
+
 /lesson:
   controller: Pages
   action: lesson
@@ -74,3 +79,9 @@
   controller: Security
   action: forgetPassword
   auth: false
+
+/admin-user:
+  controller: User
+  action: forgetPassword
+  auth: false
+

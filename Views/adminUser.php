@@ -64,22 +64,21 @@
     </section>
     <section>
         <?php
-
         foreach ($data as $rowData): ?>
             <div class="row mb-4">
                 <div class="col-sm-12">
                     <div class="card flex-row flex-wrap card--shadow justify-content-between">
-                        <a href="<?= $rowData['url']?>"><div class="card-header">
+                        <div class="card-header">
                             <img src="/Content/Images/formation.png" alt="title image" style="object-fit: cover;">
-                        </div></a>
+                        </div>
                         <div class="card-block">
-                            <a href="<?= $rowData['url']?>"><h4 class="card-title"><?= $rowData['title'] ?></h4></a>
+                            <h4 class="card-title"><?= $rowData['title'] ?></h4>
                             <p class="card-text mb-10"><?= $rowData['description'] ?>
                             </p>
                             <a href="#" style="color: #c56f43;"> </a>
                         </div>
                         <div class="card-button">
-                        <?= $rowData['name'] ?>
+                            <?= $rowData['name'] ?>
 
                             <div class="card-icon">
                                 <a href="#"><img src="/Content/svg/edit.svg" alt="edit button"></a>

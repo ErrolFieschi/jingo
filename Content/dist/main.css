@@ -822,6 +822,25 @@ a > img {
   user-select: none;
 }
 
+#training_description {
+  height: 120px;
+}
+
+#training_themes {
+  border: solid 1.7px #5f5f5f;
+}
+
+.popup_form_input {
+  width: 100%;
+  margin-bottom: 20px;
+  background-color: #F3F3F3;
+  border: none;
+  border-bottom: solid 1px;
+  padding-bottom: 12px;
+  border-radius: 5px;
+  border-bottom: none;
+}
+
 .popup-form {
   background-color: white;
   position: absolute;
