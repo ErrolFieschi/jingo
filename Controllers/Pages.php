@@ -6,6 +6,7 @@ use App\Core\Helpers;
 use App\Core\View;
 use App\Core\FormValidator;
 use App\Models\Lesson;
+use App\Core\Database;
 
 
 class Pages
@@ -102,17 +103,23 @@ class Pages
     }
 
     public function showAction(){
-        $trainingId = Database::customSelectOneFromATable('training', '*', 'url', ltrim($_SERVER["REQUEST_URI"], "/"));
-        //var_dump($data);
-        $parts = Database::customSelectFromATable('part', '*', 'training_id', $trainingId['id']);
-        echo ltrim($_SERVER["REQUEST_URI"], "\\");
-
+        $uri = Helpers::getUrlAsArray();
         $lessons = [];
-        foreach ($parts as $part){
-            array_push($lessons, Database::customSelectFromATable("lesson", '*', 'part_id', $part['id']));
-        }
 
-        var_dump($lessons);
+        $trainingId = Database::customSelectFromATable('training', 'id', 'url', $uri[0], true);
+        var_dump($trainingId['id']);
+        echo '<br>';
+
+        $parts = Database::customSelectFromATable('part', 'id', 'training_id', $trainingId['id'], true);
+        var_dump($parts['id']);
+
+        //foreach ($parts as $part){
+            array_push($lessons, Database::customSelectFromATable("lesson", 'id,title,resume,image,url', 'part_id', $parts['id']));
+        //}
+        echo 'COUNT## ' . count($lessons[0]);
+
+        $view = new View("lesson-list", "back");
+        $view->assign("data", $lessons[0]);
     }
 }
 

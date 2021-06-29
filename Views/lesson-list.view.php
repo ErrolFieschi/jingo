@@ -51,7 +51,7 @@
                     </div>
                     <div class="card-button">
                         <div class="card-icon">
-                            <a href="#"><img src="/Content/svg/edit.svg" alt="edit button"></a>
+                            <a href="<?= $rowData['url'] ?>"><img src="/Content/svg/edit.svg" alt="edit button"></a>
                         </div>
                         <div class="card-icon">
                             <a href="#"><img src="/Content/svg/setting-bis.svg" alt="setting button"></a>
