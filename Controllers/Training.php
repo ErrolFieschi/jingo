@@ -49,6 +49,7 @@ class Training
         wlms_training.createby,
         wlms_training.description,
         wlms_training.active,
+        wlms_training.url,
         wlms_training.image
         FROM wlms_training LEFT JOIN wlms_training_tag 
         ON wlms_training.training_tag_id = wlms_training_tag.id ORDER BY wlms_training.update_date', []);
