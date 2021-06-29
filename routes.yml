@@ -55,21 +55,6 @@
   action: trainingOptions
   auth: false
 
-/lesson:
-  controller: Pages
-  action: lesson
-  auth: false
-
-/lesson-list:
-  controller: Pages
-  action: lessonList
-  auth: false
-
-/pages:
-  controller: Pages
-  action: pages
-  auth: false
-
 /model:
   controller: Front
   action: model

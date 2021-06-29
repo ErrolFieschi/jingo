@@ -104,22 +104,14 @@ class Pages
 
     public function showAction(){
         $uri = Helpers::getUrlAsArray();
-        $lessons = [];
 
-        $trainingId = Database::customSelectFromATable('training', 'id', 'url', $uri[0], true);
-        var_dump($trainingId['id']);
-        echo '<br>';
-
-        $parts = Database::customSelectFromATable('part', 'id', 'training_id', $trainingId['id'], true);
-        var_dump($parts['id']);
-
-        //foreach ($parts as $part){
-            array_push($lessons, Database::customSelectFromATable("lesson", 'id,title,resume,image,url', 'part_id', $parts['id']));
-        //}
-        echo 'COUNT## ' . count($lessons[0]);
-
-        $view = new View("lesson-list", "back");
-        $view->assign("data", $lessons[0]);
+        $lesson = Database::customSelectFromATable('lesson', '*', 'url', $uri[2], true);
+        //echo '<pre>';
+        //var_dump($lesson);
+        $view = new View("lesson", "back");
+        $view->assign("lesson", $lesson);
+        $view->assign("chapitre", $uri[2]);
+        $view->assign("training", $uri[0]);
     }
 }
 

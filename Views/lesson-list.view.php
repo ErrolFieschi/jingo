@@ -42,7 +42,7 @@
             <div class="col-sm-12">
                 <div class="card flex-row flex-wrap card--shadow justify-content-between">
                     <div class="card-header">
-                        <img src="<?= $rowData['image'] ?>" alt="title image" style="object-fit: cover;">
+                        <img src="/<?= $rowData['image'] ?>" alt="title image" style="object-fit: cover;">
                     </div>
                     <div class="card-block">
                         <h4 class="card-title"><?= $rowData['title'] ?></h4>
