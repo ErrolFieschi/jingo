@@ -19,13 +19,14 @@ class Security{
 
 	public function loginAction(){
 
-        if( isset($_COOKIE["connectionUser"]) && isset($_COOKIE["connectionPWD"]) ) {
+        if( isset($_COOKIE["connectionUser"])  ) {
             $user = new User();
-            $user->setEmail(utf8_encode($_COOKIE["connectionUser"]));
-
+            $data = $user->searchOneColWithOneRow("user","token,email","token",$_COOKIE['connectionUser']);
+            echo "<pre>"; var_dump($data);
+            $user->setEmail($data["email"]) ;
             if(Secu::userExist($user,$user->getEmail())) {
-                if(Secu::userTestConnection($user,utf8_encode($_COOKIE["connectionPWD"]))) {
-                    $user->setPwd(utf8_encode($_COOKIE["connectionPWD"]));
+                $user->setToken($data["token"]);
+                if(Secu::userTestConnectionByToken($user,$data["token"])) {
                     self::setTokenWhenConnectionOK($user);
                     header('Status: 301 Permanently', false, 301);
                     header('Location: /dashboard');
@@ -49,9 +50,8 @@ class Security{
                         self::setTokenWhenConnectionOK($user);
 
                         if( isset($_POST['checkLogin']) ) {
-                            echo "test" ;
-                            setcookie("connectionUser",  $user->getEmail() ,time()+3600*24) ;
-                            setcookie("connectionPWD",  $_POST["pwd"] ,time()+3600*24) ;
+
+                            setcookie("connectionUser",  $user->getToken() ,time()+3600*24) ;
                         }
 
                         header('Status: 301 Permanently', false, 301);
@@ -120,8 +120,6 @@ class Security{
             if(Secu::userExist($user, $_POST["email"])) {
                 $errors = FormValidator::check($form, $_POST);
                 if(empty($errors)) {
-
-
 
                     $pwd = uniqid() ;
                     $user->setPwd($pwd) ;
