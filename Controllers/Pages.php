@@ -102,8 +102,18 @@ class Pages
 
     }
 
-    public function importAction(){
+    public function showAction(){
+        $trainingId = Database::customSelectOneFromATable('training', '*', 'url', ltrim($_SERVER["REQUEST_URI"], "/"));
+        //var_dump($data);
+        $parts = Database::customSelectFromATable('part', '*', 'training_id', $trainingId['id']);
+        echo ltrim($_SERVER["REQUEST_URI"], "\\");
 
+        $lessons = [];
+        foreach ($parts as $part){
+            array_push($lessons, Database::customSelectFromATable("lesson", '*', 'part_id', $part['id']));
+        }
+
+        var_dump($lessons);
     }
 }
 

@@ -41,8 +41,18 @@ class Training
         $view->assign("formTraining", $formTraining);
     }
 
-    public function testAction(){
-        echo 'GG CA MARCHE' ;
+    public function showAction(){
+        $data = Database::customSelectOneFromATable('training', '*', 'url', ltrim($_SERVER["REQUEST_URI"], "/"));
+        //var_dump($data);
+        $parts = Database::customSelectFromATable('part', '*', 'training_id', $data['id']);
+        echo ltrim($_SERVER["REQUEST_URI"], "\\");
+
+        $lessons = [];
+        foreach ($parts as $part){
+            array_push($lessons, Database::customSelectFromATable("lesson", '*', 'part_id', $part['id']));
+        }
+
+        var_dump($lessons);
     }
 
 }

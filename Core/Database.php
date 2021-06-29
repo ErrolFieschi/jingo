@@ -151,6 +151,20 @@ class Database
 
     }
 
+    public static function customSelectFromATable(String $BDDTableName, String $customSelect , String $tableRowInWhereCondition, String $tableRowValue) {
+        $query = self::getInstance()->pdo->prepare(
+            "SELECT " . $customSelect .
+            " FROM ".DBPREFIXE.$BDDTableName.
+            " WHERE ".$tableRowInWhereCondition. " = :find ;");
+
+        $query->execute([
+            "find" => $tableRowValue
+        ]);
+
+        return $query->fetchAll() ;
+
+    }
+
 }
 
 
