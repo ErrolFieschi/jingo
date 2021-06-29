@@ -82,4 +82,6 @@
 
 /admin-user:
   controller: User
+  action: forgetPassword
+  auth: false
 

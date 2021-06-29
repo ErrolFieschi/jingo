@@ -69,17 +69,17 @@
             <div class="row mb-4">
                 <div class="col-sm-12">
                     <div class="card flex-row flex-wrap card--shadow justify-content-between">
-                        <div class="card-header">
+                        <a href="<?= $rowData['url']?>"><div class="card-header">
                             <img src="/Content/Images/formation.png" alt="title image" style="object-fit: cover;">
-                        </div>
+                        </div></a>
                         <div class="card-block">
-                            <h4 class="card-title"><?= $rowData['title'] ?></h4>
+                            <a href="<?= $rowData['url']?>"><h4 class="card-title"><?= $rowData['title'] ?></h4></a>
                             <p class="card-text mb-10"><?= $rowData['description'] ?>
                             </p>
                             <a href="#" style="color: #c56f43;"> </a>
                         </div>
                         <div class="card-button">
-                            <?= $rowData['name'] ?>
+                        <?= $rowData['name'] ?>
 
                             <div class="card-icon">
                                 <a href="#"><img src="/Content/svg/edit.svg" alt="edit button"></a>

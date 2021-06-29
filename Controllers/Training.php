@@ -15,10 +15,6 @@ class Training
     {
         $view = new View("training", "back");
         $training = new T();
-        $suppTraining = $training->suppTraining();
-        $view->assign("suppTraining", $suppTraining);
-
-
         if (!empty($_GET['id']) && !isset($_GET['visible'])) {
             Database::deleteFromId('training', 'id', $_GET['id']);
         }
@@ -30,13 +26,6 @@ class Training
             }
         }
         header('Location: /training');
-
-
-        if (!empty($_POST['suppTraining'])) {
-            $errors = FormValidator::check($suppTraining, $_POST);
-
-        }
-        $view->assign("suppTraining", $suppTraining);
     }
 
 
@@ -60,6 +49,7 @@ class Training
         wlms_training.createby,
         wlms_training.description,
         wlms_training.active,
+        wlms_training.url,
         wlms_training.image
         FROM wlms_training LEFT JOIN wlms_training_tag 
         ON wlms_training.training_tag_id = wlms_training_tag.id ORDER BY wlms_training.update_date', []);
