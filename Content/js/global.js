@@ -9,4 +9,10 @@ $(document).ready(function () {
         $(".popup-form").show();
     });
 
+    $.noConflict();
+    $('#tab').DataTable();
+
 });
+
+
+

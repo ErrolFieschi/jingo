@@ -7,8 +7,13 @@
     <link href="/Content/dist/main.css" rel="stylesheet">
     <script src="/node_modules/chart.js/dist/Chart.js"></script>
     <script src="/Content/js/jquery-3.5.1.min.js"></script>
-    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.10.25/datatables.min.css"/>
-    <script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.25/datatables.min.js"></script>
+
+<!--    <script src="js/jquery.min.js" type="text/javascript"></script>-->
+<!--    <script src="js/jquery.dataTables.min.js" type="text/javascript"></script>-->
+
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.25/css/jquery.dataTables.css">
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.js"></script>
+
     <script src="/Content/js/nav.js"></script>
     <script src="/Content/js/global.js"></script>
     <script defer src="/Content/js/chart.js"></script>
@@ -63,7 +68,7 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link " href="#">
+                <a class="nav-link " href="users">
                 <img src="/Content/svg/user.svg" alt="icon">
                     <span>Utilisateurs</span>
                 </a>

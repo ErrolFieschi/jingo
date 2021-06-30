@@ -60,6 +60,11 @@
   action: model
   auth: false
 
+/users:
+  controller: Main
+  action: users
+  auth: false
+
 /forget-password:
   controller: Security
   action: forgetPassword

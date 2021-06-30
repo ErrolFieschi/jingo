@@ -17,7 +17,7 @@
         </div>
     </section>
     <section>
-        <table id="example" class="display testerExemple" style="width:100%">
+        <table id="tab" class="display" style="width:100%">
             <thead>
             <tr>
                 <th scope="col">#</th>
@@ -42,8 +42,7 @@
                 </th-->
             </tr>
             </thead>
-            <?php
-            foreach ($data as $rowData): ?>
+            <?php foreach ($data as $rowData): ?>
                 <tbody>
                 <?php if ($rowData['isDeleted'] == 1) {
                     ?>
