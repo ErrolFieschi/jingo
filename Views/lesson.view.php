@@ -10,8 +10,8 @@
     </section>
 
     <section>
-        <div class="col-xl-3 col-md-3 col-sm-12">
-            <a href="/<?= $training; ?>"><p style="color: white !important; background-color: #0f2575;"><< Retour aux chapitres</p></a>
+        <div class="mb-4">
+            <a class="btn" href="/<?= $back; ?>"><i class="fas fa-angle-double-left"></i> Retour aux leçons</a>
         </div>
         <div class="row mb-4" style="background-color: white;">
             <div class="col-sm-12">

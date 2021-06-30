@@ -111,7 +111,7 @@ class Pages
         $view = new View("lesson", "back");
         $view->assign("lesson", $lesson);
         $view->assign("chapitre", $uri[2]);
-        $view->assign("training", $uri[0]);
+        $view->assign("back", $uri[0] . '/' . $uri[1]);
     }
 }
 

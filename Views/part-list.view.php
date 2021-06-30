@@ -8,9 +8,6 @@
         </div>
     </section>
     <section>
-        <div class="col-xl-3 col-md-3 col-sm-12">
-            <a href="training"><p style="color: white !important; background-color: #0f2575;"><< Retour aux formations</p></a>
-        </div>
         <div class="row">
             <div class="col-xl-3 col-md-3 col-sm-12 card--inverse">
                 <div class="card-center card--shadow" id="modal-btn">
@@ -40,12 +37,15 @@
         </div>
     </section>
     <section>
+        <div class="mb-4">
+            <a class="btn" href="training"><i class="fas fa-angle-double-left"></i> Retour aux formations</a>
+        </div>
         <?php foreach ($data as $rowData): ?>
             <div class="row mb-4">
                 <div class="col-sm-12">
                     <div class="card flex-row flex-wrap card--shadow justify-content-between">
                         <div class="card-block">
-                            <a href="<?= $rowData['url'] ?>"><h4 class="card-title"><?= $rowData['title'] ?></h4></a>
+                            <a href="<?= $uri . '/' . $rowData['url'] ?>"><h4 class="card-title"><?= $rowData['title'] ?></h4></a>
                         </div>
                         <div class="card-button">
                             <div class="card-icon">

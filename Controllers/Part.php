@@ -33,5 +33,7 @@ class Part
         //var_dump($lessons[0]);
         $view = new View("lesson-list", "back");
         $view->assign("data", $lessons[0]);
+        $view->assign("uri", $uri[1]);
+        $view->assign("back", $uri[0]);
     }
 }
