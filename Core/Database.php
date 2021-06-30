@@ -37,6 +37,7 @@ class Database
 
 
 
+
 	public function save(){
 
 		$columns = array_diff_key (
@@ -72,14 +73,22 @@ class Database
 
 	}
 
-
-
-	public function updateOneRow($col, $value) {
-
-	    $query = $this->bdd->pdo->prepare("UPDATE ".$this->bdd->table." SET ".$col." = :value ;");
-
-	    $query->execute([
+    public static function deleteFromId(String $BDDTableName, String $where, $value)
+    {
+        $query = self::getInstance()->pdo->prepare("DELETE FROM " . DBPREFIXE . $BDDTableName . " WHERE " . $where . " = :value ;");
+        $query->execute([
             "value" => $value
+        ]);
+    }
+
+    public static function updateOneRow(String $BDDTableName, String $col, $value, $where, $valueWhere)
+    {
+
+        $query = self::getInstance()->pdo->prepare("UPDATE " . DBPREFIXE . $BDDTableName . " SET " . $col . " = :value WHERE " . $where . " = :valueWhere;");
+
+        $query->execute([
+            "value" => $value,
+            "valueWhere" => $valueWhere
         ]);
 
     }

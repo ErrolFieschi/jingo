@@ -12,9 +12,9 @@ class Training extends Database
     private $id = null;
     protected $description;
     protected $title;
-    protected $createby;
+    protected $createby = 1;
     protected $template;
-    protected $role;
+    protected $role = 0;
     protected $active = 1;
     protected $url;
     protected $training_tag_id;

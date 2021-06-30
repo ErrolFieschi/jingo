@@ -66,48 +66,49 @@
         <?php
 
         foreach ($data as $rowData): ?>
-            <div class="row mb-4">
-                <div class="col-sm-12">
-                    <div class="card flex-row flex-wrap card--shadow justify-content-between">
-                        <a href="<?= $rowData['url']?>"><div class="card-header">
+        <div class="row mb-4">
+            <div class="col-sm-12">
+                <div class="card flex-row flex-wrap card--shadow justify-content-between">
+                    <a href="<?= $rowData['url'] ?>">
+                        <div class="card-header">
                             <img src="/Content/Images/formation.png" alt="title image" style="object-fit: cover;">
-                        </div></a>
-                        <div class="card-block">
-                            <a href="<?= $rowData['url']?>"><h4 class="card-title"><?= $rowData['title'] ?></h4></a>
-                            <p class="card-text mb-10"><?= $rowData['description'] ?>
-                            </p>
-                            <a href="#" style="color: #c56f43;"> </a>
                         </div>
-                        <div class="card-button">
+                    </a>
+                    <div class="card-block">
+                        <a href="<?= $rowData['url'] ?>"><h4 class="card-title"><?= $rowData['title'] ?></h4></a>
+                        <p class="card-text mb-10"><?= $rowData['description'] ?>
+                        </p>
+                        <a href="#" style="color: #c56f43;"> </a>
+                    </div>
+                    <div class="card-button">
                         <?= $rowData['name'] ?>
 
-                            <div class="card-icon">
-                                <a href="#"><img src="/Content/svg/edit.svg" alt="edit button"></a>
-                            </div>
-                            <div class="card-icon">
-                                <a href="#"><img src="/Content/svg/setting-bis.svg" alt="setting button"></a>
-                            </div>
-                            <div class="card-icon">
-                                <a href="/training/options?id=<?= $rowData['training_id'] ?>"><img src="/Content/svg/trash.svg"
-                                                 alt="Trash button"></a>
-                            </div>
-                            <?php if ($rowData['active'] == 1) { ?>
-                                <div class="card-icon">
-                                    <a href="/training/options?id=<?= $rowData['training_id'] ?>&visible=<?= $rowData['active'] ?>"><img src="/Content/svg/active_eye.svg"
-                                                     id="<?= $rowData['training_id'] ?>"
-                                                     alt="Trash button"></a>
-                                </div>
-                            <?php } else { ?>
-                                <div class="card-icon">
-                                    <a href="/training/options?id=<?= $rowData['training_id'] ?>&visible=<?= $rowData['active'] ?>"><img src="/Content/svg/no_active_eye.svg"
-                                                     id="<?= $rowData['training_id'] ?>"
-                                                     alt="Trash button"></a>
-                                </div>
-                            <?php } ?>
+                        <div class="card-icon">
+                            <a href="#"><img src="/Content/svg/edit.svg" alt="edit button"></a>
+                        </div>
+                        <div class="card-icon">
+                            <a href="#"><img src="/Content/svg/setting-bis.svg" alt="setting button"></a>
+                        </div>
+                        <div class="card-icon">
+                            <a href="/training/options?id=<?= $rowData['training_id'] ?>"><img
+                                        src="/Content/svg/trash.svg"
+                                        alt="Trash button"></a>
+                        </div>
+                        <div class="card-icon">
+                            <a href="/training/options?id=<?= $rowData['training_id'] ?>&visible=<?= $rowData['active'] ?>"><img
+                                        src=
+                                        <?php if ($rowData['active'] == 1) :
+                                            echo "/Content/svg/active_eye.svg";
+                                        else :
+                                            echo "/Content/svg/no_active_eye.svg";
+                                        endif; ?>
+                                        id="<?= $rowData['training_id'] ?>"
+                                        alt=" button"></a>
                         </div>
                     </div>
                 </div>
             </div>
+        </div>
         <?php endforeach; ?>
     </section>
 </div>

@@ -16,6 +16,8 @@
             referrerpolicy="origin"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://kit.fontawesome.com/d59c1d4dbf.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.10.25/datatables.min.css"/>
+
 </head>
 <body>
 <div class="container-back">
