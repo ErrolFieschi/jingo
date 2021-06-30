@@ -76,6 +76,7 @@
   margin-right: 20px;
   margin-bottom: 0;
   color: white;
+  width: 250px;
   background-color: rgba(#000000, .03);
   align-items: stretch;
   display: flex;
@@ -84,6 +85,7 @@
     opacity: 0.7;
     object-fit: cover;
     height: 150px;
+    width: 250px;
     border-radius: 5px 0 0 5px;
   }
   img:hover{
