@@ -89,9 +89,9 @@ class Security{
 			$errors = FormValidator::check($form, $_POST);
 
 			if(empty($errors)){
-				    $user->setFirstname($_POST["firstname"]);
-                    $user->setLastname($_POST["lastname"]);
-                    $user->setEmail($_POST["email"]);
+				    $user->setFirstname(htmlspecialchars($_POST["firstname"]));
+                    $user->setLastname(htmlspecialchars($_POST["lastname"]));
+                    $user->setEmail(htmlspecialchars($_POST["email"]));
                     $user->setPwd($_POST["pwd"]);
                     $user->setBirthday($_POST["birthday"]);
                     $user->setCountry($_POST["country"]??$user->getCountry());

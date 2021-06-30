@@ -13,6 +13,13 @@ class User
 {
     public function userAction()
     {
+
+        //gérer les status
+        // 0 => normal user
+        // 1 => Premium
+        // 2 => VIP
+        // 3 => Admin
+
         $view = new View("adminUser", "back");
         $user = new U();
 
@@ -21,6 +28,7 @@ class User
         firstname,
         lastname,
         email,
+        DATE_FORMAT(birthday, '%d/%m/%Y') as birthday,
         pwd,
         role,
         status,

@@ -1,4 +1,7 @@
 <div class="container-back-wrap">
+    <script>
+        $('#example').DataTable();
+    </script>
     <section>
         <div class="banner banner--text banner--header"
              style="background-image: url('https://i.pinimg.com/originals/26/ae/12/26ae1241ca65ba8e8ff4a4d442c92566.png');">
@@ -15,13 +18,14 @@
         </div>
     </section>
     <section>
-        <table class="table">
+        <table id="example" class="display" style="width:100%">
             <thead>
             <tr>
                 <th scope="col">#</th>
                 <th scope="col">Prénom</th>
                 <th scope="col">Nom</th>
                 <th scope="col">Email</th>
+                <th scope="col">Date de naissance</th>
                 <!--th scope="col">Mot de passe</th-->
                 <th scope="col">Pays</th>
                 <th scope="col">Role</th>
@@ -50,6 +54,7 @@
                         <td><?= $rowData['firstname'] ?></td>
                         <td><?= $rowData['lastname'] ?></td>
                         <td><?= $rowData['email'] ?></td>
+                        <td><?= $rowData['birthday'] ?></td>
                         <!--td><?php //echo $rowData['pwd'] ?></td-->
                         <td><?= $rowData['country'] ?></td>
                         <td><?= $rowData['role'] ?></td>
@@ -73,6 +78,7 @@
                         <td><?= $rowData['firstname'] ?></td>
                         <td><?= $rowData['lastname'] ?></td>
                         <td><?= $rowData['email'] ?></td>
+                        <td><?= $rowData['birthday'] ?></td>
                         <!--td><?php //echo $rowData['pwd'] ?></td-->
                         <td><?= $rowData['country'] ?></td>
                         <td><?= $rowData['role'] ?></td>
@@ -81,11 +87,11 @@
                         <td><?= $rowData['createdAt'] ?></td>
                         <td><?= $rowData['updatedAt'] ?></td>
                         <td>
-                            <div class="card-icon"><a href=""><img src="/Content/svg/edit.svg"
+                            <div class="card-icon"><a href="/admin-user/update?id=<?= $rowData['id'] ?>"><img src="/Content/svg/edit.svg"
                                                                    alt="edit img" style="cursor: pointer"></a></div>
                         </td>
                         <td>
-                            <div class="card-icon"><a href=""> <img src="/Content/svg/trash.svg"
+                            <div class="card-icon"><a href="/admin-user/delete?id=<?= $rowData['id'] ?>"> <img src="/Content/svg/trash.svg"
                                                                     alt="Trash button" style="cursor: pointer"></a>
                             </div>
                         </td>

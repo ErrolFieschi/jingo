@@ -7,6 +7,8 @@
     <link href="./Content/dist/main.css" rel="stylesheet">
     <script src="./node_modules/chart.js/dist/Chart.js"></script>
     <script src="./Content/js/jquery-3.5.1.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.10.25/datatables.min.css"/>
+    <script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.25/datatables.min.js"></script>
     <script src="./Content/js/nav.js"></script>
     <script src="./Content/js/global.js"></script>
     <script defer src="./Content/js/chart.js"></script>
