@@ -94,21 +94,17 @@
                                         src="/Content/svg/trash.svg"
                                         alt="Trash button"></a>
                         </div>
-                        <?php if ($rowData['active'] == 1) : ?>
-                            <div class="card-icon">
-                                <a href="/training/options?id=<?= $rowData['training_id'] ?>&visible=<?= $rowData['active'] ?>"><img
-                                            src="/Content/svg/active_eye.svg"
-                                            id="<?= $rowData['training_id'] ?>"
-                                            alt="Trash button"></a>
-                            </div>
-                        <?php else : ?>
                         <div class="card-icon">
                             <a href="/training/options?id=<?= $rowData['training_id'] ?>&visible=<?= $rowData['active'] ?>"><img
-                                        src="/Content/svg/no_active_eye.svg"
+                                        src=
+                                        <?php if ($rowData['active'] == 1) :
+                                            echo "/Content/svg/active_eye.svg";
+                                        else :
+                                            echo "/Content/svg/no_active_eye.svg";
+                                        endif; ?>
                                         id="<?= $rowData['training_id'] ?>"
-                                        alt="Trash button"></a>
+                                        alt=" button"></a>
                         </div>
-                        <?php endif; ?>
                     </div>
                 </div>
             </div>
