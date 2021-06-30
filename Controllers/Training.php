@@ -8,6 +8,7 @@ use App\Core\FormValidator;
 use App\Core\Helpers;
 use App\Core\View;
 use App\Models\Training as T;
+use App\Models\Part;
 
 class Training
 {
@@ -100,19 +101,34 @@ class Training
         $parts = [];
 
         $trainingId = Database::customSelectFromATable('training', 'id', 'url', $uri[0], true);
-        //var_dump($trainingId['id']);
-        //echo '<br>';
-
-        //foreach ($parts as $part){
         array_push($parts, Database::customSelectFromATable("part", '*', 'training_id', $trainingId['id']));
-        //}
-        //echo 'COUNT## ' . count($lessons[0]);
 
-        //echo '<pre>';
-        //var_dump($lessons[0]);
         $view = new View("part-list", "back");
         $view->assign("data", $parts[0]);
         $view->assign("uri", $uri[0]);
+
+        $part = new Part();
+        $form = $part->formPart();
+        $view->assign("form", $form);
+
+        if(!empty($_POST)){
+            $errors = FormValidator::check($form, $_POST, $_FILES);
+
+            if(empty($errors)){
+
+                $part->setCreateby('user');
+                $part->setTitle($_POST["title"]);
+                $part->setIcon($_POST["icon"]);
+                $part->setUrl($_POST["title"]);
+                $part->setTrainingId($trainingId['id']);
+                $part->save();
+
+                header("Location: /" . $uri[0]);
+
+            }else{
+                $view->assign("errors", $errors);
+            }
+        }
     }
 
 

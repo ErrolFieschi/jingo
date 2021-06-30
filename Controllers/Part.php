@@ -17,13 +17,13 @@ class Part
         $uri = Helpers::getUrlAsArray();
         $lessons = [];
 
-        $trainingId = Database::customSelectFromATable('training', 'id', 'url', $uri[0], true);
-        $parts = Database::customSelectFromATable('part', 'id', 'training_id', $trainingId['id'], true);
+        $parts = Database::customSelectFromATable('part', 'id', 'url', $uri[1], true);
         array_push($lessons, Database::customSelectFromATable("lesson", 'id,title,resume,image,url', 'part_id', $parts['id']));
 
         $view = new View("lesson-list", "back");
         $lesson = new Lesson();
         $form = $lesson->formLesson();
+        echo $uri[1];
         $view->assign("data", $lessons[0]);
         $view->assign("uri", $uri[1]);
         $view->assign("back", $uri[0]);

@@ -248,7 +248,6 @@ class Training extends Database
         ];
     }
 
-
     private function getListThemes()
     {
         $data = Database::customSelectFromATable('training_tag', 'name');

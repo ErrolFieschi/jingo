@@ -10,6 +10,7 @@ class Part extends Database
 {
     private $id = null;
     private $title;
+    protected $createby;
     private $icon;
     private $order;
     protected $training_id;
@@ -20,6 +21,22 @@ class Part extends Database
         $this->bdd = parent::getInstance();
         $getCalledClassExploded = explode("\\", get_called_class());
         $this->bdd->setTable(strtolower(DBPREFIXE . end($getCalledClassExploded)));
+    }
+
+    /**
+     * @return int
+     */
+    public function getCreateby(): String
+    {
+        return $this->createby;
+    }
+
+    /**
+     * @param String $createby
+     */
+    public function setCreateby(String $createby)
+    {
+        $this->createby = $createby;
     }
 
     /**
@@ -116,6 +133,44 @@ class Part extends Database
     public function setUrl($url)
     {
         $this->url = Helpers::stringify($url);
+    }
+
+    public function formPart()
+    {
+
+        return [
+            "config" => [
+                "method" => "POST",
+                "action" => "",
+                "id" => "form_part",
+                "class" => "add_trainings col-sm-12 row",
+                "submit" => "Ajouter une Formation"
+            ],
+            "inputs" => [
+                "title" => [
+                    "type" => "text",
+                    "label" => "Titre du chapitre",
+                    "minLength" => 2,
+                    "maxLength" => 55,
+                    "id" => "part_name",
+                    "class" => "popup_form_input",
+                    "placeholder" => "",
+                    "error" => "Le nom de la page doit faire entre 2 et 55 caractères",
+                    "required" => true
+                ],
+                "icon" => [
+                    "type" => "text",
+                    "label" => "Icon du chapitre",
+                    "minLength" => 2,
+                    "maxLength" => 55,
+                    "id" => "part_icon",
+                    "class" => "popup_form_input",
+                    "placeholder" => "",
+                    "error" => "Le nom de la page doit faire entre 2 et 55 caractères",
+                    "required" => true
+                ],
+            ],
+        ];
     }
 
 }
