@@ -144,6 +144,15 @@
   justify-content: space-evenly;
 }
 
+.card-button-validate{
+  display: flex;
+  justify-content: space-evenly;
+  flex-basis: 10%;
+  background-color: #dde6f0;
+  font-size: 1.7em;
+  cursor: pointer;
+}
+
 .dashboard-stats{
   height: 728px;
 }
