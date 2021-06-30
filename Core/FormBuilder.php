@@ -26,7 +26,7 @@ class FormBuilder
             if ($configInput["type"] == "select") {
                 $html .= self::renderSelect($name, $configInput);
             } else if ($configInput["type"] == "checkbox") { //else if ($configInput["type"] == "checkbox" || $configInput["type"] == "radio") {
-                $html .= self::renderCheckboxRadio($name, $configInput, $divClass = null);
+                $html .= self::renderCheckboxRadio($name, $configInput);
             } else if ($configInput["type"] == "textarea") {
                 $html .= self::renderTextArea($name, $configInput);
             } else if ($configInput["type"] == "radio") {
@@ -84,20 +84,15 @@ class FormBuilder
     }
 
 
-    public static function renderCheckboxRadio($name, $configInput, $divClass = null)
+    public static function renderCheckboxRadio($name, $configInput)
     {
-
-        $html = '';
+        $html = "";
 
         foreach ($configInput["options"] as $key => $value) {
-            $html .= "<div class='$divClass'>";
-            $html .= "<label class='form_check_label' for='" . ($configInput["id"] ?? "") . "'> 
-                        <input type='" . ($configInput["type"] ?? "") . "'
-                                id='" . ($configInput["id"] . "_" . $value ?? "") . "' 
-                                name='" . $value . "' 
-                                class='" . ($configInput["class"] ?? "") . "'
-                                value='" . $value . "'>";
-            $html .= "</div>";
+            $html .= "<input type='" . ($configInput["type"] ?? "") . "'
+                             name='" . $name . "' 
+                             class='" . ($configInput["class"] ?? "") . "'
+                             value='" . $key . "'> $key";
         }
         return $html;
     }

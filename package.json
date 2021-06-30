@@ -17,6 +17,8 @@
   },
   "homepage": "https://github.com/ErrolFieschi/jingo#readme",
   "dependencies": {
-    "chart.js": "^2.9.4"
+    "chart.js": "^2.9.4",
+    "datatables.net": "^1.10.25",
+    "datatables.net-dt": "^1.1.0"
   }
 }
