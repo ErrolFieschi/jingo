@@ -6,6 +6,7 @@ use App\Core\Helpers;
 use App\Core\View;
 use App\Core\FormValidator;
 use App\Models\Lesson;
+use App\Core\Database;
 
 
 class Pages
@@ -101,8 +102,16 @@ class Pages
         }
     }
 
-    public function importAction(){
+    public function showAction(){
+        $uri = Helpers::getUrlAsArray();
 
+        $lesson = Database::customSelectFromATable('lesson', '*', 'url', $uri[2], true);
+        //echo '<pre>';
+        //var_dump($lesson);
+        $view = new View("lesson", "back");
+        $view->assign("lesson", $lesson);
+        $view->assign("chapitre", $uri[2]);
+        $view->assign("training", $uri[0]);
     }
 }
 

@@ -86,4 +86,27 @@ class Training
 
     }
 
+    public function showAction(){
+        $uri = Helpers::getUrlAsArray();
+        $parts = [];
+
+        $trainingId = Database::customSelectFromATable('training', 'id', 'url', $uri[0], true);
+        //var_dump($trainingId['id']);
+        //echo '<br>';
+
+        //foreach ($parts as $part){
+        array_push($parts, Database::customSelectFromATable("part", '*', 'training_id', $trainingId['id']));
+        //}
+        //echo 'COUNT## ' . count($lessons[0]);
+
+        //echo '<pre>';
+        //var_dump($lessons[0]);
+        $view = new View("part-list", "back");
+        $view->assign("data", $parts[0]);
+        $view->assign("uri", $uri[0]);
+    }
+
+
+
+
 }

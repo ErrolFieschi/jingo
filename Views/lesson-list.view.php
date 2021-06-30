@@ -42,7 +42,7 @@
             <div class="col-sm-12">
                 <div class="card flex-row flex-wrap card--shadow justify-content-between">
                     <div class="card-header">
-                        <img src="<?= $rowData['image'] ?>" alt="title image" style="object-fit: cover;">
+                        <img src="/<?= $rowData['image'] ?>" alt="title image" style="object-fit: cover;">
                     </div>
                     <div class="card-block">
                         <h4 class="card-title"><?= $rowData['title'] ?></h4>
@@ -51,7 +51,7 @@
                     </div>
                     <div class="card-button">
                         <div class="card-icon">
-                            <a href="#"><img src="/Content/svg/edit.svg" alt="edit button"></a>
+                            <a href="<?= $rowData['url'] ?>"><img src="/Content/svg/edit.svg" alt="edit button"></a>
                         </div>
                         <div class="card-icon">
                             <a href="#"><img src="/Content/svg/setting-bis.svg" alt="setting button"></a>

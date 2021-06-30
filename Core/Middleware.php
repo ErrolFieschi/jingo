@@ -54,7 +54,7 @@ class Middleware
     }
 
     public static function getAction() :string {
-        return "test" ;
+        return "show" ;
     }
 
     public static function isAuthNeeded() :bool {
