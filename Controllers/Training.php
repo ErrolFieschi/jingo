@@ -11,27 +11,23 @@ use App\Models\Training as T;
 
 class Training
 {
-    public function trainingOptionsAction()
+
+    public function trainingDeleteAction()
     {
-        $view = new View("training", "back");
-        $training = new T();
-
-
-        if (!empty($_GET['id']) && !isset($_GET['visible'])) {
+        if (!empty($_GET['id'] && isset($_GET['id']))) {
             Database::deleteFromId('training', 'id', $_GET['id']);
         }
-        if (isset($_GET['visible'])) {
+        header('Location: /training');
+    }
+
+    public function trainingVisibleAction()
+    {
+        if (isset($_GET['visible']) && isset($_GET['id'])) {
             echo "test";
             if ($_GET['visible'] == 1) {
-                echo "on est dans le if";
-                Database::updateOneRow('training', 'active', 0,'id', $_GET['id']); // Fonctionne
-                //$training->setActive(0);
-                //$training->save();
+                Database::updateOneRow('training', 'active', 0, 'id', $_GET['id']); // Fonctionne
             } else {
-                echo "on est dans le else";
-                Database::updateOneRow('training', 'active', 1,'id', $_GET['id']); // Ne fonctionne pas
-                //$training->setActive(1);
-                //$training->save();
+                Database::updateOneRow('training', 'active', 1, 'id', $_GET['id']); // Ne fonctionne pas
             }
         }
         header('Location: /training');
@@ -95,7 +91,8 @@ class Training
 
     }
 
-    public function showAction(){
+    public function showAction()
+    {
         $uri = Helpers::getUrlAsArray();
         $parts = [];
 
@@ -114,8 +111,6 @@ class Training
         $view->assign("data", $parts[0]);
         $view->assign("uri", $uri[0]);
     }
-
-
 
 
 }

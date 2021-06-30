@@ -55,6 +55,16 @@
   action: trainingOptions
   auth: false
 
+/training/delete:
+  controller: Training
+  action: trainingDelete
+  auth: false
+
+/training/visible:
+  controller: Training
+  action: trainingVisible
+  auth: false
+
 /model:
   controller: Front
   action: model
