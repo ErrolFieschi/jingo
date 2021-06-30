@@ -51,10 +51,6 @@ class Pages
         $view->assign("form", $form);
     }
 
-    public function testAction() {
-        echo "CA MARCHE GG" ;
-    }
-
     public function lessonListAction(){
 
            if(isset($_GET['id'])){
@@ -106,12 +102,12 @@ class Pages
         $uri = Helpers::getUrlAsArray();
 
         $lesson = Database::customSelectFromATable('lesson', '*', 'url', $uri[2], true);
-        //echo '<pre>';
-        //var_dump($lesson);
+
         $view = new View("lesson", "back");
         $view->assign("lesson", $lesson);
         $view->assign("chapitre", $uri[2]);
         $view->assign("back", $uri[0] . '/' . $uri[1]);
+
     }
 }
 

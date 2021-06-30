@@ -525,6 +525,10 @@ hr {
   text-decoration: none;
 }
 
+.btn:hover {
+  background-color: #343440;
+}
+
 .btn:active {
   background-color: #f6f6f6;
   background-image: -webkit-linear-gradient(top, #f6f6f6, #f1f1f1);
@@ -616,7 +620,6 @@ hr {
   object-fit: cover;
   height: 150px;
   width: 250px;
-  border-radius: 5px 0 0 5px;
 }
 .card-header img:hover {
   transition: ease 1s;
@@ -679,6 +682,12 @@ hr {
   background-color: #dde6f0;
   font-size: 1.7em;
   cursor: pointer;
+  transition: ease 1s;
+}
+
+.card-button-validate:hover {
+  background-color: #b5c6d5;
+  transition: ease 1s;
 }
 
 .dashboard-stats {
