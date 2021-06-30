@@ -15,17 +15,23 @@ class Training
     {
         $view = new View("training", "back");
         $training = new T();
+
+
         if (!empty($_GET['id']) && !isset($_GET['visible'])) {
             Database::deleteFromId('training', 'id', $_GET['id']);
         }
         if (!empty($_GET['visible'])) {
             if ($_GET['visible'] == 1) {
                 Database::updateOneRow('training', 'active', 0,'id', $_GET['id']); // Fonctionne
+                //$training->setActive(0);
+                //$training->save();
             } else {
                 Database::updateOneRow('training', 'active', 1,'id', $_GET['id']); // Ne fonctionne pas
+                //$training->setActive(1);
+                //$training->save();
             }
         }
-        header('Location: /training');
+        //header('Location: /training');
     }
 
 

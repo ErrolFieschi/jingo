@@ -1,6 +1,5 @@
 <div class="container-back-wrap">
     <script>
-        $('#example').DataTable();
     </script>
     <section>
         <div class="banner banner--text banner--header"
@@ -18,7 +17,7 @@
         </div>
     </section>
     <section>
-        <table id="example" class="display" style="width:100%">
+        <table id="example" class="display testerExemple" style="width:100%">
             <thead>
             <tr>
                 <th scope="col">#</th>
