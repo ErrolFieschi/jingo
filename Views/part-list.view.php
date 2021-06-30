@@ -8,9 +8,6 @@
         </div>
     </section>
     <section>
-        <div class="col-xl-3 col-md-3 col-sm-12">
-            <a href="training"><p style="color: white !important; background-color: #0f2575;"><< Retour aux formations</p></a>
-        </div>
         <div class="row">
             <div class="col-xl-3 col-md-3 col-sm-12 card--inverse">
                 <div class="card-center card--shadow" id="modal-btn">
@@ -40,12 +37,18 @@
         </div>
     </section>
     <section>
+        <div class="mb-4">
+            <a class="btn" href="training"><i class="fas fa-angle-double-left"></i> Retour aux formations</a>
+        </div>
         <?php foreach ($data as $rowData): ?>
             <div class="row mb-4">
                 <div class="col-sm-12">
-                    <div class="card flex-row flex-wrap card--shadow justify-content-between">
+                    <div class="card flex-row flex-nowrap card--shadow justify-content-between">
+                        <div class="card-header">
+                            <img src="/Content/Images/category.png" alt="title image" style="object-fit: cover;height: 100px !important;">
+                        </div>
                         <div class="card-block">
-                            <a href="<?= $rowData['url'] ?>"><h4 class="card-title"><?= $rowData['title'] ?></h4></a>
+                            <h4 class="card-title"><?= $rowData['title'] ?></h4>
                         </div>
                         <div class="card-button">
                             <div class="card-icon">
@@ -53,6 +56,12 @@
                             </div>
                             <div class="card-icon">
                                 <a href="#"><img src="/Content/svg/setting-bis.svg" alt="setting button"></a>
+                            </div>
+                        </div>
+
+                        <div class="card-button-validate" onclick="window.location='<?= $uri . '/' . $rowData['url'] ?>';">
+                            <div class="card-icon">
+                                <i class="fas fa-arrow-circle-right" style="color: #3b3b3b;"></i>
                             </div>
                         </div>
                     </div>

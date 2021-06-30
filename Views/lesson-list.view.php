@@ -37,10 +37,14 @@
         </div>
     </section>
     <section>
+        <div class="mb-4">
+            <a class="btn" href="/<?= $back; ?>"><i class="fas fa-angle-double-left"></i> Retour aux chapitres</a>
+        </div>
+
         <?php foreach ($data as $rowData): ?>
         <div class="row mb-4">
             <div class="col-sm-12">
-                <div class="card flex-row flex-wrap card--shadow justify-content-between">
+                <div class="card flex-row flex-nowrap card--shadow justify-content-between">
                     <div class="card-header">
                         <img src="/<?= $rowData['image'] ?>" alt="title image" style="object-fit: cover;">
                     </div>
@@ -51,10 +55,16 @@
                     </div>
                     <div class="card-button">
                         <div class="card-icon">
-                            <a href="<?= $rowData['url'] ?>"><img src="/Content/svg/edit.svg" alt="edit button"></a>
+                            <a href="#"><img src="/Content/svg/edit.svg" alt="edit button"></a>
                         </div>
                         <div class="card-icon">
                             <a href="#"><img src="/Content/svg/setting-bis.svg" alt="setting button"></a>
+                        </div>
+                    </div>
+
+                    <div class="card-button-validate" onclick="window.location='<?= $uri . '/' . $rowData['url'] ?>';">
+                        <div class="card-icon">
+                            <i class="fas fa-arrow-circle-right" style="color: #3b3b3b;"></i>
                         </div>
                     </div>
                 </div>
