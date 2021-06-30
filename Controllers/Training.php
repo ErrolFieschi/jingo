@@ -20,18 +20,21 @@ class Training
         if (!empty($_GET['id']) && !isset($_GET['visible'])) {
             Database::deleteFromId('training', 'id', $_GET['id']);
         }
-        if (!empty($_GET['visible'])) {
+        if (isset($_GET['visible'])) {
+            echo "test";
             if ($_GET['visible'] == 1) {
+                echo "on est dans le if";
                 Database::updateOneRow('training', 'active', 0,'id', $_GET['id']); // Fonctionne
                 //$training->setActive(0);
                 //$training->save();
             } else {
+                echo "on est dans le else";
                 Database::updateOneRow('training', 'active', 1,'id', $_GET['id']); // Ne fonctionne pas
                 //$training->setActive(1);
                 //$training->save();
             }
         }
-        //header('Location: /training');
+        header('Location: /training');
     }
 
 
