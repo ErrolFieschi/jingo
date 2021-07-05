@@ -104,23 +104,27 @@ class Training
         array_push($parts, Database::customSelectFromATable("part", '*', 'training_id', $trainingId['id']));
 
         $view = new View("part-list", "back");
-        $view->assign("data", $parts[0]);
-        $view->assign("uri", $uri[0]);
-
         $part = new Part();
         $form = $part->formPart();
+        $view->assign("data", $parts[0]);
+        $view->assign("uri", $uri[0]);
         $view->assign("form", $form);
 
         if(!empty($_POST)){
-            $errors = FormValidator::check($form, $_POST, $_FILES);
+            $errors = FormValidator::check($form, $_POST);
 
             if(empty($errors)){
 
+                //echo '<pre>';
+                //var_dump($_POST);
+                //echo 'id### ' . $trainingId['id'];
                 $part->setCreateby('user');
                 $part->setTitle($_POST["title"]);
+                $part->setOrderPart(1);
                 $part->setIcon($_POST["icon"]);
-                $part->setUrl($_POST["title"]);
+                $part->setUrl($part->getTitle());
                 $part->setTrainingId($trainingId['id']);
+
                 $part->save();
 
                 header("Location: /" . $uri[0]);

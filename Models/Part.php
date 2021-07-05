@@ -9,34 +9,20 @@ use App\Core\Helpers;
 class Part extends Database
 {
     private $id = null;
-    private $title;
+    protected $title;
     protected $createby;
-    private $icon;
-    private $order;
+    protected $icon;
+    protected $order_part;
     protected $training_id;
     protected $url ;
+
+    protected $bdd;
 
     public function __construct()
     {
         $this->bdd = parent::getInstance();
         $getCalledClassExploded = explode("\\", get_called_class());
         $this->bdd->setTable(strtolower(DBPREFIXE . end($getCalledClassExploded)));
-    }
-
-    /**
-     * @return int
-     */
-    public function getCreateby(): String
-    {
-        return $this->createby;
-    }
-
-    /**
-     * @param String $createby
-     */
-    public function setCreateby(String $createby)
-    {
-        $this->createby = $createby;
     }
 
     /**
@@ -50,7 +36,7 @@ class Part extends Database
     /**
      * @param null $id
      */
-    public function setId($id)
+    public function setId($id): void
     {
         $this->id = $id;
     }
@@ -66,9 +52,25 @@ class Part extends Database
     /**
      * @param mixed $title
      */
-    public function setTitle($title)
+    public function setTitle($title): void
     {
-        $this->title = $title;
+        $this->title = trim($title);
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getCreateby()
+    {
+        return $this->createby;
+    }
+
+    /**
+     * @param mixed $createby
+     */
+    public function setCreateby($createby): void
+    {
+        $this->createby = $createby;
     }
 
     /**
@@ -82,7 +84,7 @@ class Part extends Database
     /**
      * @param mixed $icon
      */
-    public function setIcon($icon)
+    public function setIcon($icon): void
     {
         $this->icon = $icon;
     }
@@ -90,17 +92,17 @@ class Part extends Database
     /**
      * @return mixed
      */
-    public function getOrder()
+    public function getOrderPart()
     {
-        return $this->order;
+        return $this->order_part;
     }
 
     /**
-     * @param mixed $order
+     * @param mixed $order_part
      */
-    public function setOrder($order)
+    public function setOrderPart($order_part): void
     {
-        $this->order = $order;
+        $this->order_part = $order_part;
     }
 
     /**
@@ -114,7 +116,7 @@ class Part extends Database
     /**
      * @param mixed $training_id
      */
-    public function setTrainingId($training_id)
+    public function setTrainingId($training_id): void
     {
         $this->training_id = $training_id;
     }

@@ -158,7 +158,7 @@ class Training extends Database
      */
     public function setTitle($title): void
     {
-        $this->title = $title;
+        $this->title = trim($title);
     }
 
     /**

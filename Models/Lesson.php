@@ -120,7 +120,7 @@ class Lesson extends Database
      */
     public function setTitle($title)
     {
-        $this->title = $title;
+        $this->title = trim($title);
     }
 
     /**

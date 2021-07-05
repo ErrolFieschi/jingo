@@ -23,7 +23,6 @@ class Part
         $view = new View("lesson-list", "back");
         $lesson = new Lesson();
         $form = $lesson->formLesson();
-        echo $uri[1];
         $view->assign("data", $lessons[0]);
         $view->assign("uri", $uri[1]);
         $view->assign("back", $uri[0]);
@@ -47,7 +46,7 @@ class Part
                     $lesson->setResume($_POST["resume"]);
                     $lesson->setIcon($_POST["icon"]);
                     $lesson->setImage($link);
-                    $lesson->setUrl($_POST["title"]);
+                    $lesson->setUrl($lesson->getTitle());
                     $lesson->setCode($_POST["code"]);
                     $lesson->setPartId($parts['id']);
                     $lesson->save();
