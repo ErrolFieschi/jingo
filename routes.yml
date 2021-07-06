@@ -86,8 +86,13 @@
   auth: false
 
 /lesson/delete/{id}:
-  controller: Pages
+  controller: Lessons
   action: deleteLesson
+  auth: false
+
+/page:
+  controller: Page
+  action: createPage
   auth: false
 
 /pages:

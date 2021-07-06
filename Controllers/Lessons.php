@@ -9,7 +9,7 @@ use App\Models\Lesson;
 use App\Core\Database;
 
 
-class Pages
+class Lessons
 {
 
     public function lessonAction(){
