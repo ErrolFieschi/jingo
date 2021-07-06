@@ -37,7 +37,7 @@
         </div>
     </section>
     <section>
-        <div class="row">
+        <div class="row col-sm-12">
             <div class="mb-4">
                 <a class="btn" href="/<?= $back; ?>"><i class="fas fa-angle-double-left"></i> Retour aux chapitres</a>
             </div>
@@ -60,7 +60,7 @@
                     </div>
                     <div class="card-button">
                         <div class="card-icon">
-                            <a href="#"><img src="/Content/svg/edit.svg" alt="edit button"></a>
+                            <a href="/lesson/delete/<?= $rowData['id'] ?>"><img src="/Content/svg/edit.svg" alt="edit button"></a>
                         </div>
                         <div class="card-icon">
                             <a href="#"><img src="/Content/svg/setting-bis.svg" alt="setting button"></a>

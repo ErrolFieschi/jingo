@@ -37,7 +37,7 @@
         </div>
     </section>
     <section>
-        <div class="row">
+        <div class="row col-sm-12">
             <div class="mb-4">
                 <a class="btn" href="training"><i class="fas fa-angle-double-left"></i> Retour aux formations</a>
             </div>
