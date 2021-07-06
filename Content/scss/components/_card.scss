@@ -86,7 +86,6 @@
     object-fit: cover;
     height: 150px;
     width: 250px;
-    border-radius: 5px 0 0 5px;
   }
   img:hover{
     transition: ease 1s;
@@ -153,6 +152,12 @@
   background-color: #dde6f0;
   font-size: 1.7em;
   cursor: pointer;
+  transition: ease 1s;
+}
+
+.card-button-validate:hover{
+  background-color: #b5c6d5;
+  transition: ease 1s;
 }
 
 .dashboard-stats{

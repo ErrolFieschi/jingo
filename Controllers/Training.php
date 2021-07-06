@@ -8,6 +8,7 @@ use App\Core\FormValidator;
 use App\Core\Helpers;
 use App\Core\View;
 use App\Models\Training as T;
+use App\Models\Part;
 
 class Training
 {
@@ -99,20 +100,40 @@ class Training
         $uri = Helpers::getUrlAsArray();
         $parts = [];
 
-        $trainingId = Database::customSelectFromATable('training', 'id', 'url', $uri[0], true);
-        //var_dump($trainingId['id']);
-        //echo '<br>';
-
-        //foreach ($parts as $part){
+        $trainingId = Database::customSelectFromATable('training', 'id, title', 'url', $uri[0], true);
         array_push($parts, Database::customSelectFromATable("part", '*', 'training_id', $trainingId['id']));
-        //}
-        //echo 'COUNT## ' . count($lessons[0]);
 
-        //echo '<pre>';
-        //var_dump($lessons[0]);
         $view = new View("part-list", "back");
+        $part = new Part();
+        $form = $part->formPart();
         $view->assign("data", $parts[0]);
         $view->assign("uri", $uri[0]);
+        $view->assign("title", $trainingId['title']);
+        $view->assign("form", $form);
+
+        if(!empty($_POST)){
+            $errors = FormValidator::check($form, $_POST);
+
+            if(empty($errors)){
+
+                //echo '<pre>';
+                //var_dump($_POST);
+                //echo 'id### ' . $trainingId['id'];
+                $part->setCreateby('user');
+                $part->setTitle($_POST["title"]);
+                $part->setOrderPart(1);
+                $part->setIcon($_POST["icon"]);
+                $part->setUrl($part->getTitle());
+                $part->setTrainingId($trainingId['id']);
+
+                $part->save();
+
+                header("Location: /" . $uri[0]);
+
+            }else{
+                $view->assign("errors", $errors);
+            }
+        }
     }
 
 

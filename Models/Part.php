@@ -9,11 +9,14 @@ use App\Core\Helpers;
 class Part extends Database
 {
     private $id = null;
-    private $title;
-    private $icon;
-    private $order;
+    protected $title;
+    protected $createby;
+    protected $icon;
+    protected $order_part;
     protected $training_id;
     protected $url ;
+
+    protected $bdd;
 
     public function __construct()
     {
@@ -33,7 +36,7 @@ class Part extends Database
     /**
      * @param null $id
      */
-    public function setId($id)
+    public function setId($id): void
     {
         $this->id = $id;
     }
@@ -49,9 +52,25 @@ class Part extends Database
     /**
      * @param mixed $title
      */
-    public function setTitle($title)
+    public function setTitle($title): void
     {
-        $this->title = $title;
+        $this->title = trim($title);
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getCreateby()
+    {
+        return $this->createby;
+    }
+
+    /**
+     * @param mixed $createby
+     */
+    public function setCreateby($createby): void
+    {
+        $this->createby = $createby;
     }
 
     /**
@@ -65,7 +84,7 @@ class Part extends Database
     /**
      * @param mixed $icon
      */
-    public function setIcon($icon)
+    public function setIcon($icon): void
     {
         $this->icon = $icon;
     }
@@ -73,17 +92,17 @@ class Part extends Database
     /**
      * @return mixed
      */
-    public function getOrder()
+    public function getOrderPart()
     {
-        return $this->order;
+        return $this->order_part;
     }
 
     /**
-     * @param mixed $order
+     * @param mixed $order_part
      */
-    public function setOrder($order)
+    public function setOrderPart($order_part): void
     {
-        $this->order = $order;
+        $this->order_part = $order_part;
     }
 
     /**
@@ -97,7 +116,7 @@ class Part extends Database
     /**
      * @param mixed $training_id
      */
-    public function setTrainingId($training_id)
+    public function setTrainingId($training_id): void
     {
         $this->training_id = $training_id;
     }
@@ -116,6 +135,44 @@ class Part extends Database
     public function setUrl($url)
     {
         $this->url = Helpers::stringify($url);
+    }
+
+    public function formPart()
+    {
+
+        return [
+            "config" => [
+                "method" => "POST",
+                "action" => "",
+                "id" => "form_part",
+                "class" => "add_trainings col-sm-12 row",
+                "submit" => "Ajouter une Formation"
+            ],
+            "inputs" => [
+                "title" => [
+                    "type" => "text",
+                    "label" => "Titre du chapitre",
+                    "minLength" => 2,
+                    "maxLength" => 55,
+                    "id" => "part_name",
+                    "class" => "popup_form_input",
+                    "placeholder" => "",
+                    "error" => "Le nom de la page doit faire entre 2 et 55 caractères",
+                    "required" => true
+                ],
+                "icon" => [
+                    "type" => "text",
+                    "label" => "Icon du chapitre",
+                    "minLength" => 2,
+                    "maxLength" => 55,
+                    "id" => "part_icon",
+                    "class" => "popup_form_input",
+                    "placeholder" => "",
+                    "error" => "Le nom de la page doit faire entre 2 et 55 caractères",
+                    "required" => true
+                ],
+            ],
+        ];
     }
 
 }
