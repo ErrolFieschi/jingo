@@ -183,12 +183,12 @@ $(document).ready(function () {
             if ($("#mode_render").val() == 0) {
                 $(".div_edit").css("border", "none");
                 $(".border_render").css("border", "none");
-                $(".render").css("border", "none");
+                $("#btn_id").hide();
                 $("#mode_render").val(1);
             } else {
                 $(".div_edit").css("border", "solid 0.5px");
                 $(".border_render").css("border", "solid 0.5px");
-                $(".render").css("border", "solid 0.5px");
+                $("#btn_id").show();
                 $("#mode_render").val(0);
             }
         })
