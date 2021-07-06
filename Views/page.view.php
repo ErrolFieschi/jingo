@@ -5,6 +5,16 @@
         <button class="button-con" id="mode_render" style="float: right" value="0">Rendu</button>
     </div>
 
+    <section>
+        <div class="row col-sm-12">
+            <div class="mb-4">
+                <a class="btn" href="dashboard">
+                    <i class="fas fa-angle-double-left" aria-hidden="true"></i>
+                    Retour à l'accueil
+                </a>
+            </div>
+        </div>
+    </section>
     <div id="former">
         <div id="label_div_former">
             <label id="label_former"></label>
