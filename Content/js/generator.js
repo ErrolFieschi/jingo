@@ -5,18 +5,37 @@ $(document).ready(function () {
     function create_bloc() {
         $("#div_choice_1").click(function () {
             var count_render = $("#page div").length;
-            $('#page').append('<div class="render_unique former_div row" id="render' + count_render + '"></div>');
+            var html = '';
+            html += '<section>';
+            html += '<div class="row">';
+
+            html += '<div class="col-sm-12 card--inverse">';
+                html += '<div class="card-center card--shadow div_edit" id="render_' + count_render + '"></div>';
+            html += '</div>';
+
+            html += '</div>';
+            html += '</section>';
+
+            $('#page').append(html);
+
         });
 
         $("#div_choice_2").click(function () {
             var count_render = $("#page div").length;
             var html = '';
-            html += '<div class="div_render row">';
-            html += '<div class="sub_div_render col-12">';
-            html += '<div class="border_render former_div col-5" id="render_' + count_render + '"></div>';
-            html += '<div class="border_render former_div col-5" id="render_' + (count_render + 1) + '" ></div>';
+            html += '<section>';
+            html += '<div class="row">';
+
+            html += '<div class="col-sm-6 card--inverse">';
+                html += '<div class="card-center card--shadow div_edit" id="render_' + count_render + '"></div>';
             html += '</div>';
+
+            html += '<div class="col-sm-6 card--inverse">';
+                html += '<div class="card-center card--shadow div_edit" id="render_' + (count_render + 1) + '"></div>';
             html += '</div>';
+
+            html += '</div>';
+            html += '</section>';
             $('#page').append(html);
         });
 
@@ -24,13 +43,23 @@ $(document).ready(function () {
         $("#div_choice_3").click(function () {
             var count_render = $("#page div").length;
             var html = '';
-            html += '<div class="div_render row">';
-            html += '<div class="sub_div_render col-12">';
-            html += '<div class="border_render former_div col-3" id="render_' + count_render + '" ></div>';
-            html += '<div class="border_render former_div col-3" id="render_' + (count_render + 1) + '" ></div>';
-            html += '<div class="border_render former_div col-3" id="render_' + (count_render + 2) + '" ></div>';
+            html += '<section>';
+            html += '<div class="row">';
+
+            html += '<div class="col-sm-4 card--inverse">';
+            html += '<div class="card-center card--shadow div_edit" id="render_' + count_render + '"></div>';
             html += '</div>';
+
+            html += '<div class="col-sm-4 card--inverse">';
+            html += '<div class="card-center card--shadow div_edit" id="render_' + (count_render + 1) + '"></div>';
             html += '</div>';
+
+            html += '<div class="col-sm-4 card--inverse">';
+            html += '<div class="card-center card--shadow div_edit" id="render_' + (count_render + 2) + '"></div>';
+            html += '</div>';
+
+            html += '</div>';
+            html += '</section>';
             $('#page').append(html);
         });
     }
@@ -41,10 +70,10 @@ $(document).ready(function () {
         $("#former").hide();
     });
 
-    // permet d'afficher sur la popup l'id du bloc de modification en cours et lui ajoute l'id également
+    // permet d'afficher la popup et sur la popup l'id du bloc de modification en cours et lui ajoute l'id également
     function show_selected_bloc() {
         $(this).click(function (event) {
-            if ($(event.target).hasClass('former_div')) {
+            if ($(event.target).hasClass('div_edit')) {
                 console.log(event.target.id);
                 $(".label_former").remove();
                 $("#label_div_former").append("<label class='label_former' id=pop_" + event.target.id + ">" + event.target.id + "<label>");
@@ -152,12 +181,12 @@ $(document).ready(function () {
     function render_mode() {
         $("#mode_render").click(function (event) {
             if ($("#mode_render").val() == 0) {
-                $(".former_div").css("border", "none");
+                $(".div_edit").css("border", "none");
                 $(".border_render").css("border", "none");
                 $(".render").css("border", "none");
                 $("#mode_render").val(1);
             } else {
-                $(".former_div").css("border", "solid 0.5px");
+                $(".div_edit").css("border", "solid 0.5px");
                 $(".border_render").css("border", "solid 0.5px");
                 $(".render").css("border", "solid 0.5px");
                 $("#mode_render").val(0);
@@ -170,7 +199,7 @@ $(document).ready(function () {
         console.log(JSON.stringify({
             data: $('#page').html()
         }));
-        console.log("html : " + $('#page').html())
+        console.log($('#page').html())
     });
 
 
@@ -229,5 +258,15 @@ $(document).ready(function () {
     }
 ],
 
+/*
+TODO : Gérer unicité des class mt etc ...
+TODO : Créer le formulaire permettant d'accéder à l'éditeur, nom de la page, titre de la page etc ...
+TODO : Ajouter les images
+
+
+ */
+
+
+/*
 utilisation du drag and drop seulement pour replacer les éléments de la page
 }*/
