@@ -64,11 +64,10 @@
     </section>
     <section>
         <?php
-
         foreach ($data as $rowData): ?>
             <div class="row mb-4">
                 <div class="col-sm-12">
-                    <div class="card flex-row flex-wrap card--shadow justify-content-between">
+                    <div class="card flex-row flex-nowrap card--shadow justify-content-between">
                         <a href="<?= $rowData['url'] ?>">
                             <div class="card-header">
                                 <img src="/Content/Images/formation.png" alt="title image" style="object-fit: cover;">
@@ -84,28 +83,34 @@
                         </div>
                         <div class="card-button">
 
-                            <div class="card-button">
-                                <div class="card-icon">
-                                    <a href="#"><img src="/Content/svg/setting-bis.svg" alt="setting button"></a>
-                                </div>
-                                <div class="card-icon">
-                                    <a href="/training/delete?id=<?= $rowData['training_id'] ?>"><img
-                                                src="/Content/svg/trash.svg"
-                                                alt="Trash button"></a>
-                                </div>
-                                <div class="card-icon">
-                                    <a href="/training/visible?id=<?= $rowData['training_id'] ?>&visible=<?= $rowData['active'] ?>"><img
-                                                src=
-                                                <?php if ($rowData['active'] == 1) :
-                                                    echo "/Content/svg/active_eye.svg";
-                                                else :
-                                                    echo "/Content/svg/no_active_eye.svg";
-                                                endif; ?>
-                                                id="<?= $rowData['training_id'] ?>"
-                                                alt=" button"></a>
-                                </div>
+
+                            <div class="card-icon">
+                                <a href="#"><img src="/Content/svg/setting-bis.svg" alt="setting button"></a>
+                            </div>
+                            <div class="card-icon">
+                                <a href="/training/delete?id=<?= $rowData['training_id'] ?>"><img
+                                            src="/Content/svg/trash.svg"
+                                            alt="Trash button"></a>
+                            </div>
+                            <div class="card-icon">
+                                <a href="/training/visible?id=<?= $rowData['training_id'] ?>&visible=<?= $rowData['active'] ?>"><img
+                                            src=
+                                            <?php if ($rowData['active'] == 1) :
+                                                echo "/Content/svg/active_eye.svg";
+                                            else :
+                                                echo "/Content/svg/no_active_eye.svg";
+                                            endif; ?>
+                                            id="<?= $rowData['training_id'] ?>"
+                                            alt=" button"></a>
                             </div>
                         </div>
+                        <div class="card-button-validate" onclick="window.location='<?= $rowData['url'] ?>';">
+                            <div class="card-icon">
+                                <i class="fas fa-arrow-circle-right" style="color: #3b3b3b;"></i>
+                            </div>
+                        </div>
+
+
                     </div>
                 </div>
             </div>

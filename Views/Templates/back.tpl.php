@@ -5,10 +5,10 @@
     <title>Administration</title>
     <meta name="description" content="ceci est la description de ma page">
     <link href="/Content/dist/main.css" rel="stylesheet">
-    <script src="/node_modules/chart.js/dist/Chart.js"></script>
     <script src="/Content/js/jquery-3.5.1.min.js"></script>
-    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.10.25/datatables.min.css"/>
-    <script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.25/datatables.min.js"></script>
+    <script src="/node_modules/chart.js/dist/Chart.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.25/css/jquery.dataTables.css">
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.js"></script>
     <script src="/Content/js/nav.js"></script>
     <script src="/Content/js/global.js"></script>
     <script defer src="/Content/js/chart.js"></script>
@@ -17,7 +17,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://kit.fontawesome.com/d59c1d4dbf.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.10.25/datatables.min.css"/>
-
 </head>
 <body>
 <div class="container-back">

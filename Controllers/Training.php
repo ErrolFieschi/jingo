@@ -12,6 +12,7 @@ use App\Models\Training as T;
 class Training
 {
 
+    //Suppression Formation
     public function trainingDeleteAction()
     {
         if (!empty($_GET['id'] && isset($_GET['id']))) {
@@ -20,6 +21,7 @@ class Training
         header('Location: /training');
     }
 
+    //Afficher ou cacher formation
     public function trainingVisibleAction()
     {
         if (isset($_GET['visible']) && isset($_GET['id'])) {
@@ -42,7 +44,7 @@ class Training
 
         $formTraining = $training->formTraining();
 
-
+        //Select formation
         $data = $training->globalFind('SELECT wlms_training.id as training_id,
         wlms_training_tag.id as training_tag_id,
         wlms_training_tag.name,
@@ -58,10 +60,11 @@ class Training
         wlms_training.image
         FROM wlms_training LEFT JOIN wlms_training_tag 
         ON wlms_training.training_tag_id = wlms_training_tag.id ORDER BY wlms_training.update_date', []);
+        // ne pas afficher la premiere donnée qui est la donnée référence
 
         $view->assign("data", $data);
 
-
+        //Ajout formation
         if (!empty($_POST)) {
             $errors = FormValidator::check($formTraining, $_POST);
             if ($training->countRow('training', 'id', 'title', $_POST["title"]) != 1) {
