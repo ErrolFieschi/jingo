@@ -95,11 +95,11 @@
             $('#modal').css('display' , 'none');
         });
 
-        $(document).on('click',function(e){
-            if(!(($(e.target).closest("#modal-content").length > 0 ) || ($(e.target).closest("#modal-btn").length > 0))){
-                $('#modal').css('display' , 'none');
-            }
-        });
+        // $(document).on('click',function(e){
+        //     if(!(($(e.target).closest("#modal-content").length > 0 ) || ($(e.target).closest("#modal-btn").length > 0))){
+        //         $('#modal').css('display' , 'none');
+        //     }
+        // });
     });
 </script>
 </body>

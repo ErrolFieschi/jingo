@@ -79,9 +79,12 @@
     </section>
 </div>
 
-<div class="modal fade show" id="modal" tabindex="-1" role="dialog" aria-labelledby="modal-form" aria-modal="true" style="display: none;">
-    <div class="modal-dialog modal- modal-dialog-centered modal-sm" role="document">
-        <div class="modal-content" id="modal-content">
+<div class="modal" id="modal" role="dialog" aria-modal="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <button type="button" class="close" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
             <?php App\Core\FormBuilder::render($form,'form_input_wrapper') ?>
             <?php if (isset($errors)):
                 foreach ($errors as $error):?>
