@@ -109,5 +109,9 @@ class Pages
         $view->assign("back", $uri[0] . '/' . $uri[1]);
 
     }
+
+    public function deleteLesson(){
+        echo "<script>console.log('test');</script>";
+    }
 }
 

@@ -74,3 +74,8 @@
   controller: User
   action: updateUser
   auth: false
+
+/lesson/delete/{id}:
+  controller: Pages
+  action: deleteLesson
+  auth: false
