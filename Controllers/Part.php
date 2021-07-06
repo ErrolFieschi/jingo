@@ -40,9 +40,6 @@ class Part
                     $link = 'Content/Images/lesson/' . $picture_name . '.' . $extension;
                     move_uploaded_file($_FILES["photo"]["tmp_name"], $link);
 
-                    //echo '<pre>';
-                    var_dump($_POST['code']);
-                    exit;
                     $lesson->setCreateby('user');
                     $lesson->setTitle($_POST["title"]);
                     $lesson->setResume($_POST["resume"]);
