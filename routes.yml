@@ -84,3 +84,8 @@
   controller: User
   action: updateUser
   auth: false
+
+/pages:
+  controller: Page
+  action: createPage
+  auth: false
