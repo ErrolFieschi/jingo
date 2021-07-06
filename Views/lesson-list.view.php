@@ -2,7 +2,7 @@
     <section>
         <div class="banner banner--text banner--header" style="background-image: url('https://i.pinimg.com/originals/26/ae/12/26ae1241ca65ba8e8ff4a4d442c92566.png');">
             <div class="bg">
-                <h4>Ma liste de leçon</h4>
+                <h4>Liste de leçon</h4>
                 <p class="my-0">L’endroit pour créer, modifier ou supprimer des leçons</p>
             </div>
         </div>
@@ -37,8 +37,13 @@
         </div>
     </section>
     <section>
-        <div class="mb-4">
-            <a class="btn" href="/<?= $back; ?>"><i class="fas fa-angle-double-left"></i> Retour aux chapitres</a>
+        <div class="row">
+            <div class="mb-4">
+                <a class="btn" href="/<?= $back; ?>"><i class="fas fa-angle-double-left"></i> Retour aux chapitres</a>
+            </div>
+            <div class="mb-4" style="margin-left: 10px;">
+                <span class="btn no-click"><i class="fas fa-street-view" style="font-size: 15px; padding-right: 10px;"></i> <?= strtoupper($title); ?></span>
+            </div>
         </div>
 
         <?php foreach ($data as $rowData): ?>

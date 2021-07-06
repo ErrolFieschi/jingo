@@ -17,7 +17,7 @@ class Part
         $uri = Helpers::getUrlAsArray();
         $lessons = [];
 
-        $parts = Database::customSelectFromATable('part', 'id', 'url', $uri[1], true);
+        $parts = Database::customSelectFromATable('part', 'id, title', 'url', $uri[1], true);
         array_push($lessons, Database::customSelectFromATable("lesson", 'id,title,resume,image,url', 'part_id', $parts['id']));
 
         $view = new View("lesson-list", "back");
@@ -26,6 +26,7 @@ class Part
         $view->assign("data", $lessons[0]);
         $view->assign("uri", $uri[1]);
         $view->assign("back", $uri[0]);
+        $view->assign("title", $parts['title']);
         $view->assign("form", $form);
 
 
