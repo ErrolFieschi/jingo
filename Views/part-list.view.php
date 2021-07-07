@@ -60,7 +60,13 @@
                                 <a href="#"><img src="/Content/svg/setting-bis.svg" alt="setting button"></a>
                             </div>
                             <div class="card-icon">
-                                <a href="#"><img src="/Content/svg/trash.svg" alt="Trash button"></a>
+                                <form method="post" id="<?=$rowData['id']?>" action="/part/delete">
+                                    <input type="hidden" name="id" value="<?= $rowData['id'] ?>">
+                                    <input type="hidden" name="uri" value="<?= '/' . $uri ?>">
+                                    <a href="javascript:(0)" onclick="document.getElementById(<?=$rowData['id']?>).submit()">
+                                        <img src="/Content/svg/trash.svg" alt="edit button">
+                                    </a>
+                                </form>
                             </div>
                         </div>
 

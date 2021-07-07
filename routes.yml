@@ -75,7 +75,12 @@
   action: updateUser
   auth: false
 
-/lesson/delete/{id}:
+/lesson/delete:
   controller: Pages
   action: deleteLesson
+  auth: false
+
+/part/delete:
+  controller: Part
+  action: deletePart
   auth: false

@@ -110,8 +110,9 @@ class Pages
 
     }
 
-    public function deleteLesson(){
-        echo "<script>console.log('test');</script>";
+    public function deleteLessonAction(){
+        Database::deleteFromId("lesson", "id", $_POST['id']);
+        header('Location: ' . $_POST['uri']);
     }
 }
 
