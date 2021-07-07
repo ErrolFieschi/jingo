@@ -55,6 +55,16 @@
   action: trainingOptions
   auth: false
 
+/training/delete:
+  controller: Training
+  action: trainingDelete
+  auth: false
+
+/training/visible:
+  controller: Training
+  action: trainingVisible
+  auth: false
+
 /model:
   controller: Front
   action: model
@@ -83,4 +93,14 @@
 /part/delete:
   controller: Part
   action: deletePart
+  auth: false
+
+/page:
+  controller: Page
+  action: createPage
+  auth: false
+
+/pages:
+  controller: Page
+  action: createPage
   auth: false

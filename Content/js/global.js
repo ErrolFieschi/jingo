@@ -1,6 +1,7 @@
 $(document).ready(function () {
 
     // POP UP
+
     $(".popup-form").hide();
     $(".unshow").click(function(){
         $(".popup-form").hide();
@@ -8,5 +9,6 @@ $(document).ready(function () {
     $(".show").click(function(){
         $(".popup-form").show();
     });
-
+    $.noConflict();
+    $(".tab").DataTable();
 });

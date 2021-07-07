@@ -9,7 +9,7 @@ use App\Core\Helpers;
 
 class Training extends Database
 {
-    private $id = null;
+    protected $id = null;
     protected $description;
     protected $title;
     protected $createby = 1;

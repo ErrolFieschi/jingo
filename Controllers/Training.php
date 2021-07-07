@@ -12,27 +12,25 @@ use App\Models\Part;
 
 class Training
 {
-    public function trainingOptionsAction()
+
+    //Suppression Formation
+    public function trainingDeleteAction()
     {
-        $view = new View("training", "back");
-        $training = new T();
-
-
-        if (!empty($_GET['id']) && !isset($_GET['visible'])) {
+        if (!empty($_GET['id'] && isset($_GET['id']))) {
             Database::deleteFromId('training', 'id', $_GET['id']);
         }
-        if (isset($_GET['visible'])) {
+        header('Location: /training');
+    }
+
+    //Afficher ou cacher formation
+    public function trainingVisibleAction()
+    {
+        if (isset($_GET['visible']) && isset($_GET['id'])) {
             echo "test";
             if ($_GET['visible'] == 1) {
-                echo "on est dans le if";
-                Database::updateOneRow('training', 'active', 0,'id', $_GET['id']); // Fonctionne
-                //$training->setActive(0);
-                //$training->save();
+                Database::updateOneRow('training', 'active', 0, 'id', $_GET['id']); // Fonctionne
             } else {
-                echo "on est dans le else";
-                Database::updateOneRow('training', 'active', 1,'id', $_GET['id']); // Ne fonctionne pas
-                //$training->setActive(1);
-                //$training->save();
+                Database::updateOneRow('training', 'active', 1, 'id', $_GET['id']); // Ne fonctionne pas
             }
         }
         header('Location: /training');
@@ -47,7 +45,7 @@ class Training
 
         $formTraining = $training->formTraining();
 
-
+        //Select formation
         $data = $training->globalFind('SELECT wlms_training.id as training_id,
         wlms_training_tag.id as training_tag_id,
         wlms_training_tag.name,
@@ -63,10 +61,11 @@ class Training
         wlms_training.image
         FROM wlms_training LEFT JOIN wlms_training_tag 
         ON wlms_training.training_tag_id = wlms_training_tag.id ORDER BY wlms_training.update_date', []);
+        // ne pas afficher la premiere donnée qui est la donnée référence
 
         $view->assign("data", $data);
 
-
+        //Ajout formation
         if (!empty($_POST)) {
             $errors = FormValidator::check($formTraining, $_POST);
             if ($training->countRow('training', 'id', 'title', $_POST["title"]) != 1) {
@@ -96,7 +95,8 @@ class Training
 
     }
 
-    public function showAction(){
+    public function showAction()
+    {
         $uri = Helpers::getUrlAsArray();
         $parts = [];
 
@@ -135,8 +135,6 @@ class Training
             }
         }
     }
-
-
 
 
 }
