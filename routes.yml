@@ -86,7 +86,7 @@
   auth: false
 
 /lesson/delete:
-  controller: Pages
+  controller: Lessons
   action: deleteLesson
   auth: false
 

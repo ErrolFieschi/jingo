@@ -64,6 +64,6 @@ class Part
         Database::deleteFromId("lesson", "part_id", $_POST['id']);
         Database::deleteFromId("part", "id", $_POST['id']);
 
-        header('Location: ' . $_POST['uri']);
+        //header('Location: ' . $_POST['uri']);
     }
 }
