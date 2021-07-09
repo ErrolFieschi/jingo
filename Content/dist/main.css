@@ -3060,4 +3060,102 @@ a.btn_style_submit {
   background-color: lightslategray;
 }
 
+/*Refaire en sass dans card*/
+.card--border {
+  border: 1px solid rgba(0, 0, 0, 0.125) !important;
+}
+
+.card--shadow--border {
+  box-shadow: 0 0 8px 2px rgba(0, 0, 0, 0.1);
+  border: 1px solid rgba(0, 0, 0, 0.125) !important;
+}
+
+.card-coin-left-top {
+  justify-content: flex-start;
+  align-items: baseline;
+  display: flex;
+  position: relative;
+  flex-direction: column;
+  border: 1px solid rgba(0, 0, 0, 0.125);
+  min-height: 200px;
+  background-color: #F2F2F2;
+}
+
+.card-coin-right-top {
+  justify-content: flex-start;
+  align-items: end;
+  display: flex;
+  position: relative;
+  flex-direction: column;
+  border: 1px solid rgba(0, 0, 0, 0.125);
+  min-height: 200px;
+  background-color: #F2F2F2;
+}
+
+.card-coin-right-bottom {
+  justify-content: flex-end;
+  align-items: end;
+  display: flex;
+  position: relative;
+  flex-direction: row;
+  border: 1px solid rgba(0, 0, 0, 0.125);
+  min-height: 200px;
+  background-color: #F2F2F2;
+}
+
+.card-coin-left-bottom {
+  justify-content: flex-start;
+  align-items: end;
+  display: flex;
+  position: relative;
+  flex-direction: row;
+  border: 1px solid rgba(0, 0, 0, 0.125);
+  min-height: 200px;
+  background-color: #F2F2F2;
+}
+
+.card-center-right {
+  justify-content: flex-end;
+  align-items: center;
+  display: flex;
+  position: relative;
+  flex-direction: row;
+  border: 1px solid rgba(0, 0, 0, 0.125);
+  min-height: 200px;
+  background-color: #F2F2F2;
+}
+
+.card-center-left {
+  justify-content: flex-start;
+  align-items: center;
+  display: flex;
+  position: relative;
+  flex-direction: row;
+  border: 1px solid rgba(0, 0, 0, 0.125);
+  min-height: 200px;
+  background-color: #F2F2F2;
+}
+
+.card-center-top {
+  justify-content: flex-start;
+  align-items: center;
+  display: flex;
+  position: relative;
+  flex-direction: column;
+  border: 1px solid rgba(0, 0, 0, 0.125);
+  min-height: 200px;
+  background-color: #F2F2F2;
+}
+
+.card-center-bottom {
+  justify-content: flex-end;
+  align-items: center;
+  display: flex;
+  position: relative;
+  flex-direction: column;
+  border: 1px solid rgba(0, 0, 0, 0.125);
+  min-height: 200px;
+  background-color: #F2F2F2;
+}
+
 /*# sourceMappingURL=main.css.map */

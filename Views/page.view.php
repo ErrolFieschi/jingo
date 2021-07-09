@@ -15,26 +15,36 @@
             </div>
         </div>
     </section>
+
     <div id="former">
         <div id="label_div_former">
             <label id="label_former"></label>
         </div>
         <br>
-        <button class="btn_style" id="btn_sepa">Séparateur</button>
         <button class="btn_style" id="btn_link">Lien</button>
-        <button class="btn_style" id="btn_text">Text</button>
+        <button class="btn_style" id="btn_text">Editeur de text</button>
         <button class="btn_style" id="btn_image">Image</button>
-        <button class="btn_style" id="btn_function">Fonctions</button>
         <button class="btn_style" id="btn_style_options">Style</button>
+        <button class="btn_style" id="btn_effect">Effets</button>
+        <button class="btn_style" id="bloc_options">Bloc</button>
+        <button class="btn_style" id="btn_function">Fonctions</button>
         <i class="fa fa-times" id="cross_form" aria-hidden="true"></i>
         <br>
-        <div id="sepa_create" class="edit_page">
-            <label>Choisissez la taille de votre séparateur</label>
-            <br>
-            <input type="text" class="page_form_input"/>
-            <br>
-            <button class="btn_style_submit" id="submit_sepa">valider</button>
+
+        <div id="add_effect">
+            <label for="effect-list">Effet d'affichage</label>
+            <select id="effect-list">
+                <option value="">Aucun</option>
+                <option value="effect_fadein">Fade In</option>
+                <option value="effect_slidedown">Slide down</option>
+                <option value="effect_slideleft">Slide left</option>
+                <option value="effect_slideright">Slide right</option>
+                <option value="effect_slidetop">Slide top</option>
+                <option value="effect_zoom">zoom</option>
+            </select>
+            <button class="btn_style_submit" id="submit_effect">valider</button>
         </div>
+
         <div id="link_create" class="edit_page">
             <label>Lien de la page</label>
             <br>
@@ -66,7 +76,7 @@
             <label for="margin-top-opt">Exterieur dessus bloc</label>
             <select id="margin-top-opt">
                 <option value="">Choisissez la taille</option>
-                <option value="mt-5">10%</option>
+                <option value="">10%</option>
                 <option value="mt-10">30%</option>
                 <option value="mt-16">50%</option>
                 <option value="mt-24">70%</option>
@@ -104,7 +114,6 @@
                 <option value="ml-32">90%</option>
                 <option value="ml-40">100%</option>
             </select>
-
             <br>
             <br>
             <br>
@@ -151,13 +160,61 @@
                 <option value="pr-32">90%</option>
                 <option value="pr-40">100%</option>
             </select>
+            <br>
+            <br>
+            <label for="center-element-place">Placement centrale</label>
+            <select id="center-element-place">
+                <option value="card-center">centré</option>
+                <option value="card-center-top">centré haut</option>
+                <option value="card-center-bottom">centré bas</option>
+                <option value="card-center-left">centré gauche</option>
+                <option value="card-center-right">centré droit</option>
+            </select>
+
+            <label for="corners-element-place">Placement coins</label>
+            <select id="corners-element-place">
+                <option value="">Placement des éléments</option>
+                <option value="card-coin-left-top">coin haut gauche</option>
+                <option value="card-coin-right-top">coin haut droit</option>
+                <option value="card-coin-right-bottom">coin bas gauche</option>
+                <option value="card-coin-left-bottom">coin bas droit</option>
+            </select>
+            <br>
+
+            <div>
+                <input type="color" id="div_color" name="div_color"
+                       value="">
+                <label for="div_color">Couleur du bloc</label>
+            </div>
+
+            <div>
+                <label>Taille</label>
+                <input type="number" id="div_height" name="div_height" min="50"
+                       value="">
+            </div>
+
+            <div>
+                <label>Arrondissement des bordures</label>
+                <input type="number" id="div_border_radius" name="div_border_radius" min="0"
+                       value="">
+            </div>
+
+            <br>
+            <label for="bloc-style">Placement coins</label>
+            <select id="bloc-style">
+                <option value="">Aucun</option>
+                <option value="card--shadow">Ombres</option>
+                <option value="card--border">Bordures</option>
+                <option value="card--shadow--border">Bordures et ombres</option>
+            </select>
+
+            <br>
             <button class="btn_style_submit" id="submit_options">valider</button>
         </div>
     </div>
 
     <div id="page">
     </div>
-
 
     <section>
         <div class="row" id="btn_id">
@@ -183,4 +240,3 @@
     <button class="button-con mt-20" id="export_json" style="float: right" value="0">Export</button>
     <div id="show_json"></div>
 </div>
-

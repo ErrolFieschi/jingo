@@ -6,11 +6,11 @@ $(document).ready(function () {
         $("#div_choice_1").click(function () {
             var count_render = $("#page div").length;
             var html = '';
-            html += '<section>';
+            html += '<section id="render_' + count_render + '">';
             html += '<div class="row">';
 
             html += '<div class="col-sm-12 card--inverse">';
-                html += '<div class="card-center card--shadow div_edit" id="render_' + count_render + '"></div>';
+            html += '<div class="card-center div_edit" id="render_' + (count_render + 1) + '"></div>';
             html += '</div>';
 
             html += '</div>';
@@ -23,15 +23,15 @@ $(document).ready(function () {
         $("#div_choice_2").click(function () {
             var count_render = $("#page div").length;
             var html = '';
-            html += '<section>';
+            html += '<section id="render_' + count_render + '">';
             html += '<div class="row">';
 
-            html += '<div class="col-sm-6 card--inverse">';
-                html += '<div class="card-center card--shadow div_edit" id="render_' + count_render + '"></div>';
+            html += '<div class="col-sm-12 col-md-6 card--inverse">';
+            html += '<div class="card-center div_edit" id="render_' + (count_render + 1) + '"></div>';
             html += '</div>';
 
-            html += '<div class="col-sm-6 card--inverse">';
-                html += '<div class="card-center card--shadow div_edit" id="render_' + (count_render + 1) + '"></div>';
+            html += '<div class="col-sm-12 col-md-6 card--inverse">';
+            html += '<div class="card-center div_edit" id="render_' + (count_render + 2) + '"></div>';
             html += '</div>';
 
             html += '</div>';
@@ -43,19 +43,19 @@ $(document).ready(function () {
         $("#div_choice_3").click(function () {
             var count_render = $("#page div").length;
             var html = '';
-            html += '<section>';
+            html += '<section id="render_' + count_render + '">';
             html += '<div class="row">';
 
-            html += '<div class="col-sm-4 card--inverse">';
-            html += '<div class="card-center card--shadow div_edit" id="render_' + count_render + '"></div>';
+            html += '<div class="col-sm-12 col-md-4 card--inverse">';
+            html += '<div class="card-center div_edit" id="render_' + (count_render + 1) + '"></div>';
             html += '</div>';
 
-            html += '<div class="col-sm-4 card--inverse">';
-            html += '<div class="card-center card--shadow div_edit" id="render_' + (count_render + 1) + '"></div>';
+            html += '<div class="col-sm-12 col-md-4 card--inverse">';
+            html += '<div class="card-center div_edit" id="render_' + (count_render + 2) + '"></div>';
             html += '</div>';
 
-            html += '<div class="col-sm-4 card--inverse">';
-            html += '<div class="card-center card--shadow div_edit" id="render_' + (count_render + 2) + '"></div>';
+            html += '<div class="col-sm-12 col-md-4 card--inverse">';
+            html += '<div class="card-center div_edit" id="render_' + (count_render + 3) + '"></div>';
             html += '</div>';
 
             html += '</div>';
@@ -84,46 +84,53 @@ $(document).ready(function () {
 
     // permet d'afficher les options de chaque boutons de la popup
     function show_popup_options() {
+
         $("#style_choice").hide();
         $("#text_create").hide();
-        $("#link_create").hide();
         $("#image_choice").hide();
-        $("#sepa_create").show();
-        $("#btn_sepa").click(function (event) {
-            $("#style_choice").hide();
-            $("#text_create").hide();
-            $("#link_create").hide();
-            $("#image_choice").hide();
-            $("#sepa_create").show();
-        });
+        $("#add_effect").hide();
+        $("#link_create").show();
+
         $("#btn_link").click(function (event) {
+
             $("#style_choice").hide();
             $("#text_create").hide();
             $("#image_choice").hide();
-            $("#sepa_create").hide();
+            $("#add_effect").hide();
             $("#link_create").show();
         });
         $("#btn_image").click(function (event) {
+
             $("#style_choice").hide();
             $("#text_create").hide();
-            $("#sepa_create").hide();
             $("#link_create").hide();
+            $("#add_effect").hide();
             $("#image_choice").show();
         });
         $("#btn_text").click(function (event) {
+
             $("#style_choice").hide();
             $("#image_choice").hide();
-            $("#sepa_create").hide();
             $("#link_create").hide();
+            $("#add_effect").hide();
             $("#text_create").show();
         });
         $("#btn_style_options").click(function (event) {
-            $("#sepa_create").hide();
+
             $("#text_create").hide();
             $("#link_create").hide();
             $("#image_choice").hide();
+            $("#add_effect").hide();
             $("#style_choice").show();
-        })
+        });
+
+        $("#btn_effect").click(function (event) {
+            $("#style_choice").hide();
+            $("#text_create").hide();
+            $("#image_choice").hide();
+            $("#link_create").hide();
+            $("#add_effect").show();
+        });
     }
 
     //permet d'ajouter un bouton avec un lien sur la page
@@ -146,6 +153,108 @@ $(document).ready(function () {
         $("#submit_options").click(function (event) {
             var id = ($('.label_former').attr('id'));
             id = id.substr(4);
+            var getId = "#" + id;
+            var i;
+            var y;
+            // faire un get value des enfants et boucler sur les valeurs des select
+            console.log();
+            var mp_options = [
+                "mt-5", "mt-10", "mt-16",
+                "mt-24", "mt-32", "mt-40",
+
+                "mb-5", "mb-10", "mb-16",
+                "mb-24", "mb-32", "mb-40",
+
+                "ml-5", "ml-10", "ml-16",
+                "ml-24", "ml-32", "ml-40",
+
+                "mr-5", "mr-10", "mr-16",
+                "mr-24", "mr-32", "mr-40",
+
+                "pt-5", "pt-10", "pt-16",
+                "pt-24", "pt-32", "pt-40",
+
+                "pb-5", "pb-10", "pb-16",
+                "pb-24", "pb-32", "pb-40",
+
+                "pl-5", "pl-10", "pl-16",
+                "pl-24", "pl-32", "pl-40",
+
+                "pr-5", "pr-10", "pr-16",
+                "pr-24", "pr-32", "pr-40",
+
+                "card-center","card-center-top","card-center-bottom",
+                "card-center-left","card-center-right",
+
+                "card-coin-left-top", "card-coin-right-top",
+                "card-coin-right-bottom", "card-coin-left-bottom",
+
+                "card--shadow","card--border","card--shadow--border"
+            ];
+            for (i = 0; i < mp_options.length; i++) {
+                if ($(getId).hasClass(mp_options[i])) {
+                    if (i >= 1 && i <= 7) { //margin top
+                        $(getId).removeClass(mp_options[i]);
+                        $("#" + id).addClass($('#margin-top-opt').find(":selected").val());
+                    }
+                    if (i >= 7 && i <= 13) { //margin bottom
+                        $(getId).removeClass(mp_options[i]);
+                        $("#" + id).addClass($('#margin-bottom-opt').find(":selected").val());
+                    }
+                    if (i >= 13 && i <= 19) { //margin left
+                        $(getId).removeClass(mp_options[i]);
+                        $("#" + id).addClass($('#margin-left-opt').find(":selected").val());
+                    }
+                    if (i >= 19 && i <= 25) { //margin right
+                        $(getId).removeClass(mp_options[i]);
+                        $("#" + id).addClass($('#margin-right-opt').find(":selected").val());
+                    }
+                    if (i >= 25 && i <= 31) { //padding top
+                        $(getId).removeClass(mp_options[i]);
+                        $("#" + id).addClass($('#padding-top-opt').find(":selected").val());
+                    }
+                    if (i >= 31 && i <= 37) { //padding bottom
+                        $(getId).removeClass(mp_options[i]);
+                        $("#" + id).addClass($('#padding-bottom-opt').find(":selected").val());
+                    }
+                    if (i >= 37 && i <= 43) { //padding left
+                        $(getId).removeClass(mp_options[i]);
+                        $("#" + id).addClass($('#padding-left-opt').find(":selected").val());
+                    }
+                    if (i >= 43 && i <= 49) { //padding right
+                        $(getId).removeClass(mp_options[i]);
+                        $("#" + id).addClass($('#padding-right-opt').find(":selected").val());
+                    }
+                    if (i >= 49 && i <= 54) { //center
+                        $(getId).removeClass(mp_options[i]);
+                        $("#" + id).addClass($('#center-element-place').find(":selected").val());
+                    }
+                    if (i >= 54 && i <= 58) { //corner
+                        $(getId).removeClass(mp_options[i]);
+                        $("#" + id).addClass($('#corners-element-place').find(":selected").val());
+                    }
+                    if (i >= 58 && i <= 61) { //bloc style
+                        $(getId).removeClass(mp_options[i]);
+                        $("#" + id).addClass($('#bloc-style').find(":selected").val());
+                    }
+                    console.log(("." + mp_options[i]));
+                }
+            }
+
+            if ($("#div_height").val() != "" && $.isNumeric($("#div_height").val()) && $("#div_height").val() >=50) { // taille de la div
+                $("#" + id).css("height",$("#div_height").val());
+            }
+
+            if ($("#div_border_radius").val() != "" && $.isNumeric($("#div_border_radius").val())) { // taille de la div
+                $("#" + id).css("border-radius",$("#div_border_radius").val()+"px");
+                console.log("border : " + $("#div_border_radius").val());
+            }
+
+
+
+
+            // gerer unicité coins et centres
+
             $("#" + id).addClass($('#padding-right-opt').find(":selected").val() + ' '
                 + $('#padding-left-opt').find(":selected").val() + ' '
                 + $('#padding-top-opt').find(":selected").val() + ' '
@@ -154,9 +263,26 @@ $(document).ready(function () {
                 + $('#margin-top-opt').find(":selected").val() + ' '
                 + $('#margin-bottom-opt').find(":selected").val() + ' '
                 + $('#margin-right-opt').find(":selected").val() + ' '
-                + $('#margin-left-opt').find(":selected").val()
+                + $('#margin-left-opt').find(":selected").val() + ' '
+                + $('#center-element-place').find(":selected").val() + ' '
+                + $('#corners-element-place').find(":selected").val() + ' '
+                + $('#bloc-style').find(":selected").val()
             );
         })
+    }
+
+    $("#div_color").change(function(){ // <-- use change event
+        var id = ($('.label_former').attr('id'));
+        id = id.substr(4);
+        var getId = "#" + id;
+        $(getId).css('background-color', $("#div_color").val());
+    });
+
+
+    // permet de reinitialiser le css
+
+    function reset_style_options() {
+
     }
 
     function add_img_page() {
@@ -183,12 +309,12 @@ $(document).ready(function () {
             if ($("#mode_render").val() == 0) {
                 $(".div_edit").css("border", "none");
                 $(".border_render").css("border", "none");
-                $("#btn_id").hide();
+                $(".render").css("border", "none");
                 $("#mode_render").val(1);
             } else {
                 $(".div_edit").css("border", "solid 0.5px");
                 $(".border_render").css("border", "solid 0.5px");
-                $("#btn_id").show();
+                $(".render").css("border", "solid 0.5px");
                 $("#mode_render").val(0);
             }
         })
@@ -196,9 +322,9 @@ $(document).ready(function () {
 
 
     $("#export_json").click(function () {
-        console.log(JSON.stringify({
-            data: $('#page').html()
-        }));
+        //console.log(JSON.stringify({
+        //    data: $('#page').html()
+        //}));
         console.log($('#page').html())
     });
 
@@ -211,62 +337,13 @@ $(document).ready(function () {
     add_img_page();
     add_text_page();
     add_style_options();
+    reset_style_options();
 
+    // effet couleur du hover
+    // replacer les places de la div
+    // ajout choix type banner etc
+    // ajout des animations
+    // récupérer les données deja enregistrer pour eviter les mauvaises modifications
+
+    // ajouter une classe par élément qui indique que la class mt par exemple a bien été ajouter si c'est le cas on refait
 });
-
-
-/*
-{
-    "pages":[
-    {
-        "classDiv":"sub_div_render col-12",
-        "subDiv":[
-            {
-                "classDiv":"border_render col-3",
-                "idDiv":"render_1",
-                "type":"",
-                "value":""
-            },
-            {
-                "classDiv":"border_render col-3",
-                "idDiv":"render_2",
-                "type":"",
-                "value":""
-            },
-            {
-                "classDiv":"border_render col-3",
-                "idDiv":"render_3",
-                "type":"",
-                "value":""
-            }
-        ],
-        "classDiv":"sub_div_render col-12",
-        "subDiv":[
-            {
-                "classDiv":"border_render col-5",
-                "idDiv":"render_4",
-                "type":"",
-                "value":""
-            },
-            {
-                "classDiv":"border_render col-5",
-                "idDiv":"render_5",
-                "type":"",
-                "value":""
-            }
-        ]
-    }
-],
-
-/*
-TODO : Gérer unicité des class mt etc ...
-TODO : Créer le formulaire permettant d'accéder à l'éditeur, nom de la page, titre de la page etc ...
-TODO : Ajouter les images
-
-
- */
-
-
-/*
-utilisation du drag and drop seulement pour replacer les éléments de la page
-}*/
