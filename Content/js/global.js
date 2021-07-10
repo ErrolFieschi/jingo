@@ -8,11 +8,6 @@ $(document).ready(function () {
     $(".show").click(function(){
         $(".popup-form").show();
     });
-
     $.noConflict();
-    $('#tab').DataTable();
-
+    $(".tab").DataTable();
 });
-
-
-

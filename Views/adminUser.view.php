@@ -15,18 +15,20 @@
         <table id="tab" class="display" style="width:100%">
             <thead>
             <tr>
-                <th scope="col">#</th>
-                <th scope="col">Prénom</th>
-                <th scope="col">Nom</th>
-                <th scope="col">Email</th>
-                <th scope="col">Date de naissance</th>
+                <th>#</th>
+                <th>Prénom</th>
+                <th>Nom</th>
+                <th>Email</th>
+                <th>Date de naissance</th>
                 <!--th scope="col">Mot de passe</th-->
-                <th scope="col">Pays</th>
-                <th scope="col">Role</th>
-                <th scope="col">Status</th>
-                <th scope="col">Supprimer</th>
-                <th scope="col">Date de création</th>
-                <th scope="col">Date de mise à jour</th>
+                <th>Pays</th>
+                <th>Role</th>
+                <th>Status</th>
+                <th>Supprimer</th>
+                <th>Date de création</th>
+                <th>Date de mise à jour</th>
+                <th>Edit</th>
+                <th>Supprimer</th>
                 <!--th>
                     <div class="card-icon"><img src="/Content/svg/edit.svg"
                                                 alt="edit img" style="cursor: pointer"></div>
@@ -37,8 +39,10 @@
                 </th-->
             </tr>
             </thead>
-            <?php foreach ($data as $rowData): ?>
-                <tbody>
+            <tbody>
+            <?php
+            foreach ($data as $rowData): ?>
+
                 <?php if ($rowData['isDeleted'] == 1) {
                     ?>
                     <tr style="background-color: red;">
@@ -85,14 +89,15 @@
                                                                    alt="edit img" style="cursor: pointer"></a></div>
                         </td>
                         <td>
-                            <div class="card-icon"><a href="/admin-user/delete?id=<?= $rowData['id'] ?>"> <img src="/Content/svg/trash.svg"
-                                                                    alt="Trash button" style="cursor: pointer"></a>
+                            <div class="card-icon"><a href="/admin-user/delete?id=<?= $rowData['id'] ?>"> <img
+                                            src="/Content/svg/trash.svg"
+                                            alt="Trash button" style="cursor: pointer"></a>
                             </div>
                         </td>
                     </tr>
                 <?php } ?>
-                </tbody>
             <?php endforeach; ?>
+            </tbody>
         </table>
     </section>
     <section>

@@ -9,7 +9,7 @@ use App\Models\Lesson;
 use App\Core\Database;
 
 
-class Pages
+class Lessons
 {
 
     public function lessonAction(){
@@ -49,10 +49,6 @@ class Pages
             }
         }
         $view->assign("form", $form);
-    }
-
-    public function testAction() {
-        echo "CA MARCHE GG" ;
     }
 
     public function lessonListAction(){
@@ -106,12 +102,17 @@ class Pages
         $uri = Helpers::getUrlAsArray();
 
         $lesson = Database::customSelectFromATable('lesson', '*', 'url', $uri[2], true);
-        //echo '<pre>';
-        //var_dump($lesson);
+
         $view = new View("lesson", "back");
         $view->assign("lesson", $lesson);
         $view->assign("chapitre", $uri[2]);
         $view->assign("back", $uri[0] . '/' . $uri[1]);
+
+    }
+
+    public function deleteLessonAction(){
+        Database::deleteFromId("lesson", "id", $_POST['id']);
+        header('Location: ' . $_POST['uri']);
     }
 }
 
