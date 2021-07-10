@@ -10,12 +10,7 @@
             </div>
         </div>
     </section>
-    <section>
-        <div class="row mb-12 ">
-            <div class="row col-sm-7 popup-form">
-            </div>
-        </div>
-    </section>
+
     <section>
         <table id="tab" class="display" style="width:100%">
             <thead>
@@ -85,7 +80,8 @@
                         <td><?= $rowData['createdAt'] ?></td>
                         <td><?= $rowData['updatedAt'] ?></td>
                         <td>
-                            <div class="card-icon"><a href="/admin-user/update?id=<?= $rowData['id'] ?>"><img src="/Content/svg/edit.svg"
+<!--                            <a href="/admin-user/update?id=--><?//= $rowData['id'] ?><!--">-->
+                            <div class="card-icon show"><img src="/Content/svg/edit.svg"
                                                                    alt="edit img" style="cursor: pointer"></a></div>
                         </td>
                         <td>
@@ -98,6 +94,22 @@
                 </tbody>
             <?php endforeach; ?>
         </table>
+    </section>
+    <section>
+        <div class="row mb-12 ">
+            <div class="row col-sm-7 popup-form">
+                <?php App\Core\FormBuilder::render($formUpdateUser, "popup_form_builder col-md-6");
+                ?>
+                <i class="far fa-times-circle unshow"></i>
+                <?php
+                if (isset($errors)):
+                    foreach ($errors as $error):?>
+                        <li style="color:red"><?= $error; ?></li>
+                    <?php endforeach;
+                endif; ?>
+
+            </div>
+        </div>
     </section>
 </div>
 
