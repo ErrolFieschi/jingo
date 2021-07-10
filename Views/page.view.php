@@ -66,7 +66,11 @@
         </div>
 
         <div id="image_choice" class="edit_page">
-            <label>Choisissez une image</label>
+            <?php
+            foreach ($img_dir as $img): ?>
+                <img class="" src="<?= $img; ?>" style="height: 100px; width: 100px; object-fit: cover; cursor: pointer;"
+                     alt="">
+             <?php endforeach; ?>
             <br>
             <button class="btn_style_submit" id="submit_image_choice">valider</button>
         </div>
@@ -162,23 +166,20 @@
             </select>
             <br>
             <br>
-            <label for="center-element-place">Placement centrale</label>
-            <select id="center-element-place">
+            <label for="element-place">Placement éléments</label>
+            <select id="element-place">
                 <option value="card-center">centré</option>
                 <option value="card-center-top">centré haut</option>
                 <option value="card-center-bottom">centré bas</option>
                 <option value="card-center-left">centré gauche</option>
                 <option value="card-center-right">centré droit</option>
-            </select>
-
-            <label for="corners-element-place">Placement coins</label>
-            <select id="corners-element-place">
-                <option value="">Placement des éléments</option>
                 <option value="card-coin-left-top">coin haut gauche</option>
                 <option value="card-coin-right-top">coin haut droit</option>
                 <option value="card-coin-right-bottom">coin bas gauche</option>
                 <option value="card-coin-left-bottom">coin bas droit</option>
             </select>
+
+
             <br>
 
             <div>
@@ -200,7 +201,7 @@
             </div>
 
             <br>
-            <label for="bloc-style">Placement coins</label>
+            <label for="bloc-style">Bordures et ombres</label>
             <select id="bloc-style">
                 <option value="">Aucun</option>
                 <option value="card--shadow">Ombres</option>
@@ -237,6 +238,6 @@
         </div>
     </section>
 
-    <button class="button-con mt-20" id="export_json" style="float: right" value="0">Export</button>
+    <button class="button-con mt-20" id="export_json" style="float: right" value="0">Enregistrer</button>
     <div id="show_json"></div>
 </div>
