@@ -137,12 +137,15 @@ $(document).ready(function () {
 
     function add_button_page() {
         $("#submit_link").click(function (event) {
-            if ($("#link_form").val() == "" || $("#label_form").val() == "") {
+            if ($("#label_form").val() == "" && ($('#formation-link').find(":selected").val() == "" || $('#lesson-link').find(":selected").val() == "")) {
                 alert("les deux champs doivent être remplit");
-            } else {
+            }else if($('#formation-link').find(":selected").val() != "" && $('#lesson-link').find(":selected").val() != ""){
+                alert("Vous ne pouvez pas choisir 2 liens");
+            }
+            else {
                 var id = ($('.label_former').attr('id'));
                 id = id.substr(4);
-                $("#" + id).append('<a class="btn_style_submit" href=\'' + $("#link_form").val() + '\'> ' + $("#label_form").val() + '</a>');
+                $("#" + id).append('<a class="btn_style_submit" href=\'' + $('#formation-link').find(":selected").val()  + $('#lesson-link').find(":selected").val() + '\'> ' + $("#label_form").val() + '</a>');
             }
         })
     }
@@ -247,15 +250,10 @@ $(document).ready(function () {
             }
 
 
-
-
-            // gerer unicité coins et centres
-
             $("#" + id).addClass($('#padding-right-opt').find(":selected").val() + ' '
                 + $('#padding-left-opt').find(":selected").val() + ' '
                 + $('#padding-top-opt').find(":selected").val() + ' '
                 + $('#padding-bottom-opt').find(":selected").val() + ' '
-
                 + $('#margin-top-opt').find(":selected").val() + ' '
                 + $('#margin-bottom-opt').find(":selected").val() + ' '
                 + $('#margin-right-opt').find(":selected").val() + ' '
@@ -305,15 +303,28 @@ $(document).ready(function () {
                 $(".div_edit").css("border", "none");
                 $(".border_render").css("border", "none");
                 $(".render").css("border", "none");
+                $("#btn_id").hide();
                 $("#mode_render").val(1);
             } else {
                 $(".div_edit").css("border", "solid 0.5px");
                 $(".border_render").css("border", "solid 0.5px");
                 $(".render").css("border", "solid 0.5px");
+                $("#btn_id").show();
                 $("#mode_render").val(0);
             }
         })
     }
+
+    $(".image_creator").click(function () {
+        var id = ($('.label_former').attr('id'));
+        id = id.substr(4);
+        var getId = "#" + id;
+        $(getId).append('<img src="' + $(this).attr('id')+ '" />');
+        //$(getId).css("background-image","url(" + $(this).attr('id'));
+        $(getId).css(" background-repeat","no-repeat");
+
+        console.log($(this).attr('id'));
+    });
 
 
     $("#export_json").click(function () {
@@ -339,6 +350,9 @@ $(document).ready(function () {
     // ajout choix type banner etc
     // ajout des animations
     // récupérer les données deja enregistrer pour eviter les mauvaises modifications
-
+    // faire des fonctions qui appelle des methodes database
+    // derniere formation
+    // liste des formation avec limit etc ..
+    // rechercher une formation
     // ajouter une classe par élément qui indique que la class mt par exemple a bien été ajouter si c'est le cas on refait
 });

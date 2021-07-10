@@ -35,9 +35,6 @@ class Database
         self::$_instance->table = $table ;
     }
 
-
-
-
 	public function save(){
 
 		$columns = array_diff_key (

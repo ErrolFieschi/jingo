@@ -3018,6 +3018,7 @@ textarea:focus, input:focus {
   padding: 10px;
   box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
   display: none;
+  overflow: auto;
 }
 
 #cross_form {
@@ -3156,6 +3157,13 @@ a.btn_style_submit {
   border: 1px solid rgba(0, 0, 0, 0.125);
   min-height: 200px;
   background-color: #F2F2F2;
+}
+
+.image_creator {
+  height: 100px;
+  width: 100px;
+  object-fit: cover;
+  cursor: pointer;
 }
 
 /*# sourceMappingURL=main.css.map */
