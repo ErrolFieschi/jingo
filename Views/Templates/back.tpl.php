@@ -8,7 +8,6 @@
     <script src="/vendor/tinymce/tinymce.min.js"></script>
     <script src="/vendor/tinymce/uploadFile.js"></script>
     <script src="/node_modules/chart.js/dist/Chart.js"></script>
-    <script src="/Content/js/jquery-3.5.1.min.js"></script>
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.10.25/datatables.min.css"/>
     <script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.25/datatables.min.js"></script>
     <script src="/Content/js/nav.js"></script>
@@ -87,6 +86,10 @@
     </nav>
     <?php include $this->view; ?>
 </div>
+<script
+        src="https://code.jquery.com/jquery-3.6.0.min.js"
+        integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+        crossorigin="anonymous"></script>
 <script>
 
     $(document).ready(function(){
