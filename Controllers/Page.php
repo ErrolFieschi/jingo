@@ -21,7 +21,7 @@ class Page
         $trainingUrlList = Database::customSelectFromATable('training', 'url');
         $trainingLessonList = Database::customSelectFromATable('lesson', 'url');
         $trainingPartList = Database::customSelectFromATable('part', 'url');
-        $createdPagesList = Database::customSelectFromATable('part', 'url'); //liste des pages créer
+        $createdPagesList = Database::customSelectFromATable('page', 'url'); //liste des pages créer
 
         //remplacer les liens par les affichages front
 
@@ -29,7 +29,16 @@ class Page
         $view->assign("trainingLessonList", $trainingLessonList);
         $view->assign("trainingPartList", $trainingPartList);
 
+    }
+    public function showPagesAction(){
+        $view = new View("pages", "back");
+        $pagesShow = Database::customSelectFromATable('page', '*');
+        $view->assign("pagesShow", $pagesShow);
+    }
 
-
+    public function renderPageAction(){
+        $view = new View("page-show", "page");
+        $pagesShow = Database::customSelectFromATable('page', '*');
+        $view->assign("pagesShow", $pagesShow);
     }
 }

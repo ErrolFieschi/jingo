@@ -95,12 +95,17 @@
   action: deletePart
   auth: false
 
-/page:
+/pages:
+  controller: Page
+  action: showPages
+  auth: false
+
+/page-creator:
   controller: Page
   action: createPage
   auth: false
 
-/pages:
+/page/render:
   controller: Page
-  action: createPage
+  action: renderPage
   auth: false

@@ -7,6 +7,14 @@ use App\Core\Helpers;
 
 class Page extends Database
 {
+    protected $id = null;
+    protected $title;
+    protected $name;
+    protected $code;
+    protected $url;
+    protected $active;
+
+    protected $bdd;
 
     public function __construct()
     {

@@ -80,13 +80,51 @@
         </div>
         <!-- Ajout d'images -->
         <div id="image_choice" class="edit_page">
+            <label for="image_placement">Placement de l'image</label>
+            <select id="image_placement" class="popup_form_input">
+                <option value="center">center</option>
+                <option value="top">Top</option>
+                <option value="left">Left</option>
+                <option value="right">Right</option>
+                <option value="bottom">Bottom</option>
+            </select>
+            <label for="image_style_editor">Format de l'image</label>
+            <select id="image_style_editor" class="popup_form_input">
+                <option value="cover">cover</option>
+                <option value="contain">contain</option>
+                <option value="initial">initial</option>
+            </select>
+            <label for="image_attachment_editor">Attacher l'image</label>
+            <select id="image_attachment_editor" class="popup_form_input">
+                <option value="scroll">non</option>
+                <option value="fixed">oui</option>
+            </select>
+            <label for="image_filter_editor">Attacher l'image</label>
+            <select id="iimage_filter_editor" class="popup_form_input">
+                <option value="">Aucun</option>
+                <option value="blur(4px)">Blur</option>
+                <option value="brightness(100%)">Brightness</option>
+                <option value="contrast(180%)">contrast</option>
+                <option value="grayscale(100%)">grayscale</option>
+                <option value="hue-rotate(180deg)">hue-rotate</option>
+                <option value="invert(100%)">invert</option>
+                <option value="opacity(50%)">opacity</option>
+                <option value="saturate(7)">saturate</option>
+                <option value="sepia(100%)">sepia</option>
+
+            </select>
+            <label>Taille Image</label>
+            <input type="number" id="image_height_editor" name="image_height_editor" class="popup_form_input"
+                   min="20" value="">
+            <button class="button-con" id="submit_image_choice">valider</button>
+
+            <br>
+            <br>
             <?php
             foreach ($img_dir as $img): ?>
                 <img class="image_creator" id="<?= $img; ?>" src="<?= $img; ?>"
                      alt="">
             <?php endforeach; ?>
-            <br>
-            <button class="button-con" id="submit_image_choice">valider</button>
         </div>
 
         <div id="style_choice" class="edit_page">
@@ -196,7 +234,7 @@
 
             <div>
                 <label>Taille</label>
-                <input type="number" id="div_height" name="div_height" min="50"
+                <input type="number" id="div_height" name="div_height"
                        value="">
             </div>
 

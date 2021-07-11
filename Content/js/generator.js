@@ -241,10 +241,15 @@ $(document).ready(function () {
             }
 
             if ($("#div_height").val() != "" && $.isNumeric($("#div_height").val()) && $("#div_height").val() >=50) { // taille de la div
+                console.log("test");
                 $("#" + id).css("height",$("#div_height").val());
+            }else if($("#div_height").val() <50 && $("#div_height").val() != "" ){
+                alert("Nombre inferieur à 50");
             }
 
-            if ($("#div_border_radius").val() != "" && $.isNumeric($("#div_border_radius").val())) { // taille de la div
+            if ($("#div_border_radius").val() != "" && $.isNumeric($("#div_border_radius").val()) && $("#" + id).children().hasClass("img_page_add")) { // taille de la div
+                $("#" + id).children().css("border-radius",$("#div_border_radius").val()+"px");
+            }else{
                 $("#" + id).css("border-radius",$("#div_border_radius").val()+"px");
                 console.log("border : " + $("#div_border_radius").val());
             }
@@ -315,13 +320,56 @@ $(document).ready(function () {
         })
     }
 
+    //gestion des images et ajout des images
+
+
+
     $(".image_creator").click(function () {
         var id = ($('.label_former').attr('id'));
         id = id.substr(4);
         var getId = "#" + id;
-        $(getId).append('<img src="' + $(this).attr('id')+ '" />');
+
+        $(getId).css("background-image","url(/"+""+  $(this).attr('id') + "");
+        $(getId).css("align-items","unset");
+        $(getId).css("background-repeat","no-repeat");
+        $(getId).css("background-size", $('#image_style_editor').find(":selected").val());
+        $(getId).css("background-attachment",$('#image_attachment_editor').find(":selected").val());
+        $(getId).css("background-position",$('#image_placement').find(":selected").val());
+        if ($('#image_height_editor').val != ""){
+            $(getId).css("max-height",$('#image_height_editor').val);
+        }else{
+            $(getId).css("max-height","100%");
+        }
+
+        $("#submit_image_choice").click(function () {
+            var id = ($('.label_former').attr('id'));
+            id = id.substr(4);
+            var getId = "#" + id;
+            $(getId).css("background-size", $('#image_style_editor').find(":selected").val());
+            $(getId).css("background-position",$('#image_placement').find(":selected").val());
+            $(getId).css("background-attachment",$('#image_attachment_editor').find(":selected").val());
+            if ($('#image_height_editor').val != ""){
+                $(getId).css("background-size",$('#image_height_editor').val+"px");
+            }else{
+                $(getId).css("background-size","100%");
+            }
+        });
+
+
+        $(getId).css("max-width","100%");
+        //appliquer le filtre de couleur
+        //$(getId).append('<img src="' + $(this).attr('id')+ '" id="'+ $(this).attr('id') +'" class="img_page_add" />');
         //$(getId).css("background-image","url(" + $(this).attr('id'));
-        $(getId).css(" background-repeat","no-repeat");
+        // creer un id unique pour les images
+
+        /*$(getId).css("align-items","unset");
+        $(getId).children().css("background-repeat","no-repeat");
+        $(getId).children().css("object-fit","cover");
+        $(getId).children().css("max-height","100%");
+        $(getId).children().css("max-width","100%");
+*/
+        // gerer les select
+        // ajouter height
 
         console.log($(this).attr('id'));
     });
@@ -346,8 +394,9 @@ $(document).ready(function () {
     reset_style_options();
 
     // effet couleur du hover
+    // gerer le problème du clic après ajout d'un éléments
     // replacer les places de la div
-    // ajout choix type banner etc
+    // ajout choix type banner etc //
     // ajout des animations
     // récupérer les données deja enregistrer pour eviter les mauvaises modifications
     // faire des fonctions qui appelle des methodes database
@@ -355,4 +404,7 @@ $(document).ready(function () {
     // liste des formation avec limit etc ..
     // rechercher une formation
     // ajouter une classe par élément qui indique que la class mt par exemple a bien été ajouter si c'est le cas on refait
+    // retirer container et gérer a la voler de chaque div
+
+    // ajouter une vidéo ça sera le feu
 });
