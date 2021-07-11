@@ -109,3 +109,8 @@
   controller: Page
   action: renderPage
   auth: false
+
+/page/update:
+  controller: Page
+  action: updatePage
+  auth: false
