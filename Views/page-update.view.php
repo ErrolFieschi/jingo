@@ -281,6 +281,14 @@
                         <div class="card--shadow choice_bloc_editor col-3"></div>
                         <div class="card--shadow choice_bloc_editor col-3"></div>
                     </div>
+                    <div id="div_choice_4" class="col-sm-4">
+                        <div class="card--shadow choice_bloc_editor col-sm-2"></div>
+                        <div class="card--shadow choice_bloc_editor col-sm-4"></div>
+                    </div>
+                    <div id="div_choice_5" class="col-sm-4">
+                        <div class="card--shadow choice_bloc_editor col-sm-4"></div>
+                        <div class="card--shadow choice_bloc_editor col-sm-2"></div>
+                    </div>
                 </div>
             </div>
         </div>

@@ -28,7 +28,7 @@
         <button class="btn_style" id="btn_effect">Effets</button>
         <button class="btn_style" id="bloc_options">Bloc</button>
         <button class="btn_style" id="btn_function">Fonctions</button>
-        <i class="far fa-times-circle unshow" id="cross_form"  aria-hidden="true"></i>
+        <i class="far fa-times-circle unshow" id="cross_form" aria-hidden="true"></i>
 
         <div id="add_effect">
             <label for="effect-list">Effet d'affichage</label>
@@ -44,6 +44,12 @@
             <button class="button-con" id="submit_effect">valider</button>
         </div>
 
+        <div id="bloc_options_form" class="edit_page">
+            <button class="button-con" id="delete_div_creator" style="background-color: red!important">Supprimer</button>
+            <button class="button-con" id="free_div_creator" style="background-color: orange!important">Vider</button>
+        </div>
+
+
         <!-- AJout de boutons et de liens-->
         <div id="link_create" class="edit_page">
             <label for="formation-link">Lien formations</label>
@@ -51,7 +57,7 @@
                 <option value="">Aucun</option>
                 <?php
                 foreach ($trainingUrlList as $trainingList):?>
-                <option value="<?= $trainingList[0]?>"><?= $trainingList[0]?></option>
+                    <option value="<?= $trainingList[0] ?>"><?= $trainingList[0] ?></option>
                 <?php endforeach; ?>
             </select>
 
@@ -60,7 +66,7 @@
                 <option value="">Aucun</option>
                 <?php
                 foreach ($trainingLessonList as $lessonList):?>
-                    <option value="<?= $lessonList[0]?>"><?= $lessonList[0]?></option>
+                    <option value="<?= $lessonList[0] ?>"><?= $lessonList[0] ?></option>
                 <?php endforeach; ?>
             </select>
 
@@ -71,6 +77,8 @@
             <button class="button-con" id="submit_link">valider</button>
             <!-- Boucler les proposition de style de boutons et faire un système de choix -->
         </div>
+
+
         <!-- Editeur de textes -->
         <div id="text_create" class="edit_page">
                     <textarea id="textarea_form" name="textarea_form" rows="4" cols="40"
@@ -78,6 +86,8 @@
             <br>
             <button class="button-con" id="submit_textarea">valider</button>
         </div>
+
+
         <!-- Ajout d'images -->
         <div id="image_choice" class="edit_page">
             <label for="image_placement">Placement de l'image</label>
@@ -99,8 +109,8 @@
                 <option value="scroll">non</option>
                 <option value="fixed">oui</option>
             </select>
-            <label for="image_filter_editor">Attacher l'image</label>
-            <select id="iimage_filter_editor" class="popup_form_input">
+            <label for="image_filter_editor">Filtres</label>
+            <select id="image_filter_editor" class="popup_form_input">
                 <option value="">Aucun</option>
                 <option value="blur(4px)">Blur</option>
                 <option value="brightness(100%)">Brightness</option>
@@ -257,6 +267,7 @@
     </div>
 
     <div id="page">
+        <div class="incrementor" id="0" style="display: none"></div>
     </div>
 
     <section>
@@ -274,6 +285,14 @@
                         <div class="card--shadow choice_bloc_editor col-3"></div>
                         <div class="card--shadow choice_bloc_editor col-3"></div>
                         <div class="card--shadow choice_bloc_editor col-3"></div>
+                    </div>
+                    <div id="div_choice_4" class="col-sm-4">
+                        <div class="card--shadow choice_bloc_editor col-sm-2"></div>
+                        <div class="card--shadow choice_bloc_editor col-sm-4"></div>
+                    </div>
+                    <div id="div_choice_5" class="col-sm-4">
+                        <div class="card--shadow choice_bloc_editor col-sm-4"></div>
+                        <div class="card--shadow choice_bloc_editor col-sm-2"></div>
                     </div>
                 </div>
             </div>

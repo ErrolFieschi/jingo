@@ -19,7 +19,7 @@
 
     <section>
         <div class="row">
-            <a href="/page/create">
+            <a href="/page-creator">
                 <div class="col-xl-3 col-md-3 col-sm-12 card--inverse ">
                     <div class="card-center card--shadow">
                         <i class="fas fa-plus" style="font-size: 50px;"></i>
