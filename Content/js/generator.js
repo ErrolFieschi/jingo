@@ -2,19 +2,6 @@ $(document).ready(function () {
 
     // Les 3 fonctions en dessous créer et implémente les id unique de chaque bloc
 
-    function unicity_div(){
-        var check = "0";
-        //let check = "inc_O";
-        //check = check.substr(4);
-        var convertor = parseInt(check);
-        convertor += 1;
-        console.log(convertor);
-        convertor += 2;
-        console.log(convertor);
-        convertor += 3;
-        console.log(convertor);
-    }
-
     function create_bloc() {
         $("#div_choice_1").click(function () {
             var getIncrementor = $('.incrementor').attr('id');
@@ -224,13 +211,16 @@ $(document).ready(function () {
 
     function add_button_page() {
         $("#submit_link").click(function (event) {
+            var id = ($('.label_former').attr('id'));
+            id = id.substr(4);
             if ($("#label_form").val() == "" && ($('#formation-link').find(":selected").val() == "" || $('#lesson-link').find(":selected").val() == "")) {
                 alert("les deux champs doivent être remplit");
             } else if ($('#formation-link').find(":selected").val() != "" && $('#lesson-link').find(":selected").val() != "") {
                 alert("Vous ne pouvez pas choisir 2 liens");
+            } else if($("#" + id).children().length > 0){
+                alert("Vous devez dabord vider l'interieur du bloc");
+                return 0;
             } else {
-                var id = ($('.label_former').attr('id'));
-                id = id.substr(4);
                 $("#" + id).append('<a class="btn_style_submit" href=\'' + $('#formation-link').find(":selected").val() + $('#lesson-link').find(":selected").val() + '\'> ' + $("#label_form").val() + '</a>');
             }
         })
@@ -377,11 +367,11 @@ $(document).ready(function () {
 
     function add_text_page() {
         $("#submit_textarea").click(function (event) {
+            var id = ($('.label_former').attr('id'));
+            id = id.substr(4);
             if ($("#textarea_form").val() == "") {
                 alert("les deux champs doivent être remplit");
             } else {
-                var id = ($('.label_former').attr('id'));
-                id = id.substr(4);
                 $("#" + id).append('<p>' + $("#textarea_form").val() + '</p>');
             }
         })
@@ -433,22 +423,35 @@ $(document).ready(function () {
         var id = ($('.label_former').attr('id'));
         id = id.substr(4);
         var getId = "#" + id;
-        $(getId).css("background-size", $('#image_style_editor').find(":selected").val());
         $(getId).css("background-position", $('#image_placement').find(":selected").val());
         $(getId).css("background-attachment", $('#image_attachment_editor').find(":selected").val());
         $(getId).css("filter", $('#image_filter_editor').find(":selected").val());
-        if ($('#image_height_editor').val != "") {
-            $(getId).css("background-size", $('#image_height_editor').val + "px");
+        if ($('#image_height_editor').val() != "" && $('#image_style_editor').find(":selected").val() == "initial") {
+            $(getId).css("background-size", $('#image_height_editor').val() + "px");
         } else {
-            $(getId).css("background-size", "100%");
+            $(getId).css("background-size", $('#image_style_editor').find(":selected").val());
         }
+    });
+
+    $("#bloc_div_up").click(function () {
+
+        var id = ($('.label_former').attr('id'));
+        id = id.substr(4);
+        var getId = "#" + id;
+        var parent_selected = $(getId).parent().parent().parent().prev().attr('id');
+        var actual_div =  $(getId).parent().parent().parent().attr('id');
+        var div_save = $("#"+actual_div).clone();
+        console.log("la ou je veux aller : " + $(getId).parent().parent().parent().prev().attr('id'));
+        console.log("la ou je suis censé être : " + $(getId).parent().parent().parent().attr('id'));
+        $("#"+actual_div).remove();
+        $("#"+parent_selected).prepend(div_save);
+
     });
 
     $("#delete_div_creator").click(function () {
         var id = ($('.label_former').attr('id'));
         id = id.substr(4);
         var getId = "#" + id;
-        // mettre à jour les id's recuperer toutes les class avec le nom "bla" et refaire le counter
         // avant chaque suppression faire une insertion en base (enregistrement auto)
         var parent_selected = $(getId).parent().parent().parent().attr('id');
         $("#"+parent_selected).remove();
@@ -500,7 +503,10 @@ $(document).ready(function () {
     add_text_page();
     add_style_options();
     reset_style_options();
-    // creer une div hidden pour incrémenter
+
+
+    // replacer les div, prendre l'id du parent (section) et et faire un append juste au dessus
+
     // effet couleur du hover
     // gerer le problème du clic après ajout d'un éléments
     // replacer les places de la div
@@ -519,6 +525,7 @@ $(document).ready(function () {
     // afficher les formations
     // afficher la derniere lesson
     // Update le text normalement pas trop compliqué
+    // carroussel
 
     // ajouter une vidéo ça sera le feu
 });

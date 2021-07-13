@@ -47,6 +47,8 @@
         <div id="bloc_options_form" class="edit_page">
             <button class="button-con" id="delete_div_creator" style="background-color: red!important">Supprimer</button>
             <button class="button-con" id="free_div_creator" style="background-color: orange!important">Vider</button>
+            <i class="fas fa-chevron-up" style="font-size: 23px" id="bloc_div_up"></i>
+            <i class="fas fa-chevron-down" style="font-size: 23px" id="bloc_div_down"></i>
         </div>
 
 
