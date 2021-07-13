@@ -434,17 +434,33 @@ $(document).ready(function () {
     });
 
     $("#bloc_div_up").click(function () {
-
         var id = ($('.label_former').attr('id'));
         id = id.substr(4);
         var getId = "#" + id;
-        var parent_selected = $(getId).parent().parent().parent().prev().attr('id');
         var actual_div =  $(getId).parent().parent().parent().attr('id');
+        var parent_selected = $(getId).parent().parent().parent().prev().attr('id');
         var div_save = $("#"+actual_div).clone();
         console.log("la ou je veux aller : " + $(getId).parent().parent().parent().prev().attr('id'));
         console.log("la ou je suis censé être : " + $(getId).parent().parent().parent().attr('id'));
-        $("#"+actual_div).remove();
-        $("#"+parent_selected).prepend(div_save);
+        if(parent_selected != null) {
+            $("#" + actual_div).remove();
+            $("#" + parent_selected).before(div_save);
+        }
+    });
+
+    $("#bloc_div_down").click(function () {
+        var id = ($('.label_former').attr('id'));
+        id = id.substr(4);
+        var getId = "#" + id;
+        var actual_div =  $(getId).parent().parent().parent().attr('id');
+        var next_place = $(getId).parent().parent().parent().next().attr('id');
+        var div_save = $("#"+actual_div).clone();
+        console.log("la ou je veux aller : " + $(getId).parent().parent().parent().next().attr('id'));
+        console.log("la ou je suis censé être : " + actual_div);
+        if(next_place != null){
+            $("#"+actual_div).remove();
+            $("#"+next_place).after(div_save);
+        }
 
     });
 
