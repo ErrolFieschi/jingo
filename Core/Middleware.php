@@ -44,7 +44,7 @@ class Middleware
     }
 
     public static function getControllerLesson() :string {
-        return "Pages" ;
+        return "Lessons" ;
     }
     public static function getControllerPart() :string {
         return "Part" ;

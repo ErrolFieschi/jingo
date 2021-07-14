@@ -42,7 +42,7 @@
                 <a class="btn" href="/<?= $back; ?>"><i class="fas fa-angle-double-left"></i> Retour aux chapitres</a>
             </div>
             <div class="mb-4" style="margin-left: 10px;">
-                <span class="btn no-click"><i class="fas fa-street-view" style="font-size: 15px; padding-right: 10px;"></i> <?= strtoupper($title); ?></span>
+                <span class="btn no-click"><i class="fas fa-street-view" style="font-size: 15px; padding-right: 10px;"></i> <?= mb_strtoupper($title); ?></span>
             </div>
         </div>
 
@@ -69,7 +69,12 @@
                             </form>
                         </div>
                         <div class="card-icon">
-                            <a href="#"><img src="/Content/svg/setting-bis.svg" alt="setting button"></a>
+                            <form method="post" id="update-<?=$rowData['id']?>" action="">
+                                <input type="hidden" name="update" value="<?= $rowData['id'] ?>">
+                                <a href="javascript:(0)" onclick="document.getElementById('<?= 'update-' . $rowData['id']?>').submit()">
+                                    <img src="/Content/svg/setting-bis.svg" alt="setting button">
+                                </a>
+                            </form>
                         </div>
                     </div>
 

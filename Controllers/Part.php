@@ -22,7 +22,12 @@ class Part
 
         $view = new View("lesson-list", "back");
         $lesson = new Lesson();
-        $form = $lesson->formLesson();
+
+        if(isset($_POST['update']) && !empty($_POST['update'])){
+            $form = $lesson->formUpdateLesson($_POST['update']);
+        }else{
+            $form = $lesson->formLesson();
+        }
         $view->assign("data", $lessons[0]);
         $view->assign("uri", $uri[1]);
         $view->assign("back", $uri[0]);
@@ -30,7 +35,7 @@ class Part
         $view->assign("form", $form);
 
 
-            if(!empty($_POST)){
+            if(!empty($_POST) && !isset($_POST['update'])){
                 $errors = FormValidator::check($form, $_POST, $_FILES);
 
                 if(empty($errors)){
@@ -50,7 +55,6 @@ class Part
                     $lesson->setCode($_POST["code"]);
                     $lesson->setPartId($parts['id']);
                     $lesson->save();
-                    //var_dump($lesson);
 
                     header("Location: /" . $uri[0] . '/' . $uri[1]);
 

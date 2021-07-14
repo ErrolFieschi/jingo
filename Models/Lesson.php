@@ -226,6 +226,64 @@ class Lesson extends Database
             ]
         ];
     }
+
+    public function formUpdateLesson($post = null)
+    {
+
+        $data = Database::customSelectFromATable("lesson", "title, resume, code, icon", "id", $post);
+       // echo '<pre>';
+       // var_dump($data);
+        return [
+
+            "config"=>[
+                "method"=>"POST",
+                "action"=>"",
+                "enctype"=>"multipart/form-data",
+                "id"=>"form_lesson",
+                "class"=>"form_input",
+                "submit"=>"Mettre à jour cette leçon"
+            ],
+            "inputs" => [
+                "title" => [
+                    "type" => "text",
+                    "label" => "Titre",
+                    "minLength" => 2,
+                    "maxLength" => 55,
+                    "id" => "title",
+                    "value" => $data[0]['title'],
+                    "class" => "form-control",
+                    "placeholder" => "Titre de la leçon",
+                    "error" => "Le titre doit faire entre 2 et 55 caractères",
+                    "required" => true
+                ],
+                "resume" => [
+                    "type" => "textarea",
+                    "label" => "Résumé de la leçon",
+                    "id" => "resume",
+                    "value" => $data[0]['resume'],
+                    "class" => "form-control",
+                    "placeholder" => "Tapez votre résumé ici"
+                ],
+                "icon" => [
+                    "type" => "text",
+                    "label" => "Mes icons",
+                    "id" => "icon",
+                    "value" => $data[0]['icon'],
+                    "class" => "form-control",
+                    "placeholder" => "Tapez votre cours ici",
+                    "required" => true
+                ],
+                "code" => [
+                    "type" => "textarea",
+                    "label" => "Ma leçon",
+                    "id" => "code",
+                    "value" => $data[0]['code'],
+                    "class" => "jingoEditor",
+                    "placeholder" => "Tapez votre cours ici"
+                ]
+            ]
+        ];
+    }
 }
 
 
