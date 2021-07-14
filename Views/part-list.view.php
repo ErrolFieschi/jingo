@@ -42,7 +42,7 @@
                 <a class="btn" href="training"><i class="fas fa-angle-double-left"></i> Retour aux formations</a>
             </div>
             <div class="mb-4" style="margin-left: 10px;">
-                <span class="btn no-click"><i class="fas fa-street-view" style="font-size: 15px; padding-right: 10px;"></i> <?= strtoupper($title); ?></span>
+                <span class="btn no-click"><i class="fas fa-street-view" style="font-size: 15px; padding-right: 10px;"></i> <?= mb_strtoupper($title); ?></span>
             </div>
         </div>
         <?php foreach ($data as $rowData): ?>
