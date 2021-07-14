@@ -17,8 +17,8 @@ $(document).ready(function () {
             html += '</div>';
             html += '</section>';
 
-            count_render+=2;
-            $('.incrementor').attr('id',count_render);
+            count_render += 2;
+            $('.incrementor').attr('id', count_render);
             console.log(count_render);
 
             $('#page').append(html);
@@ -43,8 +43,8 @@ $(document).ready(function () {
             html += '</div>';
             html += '</section>';
 
-            count_render+=3;
-            $('.incrementor').attr('id',count_render);
+            count_render += 3;
+            $('.incrementor').attr('id', count_render);
             $('#page').append(html);
         });
 
@@ -71,8 +71,8 @@ $(document).ready(function () {
             html += '</div>';
             html += '</section>';
 
-            count_render+=4;
-            $('.incrementor').attr('id',count_render);
+            count_render += 4;
+            $('.incrementor').attr('id', count_render);
             $('#page').append(html);
         });
 
@@ -94,8 +94,8 @@ $(document).ready(function () {
             html += '</div>';
             html += '</section>';
 
-            count_render+=3;
-            $('.incrementor').attr('id',count_render);
+            count_render += 3;
+            $('.incrementor').attr('id', count_render);
             $('#page').append(html);
         });
 
@@ -117,8 +117,8 @@ $(document).ready(function () {
             html += '</div>';
             html += '</section>';
 
-            count_render+=3;
-            $('.incrementor').attr('id',count_render);
+            count_render += 3;
+            $('.incrementor').attr('id', count_render);
             $('#page').append(html);
         });
     }
@@ -217,7 +217,7 @@ $(document).ready(function () {
                 alert("les deux champs doivent être remplit");
             } else if ($('#formation-link').find(":selected").val() != "" && $('#lesson-link').find(":selected").val() != "") {
                 alert("Vous ne pouvez pas choisir 2 liens");
-            } else if($("#" + id).children().length > 0){
+            } else if ($("#" + id).children().length > 0) {
                 alert("Vous devez dabord vider l'interieur du bloc");
                 return 0;
             } else {
@@ -364,7 +364,6 @@ $(document).ready(function () {
     }
 
     // a remplacer par le tiny mais permet d'ajouter du texte sur la page
-
     function add_text_page() {
         $("#submit_textarea").click(function (event) {
             var id = ($('.label_former').attr('id'));
@@ -399,7 +398,6 @@ $(document).ready(function () {
     }
 
     //gestion des images et ajout des images
-
     $(".image_creator").click(function () {
         var id = ($('.label_former').attr('id'));
         id = id.substr(4);
@@ -413,12 +411,13 @@ $(document).ready(function () {
         $(getId).css("background-position", $('#image_placement').find(":selected").val());
         $(getId).css("filter", $('#image_filter_editor').find(":selected").val());
         if ($('#image_height_editor').val != "") {
-            $(getId).css("background-size", $('#image_height_editor').val+ "px");
+            $(getId).css("background-size", $('#image_height_editor').val + "px");
         } else {
             $(getId).css("background-size", "100%");
         }
     });
 
+    // modifie l'image au niveau du submit
     $("#submit_image_choice").click(function () {
         var id = ($('.label_former').attr('id'));
         id = id.substr(4);
@@ -433,46 +432,50 @@ $(document).ready(function () {
         }
     });
 
+    // déplace la div vers le haut
     $("#bloc_div_up").click(function () {
         var id = ($('.label_former').attr('id'));
         id = id.substr(4);
         var getId = "#" + id;
-        var actual_div =  $(getId).parent().parent().parent().attr('id');
+        var actual_div = $(getId).parent().parent().parent().attr('id');
         var parent_selected = $(getId).parent().parent().parent().prev().attr('id');
-        var div_save = $("#"+actual_div).clone();
+        var div_save = $("#" + actual_div).clone();
         console.log("la ou je veux aller : " + $(getId).parent().parent().parent().prev().attr('id'));
         console.log("la ou je suis censé être : " + $(getId).parent().parent().parent().attr('id'));
-        if(parent_selected != null) {
+        if (parent_selected != null) {
             $("#" + actual_div).remove();
             $("#" + parent_selected).before(div_save);
         }
     });
 
+    // déplace la div vers le bas
     $("#bloc_div_down").click(function () {
         var id = ($('.label_former').attr('id'));
         id = id.substr(4);
         var getId = "#" + id;
-        var actual_div =  $(getId).parent().parent().parent().attr('id');
+        var actual_div = $(getId).parent().parent().parent().attr('id');
         var next_place = $(getId).parent().parent().parent().next().attr('id');
-        var div_save = $("#"+actual_div).clone();
+        var div_save = $("#" + actual_div).clone();
         console.log("la ou je veux aller : " + $(getId).parent().parent().parent().next().attr('id'));
         console.log("la ou je suis censé être : " + actual_div);
-        if(next_place != null){
-            $("#"+actual_div).remove();
-            $("#"+next_place).after(div_save);
+        if (next_place != null) {
+            $("#" + actual_div).remove();
+            $("#" + next_place).after(div_save);
         }
 
     });
 
+    // Suppression de la div
     $("#delete_div_creator").click(function () {
         var id = ($('.label_former').attr('id'));
         id = id.substr(4);
         var getId = "#" + id;
         // avant chaque suppression faire une insertion en base (enregistrement auto)
         var parent_selected = $(getId).parent().parent().parent().attr('id');
-        $("#"+parent_selected).remove();
+        $("#" + parent_selected).remove();
     });
 
+    // retirer tous les éléments de la div
     $("#free_div_creator").click(function () {
         var id = ($('.label_former').attr('id'));
         id = id.substr(4);
