@@ -82,10 +82,9 @@
 
 
         <!-- Editeur de textes -->
+
         <div id="text_create" class="edit_page">
-                    <textarea id="textarea_form" name="textarea_form" rows="4" cols="40"
-                              class="page_form_input"></textarea>
-            <br>
+            <textarea id="textarea_form" name="textarea_form" class="jingoEditor" aria-hidden="true" style="cursor: text"></textarea>
             <button class="button-con" id="submit_textarea">valider</button>
         </div>
 
@@ -248,6 +247,7 @@
                 <label>Taille</label>
                 <input type="number" id="div_height" name="div_height"
                        value="">
+                <button class="button-con" id="basic_height_div">Réinitialiser</button>
             </div>
 
             <div>

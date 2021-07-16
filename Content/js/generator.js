@@ -264,7 +264,6 @@ $(document).ready(function () {
 
                 "card-center", "card-center-top", "card-center-bottom",
                 "card-center-left", "card-center-right",
-
                 "card-coin-left-top", "card-coin-right-top",
                 "card-coin-right-bottom", "card-coin-left-bottom",
 
@@ -304,7 +303,7 @@ $(document).ready(function () {
                         $(getId).removeClass(mp_options[i]);
                         $("#" + id).addClass($('#padding-right-opt').find(":selected").val());
                     }
-                    if (i >= 49 && i <= 58) { //center
+                    if (i >= 49 && i <= 58 && $(getId).hasClass("card-text-editor") != true) { //center
                         $(getId).removeClass(mp_options[i]);
                         $("#" + id).addClass($('#element-place').find(":selected").val());
                     }
@@ -312,13 +311,13 @@ $(document).ready(function () {
                         $(getId).removeClass(mp_options[i]);
                         $("#" + id).addClass($('#bloc-style').find(":selected").val());
                     }
-                    console.log(("." + mp_options[i]));
+                    console.log(("mp option : ." + mp_options[i]));
                 }
             }
 
             if ($("#div_height").val() != "" && $.isNumeric($("#div_height").val()) && $("#div_height").val() >= 50) { // taille de la div
-                console.log("test");
                 $("#" + id).css("height", $("#div_height").val());
+                $("#" + id).css("overflow", "auto");
             } else if ($("#div_height").val() < 50 && $("#div_height").val() != "") {
                 alert("Nombre inferieur à 50");
             }
@@ -327,9 +326,7 @@ $(document).ready(function () {
                 $("#" + id).children().css("border-radius", $("#div_border_radius").val() + "px");
             } else {
                 $("#" + id).css("border-radius", $("#div_border_radius").val() + "px");
-                console.log("border : " + $("#div_border_radius").val());
             }
-
 
             $("#" + id).addClass($('#padding-right-opt').find(":selected").val() + ' '
                 + $('#padding-left-opt').find(":selected").val() + ' '
@@ -339,9 +336,14 @@ $(document).ready(function () {
                 + $('#margin-bottom-opt').find(":selected").val() + ' '
                 + $('#margin-right-opt').find(":selected").val() + ' '
                 + $('#margin-left-opt').find(":selected").val() + ' '
-                + $('#element-place').find(":selected").val() + ' '
                 + $('#bloc-style').find(":selected").val()
             );
+            if ($(getId).hasClass("card-text-editor") != true) {
+                $("#" + id).addClass($('#element-place').find(":selected").val());
+            } else {
+                alert("vous etes en edition de texte vous ne pouvez pas utiliser cette fonctionnalité");
+            }
+
         })
     }
 
@@ -368,12 +370,19 @@ $(document).ready(function () {
         $("#submit_textarea").click(function (event) {
             var id = ($('.label_former').attr('id'));
             id = id.substr(4);
+            console.log("je suis ici");
+            tinyMCE.triggerSave();
             if ($("#textarea_form").val() == "") {
                 alert("les deux champs doivent être remplit");
             } else {
-                $("#" + id).append('<p>' + $("#textarea_form").val() + '</p>');
+                $("#" + id).removeClass("card-center");
+                $("#" + id).addClass("card-text-editor");
+                var saveText = $("#" + id).clone();
+                $("#" + id).empty();
+                $("#" + id).append($("#textarea_form").val());
+
             }
-        })
+        });
     }
 
     // Permet de visualiser le rendu final de la page

@@ -53,7 +53,7 @@
                         <div class="card-icon">
                             <div class="card-icon">
                                 <a href="/page/update?id=<?= $rowData['id'] ?>"><i class="fas fa-edit"
-                                                                                   style="color: black;"></i> </a>
+                                                                                   style="color: black; font-size: 23px;"></i> </a>
                             </div>
                         </div>
 
