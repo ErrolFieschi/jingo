@@ -7,6 +7,7 @@ use App\Core\Helpers;
 use App\Core\Security as Secu;
 use App\Core\View;
 use App\Core\FormValidator;
+use App\Core\Installer;
 
 use App\Models\User;
 
@@ -149,8 +150,38 @@ class Security{
 
     }
 
+    public function setupAction(){
 
+        $view = new View("setup");
 
-	
+        $form = Installer::formSettingsDatabase();
+
+        $view->assign("form", $form);
+
+        if(!empty($_POST)) {
+            $errors = FormValidator::check($form, $_POST);
+            if(empty($errors)) {
+
+                $newInstaller = new Installer($_POST["host_db"], 'root', 'password');
+
+                $newInstaller->createDatabase($_POST["name_db"]);
+                $newInstaller->addNewUser($_POST["username_db"], $_POST["pwd"], $_POST["host_db"]);
+                $newInstaller->grantPermissionsToUser($_POST["username_db"]);
+
+                $newInstaller->useDb($_POST["name_db"]);
+
+                $allTablesWithAttributes = Installer::allTablesWithAttributes();
+
+                foreach($allTablesWithAttributes as $key => $value) {
+                    if (!empty($value)) {
+                        $newInstaller->populateDatabase($key, $_POST["prefix_db"], $value);
+                    }
+                }
+                
+            } else {
+                $view->assign("errors", $errors);
+            }
+        }
+    }
 
 }
