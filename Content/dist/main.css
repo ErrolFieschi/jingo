@@ -3173,4 +3173,8 @@ a.btn_style_submit {
   cursor: pointer;
 }
 
+.popup-form {
+  display: none;
+}
+
 /*# sourceMappingURL=main.css.map */

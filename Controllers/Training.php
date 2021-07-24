@@ -41,8 +41,8 @@ class Training
     {
 
         $view = new View("training", "back");
-        $training = new T();
 
+        $training = new T();
         $formTraining = $training->formTraining();
 
         //Select formation
@@ -92,7 +92,6 @@ class Training
             }
         }
         $view->assign("formTraining", $formTraining);
-
     }
 
     public function showAction()
@@ -111,10 +110,10 @@ class Training
         $view->assign("title", $trainingId['title']);
         $view->assign("form", $form);
 
-        if(!empty($_POST)){
+        if (!empty($_POST)) {
             $errors = FormValidator::check($form, $_POST);
 
-            if(empty($errors)){
+            if (empty($errors)) {
 
                 //echo '<pre>';
                 //var_dump($_POST);
@@ -130,7 +129,7 @@ class Training
 
                 header("Location: /" . $uri[0]);
 
-            }else{
+            } else {
                 $view->assign("errors", $errors);
             }
         }

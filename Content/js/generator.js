@@ -22,6 +22,7 @@ $(document).ready(function () {
             console.log(count_render);
 
             $('#page').append(html);
+            saver();
         });
 
         $("#div_choice_2").click(function () {
@@ -46,6 +47,7 @@ $(document).ready(function () {
             count_render += 3;
             $('.incrementor').attr('id', count_render);
             $('#page').append(html);
+            saver();
         });
 
 
@@ -74,6 +76,7 @@ $(document).ready(function () {
             count_render += 4;
             $('.incrementor').attr('id', count_render);
             $('#page').append(html);
+            saver();
         });
 
         $("#div_choice_4").click(function () {
@@ -97,6 +100,7 @@ $(document).ready(function () {
             count_render += 3;
             $('.incrementor').attr('id', count_render);
             $('#page').append(html);
+            saver();
         });
 
         $("#div_choice_5").click(function () {
@@ -120,6 +124,7 @@ $(document).ready(function () {
             count_render += 3;
             $('.incrementor').attr('id', count_render);
             $('#page').append(html);
+            saver();
         });
     }
 
@@ -208,143 +213,147 @@ $(document).ready(function () {
     }
 
     //permet d'ajouter un bouton avec un lien sur la page
-
     function add_button_page() {
-        $("#submit_link").click(function (event) {
-            var id = ($('.label_former').attr('id'));
-            id = id.substr(4);
-            if ($("#label_form").val() == "" && ($('#formation-link').find(":selected").val() == "" || $('#lesson-link').find(":selected").val() == "")) {
-                alert("les deux champs doivent être remplit");
-            } else if ($('#formation-link').find(":selected").val() != "" && $('#lesson-link').find(":selected").val() != "") {
-                alert("Vous ne pouvez pas choisir 2 liens");
-            } else if ($("#" + id).children().length > 0) {
-                alert("Vous devez dabord vider l'interieur du bloc");
-                return 0;
-            } else {
-                $("#" + id).append('<a class="btn_style_submit" href=\'' + $('#formation-link').find(":selected").val() + $('#lesson-link').find(":selected").val() + '\'> ' + $("#label_form").val() + '</a>');
-            }
-        })
+
+        var id = ($('.label_former').attr('id'));
+        id = id.substr(4);
+        if ($("#label_form").val() == "" && ($('#formation-link').find(":selected").val() == "" || $('#lesson-link').find(":selected").val() == "")) {
+            alert("les deux champs doivent être remplit");
+        } else if ($('#formation-link').find(":selected").val() != "" && $('#lesson-link').find(":selected").val() != "") {
+            alert("Vous ne pouvez pas choisir 2 liens");
+        } else if ($("#" + id).children().length > 0) {
+            alert("Vous devez dabord vider l'interieur du bloc");
+            return 0;
+        } else {
+            $("#" + id).append('<a class="btn_style_submit" href=\'' + $('#formation-link').find(":selected").val() + $('#lesson-link').find(":selected").val() + '\'> ' + $("#label_form").val() + '</a>');
+        }
+
+    }
+
+
+    function on_return() {
+        if (confirm('Quitter sans sauvegarder')) {
+            window.location.href = "../pages";
+        }
     }
 
     // permet de modifier le css des éléments affiché
 
     function add_style_options() {
-        $("#submit_options").click(function (event) {
-            var id = ($('.label_former').attr('id'));
-            id = id.substr(4);
-            var getId = "#" + id;
-            var i;
-            var y;
-            // faire un get value des enfants et boucler sur les valeurs des select
-            console.log();
-            var mp_options = [
-                "mt-5", "mt-10", "mt-16",
-                "mt-24", "mt-32", "mt-40",
 
-                "mb-5", "mb-10", "mb-16",
-                "mb-24", "mb-32", "mb-40",
+        var id = ($('.label_former').attr('id'));
+        id = id.substr(4);
+        var getId = "#" + id;
+        var i;
+        var y;
+        // faire un get value des enfants et boucler sur les valeurs des select
+        console.log();
+        var mp_options = [
+            "mt-5", "mt-10", "mt-16",
+            "mt-24", "mt-32", "mt-40",
 
-                "ml-5", "ml-10", "ml-16",
-                "ml-24", "ml-32", "ml-40",
+            "mb-5", "mb-10", "mb-16",
+            "mb-24", "mb-32", "mb-40",
 
-                "mr-5", "mr-10", "mr-16",
-                "mr-24", "mr-32", "mr-40",
+            "ml-5", "ml-10", "ml-16",
+            "ml-24", "ml-32", "ml-40",
 
-                "pt-5", "pt-10", "pt-16",
-                "pt-24", "pt-32", "pt-40",
+            "mr-5", "mr-10", "mr-16",
+            "mr-24", "mr-32", "mr-40",
 
-                "pb-5", "pb-10", "pb-16",
-                "pb-24", "pb-32", "pb-40",
+            "pt-5", "pt-10", "pt-16",
+            "pt-24", "pt-32", "pt-40",
 
-                "pl-5", "pl-10", "pl-16",
-                "pl-24", "pl-32", "pl-40",
+            "pb-5", "pb-10", "pb-16",
+            "pb-24", "pb-32", "pb-40",
 
-                "pr-5", "pr-10", "pr-16",
-                "pr-24", "pr-32", "pr-40",
+            "pl-5", "pl-10", "pl-16",
+            "pl-24", "pl-32", "pl-40",
 
-                "card-center", "card-center-top", "card-center-bottom",
-                "card-center-left", "card-center-right",
-                "card-coin-left-top", "card-coin-right-top",
-                "card-coin-right-bottom", "card-coin-left-bottom",
+            "pr-5", "pr-10", "pr-16",
+            "pr-24", "pr-32", "pr-40",
 
-                "card--shadow", "card--border", "card--shadow--border"
-            ];
-            for (i = 0; i < mp_options.length; i++) {
-                if ($(getId).hasClass(mp_options[i])) {
-                    if (i >= 1 && i <= 7) { //margin top
-                        $(getId).removeClass(mp_options[i]);
-                        $("#" + id).addClass($('#margin-top-opt').find(":selected").val());
-                    }
-                    if (i >= 7 && i <= 13) { //margin bottom
-                        $(getId).removeClass(mp_options[i]);
-                        $("#" + id).addClass($('#margin-bottom-opt').find(":selected").val());
-                    }
-                    if (i >= 13 && i <= 19) { //margin left
-                        $(getId).removeClass(mp_options[i]);
-                        $("#" + id).addClass($('#margin-left-opt').find(":selected").val());
-                    }
-                    if (i >= 19 && i <= 25) { //margin right
-                        $(getId).removeClass(mp_options[i]);
-                        $("#" + id).addClass($('#margin-right-opt').find(":selected").val());
-                    }
-                    if (i >= 25 && i <= 31) { //padding top
-                        $(getId).removeClass(mp_options[i]);
-                        $("#" + id).addClass($('#padding-top-opt').find(":selected").val());
-                    }
-                    if (i >= 31 && i <= 37) { //padding bottom
-                        $(getId).removeClass(mp_options[i]);
-                        $("#" + id).addClass($('#padding-bottom-opt').find(":selected").val());
-                    }
-                    if (i >= 37 && i <= 43) { //padding left
-                        $(getId).removeClass(mp_options[i]);
-                        $("#" + id).addClass($('#padding-left-opt').find(":selected").val());
-                    }
-                    if (i >= 43 && i <= 49) { //padding right
-                        $(getId).removeClass(mp_options[i]);
-                        $("#" + id).addClass($('#padding-right-opt').find(":selected").val());
-                    }
-                    if (i >= 49 && i <= 58 && $(getId).hasClass("card-text-editor") != true) { //center
-                        $(getId).removeClass(mp_options[i]);
-                        $("#" + id).addClass($('#element-place').find(":selected").val());
-                    }
-                    if (i >= 58 && i <= 61) { //bloc style
-                        $(getId).removeClass(mp_options[i]);
-                        $("#" + id).addClass($('#bloc-style').find(":selected").val());
-                    }
-                    console.log(("mp option : ." + mp_options[i]));
+            "card-center", "card-center-top", "card-center-bottom",
+            "card-center-left", "card-center-right",
+            "card-coin-left-top", "card-coin-right-top",
+            "card-coin-right-bottom", "card-coin-left-bottom",
+
+            "card--shadow", "card--border", "card--shadow--border"
+        ];
+        for (i = 0; i < mp_options.length; i++) {
+            if ($(getId).hasClass(mp_options[i])) {
+                if (i >= 1 && i <= 7) { //margin top
+                    $(getId).removeClass(mp_options[i]);
+                    $("#" + id).addClass($('#margin-top-opt').find(":selected").val());
                 }
+                if (i >= 7 && i <= 13) { //margin bottom
+                    $(getId).removeClass(mp_options[i]);
+                    $("#" + id).addClass($('#margin-bottom-opt').find(":selected").val());
+                }
+                if (i >= 13 && i <= 19) { //margin left
+                    $(getId).removeClass(mp_options[i]);
+                    $("#" + id).addClass($('#margin-left-opt').find(":selected").val());
+                }
+                if (i >= 19 && i <= 25) { //margin right
+                    $(getId).removeClass(mp_options[i]);
+                    $("#" + id).addClass($('#margin-right-opt').find(":selected").val());
+                }
+                if (i >= 25 && i <= 31) { //padding top
+                    $(getId).removeClass(mp_options[i]);
+                    $("#" + id).addClass($('#padding-top-opt').find(":selected").val());
+                }
+                if (i >= 31 && i <= 37) { //padding bottom
+                    $(getId).removeClass(mp_options[i]);
+                    $("#" + id).addClass($('#padding-bottom-opt').find(":selected").val());
+                }
+                if (i >= 37 && i <= 43) { //padding left
+                    $(getId).removeClass(mp_options[i]);
+                    $("#" + id).addClass($('#padding-left-opt').find(":selected").val());
+                }
+                if (i >= 43 && i <= 49) { //padding right
+                    $(getId).removeClass(mp_options[i]);
+                    $("#" + id).addClass($('#padding-right-opt').find(":selected").val());
+                }
+                if (i >= 49 && i <= 58 && $(getId).hasClass("card-text-editor") != true) { //center
+                    $(getId).removeClass(mp_options[i]);
+                    $("#" + id).addClass($('#element-place').find(":selected").val());
+                }
+                if (i >= 58 && i <= 61) { //bloc style
+                    $(getId).removeClass(mp_options[i]);
+                    $("#" + id).addClass($('#bloc-style').find(":selected").val());
+                }
+                console.log(("mp option : ." + mp_options[i]));
             }
+        }
 
-            if ($("#div_height").val() != "" && $.isNumeric($("#div_height").val()) && $("#div_height").val() >= 50) { // taille de la div
-                $("#" + id).css("height", $("#div_height").val());
-                $("#" + id).css("overflow", "auto");
-            } else if ($("#div_height").val() < 50 && $("#div_height").val() != "") {
-                alert("Nombre inferieur à 50");
-            }
+        if ($("#div_height").val() != "" && $.isNumeric($("#div_height").val()) && $("#div_height").val() >= 50) { // taille de la div
+            $("#" + id).css("height", $("#div_height").val());
+            $("#" + id).css("overflow", "auto");
+        } else if ($("#div_height").val() < 50 && $("#div_height").val() != "") {
+            alert("Nombre inferieur à 50");
+        }
 
-            if ($("#div_border_radius").val() != "" && $.isNumeric($("#div_border_radius").val()) && $("#" + id).children().hasClass("img_page_add")) { // taille de la div
-                $("#" + id).children().css("border-radius", $("#div_border_radius").val() + "px");
-            } else {
-                $("#" + id).css("border-radius", $("#div_border_radius").val() + "px");
-            }
+        if ($("#div_border_radius").val() != "" && $.isNumeric($("#div_border_radius").val()) && $("#" + id).children().hasClass("img_page_add")) { // taille de la div
+            $("#" + id).children().css("border-radius", $("#div_border_radius").val() + "px");
+        } else {
+            $("#" + id).css("border-radius", $("#div_border_radius").val() + "px");
+        }
 
-            $("#" + id).addClass($('#padding-right-opt').find(":selected").val() + ' '
-                + $('#padding-left-opt').find(":selected").val() + ' '
-                + $('#padding-top-opt').find(":selected").val() + ' '
-                + $('#padding-bottom-opt').find(":selected").val() + ' '
-                + $('#margin-top-opt').find(":selected").val() + ' '
-                + $('#margin-bottom-opt').find(":selected").val() + ' '
-                + $('#margin-right-opt').find(":selected").val() + ' '
-                + $('#margin-left-opt').find(":selected").val() + ' '
-                + $('#bloc-style').find(":selected").val()
-            );
-            if ($(getId).hasClass("card-text-editor") != true) {
-                $("#" + id).addClass($('#element-place').find(":selected").val());
-            } else {
-                alert("vous etes en edition de texte vous ne pouvez pas utiliser cette fonctionnalité");
-            }
-
-        })
+        $("#" + id).addClass($('#padding-right-opt').find(":selected").val() + ' '
+            + $('#padding-left-opt').find(":selected").val() + ' '
+            + $('#padding-top-opt').find(":selected").val() + ' '
+            + $('#padding-bottom-opt').find(":selected").val() + ' '
+            + $('#margin-top-opt').find(":selected").val() + ' '
+            + $('#margin-bottom-opt').find(":selected").val() + ' '
+            + $('#margin-right-opt').find(":selected").val() + ' '
+            + $('#margin-left-opt').find(":selected").val() + ' '
+            + $('#bloc-style').find(":selected").val()
+        );
+        if ($(getId).hasClass("card-text-editor") != true) {
+            $("#" + id).addClass($('#element-place').find(":selected").val());
+        } else {
+            alert("vous etes en edition de texte vous ne pouvez pas utiliser cette fonctionnalité");
+        }
     }
 
     $("#div_color").change(function () { // <-- use change event
@@ -356,33 +365,29 @@ $(document).ready(function () {
 
 
     // permet de reinitialiser le css
-
     function reset_style_options() {
 
     }
 
-    function add_img_page() {
-        //recuperer depuis le serveur en php
-    }
-
     // a remplacer par le tiny mais permet d'ajouter du texte sur la page
-    function add_text_page() {
-        $("#submit_textarea").click(function (event) {
-            var id = ($('.label_former').attr('id'));
-            id = id.substr(4);
-            console.log("je suis ici");
-            tinyMCE.triggerSave();
-            if ($("#textarea_form").val() == "") {
-                alert("les deux champs doivent être remplit");
-            } else {
-                $("#" + id).removeClass("card-center");
-                $("#" + id).addClass("card-text-editor");
-                var saveText = $("#" + id).clone();
-                $("#" + id).empty();
-                $("#" + id).append($("#textarea_form").val());
 
-            }
-        });
+    function add_text_page() {
+
+        var id = ($('.label_former').attr('id'));
+        id = id.substr(4);
+        console.log("je suis ici");
+        tinyMCE.triggerSave();
+        if ($("#textarea_form").val() == "") {
+            alert("les deux champs doivent être remplit");
+        } else {
+            $("#" + id).removeClass("card-center");
+            $("#" + id).addClass("card-text-editor");
+            var saveText = $("#" + id).clone();
+            $("#" + id).empty();
+            $("#" + id).append($("#textarea_form").val());
+
+        }
+
     }
 
     // Permet de visualiser le rendu final de la page
@@ -442,7 +447,7 @@ $(document).ready(function () {
     });
 
     // déplace la div vers le haut
-    $("#bloc_div_up").click(function () {
+    function div_to_top() {
         var id = ($('.label_former').attr('id'));
         id = id.substr(4);
         var getId = "#" + id;
@@ -455,10 +460,11 @@ $(document).ready(function () {
             $("#" + actual_div).remove();
             $("#" + parent_selected).before(div_save);
         }
-    });
+    }
 
     // déplace la div vers le bas
-    $("#bloc_div_down").click(function () {
+
+    function div_to_bottom() {
         var id = ($('.label_former').attr('id'));
         id = id.substr(4);
         var getId = "#" + id;
@@ -471,21 +477,20 @@ $(document).ready(function () {
             $("#" + actual_div).remove();
             $("#" + next_place).after(div_save);
         }
+    }
 
-    });
-
-    // Suppression de la div
-    $("#delete_div_creator").click(function () {
+    // Suppression de la div parent
+    function delete_parent_div() {
         var id = ($('.label_former').attr('id'));
         id = id.substr(4);
         var getId = "#" + id;
         // avant chaque suppression faire une insertion en base (enregistrement auto)
         var parent_selected = $(getId).parent().parent().parent().attr('id');
         $("#" + parent_selected).remove();
-    });
+    }
 
     // retirer tous les éléments de la div
-    $("#free_div_creator").click(function () {
+    function free_div() {
         var id = ($('.label_former').attr('id'));
         id = id.substr(4);
         var getId = "#" + id;
@@ -494,7 +499,7 @@ $(document).ready(function () {
         $(getId).children().remove();
         //gerer les images
         //gerer tout le css
-    });
+    }
 
 
     //appliquer le filtre de couleur
@@ -513,25 +518,50 @@ $(document).ready(function () {
 
     console.log($(this).attr('id'));
 
-
-    $("#export_json").click(function () {
-        //console.log(JSON.stringify({
-        //    data: $('#page').html()
-        //}));
-        console.log($('#page').html())
-    });
+    function saver() {
+        $('#code_save').val('');
+        $('#code_save').val($('#page').html());
+    }
 
 
     create_bloc();
     show_selected_bloc();
     show_popup_options();
-    add_button_page();
-    render_mode();
-    add_img_page();
-    add_text_page();
-    add_style_options();
-    reset_style_options();
 
+    $("#submit_link").click(function (event) {
+        add_button_page();
+        saver();
+    });
+    $("#submit_options").click(function (event) {
+        add_style_options();
+        saver();
+    });
+    $("#submit_textarea").click(function (event) {
+        add_text_page();
+        saver();
+    });
+    $("#free_div_creator").click(function () {
+        free_div();
+        saver();
+    });
+    $("#delete_div_creator").click(function () {
+        delete_parent_div();
+        saver();
+    });
+    $("#bloc_div_down").click(function () {
+        div_to_bottom();
+        saver();
+    });
+    $("#bloc_div_up").click(function () {
+        div_to_top();
+        saver();
+    });
+
+    $("#return_to_pages").click(function () {
+        on_return();
+    });
+    render_mode();
+    reset_style_options();
 
     // replacer les div, prendre l'id du parent (section) et et faire un append juste au dessus
 
@@ -554,6 +584,18 @@ $(document).ready(function () {
     // afficher la derniere lesson
     // Update le text normalement pas trop compliqué
     // carroussel
+    // grisé la fonction centrage en mode edition text
 
+
+    // PRIORITÉ AUJOURD'HUI
+
+    // FAIRE AFFICHAGE DES PAGES
+    // SUPPRESSION DES PAGES
+    // MODIFICATION DES PAGES
+    // ACCES AUX PAGES SUR LE FRONT
+    // CRÉER LA PAGE D'ACCUEIL NON SUPPRIMABLE ET MODIFIABLE DE BASE (Bouton retour usine si le gars a fait de la merde)
+
+    // enregistrer la value dans id="code_save"
+    // FAIRE LES METAS EN DYNAMIQUE AJOUTER LA TABLE BDD
     // ajouter une vidéo ça sera le feu
 });

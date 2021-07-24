@@ -58,7 +58,6 @@
                         <li style="color:red"><?= $error; ?></li>
                     <?php endforeach;
                 endif; ?>
-
             </div>
         </div>
     </section>

@@ -42,7 +42,6 @@ class Database
 						get_class_vars(get_class())
 					);
 
-
 		//INSERT OU UPDATE
 		// $id == null -> INSERT SINON UPDATE
 		if( is_null($this->getId()) ){
