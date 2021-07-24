@@ -56,7 +56,6 @@ class Database
             $query->execute($columns);
 
 		}else{
-
 			$sql = "";
 			foreach ($columns as $col => $value) {
 			    if(!empty($value))

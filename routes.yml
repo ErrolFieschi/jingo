@@ -39,6 +39,11 @@
   action: logout
   auth: true
 
+/setup:
+  controller: Security
+  action: setup
+  auth: false
+
 /home:
   controller: Main
   action: home
@@ -83,6 +88,11 @@
 /admin-user/update:
   controller: User
   action: updateUser
+  auth: false
+
+/lesson/update:
+  controller: Part
+  action: updateLesson
   auth: false
 
 /lesson/delete:
