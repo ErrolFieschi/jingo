@@ -85,6 +85,11 @@
   action: updateUser
   auth: false
 
+/lesson/update:
+  controller: Part
+  action: updateLesson
+  auth: false
+
 /lesson/delete:
   controller: Lessons
   action: deleteLesson
