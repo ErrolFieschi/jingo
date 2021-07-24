@@ -39,6 +39,11 @@
   action: logout
   auth: true
 
+/setup:
+  controller: Security
+  action: setup
+  auth: false
+
 /home:
   controller: Main
   action: home
