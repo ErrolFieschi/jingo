@@ -59,8 +59,8 @@ class Installer {
 
       $this->pdo->exec("CREATE TABLE ".$prefix_db.$new_table." (".$sql.") ;");
   }
-    public function setupAction()
-    {
+  public function setupAction()
+  {
         $view = new View('installer/setup');
         $form = $this->formSettingsSite();
         $view->assign('form', $form);
@@ -68,48 +68,93 @@ class Installer {
         if (!empty($_POST)) {
             $errors = FormValidator::check($form, $_POST);
             if (empty($errors)) {
-
-
+                $_SESSION['isStepOneOk'] = true ;
+                header('Location: /install/2');
             } else $view->assign('errors', $errors);
         }
-    }
-    public function setupMailing(){
+  }
 
-    }
-    public function setupDataBaseAction(){
+  public function setupMailingAction(){
+      if(isset($_SESSION['isStepOneOk']) && $_SESSION['isStepOneOk'] == true) {
+          $view = new View('installer/setupMailing');
+          $form = $this->formSettingMailing();
+          $view->assign('form', $form);
 
-        $view = new View("installer/setupDB");
+          if (!empty($_POST)) {
+              $errors = FormValidator::check($form, $_POST);
+              if (empty($errors)) {
 
-        $form = $this->formSettingsDatabase();
 
-        $view->assign("form", $form);
+              } else $view->assign('errors', $errors);
+          }
+      } else Router::redicrection404() ;
 
-        if(!empty($_POST)) {
-            $errors = FormValidator::check($form, $_POST);
-            if(empty($errors)) {
+  }
 
-                $newInstaller = new Installer($_POST["host_db"],$_POST['name_db'] ,$_POST['username_db'], $_POST['pwd']);
+  public function setupDataBaseAction(){
+      if(isset($_SESSION['isStepOneOk']) && $_SESSION['isStepOneOk'] == true
+          && isset($_SESSION['isStepTwoOk']) && $_SESSION['isStepTwoOk'])
+      {
+            $view = new View("installer/setupDB");
 
-                $newInstaller->createDatabase($newInstaller->db_name);
-                $newInstaller->addNewUser($newInstaller->db_user_root, $newInstaller->db_user_pwd, $newInstaller->db_host);
-                $newInstaller->grantPermissionsToUser($newInstaller->db_host);
+            $form = $this->formSettingsDatabase();
 
-                $newInstaller->useDb($newInstaller->db_name);
+            $view->assign("form", $form);
 
-                $allTablesWithAttributes = $this->allTablesWithAttributes();
+            if (!empty($_POST)) {
+                $errors = FormValidator::check($form, $_POST);
+                if (empty($errors)) {
 
-                foreach($allTablesWithAttributes as $key => $value) {
-                    if (!empty($value)) {
-                        $newInstaller->populateDatabase($key, $_POST["prefix_db"], $value);
+                    $newInstaller = new Installer($_POST["host_db"], $_POST['name_db'], $_POST['username_db'], $_POST['pwd']);
+
+                    $newInstaller->createDatabase($newInstaller->db_name);
+                    $newInstaller->addNewUser($newInstaller->db_user_root, $newInstaller->db_user_pwd, $newInstaller->db_host);
+                    $newInstaller->grantPermissionsToUser($newInstaller->db_host);
+
+                    $newInstaller->useDb($newInstaller->db_name);
+
+                    $allTablesWithAttributes = $this->allTablesWithAttributes();
+
+                    foreach ($allTablesWithAttributes as $key => $value) {
+                        if (!empty($value)) {
+                            $newInstaller->populateDatabase($key, $_POST["prefix_db"], $value);
+                        }
                     }
+                } else {
+                    $view->assign("errors", $errors);
                 }
-            } else {
-                $view->assign("errors", $errors);
             }
-        }
-    }
+      } else Router::redicrection404();
+  }
 
-
+  private function formSettingMailing() {
+      return [
+          'config' => [
+            'method'=>'POST',
+            'action'=>'',
+            'id'=>'setup_mailing',
+            'class'=>'form_builder mb-5',
+            'submit'=>'Passer à l\'étape suivante'
+          ],
+          'inputs'=>[
+              'email'=>[
+                  'type'=>'email',
+                  'label'=>'Adresse email pour l\'envoie automatique',
+                  'class'=>'form_input',
+                  'id'=>'email_config',
+                  'error'=>'Email non valide',
+                  'required'=>true
+              ],
+              'pwd'=>[
+                  'type'=>'password',
+                  'label'=>'Mot de passe de l\'adresse email',
+                  'id'=>'pwd_mailing',
+                  'class'=>'form_input',
+                  'required'=>true
+              ]
+          ]
+      ];
+  }
   private  function formSettingsDatabase() {
         return [
             "config" => [

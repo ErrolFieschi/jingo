@@ -35,7 +35,7 @@ class Router
                         $this->setAuth(false);
                     } else if($uris[1]==2) {
                         $this->setController('Core\Installer');
-                        $this->setAction('setupConfig');
+                        $this->setAction('setupMailing');
                         $this->setAuth(false);
                     } else if($uris[1]==3) {
                         $this->setController('Core\Installer');
@@ -87,6 +87,9 @@ class Router
         header("HTTP/1.0 404 Not Found");
 	    new View('404') ;
         die();
+    }
+    public static function redicrection404() {
+        (new Router(''))->redirect404();
     }
 
 	public function setController($controller){
