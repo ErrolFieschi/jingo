@@ -28,43 +28,52 @@ class Router
 			}else{
 
                 $uris = Helpers::getUrlAsArray() ;
-                $tmp = count($uris) ;
-                $this->setAuth(Middleware::isAuthNeeded());
-                $this->setAction(Middleware::getAction());
+                if($uris[0]== 'install') {
+                    if($uris[1]==1) {
+                        $this->setController('Core\Installer');
+                        $this->setAction('setup');
+                        $this->setAuth(false);
+                    } else if($uris[1]==2) {
+                        $this->setController('Core\Installer');
+                        $this->setAction('setupConfig');
+                        $this->setAuth(false);
+                    } else if($uris[1]==3) {
+                        $this->setController('Core\Installer');
+                        $this->setAction('setupDatabase');
+                        $this->setAuth(false);
+                    }
+                } else {
+                    $tmp = count($uris) ;
+                    $this->setAuth(Middleware::isAuthNeeded());
+                    $this->setAction(Middleware::getAction());
 
-                if($tmp == 1) {
-                    // GET FORMATION CONTROLLER AND SHOW ACTION
-                    if(Middleware::isFormationExist($uris[$tmp-1])) {
-                        if (! $this->getAuth() ) {
-                            $this->setController(Middleware::getControllerFormation());
-                        }
-                    } else $this->redirect404();
+                    if($tmp == 1) {
+                        // GET FORMATION CONTROLLER AND SHOW ACTION
+                        if(Middleware::isFormationExist($uris[$tmp-1])) {
+                            if (! $this->getAuth() ) {
+                                $this->setController(Middleware::getControllerFormation());
+                            }
+                        } else $this->redirect404();
 
-                } else if ($tmp == 2 ) {
-                    // GET PART CONTROLLER AND SHOW ACTION
-                    if(Middleware::isPartExist($uris[$tmp-1],$uris[$tmp-2])) {
-                        if (!$this->getAuth()) {
-                            $this->setController(Middleware::getControllerPart());
-                        }
-                    } else  $this->redirect404();
+                    } else if ($tmp == 2 ) {
+                        // GET PART CONTROLLER AND SHOW ACTION
+                        if(Middleware::isPartExist($uris[$tmp-1],$uris[$tmp-2])) {
+                            if (!$this->getAuth()) {
+                                $this->setController(Middleware::getControllerPart());
+                            }
+                        } else  $this->redirect404();
 
-                } else if ($tmp == 3) {
-                    // GET LESSON CONTROLLER AND SHOW ACTION
-                    if(Middleware::isLessonExist($uris[$tmp-1],$uris[$tmp-2],$uris[$tmp-3])) {
-                        if (!$this->getAuth()) {
-                            $this->setController(Middleware::getControllerLesson());
-                        }
-                    } else $this->redirect404();
+                    } else if ($tmp == 3) {
+                        // GET LESSON CONTROLLER AND SHOW ACTION
+                        if(Middleware::isLessonExist($uris[$tmp-1],$uris[$tmp-2],$uris[$tmp-3])) {
+                            if (!$this->getAuth()) {
+                                $this->setController(Middleware::getControllerLesson());
+                            }
+                        } else $this->redirect404();
+                    }
                 }
-
-                //die("Chemin inexistant : 404");
-				//remplacer par un header location
 			}
-
 		}else{
-
-
-
 			die("Le fichier routes.yml ne fonctionne pas !");
 		}
 	}
@@ -75,7 +84,9 @@ class Router
 	}
 
 	public function redirect404() {
-        die("Chemin inexistant : 404");
+        header("HTTP/1.0 404 Not Found");
+	    new View('404') ;
+        die();
     }
 
 	public function setController($controller){
