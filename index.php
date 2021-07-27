@@ -55,7 +55,7 @@ if(file_exists('Core/data.sql') && $_SERVER['REQUEST_URI'] != '/installer-delete
                         $controllerObjet->$action();
                     } else {
                         header('Location: /login');
-//                    header("location : /"); // RIEN A FOUTRE
+//                    header("location : /");
                     }
                 } else {
                     $controllerObjet->$action();

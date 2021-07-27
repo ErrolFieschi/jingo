@@ -1,3 +1,23 @@
+/* position */
+.fixed {
+    position: fixed;
+}
+
+.push{
+    margin-left: auto;
+}
+
+.w-60{
+    width: 60%;
+}
+
+.w-20 {
+    width: 20%;
+}
+
+.pb--b-40 {
+    padding-bottom: 40px;
+}
 
 /* Border */
 
@@ -104,4 +124,9 @@
     text-align: center;
     text-align: -moz-center;
     text-align: -webkit-center;
+}
+.position-sticky{
+    position: -webkit-sticky;
+    position: sticky;
+    right: 20;
 }

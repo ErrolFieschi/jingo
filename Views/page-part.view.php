@@ -17,7 +17,7 @@
                                         <h4 class="card-title"><?= $rowData['title'] ?></h4>
                                     </div>
 
-                                    <div class="card-button-validate">
+                                    <div class="flex push card-button-validate">
                                         <div class="card-icon">
                                             <i class="fas fa-arrow-circle-right" style="color: #3b3b3b;"></i>
                                         </div>
