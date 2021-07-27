@@ -129,11 +129,11 @@ class FormBuilder
         $html = "<label>" . ($configInput["label"] ?? "text") . "</label>";
         $html .= "<select name='" . $name . "' id='" . ($configInput["id"] ?? "") . "'
 		                 id='" . ($configInput["id"] ?? "") . "'
-						 class='" . ($configInput["class"] ?? "") .
-            (!empty($configInput["required"]) ? "required='required'" : "") . "'>";
+						 class='" . ($configInput["class"] ?? "") . "'".
+            (!empty($configInput["required"]) ? "required" : "") . ">";
 
         foreach ($configInput["options"] as $key => $value) {
-            $html .= "<option value='" . $key . "'>" . $value . "</option>";
+            $html .= "<option ". ($configInput["value"] == $key ? "selected='selected' " : "") ." value='" . $key . "'>" . $value . "</option>";
         }
         $html .= "</select>";
 

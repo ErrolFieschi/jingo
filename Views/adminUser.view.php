@@ -12,7 +12,28 @@
     </section>
 
     <section>
-        <table id="tab" class="display" style="width:100%">
+        <div class="row mb-12 ">
+            <?php if (isset($_GET['id'])) { ?>
+                <div class="row col-sm-7 popup-form">
+                    <?php App\Core\FormBuilder::render($formUser, "popup_form_builder flex flex-col col-md-6"); ?>
+                    <a href="/admin-user">
+                        <i class="far fa-times-circle unshow"></i>
+                    </a>
+                    <?php
+                    if (isset($errors)):
+                        foreach ($errors as $error):?>
+                            <li style="color:red"><?= $error; ?></li>
+                        <?php endforeach;
+                    endif; ?>
+                </div>
+                <script>
+                    $(".popup-form").show();
+                </script>
+            <?php } ?>
+        </div>
+    </section>
+    <section style="overflow: auto;">
+        <table class="tab" class="display testerExemple" style="width:100%;">
             <thead>
             <tr>
                 <th>#</th>
@@ -23,70 +44,36 @@
                 <!--th scope="col">Mot de passe</th-->
                 <th>Pays</th>
                 <th>Role</th>
-                <th>Status</th>
+                <!-- <th>Status</th> -->
                 <th>Supprimer</th>
                 <th>Date de création</th>
                 <th>Date de mise à jour</th>
                 <th>Edit</th>
                 <th>Supprimer</th>
-                <!--th>
-                    <div class="card-icon"><img src="/Content/svg/edit.svg"
-                                                alt="edit img" style="cursor: pointer"></div>
-                </th>
-                <th>
-                    <div class="card-icon"><img src="/Content/svg/trash.svg"
-                                                alt="Trash button" style="cursor: pointer"></div>
-                </th-->
             </tr>
             </thead>
             <tbody>
             <?php
             foreach ($data as $rowData): ?>
 
-                <?php if ($rowData['isDeleted'] == 1):
-                    ?>
-                    <tr style="background-color: red;">
-
-                        <th scope="row"><?= $rowData['id'] ?></th>
-                        <td><?= $rowData['firstname'] ?></td>
-                        <td><?= $rowData['lastname'] ?></td>
-                        <td><?= $rowData['email'] ?></td>
-                        <td><?= $rowData['birthday'] ?></td>
-                        <!--td><?php //echo $rowData['pwd'] ?></td-->
-                        <td><?= $rowData['country'] ?></td>
-                        <td><?= $rowData['role'] ?></td>
-                        <td><?= $rowData['status'] ?></td>
-                        <td><?= $rowData['isDeleted'] ?></td>
-                        <td><?= $rowData['createdAt'] ?></td>
-                        <td><?= $rowData['updatedAt'] ?></td>
+                <tr>
+                    <th scope="row"><?= $rowData['id'] ?></th>
+                    <td><?= $rowData['firstname'] ?></td>
+                    <td><?= $rowData['lastname'] ?></td>
+                    <td><?= $rowData['email'] ?></td>
+                    <td><?= $rowData['birthday'] ?></td>
+                    <td><?= $rowData['country'] ?></td>
+                    <td><?= $rolesUser[$rowData['role']] ?></td>
+                    <td><?= $rowData['isDeleted'] == 1 ? 'Oui' : 'Non' ?></td>
+                    <td><?= $rowData['createdAt'] ?></td>
+                    <td><?= $rowData['updatedAt'] ?></td>
+                    <?php if ($rowData['role'] !== 1 || $rowData['id'] == $_SESSION['id']) { ?>
                         <td>
-                            <div class="card-icon"><a href=""><img src="/Content/svg/edit.svg"
-                                                                   alt="edit img" style="cursor: pointer"></a></div>
-                        </td>
-                        <td>
-                            <div class="card-icon"><a href=""> <img src="/Content/svg/trash.svg"
-                                                                    alt="Trash button" style="cursor: pointer"></a>
+                            <div class="card-icon show">
+                                <a href="/admin-user?id=<?= $rowData['id'] ?>">
+                                    <img src="/Content/svg/edit.svg" alt="edit img" style="cursor: pointer">
+                                </a>
                             </div>
-                        </td>
-                    </tr>
-                <?php  else: ?>
-                    <tr>
-                        <th scope="row"><?= $rowData['id'] ?></th>
-                        <td><?= $rowData['firstname'] ?></td>
-                        <td><?= $rowData['lastname'] ?></td>
-                        <td><?= $rowData['email'] ?></td>
-                        <td><?= $rowData['birthday'] ?></td>
-                        <!--td><?php //echo $rowData['pwd'] ?></td-->
-                        <td><?= $rowData['country'] ?></td>
-                        <td><?= $rowData['role'] ?></td>
-                        <td><?= $rowData['status'] ?></td>
-                        <td><?= $rowData['isDeleted'] ?></td>
-                        <td><?= $rowData['createdAt'] ?></td>
-                        <td><?= $rowData['updatedAt'] ?></td>
-                        <td>
-<!--                            <a href="/admin-user?id=--><?//= $rowData['id'] ?><!--">-->
-                            <div class="card-icon show"><img src="/Content/svg/edit.svg"
-                                                                   alt="edit img" style="cursor: pointer"></a></div>
                         </td>
                         <td>
                             <div class="card-icon"><a href="/admin-user/delete?id=<?= $rowData['id'] ?>"> <img
@@ -94,8 +81,12 @@
                                             alt="Trash button" style="cursor: pointer"></a>
                             </div>
                         </td>
-                    </tr>
-                <?php endif; ?>
+                    <?php } else { ?>
+                        <td></td>
+                        <td></td>
+                    <?php } ?>
+                </tr>
+
             <?php endforeach; ?>
             </tbody>
         </table>
@@ -117,4 +108,3 @@
         </div>
     </section>
 </div>
-

@@ -23,6 +23,9 @@ class Database
 		}
 	}
 
+    /**
+     * @return Database|null
+     */
     public static function getInstance() {
 	    if(is_null(self::$_instance)) {
             self::$_instance = new Database() ;
@@ -30,12 +33,18 @@ class Database
 	    return self::$_instance ;
     }
 
+    /**
+     * @param $table
+     */
     public function setTable($table) {
 
         self::$_instance->table = $table ;
     }
 
-	public function save(){
+    /**
+     *
+     */
+    public function save(){
 
 		$columns = array_diff_key (
 						get_object_vars($this),
@@ -58,7 +67,7 @@ class Database
 		}else{
 			$sql = "";
 			foreach ($columns as $col => $value) {
-			    if(!empty($value))
+			    if(isset($value))
 			        $sql.= $col ." = '". $value . "' , " ;
             }
 
@@ -68,6 +77,11 @@ class Database
 
 	}
 
+    /**
+     * @param String $BDDTableName
+     * @param String $where
+     * @param $value
+     */
     public static function deleteFromId(String $BDDTableName, String $where, $value)
     {
         $query = self::getInstance()->pdo->prepare("DELETE FROM " . DBPREFIXE . $BDDTableName . " WHERE " . $where . " = :value ;");
@@ -76,6 +90,13 @@ class Database
         ]);
     }
 
+    /**
+     * @param String $BDDTableName
+     * @param String $col
+     * @param $value
+     * @param $where
+     * @param $valueWhere
+     */
     public static function updateOneRow(String $BDDTableName, String $col, $value, $where, $valueWhere)
     {
 
@@ -88,6 +109,9 @@ class Database
 
     }
 
+    /**
+     * @return mixed
+     */
     public function getAllRow() {
 
         $query = $this->bdd->pdo->prepare("SELECT * FROM ".$this->bdd->table." ;");
@@ -98,6 +122,10 @@ class Database
 
     }
 
+    /**
+     * @param $id
+     * @return mixed
+     */
     public function getRowWithId($id) {
 
         $query = $this->bdd->pdo->prepare("SELECT * FROM ".$this->bdd->table." WHERE part_id = :id ;");
@@ -110,6 +138,11 @@ class Database
 
     }
 
+    /**
+     * @param string $sql
+     * @param array $params
+     * @return array|null
+     */
     public function globalFind(string $sql, array $params = []): ?array
     {
         $statement = $this->internalExec($sql, $params);
@@ -120,6 +153,11 @@ class Database
     }
 
 
+    /**
+     * @param string $sql
+     * @param array $params
+     * @return null
+     */
     private function internalExec(string $sql, array $params)
     {
         $statement = $this->bdd->pdo->prepare($sql);
@@ -138,6 +176,11 @@ class Database
     }
 
 
+    /**
+     * @param $col
+     * @param $id
+     * @return mixed
+     */
     public function getOneRowWithId($col, $id)
     {
 
@@ -152,6 +195,13 @@ class Database
 
     }
 
+    /**
+     * @param $table
+     * @param $select
+     * @param $whereCondition
+     * @param $whereValue
+     * @return mixed
+     */
     public function searchOneColWithOneRow($table, $select, $whereCondition, $whereValue) {
         $query = self::getInstance()->pdo->prepare("SELECT " . $select . " FROM ".DBPREFIXE.$table." WHERE ".$whereCondition. " = :find ;");
 
@@ -161,7 +211,30 @@ class Database
 
         return $query->fetch();
     }
+    
+    public function countRowWithoutCondition($table){
+        $query = $this->bdd->pdo->prepare("SELECT COUNT(*) FROM ".DBPREFIXE.$table." ;");
 
+        $query->execute();
+
+        return $query->fetch();
+    }
+
+    public function innerJoinGroupBy($table, $joinTable, $joinId, $joinName){
+        $query = $this->bdd->pdo->prepare("SELECT ".DBPREFIXE.$joinTable.".".$joinName.", COUNT(".$joinId.") FROM ".DBPREFIXE.$table." INNER JOIN ".DBPREFIXE.$joinTable." ON ".$joinId." = ".DBPREFIXE.$joinTable.".id GROUP BY ".DBPREFIXE.$joinTable.".".$joinName." ;");
+
+        $query->execute();
+
+        return $query->fetchAll();
+    }
+
+    /**
+     * @param $table
+     * @param $search
+     * @param $whereCondition
+     * @param $whereValue
+     * @return mixed
+     */
     public function countRow($table, $search, $whereCondition, $whereValue){
         $query = $this->bdd->pdo->prepare("SELECT " . $search . " FROM ".DBPREFIXE.$table." WHERE ".$whereCondition. " = :find LIMIT 1;");
 
@@ -172,6 +245,15 @@ class Database
         return $query->rowCount();
     }
 
+    /**
+     * @param String $BDDTableName
+     * @param String $customSelect
+     * @param String|null $tableRowInWhereCondition
+     * @param String|null $tableRowValue
+     * @param bool $limit
+     * @param String $orderBy
+     * @return array|mixed
+     */
     public static function customSelectFromATable(String $BDDTableName, String $customSelect , String $tableRowInWhereCondition =null, String $tableRowValue=null, Bool $limit = false, String $orderBy = 'id') {
 
 	    $sql = "SELECT " . $customSelect .

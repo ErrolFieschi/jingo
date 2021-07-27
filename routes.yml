@@ -17,7 +17,8 @@
 /stats:
   controller: Main
   action: stats
-  auth: false
+  auth: true
+  role: admin
 
 /settings:
   controller: Main
@@ -60,6 +61,11 @@
   action: trainingOptions
   auth: false
 
+/training/update:
+  controller: Training
+  action: trainingUpdate
+  auth: false
+
 /training/delete:
   controller: Training
   action: trainingDelete
@@ -90,9 +96,9 @@
   action: user
   auth: false
 
-/admin-user/update:
+/admin-user/delete:
   controller: User
-  action: updateUser
+  action: deleteUser
   auth: false
 
 /lesson/update:
@@ -140,7 +146,7 @@
   action: navEdit
   auth: false
 
-/page/courses:
+/courses:
   controller: Training
   action: list
   auth: false
@@ -150,7 +156,7 @@
   action: display
   auth: false
 
-/unistallInstaller:
+/installer-delete:
   controller: Security
-  action: unistallInstaller
+  action: uninstallInstaller
   auth: false

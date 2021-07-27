@@ -48,7 +48,7 @@ if($controller == 'Core\\Installer') {
                     if (Security::isConnected()) {
                         $controllerObjet->$action();
                     } else {
-                        echo "RIEN A FOUTRE";
+                        header('Location: /login');
 //                    header("location : /"); // RIEN A FOUTRE
                     }
                 } else {

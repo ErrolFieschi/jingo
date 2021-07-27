@@ -1,9 +1,8 @@
 <div class="container">
     <section class="flex flex-end flex-row h-100 ">
-        <div class="flex card--shadow w-70 container-front content-container">
+        <div class="flex flex-col card--shadow w-70 container-front content-container">
             <?= $displayCode ?>
         </div>
-
 
         <div class="w-10 bck-c-grey-2 b-r-10">
             <h4 class="color-white tc"> <?= $title ?> </h4>

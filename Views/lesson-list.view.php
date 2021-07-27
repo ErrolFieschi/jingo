@@ -41,8 +41,19 @@
             <div class="mb-4">
                 <a class="btn" href="/<?= $back; ?>"><i class="fas fa-angle-double-left"></i> Retour aux chapitres</a>
             </div>
-            <div class="mb-4" style="margin-left: 10px;">
-                <span class="btn no-click"><i class="fas fa-street-view" style="font-size: 15px; padding-right: 10px;"></i> <?= mb_strtoupper($title); ?></span>
+            <div class="mb-4 ml-2">
+                <span class="btn btn--disable"><i class="fas fa-street-view" style="font-size: 15px; padding-right: 10px;"></i> <?= mb_strtoupper($title); ?></span>
+            </div>
+            <div class="mb-4 ml-2">
+                <div class="container h-100">
+                    <div class="d-flex justify-content-center h-100">
+                        <div class="searchbar">
+                            <input class="search_input" type="text" name="" placeholder="Rechercher une leçon">
+
+                            <a href="#" class="search_icon"><i class="fas fa-search"></i></a>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
 

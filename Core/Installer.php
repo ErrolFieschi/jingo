@@ -8,102 +8,107 @@ use PDO;
 
 class Installer {
 
-  private $pdo;
-  private $db_host;
-  private $db_name;
-  private $db_user_root;
-  private $db_user_pwd;
+    private $pdo;
+    private $db_host;
+    private $db_name;
+    private $db_user_root;
+    private $db_user_pwd;
 
-  public function __construct(String $host = null, String $db_name = null,String $root = null, String $root_password= null) {
-      if($host != null) {
-          $this->db_host = $host ;
-          $this->db_name = $db_name ;
-          $this->db_user_root = $root ;
-          $this->db_user_pwd = $root_password ;
-          try {
-              $this->pdo = new \PDO("mysql:host=".$host.";port=3306", $root, $root_password);
-          } catch (\Exception $e) {
-              die("Erreur SQL " . $e->getMessage());
-          }
-      }
-  }
+    public function __construct(String $host = null, String $db_name = null,String $root = null, String $root_password= null) {
+        if($host != null) {
+            $this->db_host = $host ;
+            $this->db_name = $db_name ;
+            $this->db_user_root = $root ;
+            $this->db_user_pwd = $root_password ;
+            try {
+                $this->pdo = new \PDO("mysql:host=".$host.";port=3306", $root, $root_password);
+            } catch (\Exception $e) {
+                die("Erreur SQL " . $e->getMessage());
+            }
+        }
+    }
 
-  private function createDatabase(String $BDDName) {
-      $this->pdo->exec("CREATE DATABASE IF NOT EXISTS ".$BDDName." ;");
-  }
+    private function createDatabase(String $BDDName) {
+        $this->pdo->exec("CREATE DATABASE IF NOT EXISTS ".$BDDName." ;");
+    }
 
-  private function addNewUser(String $username, String $password, String $host) {
-      $this->pdo->exec("CREATE USER '".$username."'@'".$host."' IDENTIFIED BY '".$password."';");
-  }
-  
-  private function grantPermissionsToUser(String $username) {
-      $this->pdo->exec("GRANT ALL PRIVILEGES ON * . * TO '".$username."'@'".$this->db_host."';");
-  }
+    private function addNewUser(String $username, String $password, String $host) {
+        $this->pdo->exec("CREATE USER '".$username."'@'".$host."' IDENTIFIED BY '".$password."';");
+    }
 
-  private function useDb(String $BDDName) {
-      $this->pdo->exec("USE ".$BDDName.";");
-  }
+    private function grantPermissionsToUser(String $username) {
+        $this->pdo->exec("GRANT ALL PRIVILEGES ON * . * TO '".$username."'@'".$this->db_host."';");
+    }
 
-  public function setupDatabaseAction()
-  {
-      if(isset($_SESSION['isStepOneOk']) && $_SESSION['isStepOneOk'] == true
-          && isset($_SESSION['isStepTwoOk']) && $_SESSION['isStepTwoOk'])
-      {
-          $view = new View('installer/setup');
-          $form = $this->formSettingsSite();
-          $view->assign('form', $form);
+    private function useDb(String $BDDName) {
+        $this->pdo->exec("USE ".$BDDName.";");
+    }
 
-          if (!empty($_POST)) {
-              $errors = FormValidator::check($form, $_POST);
-              if (empty($errors)) {
+    public function setupDatabaseAction()
+    {
+        if(isset($_SESSION['isStepOneOk']) && $_SESSION['isStepOneOk'] == true
+            && isset($_SESSION['isStepTwoOk']) && $_SESSION['isStepTwoOk'])
+        {
+            $view = new View('installer/setup');
+            $form = $this->formSettingsSite();
+            $view->assign('form', $form);
 
-                  file_put_contents('.env','TITLE='.$_POST['TITLE'],FILE_APPEND);
-                  $user = new User();
-                  $user->setFirstname(htmlspecialchars($_POST["firstname"]));
-                  $user->setLastname(htmlspecialchars($_POST["lastname"]));
-                  $user->setEmail(htmlspecialchars($_POST["email"]));
-                  $user->setPwd($_POST["pwd"]);
-                  $user->setBirthday($_POST["birthday"]);
-                  $user->setCountry($_POST["country"]??$user->getCountry()??'FR');
-                  $user->setRole(1);
-                  $user->save();
+            if (!empty($_POST)) {
+                $errors = FormValidator::check($form, $_POST);
+                if (empty($errors)) {
 
-                  $page = new Page() ;
-                  $page->setName('Accueil');
-                  $page->setUrl(Helpers::stringify($page->getName()));
-                  $page->setActive(1);
-                  $page->setTitle('Bienvenue sur l\'accueil');
-                  $page->setCreateBy(1);
-                  $page->setMeta('Formation en ligne, formation, jingo');
-                  $page->save();
+                    file_put_contents('.env','TITLE='.$_POST['TITLE'],FILE_APPEND);
+                    $user = new User();
+                    $user->setFirstname(htmlspecialchars($_POST["firstname"]));
+                    $user->setLastname(htmlspecialchars($_POST["lastname"]));
+                    $user->setEmail(htmlspecialchars($_POST["email"]));
+                    $user->setPwd($_POST["pwd"]);
+                    $user->setBirthday($_POST["birthday"]);
+                    $user->setCountry($_POST["country"]??$user->getCountry()??'FR');
+                    $user->setRole(1);
+                    $user->save();
 
-                  header('Location: /unistallInstaller');
-              } else $view->assign('errors', $errors);
-          }
-      } else Router::redicrection404();
-  }
+                    $page = new Page() ;
+                    $page->setName('Accueil');
+                    $page->setUrl(Helpers::stringify($page->getName()));
+                    $page->setActive(1);
+                    $page->setTitle('Bienvenue sur l\'accueil');
+                    $page->setCreateBy(1);
+                    $page->setMeta('Formation en ligne, formation, jingo');
+                    $page->setVisible(1);
+                    $page->save();
 
-  public function setupMailingAction(){
-      if(isset($_SESSION['isStepOneOk']) && $_SESSION['isStepOneOk'] == true) {
-          $view = new View('installer/setupMailing');
-          $form = $this->formSettingMailing();
-          $view->assign('form', $form);
+                    system('cmd /c composer install') ;
+                    system('cmd /c npm run');
+                    system('cmd /c sass Content/scss/main.scss:Content/dist/main.css') ;
 
-          if (!empty($_POST)) {
-              $errors = FormValidator::check($form, $_POST);
-              if (empty($errors)) {
+                    header('Location: /installer-delete');
+                } else $view->assign('errors', $errors);
+            }
+        } else Router::redicrection404();
+    }
 
-                  $this->writeEnv($_POST);
+    public function setupMailingAction(){
+        if(isset($_SESSION['isStepOneOk']) && $_SESSION['isStepOneOk'] == true) {
+            $view = new View('installer/setupMailing');
+            $form = $this->formSettingMailing();
+            $view->assign('form', $form);
 
-                  $_SESSION['isStepTwoOk'] = true;
-                  header('Location: /install/3');
-              } else $view->assign('errors', $errors);
-          }
-      } else Router::redicrection404() ;
+            if (!empty($_POST)) {
+                $errors = FormValidator::check($form, $_POST);
+                if (empty($errors)) {
 
-  }
+                    $this->writeEnv($_POST);
 
-  public function setupAction(){
+                    $_SESSION['isStepTwoOk'] = true;
+                    header('Location: /install/3');
+                } else $view->assign('errors', $errors);
+            }
+        } else Router::redicrection404() ;
+
+    }
+
+    public function setupAction(){
         $view = new View("installer/setupDB");
         $form = $this->formSettingsDatabase();
         $view->assign("form", $form);
@@ -139,44 +144,44 @@ class Installer {
                 $view->assign("errors", $errors);
             }
         }
-  }
+    }
 
 
-  private function writeEnv(Array $post) {
-          foreach ($post as $key => $value) {
-              file_put_contents('.env',$key.'='.$value.PHP_EOL,FILE_APPEND) ;
-          }
-  }
+    private function writeEnv(Array $post) {
+        foreach ($post as $key => $value) {
+            file_put_contents('.env',$key.'='.$value.PHP_EOL,FILE_APPEND) ;
+        }
+    }
 
-  private function formSettingMailing() {
-      return [
-          'config' => [
-            'method'=>'POST',
-            'action'=>'',
-            'id'=>'setup_mailing',
-            'class'=>'form_builder mb-5',
-            'submit'=>'Passer à l\'étape suivante'
-          ],
-          'inputs'=>[
-              'MAIL'=>[
-                  'type'=>'email',
-                  'label'=>'Adresse email pour l\'envoie automatique',
-                  'class'=>'form_input',
-                  'id'=>'email_config',
-                  'error'=>'Email non valide',
-                  'required'=>true
-              ],
-              'MAILPWD'=>[
-                  'type'=>'password',
-                  'label'=>'Mot de passe de l\'adresse email',
-                  'id'=>'pwd_mailing',
-                  'class'=>'form_input',
-                  'required'=>true
-              ]
-          ]
-      ];
-  }
-  private  function formSettingsDatabase() {
+    private function formSettingMailing() {
+        return [
+            'config' => [
+                'method'=>'POST',
+                'action'=>'',
+                'id'=>'setup_mailing',
+                'class'=>'form_builder mb-5',
+                'submit'=>'Passer à l\'étape suivante'
+            ],
+            'inputs'=>[
+                'MAIL'=>[
+                    'type'=>'email',
+                    'label'=>'Adresse email pour l\'envoie automatique',
+                    'class'=>'form_input',
+                    'id'=>'email_config',
+                    'error'=>'Email non valide',
+                    'required'=>true
+                ],
+                'MAILPWD'=>[
+                    'type'=>'password',
+                    'label'=>'Mot de passe de l\'adresse email',
+                    'id'=>'pwd_mailing',
+                    'class'=>'form_input',
+                    'required'=>true
+                ]
+            ]
+        ];
+    }
+    private  function formSettingsDatabase() {
         return [
             "config" => [
                 "method" => "POST",
@@ -246,29 +251,29 @@ class Installer {
             ]
 
         ];
-  }
+    }
 
-  private  function formSettingsSite() {
-      return [
-          "config" => [
-            "method" => "POST",
-            "action" => "",
-            "id" => "setup_database",
-            "class" => "form_builder mb-5",
-            "submit" => "Finir"
-         ],
-         "inputs" => [
-            "TITLE"=>[
-              'type'=>'text',
-              'label'=>'Titre du site',
-              'minLength'=>2,
-              'id'=>'titre',
-              'class'=>'form_input',
-              'placeholder'=>'Titre du site',
-              'error'=>'Votre titre doit faire minimum 2 caractères',
-              'required'=>true
+    private  function formSettingsSite() {
+        return [
+            "config" => [
+                "method" => "POST",
+                "action" => "",
+                "id" => "setup_database",
+                "class" => "form_builder mb-5",
+                "submit" => "Finir"
             ],
-             "firstname" => [
+            "inputs" => [
+                "TITLE"=>[
+                    'type'=>'text',
+                    'label'=>'Titre du site',
+                    'minLength'=>2,
+                    'id'=>'titre',
+                    'class'=>'form_input',
+                    'placeholder'=>'Titre du site',
+                    'error'=>'Votre titre doit faire minimum 2 caractères',
+                    'required'=>true
+                ],
+                "firstname" => [
                     "type" => "text",
                     "label" => "Votre prénom",
                     "minLength" => 2,
@@ -278,8 +283,8 @@ class Installer {
                     "placeholder" => "Prénom",
                     "error" => "Votre prénom doit faire entre 2 et 55 caractères",
                     "required" => true
-             ],
-             "lastname" => [
+                ],
+                "lastname" => [
                     "type" => "text",
                     "label" => "Votre nom",
                     "minLength" => 2,
@@ -289,8 +294,8 @@ class Installer {
                     "placeholder" => "Nom",
                     "error" => "Votre nom doit faire entre 2 et 55 caractères",
                     "required" => true
-             ],
-             "birthday" => [
+                ],
+                "birthday" => [
                     "type" => "date",
                     "label" => "Votre date de naissance",
                     "maxDate" => date("Y-m-d", strtotime("-18 year", time())),
@@ -298,8 +303,8 @@ class Installer {
                     "class" => "form_input",
                     "error" => "Votre date de naissance est obligatoire",
                     "required" => true
-             ],
-             "email" => [
+                ],
+                "email" => [
                     "type" => "email",
                     "label" => "Votre email",
                     "minLength" => 8,
@@ -309,8 +314,8 @@ class Installer {
                     "placeholder" => "Email",
                     "error" => "Votre email doit faire entre 8 et 320 caractères",
                     "required" => true,
-             ],
-             "pwd" => [
+                ],
+                "pwd" => [
                     "type" => "password",
                     "label" => "Votre mot de passe",
                     "minLength" => 8,
@@ -321,8 +326,8 @@ class Installer {
                     "placeholder" => "Mot de passe",
                     "error" => "Votre mot de passe doit faire au minimum 8 caractères",
                     "required" => true
-             ],
-             "pwdConfirm" => [
+                ],
+                "pwdConfirm" => [
                     "type" => "password",
                     "label" => "Confirmation",
                     "confirm" => "pwd",
@@ -331,8 +336,8 @@ class Installer {
                     "placeholder" => "Confirmer mot de passe",
                     "error" => "Votre mot de mot de passe de confirmation ne correspond pas",
                     "required" => true
-             ]
-         ]
-      ];
-  }
+                ]
+            ]
+        ];
+    }
 }

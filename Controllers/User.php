@@ -5,20 +5,15 @@ namespace App\Controller;
 
 use App\Core\Database;
 use App\Core\FormValidator;
-use App\Core\Helpers;
+use App\Core\Security as Secu;
 use App\Core\View;
 use App\Models\User as U;
 
 class User
 {
-    public function userAction()
-    {
 
-        //gérer les status
-        // 0 => normal user
-        // 1 => Premium
-        // 2 => VIP
-        // 3 => Admin
+    // Affichage Utilisateurs et modification utilisateur
+    public function userAction() {
 
         $view = new View("adminUser", "back");
         $user = new U();
@@ -41,65 +36,50 @@ class User
         FROM wlms_user", []);
 
         $view->assign("data", $data);
+        $view->assign("rolesUser", $user->rolesUser());
 
-        if (!empty($_POST)) {
-            $errors = FormValidator::check($formUpdateUser, $_POST);
-            if ($user->countRow('user', 'id', 'email', $_POST["email"]) != 1) {
-                if (empty($errors)) {
-                    $user->setId($_POST["id"]);
+        if (isset($_GET['id'])) {
+            $userSelected = $user->customSelectFromATable("user", "*", "id", $_GET['id']);
+            $view->assign("userSelected", $userSelected);
+            $formUser = $user->updateUser();
+            foreach ($formUser['inputs'] as $key => $col) {
+                $formUser['inputs'][$key]['value'] = $userSelected[0][$key];
+            }
+            $view->assign("formUser", $formUser);
+
+            if(!empty($_POST)) {
+                !Secu::userExist($user, $_POST["email"], $user->customSelectFromATable('user', 'email', 'id', $_GET['id'])[0]['email']);
+                $errors = FormValidator::check($formUser, $_POST);
+                if(empty($errors)) {
+
+                    $user->setId($_GET['id']);
                     $user->setFirstname($_POST["firstname"]);
-                    $user->setLastname($_POST['lastname']);
-                    $user->setEmail($_POST['email']);
-                    $user->setStatus($_POST['status']);
+                    $user->setLastname($_POST["lastname"]);
+                    $user->setBirthday($_POST["birthday"]);
+                    $user->setRole($_POST["role"]);
+                    $user->setEmail($_POST["email"]);
+                    $user->setCountry($_POST["country"]);
+                    
                     $user->save();
 
+                    header("Location: /admin-user");
                 } else {
-                    var_dump($errors);
+                    $view->assign("errors", $errors);
                 }
-            } else {
-                $view->assign("errors", $errors);
             }
-        }
 
-        $view->assign('formUpdateUser', $formUpdateUser);
+        } else {
+            $view->assign("formUser", $user->updateUser());
+        }
 
     }
 
-    public function updateUserAction() {
-        $view = new View("adminUser", "back");
-        $user = new U();
-
-        $formUpdateUser = $user->formUpdateUser();
-
-
-        $dataUp = $user->globalFind('SELECT id as user_id,
-        firstname,
-        lastname,
-        email,
-        status
-        FROM wlms_user ORDER BY wlms_user.createdAt', []);
-
-        $view->assign("dataUp", $dataUp);
-
-
-        if (!empty($_POST)) {
-            $errors = FormValidator::check($formUpdateUser, $_POST);
-            if ($user->countRow('user', 'id', 'email', $_POST["email"]) != 1) {
-                if (empty($errors)) {
-                    $user->setFirstname($_POST["firstname"]);
-                    $user->setLastname($_POST['lastname']);
-                    $user->setEmail($_POST['email']);
-                    $user->setStatus($_POST['status']);
-                    $user->save();
-
-                } else {
-                    var_dump($errors);
-                }
-            } else {
-                $view->assign("errors", $errors);
-            }
+    // Suppression Utilisateur
+    public function deleteUserAction()
+    {
+        if (!empty($_GET['id'] && isset($_GET['id']))) {
+            Database::deleteFromId('user', 'id', $_GET['id']);
         }
-        $view->assign("formUpdateUser", $formUpdateUser);
-
+        header('Location: /admin-user');
     }
 }

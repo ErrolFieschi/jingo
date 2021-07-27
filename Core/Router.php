@@ -1,29 +1,41 @@
 <?php
 namespace App\Core;
 
-
-
+use App\Models\User;
 
 class Router
 {
-	private $routes = [];
-	private $uri;
-	private $routesPath = "routes.yml";
-	private $controller;
-	private $action;
-	private $auth;
 
-	public function __construct($uri){
+    private $routes = [];
+    private $uri;
+    private $routesPath = "routes.yml";
+    private $controller;
+    private $action;
+    private $auth;
+	private $role;
+
+    /**
+     * Router constructor.
+     * @param $uri
+     */
+    public function __construct($uri){
 		$this->setUri($uri);
 		if(file_exists($this->routesPath)){
 			//[/] => Array ( [controller] => Global [action] => default )
 			$this->routes = yaml_parse_file($this->routesPath);
 
 			if( !empty($this->routes[$this->uri]) && $this->routes[$this->uri]["controller"] && $this->routes[$this->uri]["action"]){
-
-				$this->setController($this->routes[$this->uri]["controller"]);
-				$this->setAction($this->routes[$this->uri]["action"]);
+                
+                $this->setController($this->routes[$this->uri]["controller"]);
+                $this->setAction($this->routes[$this->uri]["action"]);
                 $this->setAuth($this->routes[$this->uri]["auth"]);
+                
+                if (!empty($this->routes[$this->uri]["role"])) {
+                    $this->setRole($this->routes[$this->uri]["role"]);
+                    if (array_search($this->getRole(), User::rolesUser()) >= Security::userRole()) {
+                        header('Location: /page/accueil');
+                    }
+                }
 
 			}else{
 
@@ -147,36 +159,58 @@ class Router
 		}
 	}
 
-	public function setUri($uri){
+    /**
+     * @param $uri
+     */
+    public function setUri($uri){
 		$this->uri = trim(mb_strtolower($uri));
 
 	}
 
-	public function redirect404() {
+    /**
+     *
+     */
+    public function redirect404() {
         header("HTTP/1.0 404 Not Found");
 	    new View('404') ;
         die();
     }
+
+    /**
+     *
+     */
     public static function redicrection404() {
         (new Router(''))->redirect404();
     }
 
-	public function setController($controller){
+    /**
+     * @param $controller
+     */
+    public function setController($controller){
 		$this->controller = $controller;
 	}
 
 
-	public function setAction($action){
+    /**
+     * @param $action
+     */
+    public function setAction($action){
 		$this->action = $action."Action";
 	}
 
 
-	public function getController(){
+    /**
+     * @return mixed
+     */
+    public function getController(){
 		return $this->controller;
 	}
 
 
-	public function getAction(){
+    /**
+     * @return mixed
+     */
+    public function getAction(){
 		return $this->action;
 	}
 
@@ -194,6 +228,22 @@ class Router
     public function setAuth($auth)
     {
         $this->auth = $auth;
+    }
+
+     /**
+     * @return mixed
+     */
+    public function getRole()
+    {
+        return $this->role;
+    }
+
+    /**
+     * @param mixed $auth
+     */
+    public function setRole($role)
+    {
+        $this->role = array_search($role, User::rolesUser());
     }
 
 }

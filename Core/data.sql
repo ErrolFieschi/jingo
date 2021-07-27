@@ -38,6 +38,7 @@ create table PREFIXEpage
     active   tinyint      not null,
     createby int          not null,
     meta     text         null,
+    visible  tinyint      not null,
     constraint PREFIXEpage_id_uindex
         unique (id)
 );
