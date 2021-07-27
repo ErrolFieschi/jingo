@@ -9,30 +9,36 @@ use App\Core\Security;
 
 session_start() ;
 
+if(!file_exists('.env'))
+    file_put_contents('.env','#Creation du .env',FILE_TEXT) ;
+
+
 require "Autoload.php";
-
-
 Autoload::register();
-
-
 new ConstantMaker();
 
 
+if(file_exists('Core/data.sql')) {
 
-// $uri  => /se-connecter?user_id=2 => /se-connecter
-$uriExploded = explode("?", $_SERVER["REQUEST_URI"]);
-$uri = $uriExploded[0];
+    $controller = new Installer() ;
+    if(!isset($_SESSION['isStepOneOk']) || $_SERVER['REQUEST_URI'] == '/install/1')
+        $controller->setupAction();
+    else if(isset($_SESSION['isStepOneOk']) && !isset($_SESSION['isStepTwoOk']) || $_SERVER['REQUEST_URI'] == '/install/2')
+        $controller->setupMailingAction();
+    else if(isset($_SESSION['isStepOneOk']) && isset($_SESSION['isStepTwoOk']) || $_SERVER['REQUEST_URI'] == '/install/3')
+        $controller->setupDatabaseAction();
 
-$router = new Router($uri);
-
-$controller = $router->getController();
-$action = $router->getAction();
-$auth = $router->getAuth();
-
-if($controller == 'Core\\Installer') {
-    $controllerObjet = new Installer() ;
-    $controllerObjet->$action() ;
 } else {
+
+    // $uri  => /se-connecter?user_id=2 => /se-connecter
+    $uriExploded = explode("?", $_SERVER["REQUEST_URI"]);
+    $uri = $uriExploded[0];
+
+    $router = new Router($uri);
+
+    $controller = $router->getController();
+    $action = $router->getAction();
+    $auth = $router->getAuth();
 
     if( file_exists("./Controllers/".$controller.".php")){
 

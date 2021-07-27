@@ -96,7 +96,7 @@ class Security
      */
     public static function deleteInstaller() {
         try {
-            unlink("Core/data.sql") ;
+            unlink("Core/_data.sql") ;
             unlink('Core/Installer.php');
         } catch (\Exception $e){}
     }

@@ -40,22 +40,8 @@ class Router
 			}else{
 
                 $uris = Helpers::getUrlAsArray() ;
-                if($uris[0]== 'install') {
-                    if($uris[1]==1) {
-                        $this->setController('Core\Installer');
-                        $this->setAction('setup');
-                        $this->setAuth(false);
-                    } else if($uris[1]==2) {
-                        $this->setController('Core\Installer');
-                        $this->setAction('setupMailing');
-                        $this->setAuth(false);
-                    } else if($uris[1]==3) {
-                        $this->setController('Core\Installer');
-                        $this->setAction('setupDatabase');
-                        $this->setAuth(false);
-                    }
-                }
-                else if ($uris[0] == 'page') {
+
+                 if ($uris[0] == 'page') {
                     $tmp = count($uris) ;
                     $this->setAuth(Middleware::isAuthNeeded());
                     $this->setAction(Middleware::getFrontAction());
