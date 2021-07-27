@@ -139,5 +139,7 @@ class Part
     public function deletePartAction(){
         Database::deleteFromId("lesson", "part_id", $_POST['id']);
         Database::deleteFromId("part", "id", $_POST['id']);
+
+        header('Location: ' . $_POST['uri']);
     }
 }
