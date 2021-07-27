@@ -33,8 +33,6 @@ class Lessons
 
     public function showFrontAction(){
         $uri = Helpers::getUrlAsArray();
-        var_dump($uri);
-        exit();
         $lesson = Database::customSelectFromATable('lesson', '*', 'url', $uri[2], true);
 
         $view = new View("lesson", "front");

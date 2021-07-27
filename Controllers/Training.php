@@ -104,7 +104,7 @@ class Training
     {
         $uri = Helpers::getUrlAsArray();
         $parts = [];
-
+        $part = new Part();
         $trainingId = Database::customSelectFromATable('training', 'id, title', 'url', $uri[0], true);
         array_push($parts, Database::customSelectFromATable("part", '*', 'training_id', $trainingId['id'], false, 'order_part'));
 
@@ -120,24 +120,22 @@ class Training
         if (!empty($_POST)) {
             $errors = FormValidator::check($form, $_POST);
 
-            if (empty($errors)) {
+            if ($part->countRow('part', 'id', 'title', $_POST["title"]) != 1) {
+                if (empty($errors)) {
+                    $part->setCreateby('user');
+                    $part->setTitle($_POST["title"]);
+                    $part->setOrderPart(1);
+                    $part->setIcon($_POST["icon"]);
+                    $part->setUrl($part->getTitle());
+                    $part->setTrainingId($trainingId['id']);
 
-                //echo '<pre>';
-                //var_dump($_POST);
-                //echo 'id### ' . $trainingId['id'];
-                $part->setCreateby('user');
-                $part->setTitle($_POST["title"]);
-                $part->setOrderPart(1);
-                $part->setIcon($_POST["icon"]);
-                $part->setUrl($part->getTitle());
-                $part->setTrainingId($trainingId['id']);
+                    $part->save();
 
-                $part->save();
+                    header("Location: /" . $uri[0]);
 
-                header("Location: /" . $uri[0]);
-
-            } else {
-                $view->assign("errors", $errors);
+                } else {
+                    $view->assign("errors", $errors);
+                }
             }
         }
     }

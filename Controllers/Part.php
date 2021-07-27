@@ -73,9 +73,6 @@ class Part
         array_push($lessons, Database::customSelectFromATable("lesson", 'id,title,resume,image,url', 'part_id', $parts[0]['id']));
         $code = Database::customSelectFromATable('lesson', 'id, code', 'id', $lessons[0][0]['id']);
 
-       // echo '<pre>';
-        //var_dump($lessons);
-        //exit;
         $view = new View("library", "front");
         $lesson = new Lesson();
         $form = $lesson->formLesson();
@@ -114,16 +111,13 @@ class Part
 
         foreach ($orderlist as $k => $order) {
             Database::updateOneRow('part', 'order_part', $k, 'id', $order);
-            echo 'save ok';
+            echo 'La sauvegarde a bien été effectuée !';
         }
-
     }
 
 
     public function deletePartAction(){
         Database::deleteFromId("lesson", "part_id", $_POST['id']);
         Database::deleteFromId("part", "id", $_POST['id']);
-
-        //header('Location: ' . $_POST['uri']);
     }
 }
