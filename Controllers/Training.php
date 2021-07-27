@@ -47,15 +47,17 @@ class Training
 
 
         if(!empty($_POST)) {
-            if (isset($_POST['id'])) {
+
+            if (isset($_POST['id']) ) {
                 $training = Database::customSelectFromATable('training', '*', 'id', $_POST['id'], true);
 
-                $form = $train->formTrainingUpdate($training,'/training');
+                $form = $train->formTrainingUpdate($training, '/training');
                 $view->assign('form', $form);
-            }
-                $errors = FormValidator::check($form, $_POST);
-                if (empty($errors) && isset($_POST['uri'])) {
 
+            }
+            if ( isset($_POST['uri'])) {
+                $errors = FormValidator::check($form, $_POST);
+                if(empty($errors)) {
                     $train->setId($_POST['id']);
                     $train->setTitle(str_replace("'" ,"\'",$_POST['title'] ?? $training['title']));
                     $train->setDescription(str_replace( "'","\'",$_POST['description']??$training['description']));
@@ -67,11 +69,9 @@ class Training
 
                     $train->save();
                     header('Location: /training');
-                } else $view->assign('errors', $errors);
-
+                }else $view->assign('errors', $errors);
+            }
         }
-
-
     }
 
     //Afficher ou cacher formation
