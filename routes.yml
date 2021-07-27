@@ -105,6 +105,11 @@
   action: deletePart
   auth: false
 
+/part/sort:
+  controller: Part
+  action: sortPart
+  auth: false
+
 /pages:
   controller: Page
   action: showPages
