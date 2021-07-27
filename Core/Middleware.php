@@ -61,5 +61,12 @@ class Middleware
         return false ; // ON NE GERE PAS POUR LE MOMENT
     }
 
+    public static function isPageExist(String $pageUrl): bool {
+        $exist = Database::customSelectFromATable('page','url','url',$pageUrl,true) ;
+        return !empty($exist) ;
+    }
+
+
+
 
 }
