@@ -145,7 +145,7 @@
   action: library
   auth: false
 
-/courses:
+/page/courses:
   controller: Training
   action: list
   auth: false
