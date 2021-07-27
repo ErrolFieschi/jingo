@@ -100,7 +100,7 @@ class Middleware
     }
 
     public static function isAuthNeeded() :bool {
-        return false ; // ON NE GERE PAS POUR LE MOMENT
+        return false ;
     }
 
     public static function isPageExist(String $pageUrl): bool {
