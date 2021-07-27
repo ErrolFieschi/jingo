@@ -99,7 +99,7 @@
                             </div>
 
                             <div class="card-icon">
-                                <a href="#"><img src="/Content/svg/setting-bis.svg" alt="setting button"></a>
+                                <a href="/pages/pages-update?id=<?= $rowData['id'] ?>"><img src="/Content/svg/setting-bis.svg" alt="setting button"></a>
                             </div>
 
                             <div class="card-icon">

@@ -432,3 +432,13 @@ a.btn_style_submit{
 .dropdown:hover .dropdown-content {
   display: block;
 }
+
+.div_form_submit{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 2.5em;
+  background-color: white;
+  border-radius: 10px;
+  box-shadow:0 14px 28px rgb(0 0 0 / 25%), 0 10px 10px rgb(0 0 0 / 22%);
+}

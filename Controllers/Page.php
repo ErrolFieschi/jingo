@@ -39,6 +39,7 @@ class Page
         }
     }
 
+
     public function createPageAction()
     {
         $view = new View("page", "page");
@@ -63,6 +64,28 @@ class Page
 
     }
 
+    public function updateFormPageAction(){
+        $view = new View("pages-update", "back");
+        $page = new P();
+
+        $updatePage = $page->updatePage($_GET['id']);
+        $view->assign("updatePage", $updatePage);
+
+        if (!empty($_POST)) {
+            $page->setId($_GET['id']);
+            $page->setCreateBy(1);
+            $page->setActive(1);
+            $page->setTitle($_POST["title"]);
+            $page->setUrl($page->getTitle());
+            $page->setName($_POST["name"]);
+            $page->setMeta($_POST["meta"]);
+            $page->setVisible($_POST['visible']);
+
+            $page->save();
+            header('Location: /pages');
+        }
+        //
+    }
 
     public function showPagesAction()
     {

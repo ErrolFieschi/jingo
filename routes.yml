@@ -139,6 +139,11 @@
 /page/update:
   controller: Page
   action: updatePage
+  auth: true
+
+/pages/pages-update:
+  controller: Page
+  action: updateFormPage
   auth: false
 
 /pages/delete:

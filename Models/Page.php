@@ -224,6 +224,71 @@ class Page extends Database
         ];
     }
 
+    public function updatePage($post = null, $uri = null){
+        $data = Database::customSelectFromATable("page", "title, name, meta", "id",$post);
+
+        return [
+            "config" => [
+                "method" => "POST",
+                "action" => "",
+                "id" => "update_page_id",
+                "class" => "div_form_submit",
+                "submit" => "Enregistrer"
+            ],
+            "inputs" => [
+                "title" => [
+                    "type" => "text",
+                    "label" => "Titre de la page",
+                    "value" => $data[0]['title'],
+                    "minLength" => 2,
+                    "maxLength" => 55,
+                    "id" => "title_page",
+                    "class" => "popup_form_input",
+                    "placeholder" => "",
+                    "error" => "Le nom de la page doit faire entre 2 et 55 caractères",
+                    "required" => true
+                ],
+                "name" => [
+                    "type" => "text",
+                    "label" => "Nom de la page",
+                    "value" => $data[0]['name'],
+                    "minLength" => 2,
+                    "maxLength" => 55,
+                    "id" => "name_page",
+                    "class" => "popup_form_input",
+                    "placeholder" => "",
+                    "error" => "Le nom de la page doit faire entre 2 et 55 caractères",
+                    "required" => true
+                ],
+                "meta" => [
+                    "type" => "textarea",
+                    "label" => "Mots clefs",
+                    "value" => $data[0]['meta'],
+                    "minLength" => 2,
+                    "maxLength" => 300,
+                    "id" => "meta_page",
+                    "class" => "popup_form_input",
+                    "placeholder" => "",
+                    "error" => "Le nom de la page doit faire entre 2 et 300 caractères",
+                    "required" => true
+                ],
+                "visible" => [
+                    "type" => "radio",
+                    "label" => "Rendre la formation visible",
+                    "id" => "visible",
+                    "name" => "showForm",
+                    "class" => "",
+                    "options" => [
+                        "oui" => 1,
+                        "non" => 0,
+                    ],
+                    "placeholder" => "",
+                    "error" => "Votre themes doit faire 2 caractères",
+                ],
+            ],
+        ];
+    }
+
     public function createPage()
     {
         return [
@@ -231,7 +296,7 @@ class Page extends Database
                 "method" => "POST",
                 "action" => "",
                 "id" => "add_page_id",
-                "class" => "add_page button-con mt-20",
+                "class" => "add_page mt-20",
                 "submit" => "Enregistrer"
             ],
             "inputs" => [
