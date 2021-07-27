@@ -26,10 +26,11 @@ class Lessons
         header('Location: ' . $_POST['uri']);
     }
 
-//    public function displayAction(){
-//        $lesson = Database::customSelectFromATable('lesson', 'id, code', 'id', $_POST['id'], true);
-//        echo $lesson['code'];
-//    }
+    public function displayAction(){
+        $lesson = Database::customSelectFromATable('lesson', 'id, code', 'id', $_POST['id'], true);
+        echo $lesson['code'];
+    }
+
     public function showFrontAction(){
         $uri = Helpers::getUrlAsArray();
         var_dump($uri);
