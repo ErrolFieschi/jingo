@@ -19,9 +19,11 @@ class Training
         if (!empty($_GET['id'] && isset($_GET['id']))) {
             //get id of lesson
             //get id of part
-            //$getIdPart = Database::customSelectFromATable('page', '*');
+
+            $getIdPart = Database::customSelectFromATable('part', 'training_id');
             Database::deleteFromId('lesson', 'part_id', $_GET['id']);
             Database::deleteFromId('part', 'training_id', $_GET['id']);
+
             Database::deleteFromId('training', 'id', $_GET['id']);
         }
         header('Location: /training');

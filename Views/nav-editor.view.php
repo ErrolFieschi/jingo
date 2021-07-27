@@ -45,7 +45,7 @@
                                 <br>
                                 <input id="" type="text" class="popup_form_input label_link_nav"/>
                             </div>
-                            <div class="col-sm-2">
+                            <div class="col-sm-2 destroy_list_link_page">
                                 <label style="color: white" for="lesson-link">Lien pages</label>
                                 <select id="" class="popup_form_input page-link-nav">
                                     <option value="">Aucun</option>
@@ -55,7 +55,7 @@
                                     <?php endforeach; ?>
                                 </select>
                             </div>
-                            <div class="col-sm-3">
+                            <div class="col-sm-3 destroy_list_link_formation">
                                 <label style="color: white" for="formation-link">Lien formations</label>
                                 <select id="" class="popup_form_input formation-link-nav">
                                     <option value="">Aucun</option>
@@ -65,7 +65,7 @@
                                     <?php endforeach; ?>
                                 </select>
                             </div>
-                            <div class="card-button">
+                            <div class="card-button data_actualiser">
                                 <div class="card-icon col-sm-1">
                                     <i class="fas fa-check" style="color: #5ff478; font-size: 28px"></i>
                                 </div>
@@ -168,9 +168,39 @@
     </div>
     <?php
     else:
-    ?>
-    <?= $code['form']; ?>
+        ?>
+        <?= $code['form']; ?>
 
-   <?php endif; ?>
+    <?php endif; ?>
+</div>
+
+<div style="display: none" id="get_link_page">
+    <div class=" page-link-nav_check">
+        <div class="col-sm-2 destroy_list_link_page">
+            <label style="color: white" for="lesson-link">Lien pages</label>
+            <select id="" class="popup_form_input  page-link-nav">
+                <option value="">Aucun</option>
+                <?php
+                foreach ($createdPagesList as $urlPages):?>
+                    <option value="<?= $urlPages[0] ?>"><?= $urlPages[0] ?></option>
+                <?php endforeach; ?>
+            </select>
+        </div>
+    </div>
+</div>
+
+<div style="display: none" id="get_link_formation">
+    <div class="formation-link-nav_check">
+        <div class="col-sm-3 destroy_list_link_formation">
+            <label style="color: white" for="formation-link">Lien formations</label>
+            <select id="" class="popup_form_input formation-link-nav">
+                <option value="">Aucun</option>
+                <?php
+                foreach ($trainingUrlList as $trainingList):?>
+                    <option value="<?= $trainingList[0] ?>"><?= $trainingList[0] ?></option>
+                <?php endforeach; ?>
+            </select>
+        </div>
+    </div>
 </div>
 

@@ -17,16 +17,13 @@ class Navbar
 
         $view = new View("nav-editor", "page");
 
-        $trainingUrlList = Database::customSelectFromATable('training', 'url');
-        $trainingLessonList = Database::customSelectFromATable('lesson', 'url');
-        $trainingPartList = Database::customSelectFromATable('part', 'url');
-        $createdPagesList = Database::customSelectFromATable('page', 'url'); //liste des pages créer
+        $trainingUrlList = Database::customSelectFromATable('training', 'url','active',1);
+        $createdPagesList = Database::customSelectFromATable('page', 'url','visible',1); //liste des pages créer
+
         $getIdNav = Database::customSelectFromATable('navbar', 'id');
         $getNavBar = Database::customSelectFromATable('navbar', '*');
 
         $view->assign("trainingUrlList", $trainingUrlList);
-        $view->assign("trainingLessonList", $trainingLessonList);
-        $view->assign("trainingPartList", $trainingPartList);
         $view->assign("createdPagesList", $createdPagesList);
         $view->assign("getNavBar", $getNavBar);
 

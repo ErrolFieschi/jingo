@@ -1,5 +1,18 @@
 $(document).ready(function () {
 
+    actualiseLink();
+    // update les liens en fonction de la visibilité
+
+    function actualiseLink(){
+
+        var clone_link_page = $( ".page-link-nav_check").last().html();
+        var clone_link_formation = $( ".formation-link-nav_check").last().html();
+        $(".destroy_list_link_formation").remove();
+        $(".destroy_list_link_page").remove();
+        $(".data_actualiser").before(clone_link_page);
+        $(".data_actualiser").before(clone_link_formation);
+
+    }
 
     // génération des links form
     function addLink() {
@@ -86,10 +99,10 @@ $(document).ready(function () {
                 $("#" + findSectionParent() + "_nav").remove();
 
                 if ($(event.target).closest("section").find(".page-link-nav").val() == '') {
-                    html = '<a class="to_courses" id="' + findSectionParent() + '_nav" href="../courses/' + $(event.target).closest("section").find(".formation-link-nav").val() + '">' + lb_link_nav + '</a>';
+                    html = '<a class="to_courses" id="' + findSectionParent() + '_nav" href="/courses/' + $(event.target).closest("section").find(".formation-link-nav").val() + '">' + lb_link_nav + '</a>';
 
                 } else {
-                    html = '<a class="to_page" id="' + findSectionParent() + '_nav" href="../page/' + $(event.target).closest("section").find(".page-link-nav").val() + '">' + lb_link_nav + '</a>';
+                    html = '<a class="to_page" id="' + findSectionParent() + '_nav" href="/page/' + $(event.target).closest("section").find(".page-link-nav").val() + '">' + lb_link_nav + '</a>';
 
                 }
 
@@ -112,12 +125,12 @@ $(document).ready(function () {
                     var transform = navLab[i].substr(0, navLab[i].length - 4);
                     $("#" + transform).find(".label_link_nav").val($("#" + navLab[i]).text());
 
-                    if($("#" + navLab[i]).hasClass("to_courses")){
-                        $("#" + transform).find(".formation-link-nav").val($("#" + navLab[i]).attr('href').substr(11));
-                        console.log("to courses : " + $("#" + navLab[i]).attr('href').substr(11));
-                    }else{
-                        $("#" + transform).find(".page-link-nav").val($("#" + navLab[i]).attr('href').substr(8));
-                        console.log("to page : " + $("#" + navLab[i]).attr('href').substr(8));
+                    if ($("#" + navLab[i]).hasClass("to_courses")) {
+                        $("#" + transform).find(".formation-link-nav").val($("#" + navLab[i]).attr('href').substr(9));
+                        console.log("to courses : " + $("#" + navLab[i]).attr('href').substr(9));
+                    } else {
+                        $("#" + transform).find(".page-link-nav").val($("#" + navLab[i]).attr('href').substr(6));
+                        console.log("to page : " + $("#" + navLab[i]).attr('href').substr(6));
                     }
                     if ($("#" + transform).find(".page-link-nav").val() == null) {
                         $("#" + transform).find(".page-link-nav").val('');
@@ -202,6 +215,7 @@ $(document).ready(function () {
         addSimpleLink();
         suppressSimpleLink();
         saver();
+        //actualiseLink();
     });
     fillValue();
 
