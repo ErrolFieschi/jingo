@@ -43,7 +43,7 @@
             <?php
             foreach ($data as $rowData): ?>
 
-                <?php if ($rowData['isDeleted'] == 1) {
+                <?php if ($rowData['isDeleted'] == 1):
                     ?>
                     <tr style="background-color: red;">
 
@@ -69,7 +69,7 @@
                             </div>
                         </td>
                     </tr>
-                <?php } else { ?>
+                <?php  else: ?>
                     <tr>
                         <th scope="row"><?= $rowData['id'] ?></th>
                         <td><?= $rowData['firstname'] ?></td>
@@ -84,7 +84,7 @@
                         <td><?= $rowData['createdAt'] ?></td>
                         <td><?= $rowData['updatedAt'] ?></td>
                         <td>
-<!--                            <a href="/admin-user/update?id=--><?//= $rowData['id'] ?><!--">-->
+<!--                            <a href="/admin-user?id=--><?//= $rowData['id'] ?><!--">-->
                             <div class="card-icon show"><img src="/Content/svg/edit.svg"
                                                                    alt="edit img" style="cursor: pointer"></a></div>
                         </td>
@@ -95,7 +95,7 @@
                             </div>
                         </td>
                     </tr>
-                <?php } ?>
+                <?php endif; ?>
             <?php endforeach; ?>
             </tbody>
         </table>

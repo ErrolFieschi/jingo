@@ -517,6 +517,12 @@ class User extends Database
                 "submit" => "Sauvegarder"
             ],
             "inputs" => [
+                "id"=> [
+                    "type"=>"hidden",
+                    "id" => "id",
+                    "label"=>"",
+                    "value"=>"" //USER ID
+                ],
                 "firstname" => [
                     "type" => "text",
                     "label" => "Prénom de l'utilisateur",
@@ -552,6 +558,7 @@ class User extends Database
                     "class" => "form_input",
                     "placeholder" => "Prénom",
                     "error" => "Le prénom doit faire entre 2 et 55 caractères",
+                    "value"=>"",
                     "required" => true
                 ],
                 "lastname" => [
@@ -563,6 +570,7 @@ class User extends Database
                     "class" => "form_input",
                     "placeholder" => "Nom",
                     "error" => "Le nom doit faire entre 2 et 55 caractères",
+                    "value"=>"",
                     "required" => true
                 ],
                 "email" => [
@@ -574,6 +582,7 @@ class User extends Database
                     "class" => "form_input",
                     "placeholder" => "Email",
                     "error" => "L'email doit faire entre 8 et 320 caractères",
+                    "value"=>"",
                     "required" => true,
                     "unique" => true,
                     "unique_error" => "Cet email est déjà utilisé."

@@ -137,5 +137,34 @@ class Training
         }
     }
 
+    public function listAction()
+    {
 
+        $view = new View("courses", "front");
+
+        $training = new T();
+        $formTraining = $training->formTraining();
+
+        //Select formation
+        $training_table = DBPREFIXE."training";
+        $training_tag_table = DBPREFIXE."training_tag";
+        $data = $training->globalFind("SELECT $training_table.id as training_id,
+        $training_tag_table .id as training_tag_id,
+        $training_tag_table .name,
+        $training_table.title,
+        $training_table.update_date,
+        $training_table.active,
+        $training_table.duration,
+        $training_table.template,
+        $training_table.createby,
+        $training_table.description,
+        $training_table.active,
+        $training_table.url,
+        $training_table.image
+        FROM wlms_training LEFT JOIN $training_tag_table
+        ON $training_table.training_tag_id = $training_tag_table.id ORDER BY $training_table.update_date", []);
+        // ne pas afficher la premiere donnée qui est la donnée référence
+
+        $view->assign("data", $data);
+    }
 }

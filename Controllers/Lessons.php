@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Core\Helpers;
 use App\Core\View;
 use App\Core\Database;
+use App\Models\Lesson;
 
 
 class Lessons
@@ -23,6 +24,11 @@ class Lessons
     public function deleteLessonAction(){
         Database::deleteFromId("lesson", "id", $_POST['id']);
         header('Location: ' . $_POST['uri']);
+    }
+
+    public function displayAction(){
+        $lesson = Database::customSelectFromATable('lesson', 'id, code', 'id', $_POST['id'], true);
+        echo $lesson['code'];
     }
 }
 
