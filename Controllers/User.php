@@ -58,7 +58,10 @@ class User
                     $user->setBirthday($_POST["birthday"]);
                     $user->setRole($_POST["role"]);
                     $user->setEmail($_POST["email"]);
-                    $user->setCountry($_POST["country"]);
+                    
+                    if ($_SESSION['id'] == $_GET['id']) {
+                        $user->setToken($_SESSION['token']);
+                    }
                     
                     $user->save();
 

@@ -501,15 +501,6 @@ class User extends Database
                     "error" => "Le role est obligatoire",
                     "required" => true
                 ],
-                "country" => [
-                    "type" => "select",
-                    "label" => "Pays",
-                    "id" => "country",
-                    "class" => "form_input",
-                    "options" => $this->countriesUser(),
-                    "error" => "Le pays est obligatoire",
-                    "required" => true
-                ],
             ]
         ];
     }
