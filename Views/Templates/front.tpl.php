@@ -13,9 +13,13 @@
 
 <header>
 </header>
+<?php
+foreach ($getNav as $code): ?>
+    <?= $code['code'] ?>
+<?php endforeach; ?>
 
-    <!-- intégration de la vue -->
-    <?php include $this->view; ?>
+<!-- intégration de la vue -->
+<?php include $this->view; ?>
 
 
 <script

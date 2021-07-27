@@ -7,6 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.10.25/datatables.min.css"/>
     <link href="/Content/dist/main.css" rel="stylesheet">
+    <link href="/Content/dist/page-generator.css" rel="stylesheet">
     <script src="/Content/js/jquery-3.5.1.min.js"></script>
     <script src="/node_modules/chart.js/dist/Chart.js"></script>
     <script defer src="/Content/js/chart.js"></script>

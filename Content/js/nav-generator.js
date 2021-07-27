@@ -90,10 +90,10 @@ $(document).ready(function () {
     }
 
     function saver() {
-        $('#code_save').val('');
-        $('#code_save').val($('#export_navbar').html());
-        $('#form_save').val('');
-        $('#form_save').val($('#export_form').html());
+        $('#code_saver').val('');
+        $('#code_saver').val($('#export_navbar').html());
+        $('#form_saver').val('');
+        $('#form_saver').val($('#export_form').html());
     }
 
     function suppressSimpleLink() {

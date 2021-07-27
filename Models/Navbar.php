@@ -82,14 +82,14 @@ class Navbar extends Database
                 "code" => [
                     "type" => "hidden",
                     "label" => "",
-                    "id" => "code_save",
+                    "id" => "code_saver",
                     "class" => "popup_form_input",
                     "placeholder" => ""
                 ],
                 "form" => [
                     "type" => "hidden",
                     "label" => "",
-                    "id" => "form_save",
+                    "id" => "form_saver",
                     "class" => "popup_form_input",
                     "placeholder" => ""
                 ],

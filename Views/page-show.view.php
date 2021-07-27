@@ -25,10 +25,6 @@
     </div>
 </div-->
 
-<?php
-foreach ($getNav as $code): ?>
-    <?= $code['code'] ?>
-<?php endforeach; ?>
 
 <div class="container-front">
     <?php
