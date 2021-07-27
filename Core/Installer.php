@@ -2,6 +2,7 @@
 
 namespace App\Core;
 
+use App\Models\User;
 use PDO;
 
 class Installer {
@@ -57,21 +58,35 @@ class Installer {
           }
       }
 
-      $this->pdo->exec("CREATE TABLE ".$prefix_db.$new_table." (".$sql.") ;");
+      $this->pdo->exec("CREATE TABLE ".$prefix_db ."_".$new_table." (".$sql.") ;");
   }
-  public function setupAction()
+  public function setupDatabaseAction()
   {
-        $view = new View('installer/setup');
-        $form = $this->formSettingsSite();
-        $view->assign('form', $form);
+      if(isset($_SESSION['isStepOneOk']) && $_SESSION['isStepOneOk'] == true
+          && isset($_SESSION['isStepTwoOk']) && $_SESSION['isStepTwoOk'])
+      {
+          $view = new View('installer/setup');
+          $form = $this->formSettingsSite();
+          $view->assign('form', $form);
 
-        if (!empty($_POST)) {
-            $errors = FormValidator::check($form, $_POST);
-            if (empty($errors)) {
-                $_SESSION['isStepOneOk'] = true ;
-                header('Location: /install/2');
-            } else $view->assign('errors', $errors);
-        }
+          if (!empty($_POST)) {
+              $errors = FormValidator::check($form, $_POST);
+              if (empty($errors)) {
+
+                  file_put_contents('.env','TITLE='.$_POST['TITLE'],FILE_APPEND);
+                  $user = new User();
+                  $user->setFirstname(htmlspecialchars($_POST["firstname"]));
+                  $user->setLastname(htmlspecialchars($_POST["lastname"]));
+                  $user->setEmail(htmlspecialchars($_POST["email"]));
+                  $user->setPwd($_POST["pwd"]);
+                  $user->setBirthday($_POST["birthday"]);
+                  $user->setCountry($_POST["country"]??$user->getCountry()??'FR');
+                  $user->setRole(1);
+                  $user->save();
+
+              } else $view->assign('errors', $errors);
+          }
+      } else Router::redicrection404();
   }
 
   public function setupMailingAction(){
@@ -84,47 +99,54 @@ class Installer {
               $errors = FormValidator::check($form, $_POST);
               if (empty($errors)) {
 
+                  $this->writeEnv($_POST);
 
+                  $_SESSION['isStepTwoOk'] = true;
+                  header('Location: /install/3');
               } else $view->assign('errors', $errors);
           }
       } else Router::redicrection404() ;
 
   }
 
-  public function setupDataBaseAction(){
-      if(isset($_SESSION['isStepOneOk']) && $_SESSION['isStepOneOk'] == true
-          && isset($_SESSION['isStepTwoOk']) && $_SESSION['isStepTwoOk'])
-      {
-            $view = new View("installer/setupDB");
+  public function setupAction(){
+        $view = new View("installer/setupDB");
+        $form = $this->formSettingsDatabase();
+        $view->assign("form", $form);
 
-            $form = $this->formSettingsDatabase();
+        if (!empty($_POST)) {
+            $errors = FormValidator::check($form, $_POST);
+            if (empty($errors)) {
 
-            $view->assign("form", $form);
+                $newInstaller = new Installer($_POST["DBHOST"], $_POST['DBNAME'], $_POST['DBUSER'], $_POST['DBPWD']);
 
-            if (!empty($_POST)) {
-                $errors = FormValidator::check($form, $_POST);
-                if (empty($errors)) {
+                $newInstaller->createDatabase($newInstaller->db_name);
+                $newInstaller->addNewUser($newInstaller->db_user_root, $newInstaller->db_user_pwd, $newInstaller->db_host);
+                $newInstaller->grantPermissionsToUser($newInstaller->db_host);
 
-                    $newInstaller = new Installer($_POST["host_db"], $_POST['name_db'], $_POST['username_db'], $_POST['pwd']);
+                $newInstaller->useDb($newInstaller->db_name);
 
-                    $newInstaller->createDatabase($newInstaller->db_name);
-                    $newInstaller->addNewUser($newInstaller->db_user_root, $newInstaller->db_user_pwd, $newInstaller->db_host);
-                    $newInstaller->grantPermissionsToUser($newInstaller->db_host);
+                $allTablesWithAttributes = $this->allTablesWithAttributes();
 
-                    $newInstaller->useDb($newInstaller->db_name);
-
-                    $allTablesWithAttributes = $this->allTablesWithAttributes();
-
-                    foreach ($allTablesWithAttributes as $key => $value) {
-                        if (!empty($value)) {
-                            $newInstaller->populateDatabase($key, $_POST["prefix_db"], $value);
-                        }
+                foreach ($allTablesWithAttributes as $key => $value) {
+                    if (!empty($value)) {
+                        $newInstaller->populateDatabase($key, $_POST["DBPREFIXE"], $value);
                     }
-                } else {
-                    $view->assign("errors", $errors);
                 }
+                $this->writeEnv($_POST);
+
+                $_SESSION['isStepOneOk'] = true;
+                header('Location: /install/2');
+            } else {
+                $view->assign("errors", $errors);
             }
-      } else Router::redicrection404();
+        }
+  }
+
+  private function writeEnv(Array $post) {
+          foreach ($post as $key => $value) {
+              file_put_contents('.env',$key.'='.$value.PHP_EOL,FILE_APPEND) ;
+          }
   }
 
   private function formSettingMailing() {
@@ -137,7 +159,7 @@ class Installer {
             'submit'=>'Passer à l\'étape suivante'
           ],
           'inputs'=>[
-              'email'=>[
+              'MAIL'=>[
                   'type'=>'email',
                   'label'=>'Adresse email pour l\'envoie automatique',
                   'class'=>'form_input',
@@ -145,7 +167,7 @@ class Installer {
                   'error'=>'Email non valide',
                   'required'=>true
               ],
-              'pwd'=>[
+              'MAILPWD'=>[
                   'type'=>'password',
                   'label'=>'Mot de passe de l\'adresse email',
                   'id'=>'pwd_mailing',
@@ -162,10 +184,10 @@ class Installer {
                 "action" => "",
                 "id" => "setup_database",
                 "class" => "form_builder mb-5",
-                "submit" => "Finir"
+                "submit" => "Passer à l'étape suivante"
             ],
             "inputs"=>[
-                "name_db"=>[ 
+                "DBNAME"=>[
                     "type"=>"text",
                     "label"=>"Nom de la base",
                     "minLength"=>3,
@@ -175,7 +197,7 @@ class Installer {
                     "error"=>"Votre nom de base de données doit faire entre 3 et 15 caractères",
                     "required"=>true
                 ],
-                "username_db"=>[ 
+                "DBUSER"=>[
                     "type"=>"text",
                     "label"=>"Nom d'utilisateur",
                     "minLength"=>4,
@@ -185,7 +207,7 @@ class Installer {
                     "error"=>"Votre nom d'utilisateur doit faire entre 4 et 20 caractères",
                     "required"=>true
                 ],
-                "pwd"=>[ 
+                "DBPWD"=>[
                     "type"=>"password",
                     "label"=>"Mot de passe",
                     "minLength"=>5,
@@ -194,17 +216,17 @@ class Installer {
                     "error"=>"Votre mot de passe doit faire au minimum 5 caractères",
                     "required"=>true
                 ],
-                "prefix_db"=>[ 
+                "DBPREFIXE"=>[
                     "type"=>"text",
                     "label"=>"Prefix",
                     "minLength"=>2,
-                    "maxLength"=>4,
+                    "maxLength"=>10,
                     "id"=>"prefix_db",
                     "class"=>"form_input",
-                    "error"=>"Votre prefixe doit faire entre 2 et 4 caractères",
+                    "error"=>"Votre prefixe doit faire entre 2 et 10 caractères",
                     "required"=>true
                 ],
-                "host_db"=>[ 
+                "DBHOST"=>[
                     "type"=>"text",
                     "label"=>"Host",
                     "minLength"=>4,
@@ -212,6 +234,14 @@ class Installer {
                     "id"=>"host_db",
                     "class"=>"form_input",
                     "error"=>"Votre host doit faire entre 4 et 15 caractères",
+                    "required"=>true
+                ],
+                "DBPORT"=>[
+                    "type"=>"number",
+                    "label"=>"port",
+                    "id"=>"host_db",
+                    "class"=>"form_input",
+                    "error"=>"",
                     "required"=>true
                 ],
             ]
@@ -226,40 +256,84 @@ class Installer {
                 "action" => "",
                 "id" => "setup_database",
                 "class" => "form_builder mb-5",
-                "submit" => "Passer à l'étape suivante"
+                "submit" => "Finir"
             ],
             "inputs" => [
-                "title"=>[ 
-                    "type"=>"text",
-                    "label"=>"Titre du site",
-                    "minLength"=>5,
-                    "maxLength"=>320,
-                    "id"=>"title",
-                    "class"=>"form_input",
-                    "error"=>"Votre titre doit faire entre 5 et 320 caractères",
-                    "required"=>true
+                "TITLE"=>[
+                  'type'=>'text',
+                  'label'=>'Titre du site',
+                  'minLength'=>2,
+                  'id'=>'titre',
+                  'class'=>'form_input',
+                  'placeholder'=>'Titre du site',
+                  'error'=>'Votre titre doit faire minimum 2 caractères',
+                  'required'=>true
                 ],
-                "username_site"=>[ 
-                    "type"=>"text",
-                    "label"=>"Nom de l'utilisateur sur le site",
-                    "minLength"=>5,
-                    "maxLength"=>20,
-                    "id"=>"username_site",
-                    "class"=>"form_input",
-                    "error"=>"Votre titre doit faire entre 5 et 320 caractères",
-                    "required"=>true
+                "firstname" => [
+                    "type" => "text",
+                    "label" => "Votre prénom",
+                    "minLength" => 2,
+                    "maxLength" => 55,
+                    "id" => "firstname",
+                    "class" => "form_input",
+                    "placeholder" => "Prénom",
+                    "error" => "Votre prénom doit faire entre 2 et 55 caractères",
+                    "required" => true
                 ],
-                "email"=>[
-                    "type"=>"email",
-                    "label"=>"Email",
-                    "minLength"=>8,
-                    "maxLength"=>320,
-                    "id"=>"email",
-                    "class"=>"form_input",
-                    "error"=>"Votre email doit faire entre 8 et 320 caractères",
-                    "required"=>true
+                "lastname" => [
+                    "type" => "text",
+                    "label" => "Votre nom",
+                    "minLength" => 2,
+                    "maxLength" => 55,
+                    "id" => "lastname",
+                    "class" => "form_input",
+                    "placeholder" => "Nom",
+                    "error" => "Votre nom doit faire entre 2 et 55 caractères",
+                    "required" => true
                 ],
-            ],
+                "birthday" => [
+                    "type" => "date",
+                    "label" => "Votre date de naissance",
+                    "maxDate" => date("Y-m-d", strtotime("-18 year", time())),
+                    "id" => "birthday",
+                    "class" => "form_input",
+                    "error" => "Votre date de naissance est obligatoire",
+                    "required" => true
+                ],
+                "email" => [
+                    "type" => "email",
+                    "label" => "Votre email",
+                    "minLength" => 8,
+                    "maxLength" => 320,
+                    "id" => "email",
+                    "class" => "form_input",
+                    "placeholder" => "Email",
+                    "error" => "Votre email doit faire entre 8 et 320 caractères",
+                    "required" => true,
+                ],
+                "pwd" => [
+                    "type" => "password",
+                    "label" => "Votre mot de passe",
+                    "minLength" => 8,
+                    "maj" => true,
+                    "num_verif" => true,
+                    "id" => "pwd",
+                    "class" => "form_input",
+                    "placeholder" => "Mot de passe",
+                    "error" => "Votre mot de passe doit faire au minimum 8 caractères",
+                    "required" => true
+                ],
+                "pwdConfirm" => [
+                    "type" => "password",
+                    "label" => "Confirmation",
+                    "confirm" => "pwd",
+                    "id" => "pwdConfirm",
+                    "class" => "form_input",
+                    "placeholder" => "Confirmer mot de passe",
+                    "error" => "Votre mot de mot de passe de confirmation ne correspond pas",
+                    "required" => true
+                ]
+            ]
         ];
     }
 
@@ -435,6 +509,71 @@ class Installer {
                 ],
                 "PRIMARY KEY" => [
                     "type"=>"(id)"
+                ]
+            ],
+            'lesson'=>[
+                "id" => [
+                    "type"=>"INT",
+                    "not_null"=>true,
+                    "extra"=>"AUTO_INCREMENT"
+                ],
+                "createdBy"=>[
+                    "type"=>"VARCHAR(255)",
+                    "not_null"
+                ],
+                "update_date"=>[
+                    "type"=>"TIMESTAMP",
+                    "not_null"=>false,
+                    "default_without"=>"NULL",
+                    "extra"=>"ON UPDATE CURRENT_TIMESTAMP"
+                ],
+                "title"=>[
+                    "type"=>"VARCHAR(255)",
+                    "not_null"=>false
+                ],
+                "resume"=>[
+                    'type'=>'text',
+                    'not_null'=>false
+                ],
+                'image'=>[
+                    'type'=>'VARCHAR(255)',
+                    'not_null'=>false
+                ],
+                'code'=>[
+                    'type'=>'text',
+                    'not_null'=>true
+                ],
+                'icon'=>[
+                    'type'=>'VARCHAR(255)',
+                    'not_null'=>false
+                ],
+                'create_date'=>[
+                    "type"=>"TIMESTAMP",
+                    "not_null"=>true,
+                    "default_without"=>"CURRENT_TIMESTAMP"
+                ],
+                'part_id'=>[
+                    'type'=>'int',
+                    'not_null'=>true
+                ],
+                'url'=>[
+                    'type'=>'VARCHAR(200)',
+                    'not_null'=>true
+                ]
+            ],
+            'navbar'=>[
+                "id" => [
+                    "type"=>"INT",
+                    "not_null"=>true,
+                    "extra"=>"AUTO_INCREMENT"
+                ],
+                'code'=>[
+                    'type'=>'text',
+                    'not_null'=>false
+                ],
+                'form'=>[
+                    'type'=>'text',
+                    'not_null'=>false
                 ]
             ]
         ];

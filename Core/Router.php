@@ -48,6 +48,35 @@ class Router
                        $this->setController('Page');
                        $this->setAction('renderPage');
                        $this->setAuth(Middleware::isAuthNeeded());
+
+                       $tmp = count($uris) ;
+                       $this->setAuth(Middleware::isAuthNeeded());
+                       $this->setAction(Middleware::getFrontAction());
+
+                       if($tmp == 2) {
+                           // GET FORMATION CONTROLLER AND SHOW ACTION
+                           if(Middleware::isFormationExist($uris[$tmp-1])) {
+                               if (! $this->getAuth() ) {
+                                   $this->setController(Middleware::getControllerFormation());
+                               }
+                           } else $this->redirect404();
+
+                       } else if ($tmp == 3 ) {
+                           // GET PART CONTROLLER AND SHOW ACTION
+                           if(Middleware::isPartExist($uris[$tmp-1],$uris[$tmp-2])) {
+                               if (!$this->getAuth()) {
+                                   $this->setController(Middleware::getControllerPart());
+                               }
+                           } else  $this->redirect404();
+
+                       } else if ($tmp == 4) {
+                           // GET LESSON CONTROLLER AND SHOW ACTION
+                           if(Middleware::isLessonExist($uris[$tmp-1],$uris[$tmp-2],$uris[$tmp-3])) {
+                               if (!$this->getAuth()) {
+                                   $this->setController(Middleware::getControllerLesson());
+                               }
+                           } else $this->redirect404();
+                       }
                    } else $this->redirect404();
                 }
                 else {
