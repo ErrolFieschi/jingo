@@ -24,6 +24,8 @@ class Database
 	}
 
     /**
+     * Return a instance of PDO
+     * if PDO instance is null it create a new and return it
      * @return Database|null
      */
     public static function getInstance() {
@@ -42,7 +44,7 @@ class Database
     }
 
     /**
-     *
+     * Save a model if not existing and update if id set
      */
     public function save(){
 
@@ -78,6 +80,7 @@ class Database
 	}
 
     /**
+     * Deleting a table
      * @param String $BDDTableName
      * @param String $where
      * @param $value
@@ -91,6 +94,7 @@ class Database
     }
 
     /**
+     * update one row of a table
      * @param String $BDDTableName
      * @param String $col
      * @param $value
@@ -109,36 +113,9 @@ class Database
 
     }
 
-    /**
-     * @return mixed
-     */
-    public function getAllRow() {
-
-        $query = $this->bdd->pdo->prepare("SELECT * FROM ".$this->bdd->table." ;");
-
-        $query->execute();
-
-        return $query->fetchAll();
-
-    }
 
     /**
-     * @param $id
-     * @return mixed
-     */
-    public function getRowWithId($id) {
-
-        $query = $this->bdd->pdo->prepare("SELECT * FROM ".$this->bdd->table." WHERE part_id = :id ;");
-
-        $query->execute([
-            "id" => $id
-        ]);
-
-        return $query->fetchAll();
-
-    }
-
-    /**
+     * Allow us to create an SQL and execute it
      * @param string $sql
      * @param array $params
      * @return array|null
@@ -175,27 +152,8 @@ class Database
         return $statement;
     }
 
-
     /**
-     * @param $col
-     * @param $id
-     * @return mixed
-     */
-    public function getOneRowWithId($col, $id)
-    {
-
-        $query = $this->bdd->pdo->prepare("SELECT :col FROM ".$this->bdd->table." WHERE id = :id ;");
-
-        $query->execute([
-            "col" => $col,
-            "id" => $id
-        ]);
-
-        return $query->fetch();
-
-    }
-
-    /**
+     * This method allow us to search with ONE where condition
      * @param $table
      * @param $select
      * @param $whereCondition
@@ -246,6 +204,9 @@ class Database
     }
 
     /**
+     * This method allow us to custom a select into a table
+     * with ONE Where condition (not mandatory)
+     * and limit (not mandatory)
      * @param String $BDDTableName
      * @param String $customSelect
      * @param String|null $tableRowInWhereCondition
