@@ -1,9 +1,8 @@
-
+<section class="content-container-title pl-0 pr-0 h-10-em bck-c-white w-100 tc">
+    <h6 class="mt-0 mb-0 flex pl-40 "> Accueil > Cours > Angular > <?= $title ?> </h6>
+    <h1 class="courses-title "> <?= $title ?> </h1>
+</section>
 <div class="container">
-    <section class="content-container-title pl-0 pr-0 h-10-em bck-c-white w-100 tc">
-        <h6 class="mt-0 mb-0 flex pl-40 "> Accueil > Cours > Angular > <?= $title ?> </h6>
-        <h1 class="courses-title "> <?= $title ?> </h1>
-    </section>
     <section class="flex flex-end flex-row justify-center h-100 ">
         <div class="bck-c-white flex flex-col card--shadow w-70 container-front content-container p-6">
             <?= $displayCode ?>

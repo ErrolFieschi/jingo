@@ -154,7 +154,7 @@
 /lesson/display:
   controller: Lessons
   action: display
-  auth: true
+  auth: false
 
 /installer-delete:
   controller: Security
