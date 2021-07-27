@@ -35,16 +35,12 @@ class Database
         self::$_instance->table = $table ;
     }
 
-
-
-
 	public function save(){
 
 		$columns = array_diff_key (
 						get_object_vars($this),
 						get_class_vars(get_class())
 					);
-
 
 		//INSERT OU UPDATE
 		// $id == null -> INSERT SINON UPDATE
@@ -60,7 +56,6 @@ class Database
             $query->execute($columns);
 
 		}else{
-
 			$sql = "";
 			foreach ($columns as $col => $value) {
 			    if(!empty($value))
@@ -177,14 +172,15 @@ class Database
         return $query->rowCount();
     }
 
-    public static function customSelectFromATable(String $BDDTableName, String $customSelect , String $tableRowInWhereCondition =null, String $tableRowValue=null, Bool $limit = false) {
+    public static function customSelectFromATable(String $BDDTableName, String $customSelect , String $tableRowInWhereCondition =null, String $tableRowValue=null, Bool $limit = false, String $orderBy = 'id') {
 
 	    $sql = "SELECT " . $customSelect .
             " FROM ".DBPREFIXE.$BDDTableName ;
 	    if($tableRowValue != null && $tableRowInWhereCondition != null)
             $sql .= " WHERE ".$tableRowInWhereCondition. " = :find " ;
+        $sql .= " ORDER BY " . $orderBy;
 	    if ($limit)
-          $sql .= "LIMIT 1;" ;
+          $sql .= " LIMIT 1;" ;
 
 	    $query = self::getInstance()->pdo->prepare($sql);
 

@@ -69,8 +69,9 @@
                             </form>
                         </div>
                         <div class="card-icon">
-                            <form method="post" id="update-<?=$rowData['id']?>" action="">
+                            <form method="post" id="update-<?=$rowData['id']?>" action="/lesson/update">
                                 <input type="hidden" name="update" value="<?= $rowData['id'] ?>">
+                                <input type="hidden" name="uri" value="<?= '/' . $back . '/' . $uri ?>">
                                 <a href="javascript:(0)" onclick="document.getElementById('<?= 'update-' . $rowData['id']?>').submit()">
                                     <img src="/Content/svg/setting-bis.svg" alt="setting button">
                                 </a>
@@ -89,6 +90,27 @@
         <?php endforeach; ?>
     </section>
 </div>
+
+
+
+<?php if(isset($update) && !empty($update)){ ?>
+<div class="modal" id="modal1" role="dialog" aria-modal="true" style="display: block; padding-right: 16px;">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <button type="button" class="close" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            <?php App\Core\FormBuilder::render($formUpdate,'form_input_wrapper') ?>
+            <?php if (isset($errors)):
+                foreach ($errors as $error):?>
+                    <li style="color:red"><?= $error; ?></li>
+                <?php endforeach;
+            endif; ?>
+        </div>
+    </div>
+</div>
+</div>
+<?php } ?>
 
 <div class="modal" id="modal" role="dialog" aria-modal="true">
     <div class="modal-dialog modal-dialog-centered" role="document">

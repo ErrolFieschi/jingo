@@ -52,7 +52,7 @@ class FormBuilder
     public static function renderInput($name, $configInput)
     {
         if ($configInput["type"]) {
-            $html = "<label>" . ($configInput["label"] ?? "text") . "</label>";
+            $html = "<label>" . ($configInput["label"] ?? "") . "</label>";
         }
         $html .= "<input 
 						name='" . $name . "' 

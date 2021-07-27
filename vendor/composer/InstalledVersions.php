@@ -20,6 +20,8 @@ use Composer\Semver\VersionParser;
 
 
 
+
+
 class InstalledVersions
 {
 private static $installed = array (
@@ -30,7 +32,7 @@ private static $installed = array (
     'aliases' => 
     array (
     ),
-    'reference' => '14ede1c528fa275bb4bb038e4dad97d5547e16ee',
+    'reference' => '56da97a8e1948b7da0efe821dfce8f2d1ddd73d4',
     'name' => '__root__',
   ),
   'versions' => 
@@ -42,7 +44,7 @@ private static $installed = array (
       'aliases' => 
       array (
       ),
-      'reference' => '14ede1c528fa275bb4bb038e4dad97d5547e16ee',
+      'reference' => '56da97a8e1948b7da0efe821dfce8f2d1ddd73d4',
     ),
     'phpmailer/phpmailer' => 
     array (
@@ -70,7 +72,6 @@ $packages = array();
 foreach (self::getInstalled() as $installed) {
 $packages[] = array_keys($installed['versions']);
 }
-
 
 if (1 === \count($packages)) {
 return $packages[0];
@@ -263,6 +264,7 @@ public static function reload($data)
 self::$installed = $data;
 self::$installedByVendor = array();
 }
+
 
 
 

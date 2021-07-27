@@ -22,12 +22,8 @@ class Part
 
         $view = new View("lesson-list", "back");
         $lesson = new Lesson();
+        $form = $lesson->formLesson();
 
-        if(isset($_POST['update']) && !empty($_POST['update'])){
-            $form = $lesson->formUpdateLesson($_POST['update']);
-        }else{
-            $form = $lesson->formLesson();
-        }
         $view->assign("data", $lessons[0]);
         $view->assign("uri", $uri[1]);
         $view->assign("back", $uri[0]);
@@ -35,7 +31,7 @@ class Part
         $view->assign("form", $form);
 
 
-            if(!empty($_POST) && !isset($_POST['update'])){
+            if(!empty($_POST)){
                 $errors = FormValidator::check($form, $_POST, $_FILES);
 
                 if(empty($errors)){
@@ -54,6 +50,7 @@ class Part
                     $lesson->setUrl($lesson->getTitle());
                     $lesson->setCode($_POST["code"]);
                     $lesson->setPartId($parts['id']);
+
                     $lesson->save();
 
                     header("Location: /" . $uri[0] . '/' . $uri[1]);
@@ -63,6 +60,38 @@ class Part
                 }
             }
     }
+
+    public function updateLessonAction(){
+
+        $view = new View("lesson-update", "back");
+        $lesson = new Lesson();
+        $form = $lesson->formUpdateLesson($_POST["update"], $_POST['uri']);
+        $view->assign("form", $form);
+        $view->assign("uri", $_POST['uri']);
+
+        if(!empty($_POST) && !isset($_POST['update'])){
+
+            $lesson->setTitle($_POST["title"]);
+            $lesson->setResume($_POST["resume"]);
+            $lesson->setIcon($_POST["icon"]);
+            $lesson->setCode($_POST["code"]);
+            $lesson->setId($_POST["id"]);
+            $lesson->save();
+
+            header('Location: ' . $_POST['uri']);
+        }
+    }
+
+    public function sortPartAction(){
+        $orderlist = explode(',', $_POST['order']);
+
+        foreach ($orderlist as $k => $order) {
+            Database::updateOneRow('part', 'order_part', $k, 'id', $order);
+            echo 'save ok';
+        }
+
+    }
+
 
     public function deletePartAction(){
         Database::deleteFromId("lesson", "part_id", $_POST['id']);

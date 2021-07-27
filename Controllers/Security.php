@@ -7,6 +7,7 @@ use App\Core\Helpers;
 use App\Core\Security as Secu;
 use App\Core\View;
 use App\Core\FormValidator;
+use App\Core\Installer;
 
 use App\Models\User;
 
@@ -22,7 +23,7 @@ class Security{
         if( isset($_COOKIE["connectionUser"])  ) {
             $user = new User();
             $data = $user->searchOneColWithOneRow("user","token,email","token",$_COOKIE['connectionUser']);
-            echo "<pre>"; var_dump($data);
+           // echo "<pre>"; var_dump($data);
             $user->setEmail($data["email"]) ;
             if(Secu::userExist($user,$user->getEmail())) {
                 $user->setToken($data["token"]);
@@ -150,7 +151,5 @@ class Security{
     }
 
 
-
-	
 
 }

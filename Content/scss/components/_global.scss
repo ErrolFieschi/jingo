@@ -8,6 +8,7 @@ html, body {
 }
 
 body{
+    overflow-wrap: anywhere!important;
     margin: 0;
     font-family: $font1;
     background-color: $light-grey;
