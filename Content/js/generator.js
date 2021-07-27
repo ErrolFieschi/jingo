@@ -418,6 +418,7 @@ $(document).ready(function () {
         var getId = "#" + id;
 
         $(getId).css("background-image", "url(/" + "" + $(this).attr('id') + "");
+        console.log($(this).attr('id'));
         $(getId).css("align-items", "unset");
         $(getId).css("background-repeat", "no-repeat");
         $(getId).css("background-size", $('#image_style_editor').find(":selected").val());
@@ -429,6 +430,7 @@ $(document).ready(function () {
         } else {
             $(getId).css("background-size", "100%");
         }
+        saver();
     });
 
     // modifie l'image au niveau du submit
@@ -454,8 +456,6 @@ $(document).ready(function () {
         var actual_div = $(getId).parent().parent().parent().attr('id');
         var parent_selected = $(getId).parent().parent().parent().prev().attr('id');
         var div_save = $("#" + actual_div).clone();
-        console.log("la ou je veux aller : " + $(getId).parent().parent().parent().prev().attr('id'));
-        console.log("la ou je suis censé être : " + $(getId).parent().parent().parent().attr('id'));
         if (parent_selected != null) {
             $("#" + actual_div).remove();
             $("#" + parent_selected).before(div_save);
@@ -471,8 +471,6 @@ $(document).ready(function () {
         var actual_div = $(getId).parent().parent().parent().attr('id');
         var next_place = $(getId).parent().parent().parent().next().attr('id');
         var div_save = $("#" + actual_div).clone();
-        console.log("la ou je veux aller : " + $(getId).parent().parent().parent().next().attr('id'));
-        console.log("la ou je suis censé être : " + actual_div);
         if (next_place != null) {
             $("#" + actual_div).remove();
             $("#" + next_place).after(div_save);
@@ -522,8 +520,6 @@ $(document).ready(function () {
         $('#code_save').val('');
         $('#code_save').val($('#page').html());
     }
-
-
     create_bloc();
     show_selected_bloc();
     show_popup_options();
@@ -556,7 +552,6 @@ $(document).ready(function () {
         div_to_top();
         saver();
     });
-
     $("#return_to_pages").click(function () {
         on_return();
     });

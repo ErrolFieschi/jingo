@@ -73,7 +73,7 @@
                 <?php endforeach; ?>
             </select>
 
-            <label>Label du bouton</label>
+            <label>Libellé du lien</label>
             <br>
             <input id="label_form" type="text" class="page_form_input popup_form_input"/>
             <br>

@@ -50,16 +50,23 @@ class Page
             $errors = FormValidator::check($addPage, $_POST);
             if ($page->countRow('page', 'id', 'title', $_POST["title"]) != 1) {
                 if (empty($errors)) {
-                    $page->setCreateBy(1);
+                    $page->setCreateBy($_SESSION['id']);
                     $page->setActive(1);
                     $page->setTitle($_POST["title"]);
-                    $page->setUrl($_POST["name"]);
+                    $page->setUrl($page->getTitle());
                     $page->setName($_POST["name"]);
                     $page->setMeta($_POST["meta"]);
                     $page->save();
 
                 } else {
-                    var_dump($errors);
+                    $page->setId($_POST['id']);
+                    $page->setCreateBy(1);
+                    $page->setActive(1);
+                    $page->setUrl($page->getTitle());
+                    $page->setUrl($_POST["name"]);
+                    $page->setName($_POST["name"]);
+                    $page->setMeta($_POST["meta"]);
+                    $page->save();
                 }
             } else {
                 $view->assign("errors", $errors);
@@ -72,6 +79,8 @@ class Page
     {
         $view = new View("page-show", "page");
         $pagesShow = Database::customSelectFromATable('page', '*', 'id', $_GET["id"]);
+        $getNav = Database::customSelectFromATable('navbar', '*');
+        $view->assign("getNav", $getNav);
         $view->assign("pagesShow", $pagesShow);
     }
 
@@ -98,7 +107,6 @@ class Page
 
         $page = new P();
         $savePage = $page->savePage();
-
         if (!empty($_POST)) {
             $errors = FormValidator::check($savePage, $_POST);
             if (empty($errors)) {

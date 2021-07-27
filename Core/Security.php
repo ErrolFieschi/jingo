@@ -14,11 +14,11 @@ class Security
 	}
 
     private static function checkToken() {
-        echo "<pre>" ; var_dump($_SESSION);
+        //echo "<pre>" ; var_dump($_SESSION);
 	    if (isset($_SESSION['token']) && isset($_SESSION['id'])) {
             $bd = Database::getInstance() ;
             $token = $bd->searchOneColWithOneRow("user","token","id",$_SESSION['id']);
-            var_dump($token);
+            //var_dump($token);
             return ($_SESSION['token'] == $token[0] ) ;
         }
 

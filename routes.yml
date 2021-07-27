@@ -12,7 +12,7 @@
 /dashboard:
   controller: Security
   action: admin
-  auth: false
+  auth: true
 
 /stats:
   controller: Main
@@ -53,22 +53,22 @@
 /training:
   controller: Training
   action: training
-  auth: false
+  auth: true
 
 /training/options:
   controller: Training
   action: trainingOptions
-  auth: false
+  auth: true
 
 /training/delete:
   controller: Training
   action: trainingDelete
-  auth: false
+  auth: true
 
 /training/visible:
   controller: Training
   action: trainingVisible
-  auth: false
+  auth: true
 
 /model:
   controller: Front
@@ -108,19 +108,24 @@
 /pages:
   controller: Page
   action: showPages
-  auth: false
+  auth: true
 
 /page-creator:
   controller: Page
   action: createPage
-  auth: false
+  auth: true
 
 /page/render:
   controller: Page
   action: renderPage
-  auth: false
+  auth: true
 
 /page/update:
   controller: Page
   action: updatePage
+  auth: true
+
+/navbar:
+  controller: Navbar
+  action: navEdit
   auth: false

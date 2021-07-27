@@ -36,7 +36,6 @@ class Training
         header('Location: /training');
     }
 
-
     public function trainingAction()
     {
 
@@ -46,21 +45,23 @@ class Training
         $formTraining = $training->formTraining();
 
         //Select formation
-        $data = $training->globalFind('SELECT wlms_training.id as training_id,
-        wlms_training_tag.id as training_tag_id,
-        wlms_training_tag.name,
-        wlms_training.title,
-        wlms_training.update_date,
-        wlms_training.active,
-        wlms_training.duration,
-        wlms_training.template,
-        wlms_training.createby,
-        wlms_training.description,
-        wlms_training.active,
-        wlms_training.url,
-        wlms_training.image
-        FROM wlms_training LEFT JOIN wlms_training_tag 
-        ON wlms_training.training_tag_id = wlms_training_tag.id ORDER BY wlms_training.update_date', []);
+        $training_table = DBPREFIXE."training";
+        $training_tag_table = DBPREFIXE."training_tag";
+        $data = $training->globalFind("SELECT $training_table.id as training_id,
+        $training_tag_table .id as training_tag_id,
+        $training_tag_table .name,
+        $training_table.title,
+        $training_table.update_date,
+        $training_table.active,
+        $training_table.duration,
+        $training_table.template,
+        $training_table.createby,
+        $training_table.description,
+        $training_table.active,
+        $training_table.url,
+        $training_table.image
+        FROM wlms_training LEFT JOIN $training_tag_table
+        ON $training_table.training_tag_id = $training_tag_table.id ORDER BY $training_table.update_date", []);
         // ne pas afficher la premiere donnée qui est la donnée référence
 
         $view->assign("data", $data);
@@ -70,7 +71,7 @@ class Training
             $errors = FormValidator::check($formTraining, $_POST);
             if ($training->countRow('training', 'id', 'title', $_POST["title"]) != 1) {
                 if (empty($errors)) {
-                    $training->setCreateby(1);
+                    $training->setCreateby($_SESSION['id']);
                     $training->setTitle($_POST["title"]);
                     $training->setDescription($_POST['description']);
                     $training->setTrainingTagId($_POST['themes']);

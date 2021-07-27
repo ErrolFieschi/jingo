@@ -23,7 +23,7 @@ class Security{
         if( isset($_COOKIE["connectionUser"])  ) {
             $user = new User();
             $data = $user->searchOneColWithOneRow("user","token,email","token",$_COOKIE['connectionUser']);
-            echo "<pre>"; var_dump($data);
+           // echo "<pre>"; var_dump($data);
             $user->setEmail($data["email"]) ;
             if(Secu::userExist($user,$user->getEmail())) {
                 $user->setToken($data["token"]);

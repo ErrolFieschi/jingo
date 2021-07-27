@@ -150,7 +150,7 @@ class Page extends Database
      */
     public function setUrl($url): void
     {
-        $this->url = $url;
+        $this->url = Helpers::stringify($url);
     }
 
     /**

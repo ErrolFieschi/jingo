@@ -40,11 +40,14 @@
 
 
             <div class="col-xl-3 col-md-3 col-sm-12 card--inverse ">
-                <div class="card-center card--shadow" style="cursor: pointer;">
-                    <i class="fas fa-bars" style="font-size: 50px;"></i>
-                </div>
-                <p>Editer barre de navigation</p>
+                <a href="/navbar">
+                    <div class="card-center card--shadow" style="cursor: pointer;">
+                        <i class="fas fa-bars" style="font-size: 50px;"></i>
+                    </div>
+                    <p>Editer barre de navigation</p>
+                </a>
             </div>
+
         </div>
 
     </section>
