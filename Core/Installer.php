@@ -67,7 +67,7 @@ class Installer {
                   $user->setRole(1);
                   $user->save();
 
-                  header('Location: /login');
+                  header('Location: /unistallInstaller');
               } else $view->assign('errors', $errors);
           }
       } else Router::redicrection404();

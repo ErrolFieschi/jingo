@@ -149,3 +149,8 @@
   controller: Lessons
   action: display
   auth: false
+
+/unistallInstaller:
+  controller: Security
+  action: unistallInstaller
+  auth: false
