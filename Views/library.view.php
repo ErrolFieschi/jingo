@@ -1,3 +1,4 @@
+
 <div class="container">
     <section class="content-container-title pl-0 pr-0 h-10-em bck-c-white w-100 tc">
         <h6 class="mt-0 mb-0 flex pl-40 "> Accueil > Cours > Angular > <?= $title ?> </h6>

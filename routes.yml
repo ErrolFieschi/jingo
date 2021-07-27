@@ -155,7 +155,6 @@
   controller: Lessons
   action: display
   auth: true
-  role: admin
 
 /installer-delete:
   controller: Security
