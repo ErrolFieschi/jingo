@@ -14,9 +14,6 @@
             <div class="mb-4">
                 <a class="btn" href="<?= $uri; ?>"><i class="fas fa-angle-double-left"></i> Retour aux leçons</a>
             </div>
-            <div class="mb-4" style="margin-left: 10px;">
-                <span class="btn no-click"><i class="fas fa-street-view" style="font-size: 15px; padding-right: 10px;"></i> <?php echo 'test'; ?></span>
-            </div>
         </div>
 
         <div class="row mb-4" style="background-color: white;">

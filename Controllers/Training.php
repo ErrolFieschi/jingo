@@ -101,7 +101,7 @@ class Training
         $parts = [];
 
         $trainingId = Database::customSelectFromATable('training', 'id, title', 'url', $uri[0], true);
-        array_push($parts, Database::customSelectFromATable("part", '*', 'training_id', $trainingId['id']));
+        array_push($parts, Database::customSelectFromATable("part", '*', 'training_id', $trainingId['id'], false, 'order_part'));
 
         $view = new View("part-list", "back");
         $part = new Part();
@@ -109,6 +109,7 @@ class Training
         $view->assign("data", $parts[0]);
         $view->assign("uri", $uri[0]);
         $view->assign("title", $trainingId['title']);
+        $view->assign("trainingId", $trainingId['id']);
         $view->assign("form", $form);
 
         if (!empty($_POST)) {

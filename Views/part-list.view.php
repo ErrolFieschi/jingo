@@ -1,3 +1,26 @@
+<style>
+    [draggable] {
+        -moz-user-select: none;
+        -khtml-user-select: none;
+        -webkit-user-select: none;
+        user-select: none;
+        -khtml-user-drag: element;
+        -webkit-user-drag: element;
+    }
+
+    #columns {
+        list-style-type: none;
+    }
+
+    .column {
+        cursor: move;
+    }
+
+    .column.over {
+        border-top: 10px solid #279eaf;
+    }
+
+</style>
 <div class="container-back-wrap">
     <section>
         <div class="banner banner--text banner--header" style="background-image: url('https://i.pinimg.com/originals/26/ae/12/26ae1241ca65ba8e8ff4a4d442c92566.png');">
@@ -9,43 +32,25 @@
     </section>
     <section>
         <div class="row">
-            <div class="col-xl-3 col-md-3 col-sm-12 card--inverse">
-                <div class="card-center card--shadow" id="modal-btn">
-                    <a href="javascript:void(0);"><img class="svg-dashboard--formation" src="/Content/Images/create_courses.svg" alt="register"></a>
-                </div>
-                <p>Ajouter un chapitre</p>
-            </div>
-            <div class="col-xl-3 col-md-3 col-sm-12 card--inverse">
-                <div class="card-center card--shadow">
-                    <img class="svg-dashboard--formation" src="/Content/Images/create_lesson.svg" alt="lesson">
-                </div>
-                <p>Chapitre favoris</p>
-            </div>
 
-            <div class="col-xl-3 col-md-3 col-sm-12 card--inverse">
-                <div class="card-center card--shadow">
-                    <img class="svg-dashboard--formation" src="/Content/Images/create_page.svg" alt="import page">
-                </div>
-                <p>Dernier chapitre modifié</p>
-            </div>
-            <div class="col-xl-3 col-md-3 col-sm-12 card--inverse">
-                <div class="card-center card--shadow">
-                    <img class="svg-dashboard--formation" src="/Content/Images/import_file.svg" alt="files">
-                </div>
-                <p>Chapitre à la une</p>
-            </div>
+
         </div>
     </section>
     <section>
         <div class="row col-sm-12">
             <div class="mb-4">
-                <a class="btn" href="training"><i class="fas fa-angle-double-left"></i> Retour aux formations</a>
+                <a class="btn" href="training"><i class="fas fa-angle-double-left"></i> RETOUR</a>
+            </div>
+            <div class="mb-4" id="modal-btn" style="margin-left: 10px;">
+                <a class="btn" href="javascript:void(0);"><i class="fas fa-plus"></i> Ajouter un chapitre</a>
             </div>
             <div class="mb-4" style="margin-left: 10px;">
                 <span class="btn no-click"><i class="fas fa-street-view" style="font-size: 15px; padding-right: 10px;"></i> <?= mb_strtoupper($title); ?></span>
             </div>
         </div>
+        <ul style="padding: 0;" id="columns">
         <?php foreach ($data as $rowData): ?>
+        <li style="list-style: none;" id="Element_<?= $rowData['id'] ?>" data-article-id="<?= $rowData['id'] ?>" draggable="true" class="column">
             <div class="row mb-4">
                 <div class="col-sm-12">
                     <div class="card flex-row flex-nowrap card--shadow justify-content-between">
@@ -56,9 +61,6 @@
                             <h4 class="card-title"><?= $rowData['title'] ?></h4>
                         </div>
                         <div class="card-button">
-                            <div class="card-icon">
-                                <a href="#"><img src="/Content/svg/setting-bis.svg" alt="setting button"></a>
-                            </div>
                             <div class="card-icon">
                                 <form method="post" id="<?=$rowData['id']?>" action="/part/delete">
                                     <input type="hidden" name="id" value="<?= $rowData['id'] ?>">
@@ -78,7 +80,11 @@
                     </div>
                 </div>
             </div>
+        </li>
         <?php endforeach; ?>
+        </ul>
+<!--        <a class="btn" href="training"><i class="fas fa-angle-double-left"></i> Retour aux formations</a>-->
+        <input class="btn"  type='button' value="Sauvegarder l'ordre" onclick='saveOrder(<?= $trainingId ?>);'/>
     </section>
 </div>
 <div class="modal fade show" id="modal" tabindex="-1" role="dialog" aria-labelledby="modal-form" aria-modal="true" style="display: none;">

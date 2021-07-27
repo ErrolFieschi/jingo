@@ -172,14 +172,15 @@ class Database
         return $query->rowCount();
     }
 
-    public static function customSelectFromATable(String $BDDTableName, String $customSelect , String $tableRowInWhereCondition =null, String $tableRowValue=null, Bool $limit = false) {
+    public static function customSelectFromATable(String $BDDTableName, String $customSelect , String $tableRowInWhereCondition =null, String $tableRowValue=null, Bool $limit = false, String $orderBy = 'id') {
 
 	    $sql = "SELECT " . $customSelect .
             " FROM ".DBPREFIXE.$BDDTableName ;
 	    if($tableRowValue != null && $tableRowInWhereCondition != null)
             $sql .= " WHERE ".$tableRowInWhereCondition. " = :find " ;
+        $sql .= " ORDER BY " . $orderBy;
 	    if ($limit)
-          $sql .= "LIMIT 1;" ;
+          $sql .= " LIMIT 1;" ;
 
 	    $query = self::getInstance()->pdo->prepare($sql);
 

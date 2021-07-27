@@ -231,8 +231,7 @@ class Lesson extends Database
     {
 
         $data = Database::customSelectFromATable("lesson", "title, resume, code, icon", "id", $post);
-       // echo '<pre>';
-       // var_dump($data);
+
         return [
 
             "config"=>[
@@ -288,7 +287,7 @@ class Lesson extends Database
                     "id" => "uri",
                     "value" => $uri,
                     "class" => "form-control"
-                ],
+                ]
             ]
         ];
     }

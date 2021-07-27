@@ -89,5 +89,6 @@
 <script src="/Content/js/global.js"></script>
 <script type="text/javascript" src="https://kit.fontawesome.com/19c1e7b3bd.js" crossorigin="anonymous"></script>
 <script src="/Content/js/modal.js"></script>
+<script src="/Content/js/sortList.js"></script>
 </body>
 </html>

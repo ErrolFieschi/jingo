@@ -71,12 +71,6 @@ class Part
 
         if(!empty($_POST) && !isset($_POST['update'])){
 
-            try {
-
-            }
-            catch (\Exception $exception){
-
-            }
             $lesson->setTitle($_POST["title"]);
             $lesson->setResume($_POST["resume"]);
             $lesson->setIcon($_POST["icon"]);
@@ -86,6 +80,16 @@ class Part
 
             header('Location: ' . $_POST['uri']);
         }
+    }
+
+    public function sortPartAction(){
+        $orderlist = explode(',', $_POST['order']);
+
+        foreach ($orderlist as $k => $order) {
+            Database::updateOneRow('part', 'order_part', $k, 'id', $order);
+            echo 'save ok';
+        }
+
     }
 
 
