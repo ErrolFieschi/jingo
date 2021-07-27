@@ -141,7 +141,6 @@ class Training
     {
         $uri = Helpers::getUrlAsArray();
         $parts = [];
-        $getNav = Database::customSelectFromATable('navbar', '*');
 
         $trainingId = Database::customSelectFromATable('training', 'id, title', 'url', $uri[0], true);
         array_push($parts, Database::customSelectFromATable("part", '*', 'training_id', $trainingId['id'], false, 'order_part'));
@@ -155,14 +154,12 @@ class Training
         $view->assign("title", $trainingId['title']);
         $view->assign("trainingId", $trainingId['id']);
         $view->assign("form", $form);
-        $view->assign("getNav", $getNav);
     }
 
     public function listAction()
     {
 
         $view = new View("courses", "front");
-        $getNav = Database::customSelectFromATable('navbar', '*');
 
         $training = new T();
 
@@ -187,6 +184,5 @@ class Training
         // ne pas afficher la premiere donnée qui est la donnée référence
 
         $view->assign("data", $data);
-        $view->assign("getNav", $getNav);
     }
 }

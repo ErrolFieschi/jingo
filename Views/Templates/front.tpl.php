@@ -1,3 +1,7 @@
+<?php
+use App\Core\Database;
+$getNav = Database::customSelectFromATable('navbar', '*');
+?>
 <!DOCTYPE html>
 <html lang="FR">
 <head>
@@ -14,7 +18,10 @@
 <header>
 </header>
 
-
+<?php
+foreach ($getNav as $code): ?>
+    <?= $code['code'] ?>
+<?php endforeach; ?>
 
 <!-- intégration de la vue -->
 <?php include $this->view; ?>
