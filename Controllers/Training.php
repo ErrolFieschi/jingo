@@ -142,7 +142,7 @@ class Training
         $uri = Helpers::getUrlAsArray();
         $parts = [];
 
-        $trainingId = Database::customSelectFromATable('training', 'id, title', 'url', $uri[0], true);
+        $trainingId = Database::customSelectFromATable('training', 'id, title', 'url', $uri[1], true);
         array_push($parts, Database::customSelectFromATable("part", '*', 'training_id', $trainingId['id'], false, 'order_part'));
 
         $view = new View("page-part", "front");
@@ -150,7 +150,7 @@ class Training
 
         $form = $part->formPart();
         $view->assign("data", $parts[0]);
-        $view->assign("uri", $uri[0]);
+        $view->assign("uri", $uri[1]);
         $view->assign("title", $trainingId['title']);
         $view->assign("trainingId", $trainingId['id']);
         $view->assign("form", $form);

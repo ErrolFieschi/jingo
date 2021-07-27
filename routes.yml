@@ -140,11 +140,6 @@
   action: navEdit
   auth: false
 
-/library:
-  controller: Library
-  action: library
-  auth: false
-
 /page/courses:
   controller: Training
   action: list

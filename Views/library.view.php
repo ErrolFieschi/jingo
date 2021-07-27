@@ -9,7 +9,7 @@
             <h4 class="color-white tc"> Cours de Laravel </h4>
             <div class="bck-c-white card--shadow h-100 b-r-bg-bd">
                 <ol class="bck-c-white h-100 b-r-bg-bd">
-                    <?php foreach ($lessons as $lesson): ?>
+                    <?php foreach ($data as $lesson): ?>
                         <li>
                             <a class="pages_card decoration-none  chap-animation-title change-content" ChapterPart="<?=$lesson['id']?>" onclick="changeContent(this)"> <?=$lesson['title']?> </a>
                         </li>

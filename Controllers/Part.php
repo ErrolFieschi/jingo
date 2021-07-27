@@ -64,11 +64,12 @@ class Part
     public function showFrontAction(){
         $uri = Helpers::getUrlAsArray();
         $lessons = [];
-
+        //var_dump($uri);
+        //exit;
         $parts = Database::customSelectFromATable('part', 'id, title', 'url', $uri[1], true);
         array_push($lessons, Database::customSelectFromATable("lesson", 'id,title,resume,image,url', 'part_id', $parts['id']));
 
-        $view = new View("lesson-list", "back");
+        $view = new View("library", "front");
         $lesson = new Lesson();
         $form = $lesson->formLesson();
 
