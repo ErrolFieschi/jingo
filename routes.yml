@@ -61,6 +61,11 @@
   action: trainingOptions
   auth: false
 
+/training/update:
+  controller: Training
+  action: trainingUpdate
+  auth: false
+
 /training/delete:
   controller: Training
   action: trainingDelete

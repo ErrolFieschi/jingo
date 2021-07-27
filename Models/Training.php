@@ -177,6 +177,78 @@ class Training extends Database
         $this->template = $template;
     }
 
+    public function formTrainingUpdate($data,$uri) {
+        return[
+            "config" => [
+                "method" => "POST",
+                "action" => "",
+                "id" => "form_training",
+                "class" => "add_trainings col-sm-12 row",
+                "submit" => "Modifier"
+            ],
+            "inputs" => [
+                "id"=>[
+                    "type"=>'hidden',
+                    'value'=>$data['id']
+                ],
+                "uri"=>[
+                    "type"=>'hidden',
+                    "value"=>$uri
+                ],
+                "title" => [
+                    "type" => "text",
+                    "label" => "Nom de la formation",
+                    'value'=>$data['title']??'',
+                    "id" => "training_name",
+                    "class" => "popup_form_input",
+                    "placeholder" => "",
+                ],
+                "description" => [
+                    "type" => "textarea",
+                    "label" => "Description de la formation",
+                    "id" => "training_description",
+                    "class" => "popup_form_input",
+                    "placeholder" => "",
+                    'value'=>$data['description']??'',
+
+                ],
+                "themes" => [
+                    "type" => "select",
+                    "label" => "Themes",
+                    "id" => "training_themes",
+                    "class" => "popup_form_input",
+                    'value'=>$data['training_tag_id']??'',
+                    "options" => self::getListThemes(),
+
+                ],
+                "template" => [
+                    "type" => "radio",
+                    "label" => "",
+                    "id" => "template",
+                    'value'=>$data['template']??'',
+                    "name" => "templating",
+                    "class" => "popup_form_input",
+                    "options" => self::getListTemplates(),
+                    "placeholder" => "",
+                ],
+                "visible" => [
+                    "type" => "radio",
+                    "label" => "Rendre la formation visible",
+                    "id" => "visible",
+                    'value'=>$data['active']??'',
+                    "name" => "showForm",
+                    "class" => "",
+                    "options" => [
+                        "oui" => 1,
+                        "non" => 0,
+                    ],
+                    "placeholder" => "",
+                    "error" => "Votre themes doit faire 2 caractères"
+                ],
+            ]
+        ] ;
+    }
+
     public function formTraining()
     {
 

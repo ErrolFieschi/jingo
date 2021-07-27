@@ -81,10 +81,11 @@
                             <a href="#" style="color: #c56f43;"><?= $rowData['name'] ?></a>
                         </div>
                         <div class="card-button">
-
-
                             <div class="card-icon">
-                                <a href="#"><img src="/Content/svg/setting-bis.svg" alt="setting button"></a>
+                                <form id="form<?= $rowData['training_id'] ?>" action="/training/update" method="post">
+                                    <input type="hidden" name="id" value="<?= $rowData['training_id'] ?>">
+                                    <a href="javascript:(0)" onclick="document.getElementById('form'+<?= $rowData['training_id']?>).submit()"><img src="/Content/svg/setting-bis.svg" alt="setting button"></a>
+                                </form>
                             </div>
                             <div class="card-icon">
                                 <a href="/training/delete?id=<?= $rowData['training_id'] ?>"><img
