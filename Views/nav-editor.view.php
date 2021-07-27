@@ -5,6 +5,17 @@
     </div>
 </div>
 <div class="container-front">
+    <section>
+        <div class="row col-sm-12">
+            <div class="pt-40">
+                <a class="btn" href="pages">
+                    <i class="fas fa-angle-double-left" aria-hidden="true"></i>
+                    Retour
+                </a>
+            </div>
+        </div>
+    </section>
+
     <div class="nav-form" id="export_form">
 
         <div class="incrementor-nav" id="0" style="display: none"></div>

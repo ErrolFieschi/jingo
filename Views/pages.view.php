@@ -44,8 +44,9 @@
                     <div class="card-center card--shadow" style="cursor: pointer;">
                         <i class="fas fa-bars" style="font-size: 50px;"></i>
                     </div>
-                    <p>Editer barre de navigation</p>
                 </a>
+                    <p>Editer barre de navigation</p>
+
             </div>
 
         </div>
@@ -75,7 +76,7 @@
             <div class="row mb-4">
                 <div class="col-sm-12">
                     <div class="card flex-row flex-nowrap card--shadow justify-content-between">
-                        <a href="/page/render?id=<?= $rowData['id'] ?>">
+                        <a href="/page/<?= $rowData['url'] ?>">
                             <div class="card-header">
                                 <img src="/Content/Images/formation.png" alt="title image" style="object-fit: cover;">
                             </div>
