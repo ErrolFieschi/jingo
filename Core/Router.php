@@ -42,7 +42,15 @@ class Router
                         $this->setAction('setupDatabase');
                         $this->setAuth(false);
                     }
-                } else {
+                }
+                else if ($uris[0] == 'page') {
+                   if( Middleware::isPageExist($uris[1])) {
+                       $this->setController('Page');
+                       $this->setAction('renderPage');
+                       $this->setAuth(Middleware::isAuthNeeded());
+                   } else $this->redirect404();
+                }
+                else {
                     $tmp = count($uris) ;
                     $this->setAuth(Middleware::isAuthNeeded());
                     $this->setAction(Middleware::getAction());
