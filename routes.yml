@@ -1,18 +1,16 @@
 
-/:
-  controller: Main
-  action: default
-  auth: false
 
 /admin:
   controller: Security
   action: default
-  auth: false
+  auth: true
+  role: admin
 
 /dashboard:
   controller: Security
   action: admin
-  auth: false
+  auth: true
+  role: admin
 
 /stats:
   controller: Main
@@ -23,7 +21,8 @@
 /settings:
   controller: Main
   action: settings
-  auth: false
+  auth: true
+  role: admin
 
 /register:
   controller: Security
@@ -40,11 +39,6 @@
   action: logout
   auth: true
 
-/setup:
-  controller: Security
-  action: setup
-  auth: false
-
 /home:
   controller: Main
   action: home
@@ -54,37 +48,32 @@
 /training:
   controller: Training
   action: training
-  auth: false
+  auth: true
+  role: admin
 
 /training/options:
   controller: Training
   action: trainingOptions
-  auth: false
+  auth: true
+  role: admin
 
 /training/update:
   controller: Training
   action: trainingUpdate
-  auth: false
+  auth: true
+  role: admin
 
 /training/delete:
   controller: Training
   action: trainingDelete
-  auth: false
+  auth: true
+  role: admin
 
 /training/visible:
   controller: Training
   action: trainingVisible
-  auth: false
-
-/model:
-  controller: Front
-  action: model
-  auth: false
-
-/users:
-  controller: Main
-  action: users
-  auth: false
+  auth: true
+  role: admin
 
 /forget-password:
   controller: Security
@@ -94,57 +83,68 @@
 /admin-user:
   controller: User
   action: user
-  auth: false
+  auth: true
+  role: admin
 
 /admin-user/delete:
   controller: User
   action: deleteUser
-  auth: false
+  auth: true
+  role: admin
 
 /lesson/update:
   controller: Part
   action: updateLesson
-  auth: false
+  auth: true
+  role: admin
 
 /lesson/delete:
   controller: Lessons
   action: deleteLesson
-  auth: false
+  auth: true
+  role: admin
 
 /part/delete:
   controller: Part
   action: deletePart
-  auth: false
+  auth: true
+  role: admin
 
 /part/sort:
   controller: Part
   action: sortPart
-  auth: false
+  auth: true
+  role: admin
 
 /pages:
   controller: Page
   action: showPages
-  auth: false
+  auth: true
+  role: admin
 
 /page-creator:
   controller: Page
   action: createPage
-  auth: false
+  auth: true
+  role: admin
 
 /page/render:
   controller: Page
   action: renderPage
-  auth: false
+  auth: true
+  role: admin
 
 /page/update:
   controller: Page
   action: updatePage
-  auth: false
+  auth: true
+  role: admin
 
 /navbar:
   controller: Navbar
   action: navEdit
-  auth: false
+  auth: true
+  role: admin
 
 /courses:
   controller: Training
@@ -154,7 +154,8 @@
 /lesson/display:
   controller: Lessons
   action: display
-  auth: false
+  auth: true
+  role: admin
 
 /installer-delete:
   controller: Security

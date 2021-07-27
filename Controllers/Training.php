@@ -39,7 +39,7 @@ class Training
     }
 
     /**
-     *
+     * Updating a training
      */
     public function trainingUpdateAction() {
         $view = new View('trainingUpdate','back');
