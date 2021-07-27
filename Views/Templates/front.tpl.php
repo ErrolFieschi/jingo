@@ -1,3 +1,5 @@
+<?php $getNav = App\Core\Database::customSelectFromATable('navbar', '*'); ?>
+
 <!DOCTYPE html>
 <html lang="FR">
 <head>

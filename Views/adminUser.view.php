@@ -55,47 +55,18 @@
             <?php
             foreach ($data as $rowData): ?>
 
-                <?php if ($rowData['isDeleted'] == 1) {
-                    ?>
-                    <tr style="background-color: red;">
-
-                        <th scope="row"><?= $rowData['id'] ?></th>
-                        <td><?= $rowData['firstname'] ?></td>
-                        <td><?= $rowData['lastname'] ?></td>
-                        <td><?= $rowData['email'] ?></td>
-                        <td><?= $rowData['birthday'] ?></td>
-                        <td><?= $rowData['country'] ?></td>
-                        <td><?= $rolesUser[$rowData['role']] ?></td>
-                        <!-- <td><?= $rowData['status'] ?></td> -->
-                        <td><?= $rowData['isDeleted'] ?></td>
-                        <td><?= $rowData['createdAt'] ?></td>
-                        <td><?= $rowData['updatedAt'] ?></td>
-                        <td>
-                            <div class="card-icon show">
-                                <a href="/admin-user?id=<?= $rowData['id'] ?>">
-                                    <img src="/Content/svg/edit.svg" alt="edit img" style="cursor: pointer">
-                                </a>
-                            </div>
-                        </td>
-                        <td>
-                            <div class="card-icon"><a href=""> <img src="/Content/svg/trash.svg"
-                                                                    alt="Trash button" style="cursor: pointer"></a>
-                            </div>
-                        </td>
-                    </tr>
-                <?php } else { ?>
-                    <tr>
-                        <th scope="row"><?= $rowData['id'] ?></th>
-                        <td><?= $rowData['firstname'] ?></td>
-                        <td><?= $rowData['lastname'] ?></td>
-                        <td><?= $rowData['email'] ?></td>
-                        <td><?= $rowData['birthday'] ?></td>
-                        <td><?= $rowData['country'] ?></td>
-                        <td><?= $rolesUser[$rowData['role']] ?></td>
-                        <!-- <td><?= $rowData['status'] ?></td> -->
-                        <td><?= $rowData['isDeleted'] ?></td>
-                        <td><?= $rowData['createdAt'] ?></td>
-                        <td><?= $rowData['updatedAt'] ?></td>
+                <tr>
+                    <th scope="row"><?= $rowData['id'] ?></th>
+                    <td><?= $rowData['firstname'] ?></td>
+                    <td><?= $rowData['lastname'] ?></td>
+                    <td><?= $rowData['email'] ?></td>
+                    <td><?= $rowData['birthday'] ?></td>
+                    <td><?= $rowData['country'] ?></td>
+                    <td><?= $rolesUser[$rowData['role']] ?></td>
+                    <td><?= $rowData['isDeleted'] == 1 ? 'Oui' : 'Non' ?></td>
+                    <td><?= $rowData['createdAt'] ?></td>
+                    <td><?= $rowData['updatedAt'] ?></td>
+                    <?php if ($rowData['role'] !== 1 || $rowData['id'] == $_SESSION['id']) { ?>
                         <td>
                             <div class="card-icon show">
                                 <a href="/admin-user?id=<?= $rowData['id'] ?>">
@@ -109,8 +80,12 @@
                                             alt="Trash button" style="cursor: pointer"></a>
                             </div>
                         </td>
-                    </tr>
-                <?php } ?>
+                    <?php } else { ?>
+                        <td></td>
+                        <td></td>
+                    <?php } ?>
+                </tr>
+
             <?php endforeach; ?>
             </tbody>
         </table>

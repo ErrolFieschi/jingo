@@ -27,7 +27,7 @@ class Router
                 
                 if (!empty($this->routes[$this->uri]["role"])) {
                     $this->setRole($this->routes[$this->uri]["role"]);
-                    if ($this->getRole() >= Security::userRole()) {
+                    if (array_search($this->getRole(), User::rolesUser()) >= Security::userRole()) {
                         header('Location: /page/accueil');
                     }
                 }

@@ -80,8 +80,6 @@ class Page
         $uri = Helpers::getUrlAsArray();
         $view = new View("page-show", "front");
         $pagesShow = Database::customSelectFromATable('page', '*', 'url', $uri[1]);
-        $getNav = Database::customSelectFromATable('navbar', '*');
-        $view->assign("getNav", $getNav);
         $view->assign("pagesShow", $pagesShow);
     }
 
