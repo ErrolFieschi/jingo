@@ -67,3 +67,36 @@
     </section>
 </div>
 
+<script>
+
+    $(document).ready(function () {
+        showChartDonutTraining();
+    });
+
+    function showChartDonutTraining() {
+        if(document.getElementById('chart-line-course')!= null) {
+            new Chart(document.getElementById('chart-line-course').getContext('2d'), {
+                type: 'doughnut',
+                data: {
+                    labels: [<?php echo '"'.implode('","', $trainingsByTagName).'"' ?>],
+                    datasets: [{
+                        data: [<?php echo '"'.implode('","', $trainingsByTagData).'"' ?>],
+                        backgroundColor: ['rgba(54, 162, 235, 0.2)', 'rgba(255, 206, 86, 0.2)', 'rgba(75, 192, 192, 0.2)'],
+                        borderColor: ['rgba(54, 162, 235, 1)', 'rgba(255, 206, 86, 1)', 'rgba(75, 192, 192, 1)',],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    legend: {
+                        display: true,
+                        position: 'bottom',
+                        onClick: null
+                    },
+                    maintainAspectRatio: false,
+                },
+            });
+        }
+    }
+
+</script>
