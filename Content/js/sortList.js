@@ -3,6 +3,7 @@ var dragSrcEl = null;
 function handleDragStart(e) {
     dragSrcEl = this;
 
+    $('#save-order').attr('type', 'button');
     e.dataTransfer.effectAllowed = 'move';
     e.dataTransfer.setData('text/html', this.outerHTML);
 

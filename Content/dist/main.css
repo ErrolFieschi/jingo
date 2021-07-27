@@ -525,14 +525,19 @@ hr {
   font-size: 13px;
   text-decoration: none;
 }
-
-.no-click {
-  cursor: unset;
-  background-color: #74747f !important;
+.btn--success {
+  background-color: #31aa66 !important;
+  border: 1px solid #31aa66 !important;
+  color: #fff;
 }
-
-.no-click:hover {
-  background-color: #74747f !important;
+.btn--success:hover {
+  background-color: #45c97f !important;
+}
+.btn--disable {
+  cursor: unset;
+}
+.btn--disable:hover {
+  background-color: #24242d !important;
 }
 
 .btn:hover {
