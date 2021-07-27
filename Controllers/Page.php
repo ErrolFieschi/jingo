@@ -29,7 +29,7 @@ class Page
         var_dump($_POST['id_visible']);
         if ($check_accueil[0][1] == "accueil") {
             header('Location: /pages?error=accueil_visible');
-        }elseif ($_POST['id_visible'] == 0){
+        } elseif ($_POST['id_visible'] == 0) {
 
             Database::updateOneRow('page', 'visible', 0, 'id', $_POST['id']); // Fonctionne
             header('Location: /pages');
@@ -64,7 +64,12 @@ class Page
 
     }
 
-    public function updateFormPageAction(){
+    public function updateFormPageAction()
+    {
+        $check_accueil = Database::customSelectFromATable('page', '*', 'id', $_GET['id']);
+        if ($check_accueil[0][1] == "accueil") {
+            header('Location: /pages?error=accueil');
+        }
         $view = new View("pages-update", "back");
         $page = new P();
 
@@ -84,7 +89,6 @@ class Page
             $page->save();
             header('Location: /pages');
         }
-        //
     }
 
     public function showPagesAction()
