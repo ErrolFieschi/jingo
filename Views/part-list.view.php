@@ -32,8 +32,31 @@
     </section>
     <section>
         <div class="row">
+            <div class="col-xl-3 col-md-3 col-sm-12 card--inverse">
+                <div class="card-center card--shadow" id="modal-btn">
+                    <a href="javascript:void(0);"><img class="svg-dashboard--formation" src="/Content/Images/create_courses.svg" alt="register"></a>
+                </div>
+                <p>Ajouter un chapitre</p>
+            </div>
+            <div class="col-xl-3 col-md-3 col-sm-12 card--inverse">
+                <div class="card-center card--shadow">
+                    <img class="svg-dashboard--formation" src="/Content/Images/create_lesson.svg" alt="lesson">
+                </div>
+                <p>Chapitre favoris</p>
+            </div>
 
-
+            <div class="col-xl-3 col-md-3 col-sm-12 card--inverse">
+                <div class="card-center card--shadow">
+                    <img class="svg-dashboard--formation" src="/Content/Images/create_page.svg" alt="import page">
+                </div>
+                <p>Dernière chapitre modifiée</p>
+            </div>
+            <div class="col-xl-3 col-md-3 col-sm-12 card--inverse">
+                <div class="card-center card--shadow">
+                    <img class="svg-dashboard--formation" src="/Content/Images/import_file.svg" alt="files">
+                </div>
+                <p>Chapitre à la une</p>
+            </div>
         </div>
     </section>
     <section>
@@ -41,14 +64,14 @@
             <div class="mb-4">
                 <a class="btn" href="training"><i class="fas fa-angle-double-left"></i> RETOUR</a>
             </div>
-            <div class="mb-4" id="modal-btn" style="margin-left: 10px;">
-                <a class="btn" href="javascript:void(0);"><i class="fas fa-plus"></i> Ajouter un chapitre</a>
+            <div class="mb-4 ml-3">
+                <span class="btn btn--disable"><i class="fas fa-street-view pr-12" style="font-size: 15px;"></i> <?= mb_strtoupper($title); ?></span>
             </div>
-            <div class="mb-4" style="margin-left: 10px;">
-                <span class="btn no-click"><i class="fas fa-street-view" style="font-size: 15px; padding-right: 10px;"></i> <?= mb_strtoupper($title); ?></span>
+            <div class="mb-4 ml-3">
+                <input id="save-order" class="btn btn--success"  type='hidden' value="Sauvegarder l'ordre" onclick='saveOrder(<?= $trainingId ?>);' />
             </div>
         </div>
-        <ul style="padding: 0;" id="columns">
+        <ul class="p-0" id="columns">
         <?php foreach ($data as $rowData): ?>
         <li style="list-style: none;" id="Element_<?= $rowData['id'] ?>" data-article-id="<?= $rowData['id'] ?>" draggable="true" class="column">
             <div class="row mb-4">
@@ -83,8 +106,6 @@
         </li>
         <?php endforeach; ?>
         </ul>
-<!--        <a class="btn" href="training"><i class="fas fa-angle-double-left"></i> Retour aux formations</a>-->
-        <input class="btn"  type='button' value="Sauvegarder l'ordre" onclick='saveOrder(<?= $trainingId ?>);'/>
     </section>
 </div>
 <div class="modal fade show" id="modal" tabindex="-1" role="dialog" aria-labelledby="modal-form" aria-modal="true" style="display: none;">
