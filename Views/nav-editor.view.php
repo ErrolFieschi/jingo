@@ -1,9 +1,20 @@
 <div id="export_navbar">
-    <div class="navbar">
-        <a class="site-title ml-10" style="color: white" href="#">JINGO</a>
-        <div id="placement_nav"></div>
-    </div>
+    <?php
+    foreach ($getNavBar as $code): ?>
+    <?php endforeach;
+    if ($code['code'] == null): ?>
+        <div class="navbar">
+            <a class="site-title ml-10" style="color: white" href="#">JINGO</a>
+            <div id="placement_nav"></div>
+        </div>
+    <?php else: ?>
+        <?= $code['code']; ?>
+    <?php
+    endif;
+    ?>
 </div>
+
+
 <div class="container-front">
     <section>
         <div class="row col-sm-12">
@@ -17,6 +28,7 @@
     </section>
 
     <div class="nav-form" id="export_form">
+        <?php if ($code['form'] == null): ?>
 
         <div class="incrementor-nav" id="0" style="display: none"></div>
         <div class="incrementor-validator" id="0" style="display: none"></div>
@@ -154,5 +166,11 @@
             </div>
         </section>
     </div>
+    <?php
+    else:
+    ?>
+    <?= $code['form']; ?>
+
+   <?php endif; ?>
 </div>
 

@@ -18,6 +18,8 @@ class User
         $view = new View("adminUser", "back");
         $user = new U();
 
+        $formUpdateUser = $user->formUpdateUser();
+
         $data = $user->globalFind("SELECT 
         id,
         firstname,

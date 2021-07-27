@@ -22,11 +22,13 @@ class Navbar
         $trainingPartList = Database::customSelectFromATable('part', 'url');
         $createdPagesList = Database::customSelectFromATable('page', 'url'); //liste des pages créer
         $getIdNav = Database::customSelectFromATable('navbar', 'id');
+        $getNavBar = Database::customSelectFromATable('navbar', '*');
 
         $view->assign("trainingUrlList", $trainingUrlList);
         $view->assign("trainingLessonList", $trainingLessonList);
         $view->assign("trainingPartList", $trainingPartList);
         $view->assign("createdPagesList", $createdPagesList);
+        $view->assign("getNavBar", $getNavBar);
 
         $nav = new N();
         $saveNav = $nav->updateNavbar();

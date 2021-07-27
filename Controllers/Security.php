@@ -103,8 +103,15 @@ class Security{
 		}
 		$view->assign("form", $form);
 	}
+    public function uninstallInstallerAction() {
+        echo 'test' ;
+        Secu::deleteInstaller();
 
-	public function logoutAction(){
+        header('Status: 301 Permanently', false, 301);
+        header('Location: /login');
+    }
+
+    public function logoutAction(){
         session_destroy();
         setcookie("connectionUser",null,-1);
         setcookie("connectionPWD",null,-1);

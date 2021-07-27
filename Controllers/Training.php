@@ -17,6 +17,11 @@ class Training
     public function trainingDeleteAction()
     {
         if (!empty($_GET['id'] && isset($_GET['id']))) {
+            //get id of lesson
+            //get id of part
+            //$getIdPart = Database::customSelectFromATable('page', '*');
+            Database::deleteFromId('lesson', 'part_id', $_GET['id']);
+            Database::deleteFromId('part', 'training_id', $_GET['id']);
             Database::deleteFromId('training', 'id', $_GET['id']);
         }
         header('Location: /training');
@@ -137,5 +142,52 @@ class Training
         }
     }
 
+    public function showFrontAction()
+    {
+        $uri = Helpers::getUrlAsArray();
+        $parts = [];
 
+        $trainingId = Database::customSelectFromATable('training', 'id, title', 'url', $uri[1], true);
+        array_push($parts, Database::customSelectFromATable("part", '*', 'training_id', $trainingId['id'], false, 'order_part'));
+
+        $view = new View("page-part", "front");
+        $part = new Part();
+
+        $form = $part->formPart();
+        $view->assign("data", $parts[0]);
+        $view->assign("uri", $uri[1]);
+        $view->assign("title", $trainingId['title']);
+        $view->assign("trainingId", $trainingId['id']);
+        $view->assign("form", $form);
+    }
+
+    public function listAction()
+    {
+
+        $view = new View("courses", "front");
+
+        $training = new T();
+
+        //Select formation
+        $training_table = DBPREFIXE."training";
+        $training_tag_table = DBPREFIXE."training_tag";
+        $data = $training->globalFind("SELECT $training_table.id as training_id,
+        $training_tag_table .id as training_tag_id,
+        $training_tag_table .name,
+        $training_table.title,
+        $training_table.update_date,
+        $training_table.active,
+        $training_table.duration,
+        $training_table.template,
+        $training_table.createby,
+        $training_table.description,
+        $training_table.active,
+        $training_table.url,
+        $training_table.image
+        FROM wlms_training LEFT JOIN $training_tag_table
+        ON $training_table.training_tag_id = $training_tag_table.id WHERE $training_table.active = 1 ORDER BY $training_table.update_date", []);
+        // ne pas afficher la premiere donnée qui est la donnée référence
+
+        $view->assign("data", $data);
+    }
 }

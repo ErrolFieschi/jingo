@@ -23,6 +23,7 @@ $(document).ready(function () {
         if ($(event.target).hasClass("add_link_group")) {
             var cloner = $("#render_nav_link").find(".link_reference").clone(); // cloner ok
             $(event.target).parent().parent().before(cloner);
+            // cloisoner pour récupérer en fonction de l'id ?
         }
     }
 
@@ -63,13 +64,13 @@ $(document).ready(function () {
     function addLinkDropDown() {
         if ($(event.target).hasClass("fa-check")) {
 
-            console.log("test value : " + $(event.target).closest(".link-reference").find(".label_link_nav").val());
+            //console.log("test value : " + $(event.target).closest(".link-reference").find(".label_link_nav").val());
             $(event.target).closest(".link-reference").css("background-color", "red");
-            console.log($(event.target).closest(".link-reference").attr("class"));
+            //console.log($(event.target).closest(".link-reference").attr("class"));
             var tester = $(event.target).attr('id');
 
-            console.log("tester : " + tester);
-            console.log($("#" + tester).closest(".link-reference").children().attr("class"));
+            //console.log("tester : " + tester);
+            //console.log($("#" + tester).closest(".link-reference").children().attr("class"));
         }
     }
 
@@ -83,10 +84,65 @@ $(document).ready(function () {
                 alert("Vous devez selectionner une url");
             } else {
                 $("#" + findSectionParent() + "_nav").remove();
-                html = '<a id="' + findSectionParent() + '_nav" href="' + $(event.target).closest("section").find(".page-link-nav").val() + $(event.target).closest("section").find(".formation-link-nav").val() + '">' + lb_link_nav + '</a>';
+
+                if ($(event.target).closest("section").find(".page-link-nav").val() == '') {
+                    html = '<a class="to_courses" id="' + findSectionParent() + '_nav" href="../courses/' + $(event.target).closest("section").find(".formation-link-nav").val() + '">' + lb_link_nav + '</a>';
+
+                } else {
+                    html = '<a class="to_page" id="' + findSectionParent() + '_nav" href="../page/' + $(event.target).closest("section").find(".page-link-nav").val() + '">' + lb_link_nav + '</a>';
+
+                }
+
+                //console.log($(event.target).closest("section").find(".page-link-nav").val());
                 $("#placement_nav").before(html);
             }
         }
+    }
+
+    function fillValue() {
+
+        const navLab = [];
+        $("#export_navbar").find("a").each(function () {
+            navLab.push($(this).attr("id"));
+        });
+
+        for (var i = 0; i < navLab.length; i++) {
+            if (navLab[i] != null) {
+                if (navLab[i].length >= 21) {
+                    var transform = navLab[i].substr(0, navLab[i].length - 4);
+                    $("#" + transform).find(".label_link_nav").val($("#" + navLab[i]).text());
+
+                    if($("#" + navLab[i]).hasClass("to_courses")){
+                        $("#" + transform).find(".formation-link-nav").val($("#" + navLab[i]).attr('href').substr(11));
+                        console.log("to courses : " + $("#" + navLab[i]).attr('href').substr(11));
+                    }else{
+                        $("#" + transform).find(".page-link-nav").val($("#" + navLab[i]).attr('href').substr(8));
+                        console.log("to page : " + $("#" + navLab[i]).attr('href').substr(8));
+                    }
+                    if ($("#" + transform).find(".page-link-nav").val() == null) {
+                        $("#" + transform).find(".page-link-nav").val('');
+                    }
+                    if ($("#" + transform).find(".formation-link-nav").val() == null) {
+                        $("#" + transform).find(".formation-link-nav").val('');
+                    }
+                }
+            }
+
+            //compter nombre enfant
+            //afficher a la place du nombre de l'enfant
+            //replacer les enfants
+        }
+
+
+        var inc = getIncrementor();
+        //for(var i = 0; i<inc ; i++){
+        // console.log($("#export_form").find("section").each().attr('id'));
+        //}
+        //getIncrementor
+        //compter le nombre de form
+        //incrementer l'id
+        // render_nav_link0_nav = label_link_nav de render_nav_link_0
+
     }
 
     function saver() {
@@ -97,7 +153,7 @@ $(document).ready(function () {
     }
 
     function suppressSimpleLink() {
-        if ($(event.target).hasClass("delete_link")){
+        if ($(event.target).hasClass("delete_link")) {
             $("#" + findSectionParent() + "_nav").remove();
             $("#" + findSectionParent()).remove()
         }
@@ -147,6 +203,7 @@ $(document).ready(function () {
         suppressSimpleLink();
         saver();
     });
+    fillValue();
 
 })
 ;

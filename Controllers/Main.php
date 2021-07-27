@@ -92,4 +92,9 @@ class Main{
 
         $view->assign("formLesson", $formLesson);
     }
+
+    public function usersAction(){
+
+        $view = new View("users", "back");
+    }
 }

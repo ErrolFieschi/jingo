@@ -15,6 +15,7 @@ class Page extends Database
     protected $url;
     protected $active;
     protected $meta;
+    protected $visible;
 
     protected $bdd;
 
@@ -23,6 +24,22 @@ class Page extends Database
         $this->bdd = parent::getInstance();
         $getCalledClassExploded = explode("\\", get_called_class());
         $this->bdd->setTable(strtolower(DBPREFIXE . end($getCalledClassExploded)));
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getVisible()
+    {
+        return $this->visible;
+    }
+
+    /**
+     * @param mixed $visible
+     */
+    public function setVisible($visible): void
+    {
+        $this->visible = $visible;
     }
 
     /**
@@ -250,6 +267,19 @@ class Page extends Database
                     "placeholder" => "",
                     "error" => "Le nom de la page doit faire entre 2 et 300 caractères",
                     "required" => true
+                ],
+                "visible" => [
+                    "type" => "radio",
+                    "label" => "Rendre la formation visible",
+                    "id" => "visible",
+                    "name" => "showForm",
+                    "class" => "",
+                    "options" => [
+                        "oui" => 1,
+                        "non" => 0,
+                    ],
+                    "placeholder" => "",
+                    "error" => "Votre themes doit faire 2 caractères"
                 ],
             ],
         ];

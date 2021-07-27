@@ -53,12 +53,17 @@ class Security
     }
 
     public static function userRole(): String {
-
         if (self::isConnected()) {
             $role_user = Database::customSelectFromATable('user', 'role', 'id', $_SESSION['id']);
             return $role_user[0]['role'];
         }
+    }
 
+    public static function deleteInstaller() {
+        try {
+            unlink("Core/data.sql") ;
+            unlink('Core/Installer.php');
+        } catch (\Exception $e){}
     }
 
 }

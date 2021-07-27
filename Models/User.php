@@ -514,6 +514,114 @@ class User extends Database
         ];
     }
 
+    public function formtest()
+    {
+        return [
+
+            "config" => [
+                "method" => "POST",
+                "action" => "",
+                "id" => "form_updateUser",
+                "class" => "form_builder",
+                "submit" => "Sauvegarder"
+            ],
+            "inputs" => [
+                "id"=> [
+                    "type"=>"hidden",
+                    "id" => "id",
+                    "label"=>"",
+                    "value"=>"" //USER ID
+                ],
+                "firstname" => [
+                    "type" => "text",
+                    "label" => "Prénom de l'utilisateur",
+                    "minLength" => 2,
+                    "maxLength" => 55,
+                    "id" => "firstname",
+                    "class" => "form_input",
+                    "placeholder" => "Prénom",
+                    "error" => "Le prénom doit faire entre 2 et 55 caractères",
+                    "required" => true
+                ]
+            ]
+        ];
+    }
+    public function formUpdateUser()
+    {
+        return [
+
+            "config" => [
+                "method" => "POST",
+                "action" => "",
+                "id" => "form_updateUser",
+                "class" => "form_builder",
+                "submit" => "Sauvegarder"
+            ],
+            "inputs" => [
+                "firstname" => [
+                    "type" => "text",
+                    "label" => "Prénom de l'utilisateur",
+                    "minLength" => 2,
+                    "maxLength" => 55,
+                    "id" => "firstname",
+                    "class" => "form_input",
+                    "placeholder" => "Prénom",
+                    "error" => "Le prénom doit faire entre 2 et 55 caractères",
+                    "value"=>"",
+                    "required" => true
+                ],
+                "lastname" => [
+                    "type" => "text",
+                    "label" => "Nom de l'utilisateur",
+                    "minLength" => 2,
+                    "maxLength" => 55,
+                    "id" => "lastname",
+                    "class" => "form_input",
+                    "placeholder" => "Nom",
+                    "error" => "Le nom doit faire entre 2 et 55 caractères",
+                    "value"=>"",
+                    "required" => true
+                ],
+                "email" => [
+                    "type" => "email",
+                    "label" => "Email de l'utilisateur",
+                    "minLength" => 8,
+                    "maxLength" => 320,
+                    "id" => "email",
+                    "class" => "form_input",
+                    "placeholder" => "Email",
+                    "error" => "L'email doit faire entre 8 et 320 caractères",
+                    "value"=>"",
+                    "required" => true,
+                    "unique" => true,
+                    "unique_error" => "Cet email est déjà utilisé."
+                ],
+                "role" => [
+                    "type" => "text",
+                    "label" => "role",
+                    "minLength" => 0,
+                    "maxLength" => 2,
+                    "id" => "role",
+                    "class" => "form_input",
+                    "value" => "",
+                    "error" => "erreur ",
+                    "required" => true
+                ],
+                "status" => [
+                    "type" => "text",
+                    "label" => "Status de l'utilisateur",
+                    "minLength" => 0,
+                    "maxLength" => 2,
+                    "id" => "status",
+                    "class" => "form_input",
+                    "value" => "",
+                    "error" => "erreur ",
+                    "required" => true
+                ]
+            ]
+        ];
+    }
+
 }
 
 

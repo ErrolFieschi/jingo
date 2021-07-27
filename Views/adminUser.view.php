@@ -10,6 +10,7 @@
             </div>
         </div>
     </section>
+
     <section>
         <div class="row mb-12 ">
             <?php if (isset($_GET['id'])) { ?>
@@ -89,5 +90,21 @@
             <?php endforeach; ?>
             </tbody>
         </table>
+    </section>
+    <section>
+        <div class="row mb-12 ">
+            <div class="row col-sm-7 popup-form">
+                <?php App\Core\FormBuilder::render($formUpdateUser, "popup_form_builder col-md-6");
+                ?>
+                <i class="far fa-times-circle unshow"></i>
+                <?php
+                if (isset($errors)):
+                    foreach ($errors as $error):?>
+                        <li style="color:red"><?= $error; ?></li>
+                    <?php endforeach;
+                endif; ?>
+
+            </div>
+        </div>
     </section>
 </div>
