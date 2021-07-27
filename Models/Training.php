@@ -9,7 +9,7 @@ use App\Core\Helpers;
 
 class Training extends Database
 {
-    private $id = null;
+    protected $id = null;
     protected $description;
     protected $title;
     protected $createby = 1;
@@ -158,7 +158,7 @@ class Training extends Database
      */
     public function setTitle($title): void
     {
-        $this->title = $title;
+        $this->title = trim($title);
     }
 
     /**

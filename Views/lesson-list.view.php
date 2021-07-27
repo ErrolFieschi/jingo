@@ -2,7 +2,7 @@
     <section>
         <div class="banner banner--text banner--header" style="background-image: url('https://i.pinimg.com/originals/26/ae/12/26ae1241ca65ba8e8ff4a4d442c92566.png');">
             <div class="bg">
-                <h4>Ma liste de leçon</h4>
+                <h4>Liste de leçon</h4>
                 <p class="my-0">L’endroit pour créer, modifier ou supprimer des leçons</p>
             </div>
         </div>
@@ -37,8 +37,13 @@
         </div>
     </section>
     <section>
-        <div class="mb-4">
-            <a class="btn" href="/<?= $back; ?>"><i class="fas fa-angle-double-left"></i> Retour aux chapitres</a>
+        <div class="row col-sm-12">
+            <div class="mb-4">
+                <a class="btn" href="/<?= $back; ?>"><i class="fas fa-angle-double-left"></i> Retour aux chapitres</a>
+            </div>
+            <div class="mb-4" style="margin-left: 10px;">
+                <span class="btn no-click"><i class="fas fa-street-view" style="font-size: 15px; padding-right: 10px;"></i> <?= mb_strtoupper($title); ?></span>
+            </div>
         </div>
 
         <?php foreach ($data as $rowData): ?>
@@ -55,10 +60,22 @@
                     </div>
                     <div class="card-button">
                         <div class="card-icon">
-                            <a href="#"><img src="/Content/svg/edit.svg" alt="edit button"></a>
+                            <form method="post" id="<?=$rowData['id']?>" action="/lesson/delete">
+                                <input type="hidden" name="id" value="<?= $rowData['id'] ?>">
+                                <input type="hidden" name="uri" value="<?= '/' . $back . '/' . $uri ?>">
+                                <a href="javascript:(0)" onclick="document.getElementById(<?=$rowData['id']?>).submit()">
+                                    <img src="/Content/svg/trash.svg" alt="edit button">
+                                </a>
+                            </form>
                         </div>
                         <div class="card-icon">
-                            <a href="#"><img src="/Content/svg/setting-bis.svg" alt="setting button"></a>
+                            <form method="post" id="update-<?=$rowData['id']?>" action="/lesson/update">
+                                <input type="hidden" name="update" value="<?= $rowData['id'] ?>">
+                                <input type="hidden" name="uri" value="<?= '/' . $back . '/' . $uri ?>">
+                                <a href="javascript:(0)" onclick="document.getElementById('<?= 'update-' . $rowData['id']?>').submit()">
+                                    <img src="/Content/svg/setting-bis.svg" alt="setting button">
+                                </a>
+                            </form>
                         </div>
                     </div>
 
@@ -74,9 +91,33 @@
     </section>
 </div>
 
-<div class="modal fade show" id="modal" tabindex="-1" role="dialog" aria-labelledby="modal-form" aria-modal="true" style="display: none;">
-    <div class="modal-dialog modal- modal-dialog-centered modal-sm" role="document">
-        <div class="modal-content" id="modal-content">
+
+
+<?php if(isset($update) && !empty($update)){ ?>
+<div class="modal" id="modal1" role="dialog" aria-modal="true" style="display: block; padding-right: 16px;">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <button type="button" class="close" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            <?php App\Core\FormBuilder::render($formUpdate,'form_input_wrapper') ?>
+            <?php if (isset($errors)):
+                foreach ($errors as $error):?>
+                    <li style="color:red"><?= $error; ?></li>
+                <?php endforeach;
+            endif; ?>
+        </div>
+    </div>
+</div>
+</div>
+<?php } ?>
+
+<div class="modal" id="modal" role="dialog" aria-modal="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <button type="button" class="close" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
             <?php App\Core\FormBuilder::render($form,'form_input_wrapper') ?>
             <?php if (isset($errors)):
                 foreach ($errors as $error):?>

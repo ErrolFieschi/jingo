@@ -120,7 +120,7 @@ class Lesson extends Database
      */
     public function setTitle($title)
     {
-        $this->title = $title;
+        $this->title = trim($title);
     }
 
     /**
@@ -223,6 +223,72 @@ class Lesson extends Database
                     "id" => "photoImport",
                     "class" => "form-control"
                 ]
+            ]
+        ];
+    }
+
+    public function formUpdateLesson($post = null, $uri = null)
+    {
+
+        $data = Database::customSelectFromATable("lesson", "title, resume, code, icon", "id", $post);
+       // echo '<pre>';
+       // var_dump($data);
+        return [
+
+            "config"=>[
+                "method"=>"POST",
+                "action"=>"",
+                "enctype"=>"multipart/form-data",
+                "id"=>"form_lesson_2",
+                "class"=>"form_input",
+                "submit"=>"Mettre à jour cette leçon"
+            ],
+            "inputs" => [
+                "title" => [
+                    "type" => "text",
+                    "label" => "Titre",
+                    "minLength" => 2,
+                    "maxLength" => 55,
+                    "id" => "title",
+                    "value" => $data[0]['title'],
+                    "class" => "form-control",
+                    "error" => "Le titre doit faire entre 2 et 55 caractères",
+                    "required" => true
+                ],
+                "resume" => [
+                    "type" => "textarea",
+                    "label" => "Résumé de la leçon",
+                    "id" => "resume",
+                    "value" => $data[0]['resume'],
+                    "class" => "form-control"
+                ],
+                "icon" => [
+                    "type" => "text",
+                    "label" => "Mes icons",
+                    "id" => "icon",
+                    "value" => $data[0]['icon'],
+                    "class" => "form-control",
+                    "required" => true
+                ],
+                "code" => [
+                    "type" => "textarea",
+                    "label" => "Ma leçon",
+                    "id" => "code",
+                    "value" => $data[0]['code'],
+                    "class" => "jingoEditor"
+                ],
+                "id" => [
+                    "type" => "hidden",
+                    "id" => "id",
+                    "value" => $post,
+                    "class" => "form-control"
+                ],
+                "uri" => [
+                    "type" => "hidden",
+                    "id" => "uri",
+                    "value" => $uri,
+                    "class" => "form-control"
+                ],
             ]
         ];
     }

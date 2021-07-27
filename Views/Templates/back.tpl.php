@@ -1,23 +1,17 @@
 <!DOCTYPE html>
-<html lang="FR">
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
     <title>Administration</title>
     <meta name="description" content="ceci est la description de ma page">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.10.25/datatables.min.css"/>
     <link href="/Content/dist/main.css" rel="stylesheet">
-    <script src="/node_modules/chart.js/dist/Chart.js"></script>
     <script src="/Content/js/jquery-3.5.1.min.js"></script>
+    <script src="/node_modules/chart.js/dist/Chart.js"></script>
+    <script defer src="/Content/js/chart.js"></script>
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.10.25/datatables.min.css"/>
     <script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.25/datatables.min.js"></script>
-    <script src="/Content/js/nav.js"></script>
-    <script src="/Content/js/global.js"></script>
-    <script defer src="/Content/js/chart.js"></script>
-    <script src="https://cdn.tiny.cloud/1/freuyvh2imwvcgh8t7h0vd36xd3iessaj34fcjuiypccegr3/tinymce/5/tinymce.min.js"
-            referrerpolicy="origin"></script>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="https://kit.fontawesome.com/d59c1d4dbf.js" crossorigin="anonymous"></script>
-    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.10.25/datatables.min.css"/>
-
 </head>
 <body>
 <div class="container-back">
@@ -83,47 +77,17 @@
             </li>
         </ul>
     </nav>
-
-
     <?php include $this->view; ?>
 </div>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script>
-    tinymce.init({
-        height: 500,
-        menubar: false,
-        mode : "specific_textareas",
-        editor_selector : "jingoEditor",
-        plugins: [
-            'advlist autolink lists link image charmap print preview anchor',
-            'searchreplace visualblocks code fullscreen',
-            'insertdatetime media table paste code help wordcount'
-        ],
-        toolbar: 'undo redo | formatselect | ' +
-            'bold italic backcolor | alignleft aligncenter ' +
-            'alignright alignjustify | bullist numlist outdent indent | ' +
-            'removeformat | help',
-        content_style: 'body { font-family:Helvetica,Arial,sans-serif; font-size:14px }'
-    });
-
-    $(document).ready(function(){
-        $('#modal-btn').on('click', function(){
-            $('#modal').css('display' , '');
-            $('#modal').css('display' , 'block');
-            $('#modal').css('padding-right' , '16px');
-        });
-
-        $('.modal-content').find('.close').on('click',function(){
-            $('#modal').css('display' , 'none');
-        });
-
-        $(document).on('click',function(e){
-            if(!(($(e.target).closest("#modal-content").length > 0 ) || ($(e.target).closest("#modal-btn").length > 0))){
-                $('#modal').css('display' , 'none');
-            }
-        });
-    });
-</script>
-    <script type="text/javascript" src="https://kit.fontawesome.com/19c1e7b3bd.js" crossorigin="anonymous"></script>
+<script
+        src="https://code.jquery.com/jquery-3.6.0.min.js"
+        integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+        crossorigin="anonymous"></script>
+<script src="/vendor/tinymce/tinymce.min.js"></script>
+<script src="/vendor/tinymce/uploadFile.js"></script>
+<script src="/Content/js/nav.js"></script>
+<script src="/Content/js/global.js"></script>
+<script type="text/javascript" src="https://kit.fontawesome.com/19c1e7b3bd.js" crossorigin="anonymous"></script>
+<script src="/Content/js/modal.js"></script>
 </body>
 </html>

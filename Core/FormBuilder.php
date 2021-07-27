@@ -58,6 +58,7 @@ class FormBuilder
 						name='" . $name . "' 
 						type='" . ($configInput["type"] ?? "text") . "'
 						id='" . ($configInput["id"] ?? "") . "'
+						value='" . ($configInput["value"] ?? "") . "'
 						class='" . ($configInput["class"] ?? "") . "'
 						placeholder='" . ($configInput["placeholder"] ?? "") . "'
                         " . ($configInput["type"] === "date" && !empty($configInput["minDate"]) ? "min=" . $configInput["minDate"] : "") . "
@@ -75,10 +76,11 @@ class FormBuilder
         $html .= "<textarea 
 						name='" . $name . "' 
 						id='" . ($configInput["id"] ?? "") . "'
+						value='" . ($configInput["value"] ?? "") . "'
 						class='" . ($configInput["class"] ?? "") . "'
 						placeholder='" . ($configInput["placeholder"] ?? "") . "'
 						" . (!empty($configInput["required"]) ? "required='required'" : "") . "
-					></textarea>";
+					>" . (!empty($configInput["value"]) ? $configInput["value"] : "") . " </textarea>";
 
         return $html;
     }

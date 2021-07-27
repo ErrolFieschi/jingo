@@ -35,16 +35,12 @@ class Database
         self::$_instance->table = $table ;
     }
 
-
-
-
 	public function save(){
 
 		$columns = array_diff_key (
 						get_object_vars($this),
 						get_class_vars(get_class())
 					);
-
 
 		//INSERT OU UPDATE
 		// $id == null -> INSERT SINON UPDATE
@@ -60,7 +56,6 @@ class Database
             $query->execute($columns);
 
 		}else{
-
 			$sql = "";
 			foreach ($columns as $col => $value) {
 			    if(!empty($value))
