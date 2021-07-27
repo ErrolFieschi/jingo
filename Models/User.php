@@ -195,9 +195,11 @@ class User extends Database
         return $this->token;
     }
 
-    public function setToken()
+    public function setToken(String $token = null)
     {
-        $this->token = bin2hex(random_bytes(64));
+        if($token != null)
+            $this->token = $token ;
+        else $this->token = bin2hex(random_bytes(64));
     }
 
     public static function rolesUser() {
@@ -240,6 +242,50 @@ class User extends Database
         ];
     }
 
+
+    public function formPWDChange() {
+        return[
+            "config"=>[
+                "method"=>"POST",
+                "action"=>"",
+                "id"=>"form_change_pwd",
+                "class"=>"form_builder",
+                "submit"=>"Changer"
+            ],
+            "inputs"=>[
+                "oldPwd" => [
+                    "type" => "password",
+                    "label" => "Ancien mot de passe",
+                    "id" => "oldPwd",
+                    "class" => "form_input_back",
+                    "placeholder" => "Votre ancien mot de passe",
+                    "required" => false
+                ],
+                "pwd" => [
+                    "type" => "password",
+                    "label" => "Nouveau mot de passe",
+                    "minLength" => 8,
+                    "maj"=> true,
+                    "num_verif" => true,
+                    "id" => "pwd",
+                    "class" => "form_input_back",
+                    "placeholder" => "Votre nouveau Mot de passe",
+                    "error" => "Votre mot de passe doit faire au minimum 8 caractères",
+                    "required" => true
+                ],
+                "pwdConfirm" => [
+                    "type" => "password",
+                    "label" => "Confirmation",
+                    "confirm" => "pwd",
+                    "id" => "pwdConfirm",
+                    "class" => "form_input_back",
+                    "placeholder" => "Confirmer mot de passe",
+                    "error" => "Votre mot de mot de passe de confirmation ne correspond pas",
+                    "required" => true
+                ],
+            ]
+        ] ;
+    }
 
     public function formRegister()
     {

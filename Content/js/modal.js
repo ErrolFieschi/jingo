@@ -7,5 +7,6 @@ $(document).ready(function(){
 
     $('.modal-content').find('.close').on('click',function(){
         $('#modal').css('display' , 'none');
+        $('#modal1').css('display' , 'none');
     });
 });

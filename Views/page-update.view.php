@@ -8,10 +8,10 @@
     <section>
         <div class="row col-sm-12">
             <div class="mb-4">
-                <a class="btn" href="dashboard">
+                <button id="return_to_pages" class="btn">
                     <i class="fas fa-angle-double-left" aria-hidden="true"></i>
                     Retour à l'accueil
-                </a>
+                </button>
             </div>
         </div>
     </section>
@@ -28,7 +28,7 @@
         <button class="btn_style" id="btn_effect">Effets</button>
         <button class="btn_style" id="bloc_options">Bloc</button>
         <button class="btn_style" id="btn_function">Fonctions</button>
-        <i class="far fa-times-circle unshow" id="cross_form"  aria-hidden="true"></i>
+        <i class="far fa-times-circle unshow" id="cross_form" aria-hidden="true"></i>
 
         <div id="add_effect">
             <label for="effect-list">Effet d'affichage</label>
@@ -44,6 +44,15 @@
             <button class="button-con" id="submit_effect">valider</button>
         </div>
 
+        <div id="bloc_options_form" class="edit_page">
+            <button class="button-con" id="delete_div_creator" style="background-color: red!important">Supprimer
+            </button>
+            <button class="button-con" id="free_div_creator" style="background-color: orange!important">Vider</button>
+            <i class="fas fa-chevron-up" style="font-size: 23px; cursor: pointer;" id="bloc_div_up"></i>
+            <i class="fas fa-chevron-down" style="font-size: 23px; cursor: pointer;" id="bloc_div_down"></i>
+        </div>
+
+
         <!-- AJout de boutons et de liens-->
         <div id="link_create" class="edit_page">
             <label for="formation-link">Lien formations</label>
@@ -51,7 +60,7 @@
                 <option value="">Aucun</option>
                 <?php
                 foreach ($trainingUrlList as $trainingList):?>
-                    <option value="<?= $trainingList[0]?>"><?= $trainingList[0]?></option>
+                    <option value="<?= $trainingList[0] ?>"><?= $trainingList[0] ?></option>
                 <?php endforeach; ?>
             </select>
 
@@ -60,24 +69,28 @@
                 <option value="">Aucun</option>
                 <?php
                 foreach ($trainingLessonList as $lessonList):?>
-                    <option value="<?= $lessonList[0]?>"><?= $lessonList[0]?></option>
+                    <option value="<?= $lessonList[0] ?>"><?= $lessonList[0] ?></option>
                 <?php endforeach; ?>
             </select>
 
-            <label>Label du bouton</label>
+            <label>Libellé du lien</label>
             <br>
             <input id="label_form" type="text" class="page_form_input popup_form_input"/>
             <br>
             <button class="button-con" id="submit_link">valider</button>
             <!-- Boucler les proposition de style de boutons et faire un système de choix -->
         </div>
+
+
         <!-- Editeur de textes -->
+
         <div id="text_create" class="edit_page">
-                    <textarea id="textarea_form" name="textarea_form" rows="4" cols="40"
-                              class="page_form_input"></textarea>
-            <br>
+            <textarea id="textarea_form" name="textarea_form" class="jingoEditor" aria-hidden="true"
+                      style="cursor: text"></textarea>
             <button class="button-con" id="submit_textarea">valider</button>
         </div>
+
+
         <!-- Ajout d'images -->
         <div id="image_choice" class="edit_page">
             <label for="image_placement">Placement de l'image</label>
@@ -99,8 +112,8 @@
                 <option value="scroll">non</option>
                 <option value="fixed">oui</option>
             </select>
-            <label for="image_filter_editor">Attacher l'image</label>
-            <select id="iimage_filter_editor" class="popup_form_input">
+            <label for="image_filter_editor">Filtres</label>
+            <select id="image_filter_editor" class="popup_form_input">
                 <option value="">Aucun</option>
                 <option value="blur(4px)">Blur</option>
                 <option value="brightness(100%)">Brightness</option>
@@ -122,7 +135,7 @@
             <br>
             <?php
             foreach ($img_dir as $img): ?>
-                <img class="image_creator" id="<?= $img; ?>" src="<?= $img; ?>"
+                <img class="image_creator" id="<?= $img; ?>" src="/<?= $img; ?>"
                      alt="">
             <?php endforeach; ?>
         </div>
@@ -236,6 +249,7 @@
                 <label>Taille</label>
                 <input type="number" id="div_height" name="div_height"
                        value="">
+                <button class="button-con" id="basic_height_div">Réinitialiser</button>
             </div>
 
             <div>
@@ -256,15 +270,19 @@
         </div>
     </div>
 
-    <div id="page">
     <?php
     foreach ($pagesShow as $rowData): ?>
         <h1> <?= $rowData['title'] ?> </h1>
-
-        <?= $rowData['code'] ?>
     <?php endforeach; ?>
-    </div>
+    <div id="page">
+        <?php if ($rowData['code'] == null) { ?>
+            <div class="incrementor" id="0" style="display: none"></div>
+        <?php }
 
+        foreach ($pagesShow as $rowData): ?>
+            <?= $rowData['code'] ?>
+        <?php endforeach; ?>
+    </div>
     <section>
         <div class="row" id="btn_id">
             <div class="col-sm-12 card--inverse">
@@ -293,9 +311,13 @@
             </div>
         </div>
     </section>
-
-    <button class="button-con mt-20" id="export_json" style="float: right" value="0">Enregistrer</button>
+    <div style="float: right">
+    <?php App\Core\FormBuilder::render($savePage, "popup_form_builder col-md-6");
+    if (isset($errors)):
+        foreach ($errors as $error):?>
+            <li style="color:red"><?= $error; ?></li>
+        <?php endforeach;
+    endif; ?>
+    </div>
     <div id="show_json"></div>
 </div>
-
-

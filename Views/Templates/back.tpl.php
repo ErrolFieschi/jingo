@@ -7,6 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.10.25/datatables.min.css"/>
     <link href="/Content/dist/main.css" rel="stylesheet">
+    <link href="/Content/dist/page-generator.css" rel="stylesheet">
     <script src="/Content/js/jquery-3.5.1.min.js"></script>
     <script src="/node_modules/chart.js/dist/Chart.js"></script>
     <script defer src="/Content/js/chart.js"></script>
@@ -89,5 +90,6 @@
 <script src="/Content/js/global.js"></script>
 <script type="text/javascript" src="https://kit.fontawesome.com/19c1e7b3bd.js" crossorigin="anonymous"></script>
 <script src="/Content/js/modal.js"></script>
+<script src="/Content/js/sortList.js"></script>
 </body>
 </html>

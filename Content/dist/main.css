@@ -426,13 +426,16 @@ hr {
   font-weight: 700;
   font-size: 13px;
   text-decoration: none; }
-
-.no-click {
-  cursor: unset;
-  background-color: #74747f !important; }
-
-.no-click:hover {
-  background-color: #74747f !important; }
+  .btn--success {
+    background-color: #31aa66 !important;
+    border: 1px solid #31aa66 !important;
+    color: #fff; }
+    .btn--success:hover {
+      background-color: #45c97f !important; }
+  .btn--disable {
+    cursor: unset; }
+    .btn--disable:hover {
+      background-color: #24242d !important; }
 
 .btn:hover {
   background-color: #343440; }
@@ -2432,11 +2435,6 @@ a.btn_style_submit {
   text-decoration: none;
   color: white; }
 
-.div_edit {
-  cursor: pointer;
-  border-radius: 5px;
-  border: solid 0.5px; }
-
 .choice_bloc_editor {
   min-height: 50px;
   margin-left: 20px;
@@ -2543,5 +2541,56 @@ a.btn_style_submit {
 
 .popup-form {
   display: none; }
+
+.navbar {
+  overflow: hidden;
+  background-color: #333; }
+
+.navbar a {
+  float: left;
+  font-size: 16px;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none; }
+
+.dropdown {
+  float: left;
+  overflow: hidden; }
+
+.dropdown .dropbtn {
+  font-size: 16px;
+  border: none;
+  outline: none;
+  color: white;
+  padding: 14px 16px;
+  background-color: inherit;
+  font-family: inherit;
+  margin: 0; }
+
+.navbar a:hover, .dropdown:hover .dropbtn {
+  background-color: black; }
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  z-index: 1; }
+
+.dropdown-content a {
+  float: none;
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+  text-align: left; }
+
+.dropdown-content a:hover {
+  background-color: #ddd; }
+
+.dropdown:hover .dropdown-content {
+  display: block; }
 
 /*# sourceMappingURL=main.css.map */

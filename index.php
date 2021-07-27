@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Core\Installer;
 use App\Core\Router;
 use App\Core\ConstantMaker;
 use App\Core\Security;
@@ -28,42 +29,48 @@ $controller = $router->getController();
 $action = $router->getAction();
 $auth = $router->getAuth();
 
+if($controller == 'Core\\Installer') {
+    $controllerObjet = new Installer() ;
+    $controllerObjet->$action() ;
+} else {
 
+    if( file_exists("./Controllers/".$controller.".php")){
 
+        include "./Controllers/".$controller.".php";
+        // SecurityController =>  App\Controller\SecurityController
 
-if( file_exists("./Controllers/".$controller.".php")){
-
-	include "./Controllers/".$controller.".php";
-	// SecurityController =>  App\Controller\SecurityController
-
-	$controller = "App\\Controller\\".$controller;
-	if(class_exists($controller)){
-		// $controllerontroller ====> SecurityController
-		$controllerObjet = new $controller();
-		if(method_exists($controllerObjet, $action)){
-		    if ($auth === true) {
-                if (Security::isConnected()) {
-                    $controllerObjet->$action();
+        $controller = "App\\Controller\\".$controller;
+        if(class_exists($controller)){
+            // $controllerontroller ====> SecurityController
+            $controllerObjet = new $controller();
+            if(method_exists($controllerObjet, $action)){
+                if ($auth === true) {
+                    if (Security::isConnected()) {
+                        $controllerObjet->$action();
+                    } else {
+                        header('Location: /login');
+//                    header("location : /"); // RIEN A FOUTRE
+                    }
                 } else {
-                    header('Location: /login');
+                    $controllerObjet->$action();
                 }
-            } else {
-                $controllerObjet->$action();
+
+            }else{
+                die("L'action' : ".$action." n'existe pas");
             }
 
-		}else{
-			die("L'action' : ".$action." n'existe pas");
-		}
+        }else{
 
-	}else{
-	
-		die("La classe controller : ".$controller." n'existe pas");
-	}
+            die("La classe controller : ".$controller." n'existe pas");
+        }
 
 
-}else{
-	die("Le fichier controller : ".$controller." n'existe pas");
+    }else{
+        die("Le fichier controller : ".$controller." n'existe pas");
+    }
 }
+
+
 
 
 

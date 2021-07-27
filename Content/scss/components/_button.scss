@@ -84,15 +84,22 @@
     font-weight: 700;
     font-size: 13px;
     text-decoration: none;
-}
 
-.no-click{
-    cursor: unset;
-    background-color: #74747f !important;
-}
+    &--success{
+        background-color: $green !important;
+        border: 1px solid $green !important;
+        color: #fff;
+        &:hover{
+            background-color: lighten($green, 10%) !important;
+        }
+    }
 
-.no-click:hover{
-    background-color: #74747f !important;
+    &--disable{
+        cursor: unset;
+        &:hover{
+            background-color: #24242d !important;
+        }
+    }
 }
 
 .btn:hover{
