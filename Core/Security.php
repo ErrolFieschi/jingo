@@ -14,11 +14,11 @@ class Security
 	}
 
     private static function checkToken() {
-        echo "<pre>" ; var_dump($_SESSION);
+        // echo "<pre>" ; var_dump($_SESSION);
 	    if (isset($_SESSION['token']) && isset($_SESSION['id'])) {
             $bd = Database::getInstance() ;
             $token = $bd->searchOneColWithOneRow("user","token","id",$_SESSION['id']);
-            var_dump($token);
+            // var_dump($token);
             return ($_SESSION['token'] == $token[0] ) ;
         }
 
@@ -42,15 +42,23 @@ class Security
 	    return $user->getToken() == $token ;
     }
 
-    public static function userExist(User $user, String $email): bool {
-
+    public static function userExist(User $user, String $email, String $emailVerif = null): bool {
         $test = $user->countRow("user", "email", "email", $email);
-        if ($test == 0) {
+        if ($test == 0 || !empty($emailVerif) && $email == $emailVerif) {
             $_SESSION["userExist"] = false;
             return false;
         }
         $_SESSION["userExist"] = true;
         return true;
+    }
+
+    public static function userRole(): String {
+
+        if (self::isConnected()) {
+            $role_user = Database::customSelectFromATable('user', 'role', 'id', $_SESSION['id']);
+            return $role_user[0]['role'];
+        }
+
     }
 
 }

@@ -21,7 +21,7 @@ class FormValidator
                     strlen($data[$name]) > $configInput["maxLength"]) {
                     $errors[] = $configInput["error"];
                 }
-                if (!empty($configInput["required"]) && $configInput["required"] == true && empty($data[$name])) {
+                if (!empty($configInput["required"]) && $configInput["required"] == true && empty($data[$name]) && !is_numeric($data[$name])) {
                     $errors[] = $name . " est obligatoire";
                 }
                 if ($name == "email" && !filter_var($data[$name], FILTER_VALIDATE_EMAIL)) {
@@ -73,7 +73,7 @@ class FormValidator
                     $errors[] = $configInput["error"];
                 }
 
-                if(empty($data[$name]) && !empty($configInput["required"])){
+                if(empty($data[$name]) && !is_numeric($data[$name]) && !empty($configInput["required"])){
                     $errors[] = "Tentative de Hack";
 
                 }

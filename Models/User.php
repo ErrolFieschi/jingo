@@ -200,6 +200,20 @@ class User extends Database
         $this->token = bin2hex(random_bytes(64));
     }
 
+    public static function rolesUser() {
+        return [
+            0 => "normal",
+            1 => "admin"
+        ];
+    }
+
+    public static function countriesUser() {
+        return [
+            'fr' => "France",
+            'us' => "Etats-Unis"
+        ];
+    }
+
     public function formForgetPassword()
     {
         return [
@@ -386,7 +400,7 @@ class User extends Database
                 "action" => "",
                 "id" => "form_register",
                 "class" => "form_builder",
-                "submit" => "S'inscrire"
+                "submit" => "Valider"
             ],
             "inputs" => [
                 "firstname" => [
@@ -414,7 +428,6 @@ class User extends Database
                 "birthday" => [
                     "type" => "date",
                     "label" => "Votre date de naissance",
-                    "maxDate" => date("Y-m-d", strtotime("-18 year", time())),
                     "id" => "birthday",
                     "class" => "form_input",
                     "error" => "Votre date de naissance est obligatoire",
@@ -434,25 +447,21 @@ class User extends Database
                     "unique_error" => "Cet email est déjà utilisé."
                 ],
                 "role" => [
-                    "type" => "text",
+                    "type" => "select",
                     "label" => "role",
-                    "minLength" => 0,
-                    "maxLength" => 2,
-                    "id" => "role",
+                    "id" => "Role",
                     "class" => "form_input",
-                    "value" => "",
-                    "error" => "erreur ",
+                    "options" => $this->rolesUser(),
+                    "error" => "Le role est obligatoire",
                     "required" => true
                 ],
-                "status" => [
-                    "type" => "text",
-                    "label" => "status",
-                    "minLength" => 0,
-                    "maxLength" => 2,
-                    "id" => "status",
+                "country" => [
+                    "type" => "select",
+                    "label" => "Pays",
+                    "id" => "country",
                     "class" => "form_input",
-                    "value" => "",
-                    "error" => "erreur ",
+                    "options" => $this->countriesUser(),
+                    "error" => "Le pays est obligatoire",
                     "required" => true
                 ],
             ]

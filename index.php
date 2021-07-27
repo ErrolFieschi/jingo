@@ -45,8 +45,7 @@ if( file_exists("./Controllers/".$controller.".php")){
                 if (Security::isConnected()) {
                     $controllerObjet->$action();
                 } else {
-                    echo "RIEN A FOUTRE";
-//                    header("location : /"); // RIEN A FOUTRE
+                    header('Location: /login');
                 }
             } else {
                 $controllerObjet->$action();

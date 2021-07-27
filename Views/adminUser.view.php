@@ -12,8 +12,23 @@
     </section>
     <section>
         <div class="row mb-12 ">
-            <div class="row col-sm-7 popup-form">
-            </div>
+            <?php if (isset($_GET['id'])) { ?>
+                <div class="row col-sm-7 popup-form">
+                    <?php App\Core\FormBuilder::render($formUser, "popup_form_builder flex flex-col col-md-6"); ?>
+                    <a href="/admin-user">
+                        <i class="far fa-times-circle unshow"></i>
+                    </a>
+                    <?php
+                    if (isset($errors)):
+                        foreach ($errors as $error):?>
+                            <li style="color:red"><?= $error; ?></li>
+                        <?php endforeach;
+                    endif; ?>
+                </div>
+                <script>
+                    $(".popup-form").show();
+                </script>
+            <?php } ?>
         </div>
     </section>
     <section style="overflow: auto;">
@@ -28,20 +43,12 @@
                 <!--th scope="col">Mot de passe</th-->
                 <th>Pays</th>
                 <th>Role</th>
-                <th>Status</th>
+                <!-- <th>Status</th> -->
                 <th>Supprimer</th>
                 <th>Date de création</th>
                 <th>Date de mise à jour</th>
                 <th>Edit</th>
                 <th>Supprimer</th>
-                <!--th>
-                    <div class="card-icon"><img src="/Content/svg/edit.svg"
-                                                alt="edit img" style="cursor: pointer"></div>
-                </th>
-                <th>
-                    <div class="card-icon"><img src="/Content/svg/trash.svg"
-                                                alt="Trash button" style="cursor: pointer"></div>
-                </th-->
             </tr>
             </thead>
             <tbody>
@@ -57,16 +64,18 @@
                         <td><?= $rowData['lastname'] ?></td>
                         <td><?= $rowData['email'] ?></td>
                         <td><?= $rowData['birthday'] ?></td>
-                        <!--td><?php //echo $rowData['pwd'] ?></td-->
                         <td><?= $rowData['country'] ?></td>
-                        <td><?= $rowData['role'] ?></td>
-                        <td><?= $rowData['status'] ?></td>
+                        <td><?= $rolesUser[$rowData['role']] ?></td>
+                        <!-- <td><?= $rowData['status'] ?></td> -->
                         <td><?= $rowData['isDeleted'] ?></td>
                         <td><?= $rowData['createdAt'] ?></td>
                         <td><?= $rowData['updatedAt'] ?></td>
                         <td>
-                            <div class="card-icon"><a href=""><img src="/Content/svg/edit.svg"
-                                                                   alt="edit img" style="cursor: pointer"></a></div>
+                            <div class="card-icon show">
+                                <a href="/admin-user?id=<?= $rowData['id'] ?>">
+                                    <img src="/Content/svg/edit.svg" alt="edit img" style="cursor: pointer">
+                                </a>
+                            </div>
                         </td>
                         <td>
                             <div class="card-icon"><a href=""> <img src="/Content/svg/trash.svg"
@@ -81,17 +90,18 @@
                         <td><?= $rowData['lastname'] ?></td>
                         <td><?= $rowData['email'] ?></td>
                         <td><?= $rowData['birthday'] ?></td>
-                        <!--td><?php //echo $rowData['pwd'] ?></td-->
                         <td><?= $rowData['country'] ?></td>
-                        <td><?= $rowData['role'] ?></td>
-                        <td><?= $rowData['status'] ?></td>
+                        <td><?= $rolesUser[$rowData['role']] ?></td>
+                        <!-- <td><?= $rowData['status'] ?></td> -->
                         <td><?= $rowData['isDeleted'] ?></td>
                         <td><?= $rowData['createdAt'] ?></td>
                         <td><?= $rowData['updatedAt'] ?></td>
                         <td>
-                            <div class="card-icon"><a href="/admin-user/update?id=<?= $rowData['id'] ?>"><img
-                                            src="/Content/svg/edit.svg"
-                                            alt="edit img" style="cursor: pointer"></a></div>
+                            <div class="card-icon show">
+                                <a href="/admin-user?id=<?= $rowData['id'] ?>">
+                                    <img src="/Content/svg/edit.svg" alt="edit img" style="cursor: pointer">
+                                </a>
+                            </div>
                         </td>
                         <td>
                             <div class="card-icon"><a href="/admin-user/delete?id=<?= $rowData['id'] ?>"> <img
@@ -106,4 +116,3 @@
         </table>
     </section>
 </div>
-

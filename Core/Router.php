@@ -1,8 +1,7 @@
 <?php
 namespace App\Core;
 
-
-
+use App\Models\User;
 
 class Router
 {
@@ -12,6 +11,7 @@ class Router
 	private $controller;
 	private $action;
 	private $auth;
+	private $role;
 
 	public function __construct($uri){
 		$this->setUri($uri);
@@ -20,10 +20,17 @@ class Router
 			$this->routes = yaml_parse_file($this->routesPath);
 
 			if( !empty($this->routes[$this->uri]) && $this->routes[$this->uri]["controller"] && $this->routes[$this->uri]["action"]){
-
-				$this->setController($this->routes[$this->uri]["controller"]);
-				$this->setAction($this->routes[$this->uri]["action"]);
+                
+                $this->setController($this->routes[$this->uri]["controller"]);
+                $this->setAction($this->routes[$this->uri]["action"]);
                 $this->setAuth($this->routes[$this->uri]["auth"]);
+                
+                if (!empty($this->routes[$this->uri]["role"])) {
+                    $this->setRole($this->routes[$this->uri]["role"]);
+                    if ($this->getRole() >= Security::userRole()) {
+                        header('Location: /page/accueil');
+                    }
+                }
 
 			}else{
 
@@ -111,6 +118,22 @@ class Router
     public function setAuth($auth)
     {
         $this->auth = $auth;
+    }
+
+     /**
+     * @return mixed
+     */
+    public function getRole()
+    {
+        return $this->role;
+    }
+
+    /**
+     * @param mixed $auth
+     */
+    public function setRole($role)
+    {
+        $this->role = array_search($role, User::rolesUser());
     }
 
 }
