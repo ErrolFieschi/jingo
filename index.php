@@ -18,7 +18,7 @@ Autoload::register();
 new ConstantMaker();
 
 
-if(file_exists('Core/data.sql')) {
+if(file_exists('Core/data.sql') && $_SERVER['REQUEST_URI'] != '/installer-delete') {
 
     $controller = new Installer() ;
     if(!isset($_SESSION['isStepOneOk']) || $_SERVER['REQUEST_URI'] == '/install/1')
