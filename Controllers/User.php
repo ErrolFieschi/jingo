@@ -23,6 +23,8 @@ class User
         $view = new View("adminUser", "back");
         $user = new U();
 
+        $formUpdateUser = $user->formUpdateUser();
+
         $data = $user->globalFind("SELECT 
         id,
         firstname,
@@ -39,6 +41,65 @@ class User
         FROM wlms_user", []);
 
         $view->assign("data", $data);
+
+        if (!empty($_POST)) {
+            $errors = FormValidator::check($formUpdateUser, $_POST);
+            if ($user->countRow('user', 'id', 'email', $_POST["email"]) != 1) {
+                if (empty($errors)) {
+                    $user->setId($_POST["id"]);
+                    $user->setFirstname($_POST["firstname"]);
+                    $user->setLastname($_POST['lastname']);
+                    $user->setEmail($_POST['email']);
+                    $user->setStatus($_POST['status']);
+                    $user->save();
+
+                } else {
+                    var_dump($errors);
+                }
+            } else {
+                $view->assign("errors", $errors);
+            }
+        }
+
+        $view->assign('formUpdateUser', $formUpdateUser);
+
+    }
+
+    public function updateUserAction() {
+        $view = new View("adminUser", "back");
+        $user = new U();
+
+        $formUpdateUser = $user->formUpdateUser();
+
+
+        $dataUp = $user->globalFind('SELECT id as user_id,
+        firstname,
+        lastname,
+        email,
+        status
+        FROM wlms_user ORDER BY wlms_user.createdAt', []);
+
+        $view->assign("dataUp", $dataUp);
+
+
+        if (!empty($_POST)) {
+            $errors = FormValidator::check($formUpdateUser, $_POST);
+            if ($user->countRow('user', 'id', 'email', $_POST["email"]) != 1) {
+                if (empty($errors)) {
+                    $user->setFirstname($_POST["firstname"]);
+                    $user->setLastname($_POST['lastname']);
+                    $user->setEmail($_POST['email']);
+                    $user->setStatus($_POST['status']);
+                    $user->save();
+
+                } else {
+                    var_dump($errors);
+                }
+            } else {
+                $view->assign("errors", $errors);
+            }
+        }
+        $view->assign("formUpdateUser", $formUpdateUser);
 
     }
 }

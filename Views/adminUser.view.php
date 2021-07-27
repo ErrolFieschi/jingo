@@ -10,14 +10,9 @@
             </div>
         </div>
     </section>
+
     <section>
-        <div class="row mb-12 ">
-            <div class="row col-sm-7 popup-form">
-            </div>
-        </div>
-    </section>
-    <section style="overflow: auto;">
-        <table class="tab" class="display testerExemple" style="width:100%;">
+        <table id="tab" class="display" style="width:100%">
             <thead>
             <tr>
                 <th>#</th>
@@ -48,7 +43,7 @@
             <?php
             foreach ($data as $rowData): ?>
 
-                <?php if ($rowData['isDeleted'] == 1) {
+                <?php if ($rowData['isDeleted'] == 1):
                     ?>
                     <tr style="background-color: red;">
 
@@ -74,7 +69,7 @@
                             </div>
                         </td>
                     </tr>
-                <?php } else { ?>
+                <?php  else: ?>
                     <tr>
                         <th scope="row"><?= $rowData['id'] ?></th>
                         <td><?= $rowData['firstname'] ?></td>
@@ -89,9 +84,9 @@
                         <td><?= $rowData['createdAt'] ?></td>
                         <td><?= $rowData['updatedAt'] ?></td>
                         <td>
-                            <div class="card-icon"><a href="/admin-user/update?id=<?= $rowData['id'] ?>"><img
-                                            src="/Content/svg/edit.svg"
-                                            alt="edit img" style="cursor: pointer"></a></div>
+<!--                            <a href="/admin-user?id=--><?//= $rowData['id'] ?><!--">-->
+                            <div class="card-icon show"><img src="/Content/svg/edit.svg"
+                                                                   alt="edit img" style="cursor: pointer"></a></div>
                         </td>
                         <td>
                             <div class="card-icon"><a href="/admin-user/delete?id=<?= $rowData['id'] ?>"> <img
@@ -100,10 +95,26 @@
                             </div>
                         </td>
                     </tr>
-                <?php } ?>
+                <?php endif; ?>
             <?php endforeach; ?>
             </tbody>
         </table>
+    </section>
+    <section>
+        <div class="row mb-12 ">
+            <div class="row col-sm-7 popup-form">
+                <?php App\Core\FormBuilder::render($formUpdateUser, "popup_form_builder col-md-6");
+                ?>
+                <i class="far fa-times-circle unshow"></i>
+                <?php
+                if (isset($errors)):
+                    foreach ($errors as $error):?>
+                        <li style="color:red"><?= $error; ?></li>
+                    <?php endforeach;
+                endif; ?>
+
+            </div>
+        </div>
     </section>
 </div>
 

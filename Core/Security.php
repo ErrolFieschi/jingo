@@ -53,4 +53,11 @@ class Security
         return true;
     }
 
+    public static function deleteInstaller() {
+        try {
+            unlink("Core/data.sql") ;
+            unlink('Core/Installer.php');
+        } catch (\Exception $e){}
+    }
+
 }
