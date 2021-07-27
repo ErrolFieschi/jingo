@@ -63,6 +63,7 @@ class Router
 
                         } else if ($tmp == 3 ) {
                             // GET PART CONTROLLER AND SHOW ACTION
+
                             if(Middleware::isPartExist($uris[$tmp-1],$uris[$tmp-2])) {
                                 if (!$this->getAuth()) {
                                     $this->setController(Middleware::getControllerPart());

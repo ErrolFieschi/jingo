@@ -43,23 +43,6 @@ class Installer {
       $this->pdo->exec("USE ".$BDDName.";");
   }
 
-  private function populateDatabase(String $new_table, String $prefix_db, array $attributes) {
-
-      $sql = "";
-      $last_key = end(array_keys($attributes));
-      foreach ($attributes as $key => $value) {
-          if (!empty($value) ) {
-              $sql .= $key." ".$value['type'];
-              if (isset($value['not_null'])) $sql .= $value['not_null'] ? " NOT NULL" : " NULL";
-              if (isset($value['default'])) $sql .= " DEFAULT '".$value['default']."'";
-              if (isset($value['default_without'])) $sql .= " DEFAULT ".$value['default_without'];
-              if (isset($value['extra'])) $sql .= " ".$value['extra'];
-              if ($key !== $last_key) $sql .= ", ";
-          }
-      }
-
-      $this->pdo->exec("CREATE TABLE ".$prefix_db ."_".$new_table." (".$sql.") ;");
-  }
   public function setupDatabaseAction()
   {
       if(isset($_SESSION['isStepOneOk']) && $_SESSION['isStepOneOk'] == true
@@ -126,13 +109,18 @@ class Installer {
 
                 $newInstaller->useDb($newInstaller->db_name);
 
-                $allTablesWithAttributes = $this->allTablesWithAttributes();
 
-                foreach ($allTablesWithAttributes as $key => $value) {
-                    if (!empty($value)) {
-                        $newInstaller->populateDatabase($key, $_POST["DBPREFIXE"], $value);
-                    }
+                if( $sql = file_get_contents('Core/data.sql')) {
+
+                    $sql = str_replace('PREFIXE',$_POST['DBPREFIXE'],$sql);
+                    echo '<pre>' . $sql ;
+
+                    $query = $newInstaller->pdo->prepare($sql);
+                    $query->execute() ;
+                    echo 'YES' ;
+
                 }
+
                 $this->writeEnv($_POST);
 
                 $_SESSION['isStepOneOk'] = true;
@@ -247,29 +235,29 @@ class Installer {
             ]
 
         ];
-    }
+  }
 
-    private  function formSettingsSite() {
-        return [
-            "config" => [
-                "method" => "POST",
-                "action" => "",
-                "id" => "setup_database",
-                "class" => "form_builder mb-5",
-                "submit" => "Finir"
+  private  function formSettingsSite() {
+      return [
+          "config" => [
+            "method" => "POST",
+            "action" => "",
+            "id" => "setup_database",
+            "class" => "form_builder mb-5",
+            "submit" => "Finir"
+         ],
+         "inputs" => [
+            "TITLE"=>[
+              'type'=>'text',
+              'label'=>'Titre du site',
+              'minLength'=>2,
+              'id'=>'titre',
+              'class'=>'form_input',
+              'placeholder'=>'Titre du site',
+              'error'=>'Votre titre doit faire minimum 2 caractères',
+              'required'=>true
             ],
-            "inputs" => [
-                "TITLE"=>[
-                  'type'=>'text',
-                  'label'=>'Titre du site',
-                  'minLength'=>2,
-                  'id'=>'titre',
-                  'class'=>'form_input',
-                  'placeholder'=>'Titre du site',
-                  'error'=>'Votre titre doit faire minimum 2 caractères',
-                  'required'=>true
-                ],
-                "firstname" => [
+             "firstname" => [
                     "type" => "text",
                     "label" => "Votre prénom",
                     "minLength" => 2,
@@ -279,8 +267,8 @@ class Installer {
                     "placeholder" => "Prénom",
                     "error" => "Votre prénom doit faire entre 2 et 55 caractères",
                     "required" => true
-                ],
-                "lastname" => [
+             ],
+             "lastname" => [
                     "type" => "text",
                     "label" => "Votre nom",
                     "minLength" => 2,
@@ -290,8 +278,8 @@ class Installer {
                     "placeholder" => "Nom",
                     "error" => "Votre nom doit faire entre 2 et 55 caractères",
                     "required" => true
-                ],
-                "birthday" => [
+             ],
+             "birthday" => [
                     "type" => "date",
                     "label" => "Votre date de naissance",
                     "maxDate" => date("Y-m-d", strtotime("-18 year", time())),
@@ -299,8 +287,8 @@ class Installer {
                     "class" => "form_input",
                     "error" => "Votre date de naissance est obligatoire",
                     "required" => true
-                ],
-                "email" => [
+             ],
+             "email" => [
                     "type" => "email",
                     "label" => "Votre email",
                     "minLength" => 8,
@@ -310,8 +298,8 @@ class Installer {
                     "placeholder" => "Email",
                     "error" => "Votre email doit faire entre 8 et 320 caractères",
                     "required" => true,
-                ],
-                "pwd" => [
+             ],
+             "pwd" => [
                     "type" => "password",
                     "label" => "Votre mot de passe",
                     "minLength" => 8,
@@ -322,8 +310,8 @@ class Installer {
                     "placeholder" => "Mot de passe",
                     "error" => "Votre mot de passe doit faire au minimum 8 caractères",
                     "required" => true
-                ],
-                "pwdConfirm" => [
+             ],
+             "pwdConfirm" => [
                     "type" => "password",
                     "label" => "Confirmation",
                     "confirm" => "pwd",
@@ -332,252 +320,8 @@ class Installer {
                     "placeholder" => "Confirmer mot de passe",
                     "error" => "Votre mot de mot de passe de confirmation ne correspond pas",
                     "required" => true
-                ]
-            ]
-        ];
-    }
-
-    private  function allTablesWithAttributes() {
-
-        return [
-            "user" => [
-                "id" => [         
-                    "type"=>"INT",
-                    "not_null"=>true,
-                    "extra"=>"AUTO_INCREMENT"
-                ],
-                "firstname" => [         
-                    "type"=>"VARCHAR(55)",
-                    "not_null"=>true
-                ],
-                "lastname" => [         
-                    "type"=>"VARCHAR(255)",
-                    "not_null"=>true
-                ],
-                "email" => [         
-                    "type"=>"VARCHAR(320)",
-                    "not_null"=>true
-                ],
-                "pwd" => [         
-                    "type"=>"VARCHAR(255)",
-                    "not_null"=>true
-                ],
-                "country" => [         
-                    "type"=>"CHAR(2)",
-                    "not_null"=>true,
-                    "default"=>"fr",
-                ],
-                "role" => [         
-                    "type"=>"TINYINT(4)",
-                    "not_null"=>true,
-                    "default"=>0,
-                ],
-                "isDeleted" => [         
-                    "type"=>"TINYINT(1)",
-                    "not_null"=>true,
-                    "default"=>0,
-                ],
-                "status" => [         
-                    "type"=>"TINYINT(4)",
-                    "not_null"=>true,
-                    "default"=>0,
-                ],
-                "token" => [         
-                    "type"=>"VARCHAR(64)",
-                    "not_null"=>true
-                ],
-                "birthday" => [         
-                    "type"=>"DATE",
-                    "not_null"=>false
-                ],
-                "createdAt" => [         
-                    "type"=>"TIMESTAMP",
-                    "not_null"=>true,
-                    "default_without"=>"CURRENT_TIMESTAMP"
-                ],
-                "updatedAt" => [         
-                    "type"=>"TIMESTAMP",
-                    "not_null"=>false,
-                    "default_without"=>"NULL",
-                    "extra"=>"ON UPDATE CURRENT_TIMESTAMP"
-                ],
-                "PRIMARY KEY" => [
-                    "type"=>"(id)"
-                ]
-            ],
-            "training" => [
-                "id" => [         
-                    "type"=>"INT",
-                    "not_null"=>true,
-                    "extra"=>"AUTO_INCREMENT"
-                ],
-                "title" => [         
-                    "type"=>"VARCHAR(200)",
-                    "not_null"=>false
-                ],
-                "role" => [         
-                    "type"=>"INT",
-                    "not_null"=>true
-                ],
-                "active" => [         
-                    "type"=>"INT",
-                    "not_null"=>true
-                ],
-                "duration" => [         
-                    "type"=>"INT",
-                    "not_null"=>false
-                ],
-                "createby" => [         
-                    "type"=>"VARCHAR(200)",
-                    "not_null"=>true
-                ],
-                "template" => [         
-                    "type"=>"TEXT",
-                    "not_null"=>false
-                ],
-                "description" => [         
-                    "type"=>"TEXT",
-                    "not_null"=>false
-                ],
-                "image" => [         
-                    "type"=>"VARCHAR(200)",
-                    "not_null"=>false
-                ],
-                "training_tag_id" => [         
-                    "type"=>"INT",
-                    "not_null"=>false
-                ],
-                "url" => [         
-                    "type"=>"VARCHAR(200)",
-                    "not_null"=>true
-                ],
-                "createdAt" => [         
-                    "type"=>"TIMESTAMP",
-                    "not_null"=>true,
-                    "default_without"=>"CURRENT_TIMESTAMP"
-                ],
-                "updatedAt" => [         
-                    "type"=>"TIMESTAMP",
-                    "not_null"=>false,
-                    "default_without"=>"NULL",
-                    "extra"=>"ON UPDATE CURRENT_TIMESTAMP"
-                ],
-                "PRIMARY KEY" => [
-                    "type"=>"(id)"
-                ]
-            ],
-            "part" => [
-                "id" => [         
-                    "type"=>"INT",
-                    "not_null"=>true,
-                    "extra"=>"AUTO_INCREMENT"
-                ],
-                "training_id" => [         
-                    "type"=>"INT",
-                    "not_null"=>true
-                ],
-                "title" => [    
-                    "type"=>"VARCHAR(250)",
-                    "not_null"=>false
-                ],
-                "createby" => [  
-                    "type"=>"VARCHAR(255)",
-                    "not_null"=>false
-                ],
-                "order_" => [         
-                    "type"=>"INT",
-                    "not_null"=>false
-                ],
-                "icon" => [         
-                    "type"=>"VARCHAR(255)",
-                    "not_null"=>false
-                ],
-                "url" => [         
-                    "type"=>"VARCHAR(200)",
-                    "not_null"=>true
-                ],
-                "createdAt" => [         
-                    "type"=>"TIMESTAMP",
-                    "not_null"=>true,
-                    "default_without"=>"CURRENT_TIMESTAMP"
-                ],
-                "updatedAt" => [         
-                    "type"=>"TIMESTAMP",
-                    "not_null"=>false,
-                    "default_without"=>"NULL",
-                    "extra"=>"ON UPDATE CURRENT_TIMESTAMP"
-                ],
-                "PRIMARY KEY" => [
-                    "type"=>"(id)"
-                ]
-            ],
-            'lesson'=>[
-                "id" => [
-                    "type"=>"INT",
-                    "not_null"=>true,
-                    "extra"=>"AUTO_INCREMENT"
-                ],
-                "createdBy"=>[
-                    "type"=>"VARCHAR(255)",
-                    "not_null"
-                ],
-                "update_date"=>[
-                    "type"=>"TIMESTAMP",
-                    "not_null"=>false,
-                    "default_without"=>"NULL",
-                    "extra"=>"ON UPDATE CURRENT_TIMESTAMP"
-                ],
-                "title"=>[
-                    "type"=>"VARCHAR(255)",
-                    "not_null"=>false
-                ],
-                "resume"=>[
-                    'type'=>'text',
-                    'not_null'=>false
-                ],
-                'image'=>[
-                    'type'=>'VARCHAR(255)',
-                    'not_null'=>false
-                ],
-                'code'=>[
-                    'type'=>'text',
-                    'not_null'=>true
-                ],
-                'icon'=>[
-                    'type'=>'VARCHAR(255)',
-                    'not_null'=>false
-                ],
-                'create_date'=>[
-                    "type"=>"TIMESTAMP",
-                    "not_null"=>true,
-                    "default_without"=>"CURRENT_TIMESTAMP"
-                ],
-                'part_id'=>[
-                    'type'=>'int',
-                    'not_null'=>true
-                ],
-                'url'=>[
-                    'type'=>'VARCHAR(200)',
-                    'not_null'=>true
-                ]
-            ],
-            'navbar'=>[
-                "id" => [
-                    "type"=>"INT",
-                    "not_null"=>true,
-                    "extra"=>"AUTO_INCREMENT"
-                ],
-                'code'=>[
-                    'type'=>'text',
-                    'not_null'=>false
-                ],
-                'form'=>[
-                    'type'=>'text',
-                    'not_null'=>false
-                ]
-            ]
-        ];
-
-    }
-
+             ]
+         ]
+      ];
+  }
 }
