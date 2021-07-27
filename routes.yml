@@ -140,7 +140,7 @@
   action: navEdit
   auth: false
 
-/page/courses:
+/courses:
   controller: Training
   action: list
   auth: false

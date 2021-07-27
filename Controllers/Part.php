@@ -17,8 +17,10 @@ class Part
         $uri = Helpers::getUrlAsArray();
         $lessons = [];
 
-        $parts = Database::customSelectFromATable('part', 'id, title', 'url', $uri[1], true);
-        array_push($lessons, Database::customSelectFromATable("lesson", 'id,title,resume,image,url', 'part_id', $parts['id']));
+        $parts = new P();
+        $training = Database::customSelectFromATable('training', 'id, title', 'url', $uri[0], true);
+        $parts = $parts->globalFind('SELECT id, title FROM wlms_part WHERE url = :url AND training_id = :training_id', ['url' => $uri[1], 'training_id' =>$training['id']]);
+        array_push($lessons, Database::customSelectFromATable("lesson", 'id,title,resume,image,url', 'part_id', $parts[0]['id']));
 
         $view = new View("lesson-list", "back");
         $lesson = new Lesson();
@@ -27,7 +29,7 @@ class Part
         $view->assign("data", $lessons[0]);
         $view->assign("uri", $uri[1]);
         $view->assign("back", $uri[0]);
-        $view->assign("title", $parts['title']);
+        $view->assign("title", $parts[0]['title']);
         $view->assign("form", $form);
 
 
@@ -49,7 +51,7 @@ class Part
                     $lesson->setImage($link);
                     $lesson->setUrl($lesson->getTitle());
                     $lesson->setCode($_POST["code"]);
-                    $lesson->setPartId($parts['id']);
+                    $lesson->setPartId($parts[0]['id']);
 
                     $lesson->save();
 
@@ -64,16 +66,16 @@ class Part
     public function showFrontAction(){
         $uri = Helpers::getUrlAsArray();
         $lessons = [];
-        //var_dump($uri);
-        //exit;
+
         $parts = new P();
         $training = Database::customSelectFromATable('training', 'id, title', 'url', $uri[1], true);
-       // echo $training['id'];
-        //exit;
         $parts = $parts->globalFind('SELECT id, title FROM wlms_part WHERE url = :url AND training_id = :training_id', ['url' => $uri[2], 'training_id' =>$training['id']]);
         array_push($lessons, Database::customSelectFromATable("lesson", 'id,title,resume,image,url', 'part_id', $parts[0]['id']));
         $code = Database::customSelectFromATable('lesson', 'id, code', 'id', $lessons[0][0]['id']);
 
+       // echo '<pre>';
+        //var_dump($lessons);
+        //exit;
         $view = new View("library", "front");
         $lesson = new Lesson();
         $form = $lesson->formLesson();
