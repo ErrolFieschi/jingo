@@ -25,25 +25,6 @@
                 </div>
                 <p>Ajouter une formation</p>
             </div>
-            <div class="col-xl-3 col-md-3 col-sm-12 card--inverse">
-                <div class="card-center card--shadow">
-                    <img class="svg-dashboard--formation" src="/Content/Images/create_lesson.svg" alt="lesson">
-                </div>
-                <p>Formations favoris</p>
-            </div>
-
-            <div class="col-xl-3 col-md-3 col-sm-12 card--inverse">
-                <div class="card-center card--shadow">
-                    <img class="svg-dashboard--formation" src="/Content/Images/create_page.svg" alt="import page">
-                </div>
-                <p>Derniere formation modifié</p>
-            </div>
-            <div class="col-xl-3 col-md-3 col-sm-12 card--inverse">
-                <div class="card-center card--shadow">
-                    <img class="svg-dashboard--formation" src="/Content/Images/import_file.svg" alt="files">
-                </div>
-                <p>Formation à la une</p>
-            </div>
         </div>
     </section>
     <section>

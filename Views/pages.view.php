@@ -103,12 +103,32 @@
                             </div>
 
                             <div class="card-icon">
-                                <a href="/training/delete?id=<?= $rowData['training_id'] ?>"><img
-                                            src="/Content/svg/trash.svg"
-                                            alt="Trash button"></a>
+                                <form method="post" id="<?=$rowData['id']?>" action="/pages/visible">
+                                    <?php if ($rowData['visible'] == 1) : ?>
+                                        <input type="hidden" name="id_visible" value="0">
+                                        <input type="hidden" name="id" value="<?=$rowData['id']?>">
+                                        <a href="javascript:(0)" onclick="document.getElementById(<?=$rowData['id']?>).submit()">
+                                            <img src="/Content/svg/active_eye.svg" alt="edit button">
+                                        </a>
+                                    <?php else: ?>
+                                        <input type="hidden" name="id_visible" value="1">
+                                        <input type="hidden" name="id" value="<?=$rowData['id']?>">
+                                        <a href="javascript:(0)" onclick="document.getElementById(<?=$rowData['id']?>).submit()">
+                                            <img src="/Content/svg/no_active_eye.svg" alt="edit button">
+                                        </a>
+                                    <?php endif; ?>
+                                </form>
+                            </div>
+
+                            <div class="card-icon">
+                                <form method="post" id="<?=$rowData['id']?>" action="/pages/delete">
+                                    <input type="hidden" name="id" value="<?= $rowData['id'] ?>">
+                                    <a href="javascript:(0)" onclick="document.getElementById(<?=$rowData['id']?>).submit()">
+                                        <img src="/Content/svg/trash.svg" alt="edit button">
+                                    </a>
+                                </form>
                             </div>
                         </div>
-
                         <div class="card-button-validate" onclick="window.location='<?= $rowData['url'] ?>';">
                             <div class="card-icon">
                                 <i class="fas fa-arrow-circle-right" style="color: #3b3b3b;"></i>

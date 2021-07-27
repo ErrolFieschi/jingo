@@ -12,6 +12,33 @@ use App\Models\Page as P;
 
 class Page
 {
+    public function deletePagesAction()
+    {
+        $check_accueil = Database::customSelectFromATable('page', '*', 'id', $_POST['id']);
+        if ($check_accueil[0][1] == "accueil") {
+            header('Location: /pages?error=accueil_delete');
+        } else {
+            Database::deleteFromId("page", "id", $_POST['id']);
+            header('Location: /pages');
+        }
+    }
+
+    public function visiblePagesAction()
+    {
+        $check_accueil = Database::customSelectFromATable('page', '*', 'id', $_POST['id']);
+        var_dump($_POST['id_visible']);
+        if ($check_accueil[0][1] == "accueil") {
+            header('Location: /pages?error=accueil_visible');
+        }elseif ($_POST['id_visible'] == 0){
+
+            Database::updateOneRow('page', 'visible', 0, 'id', $_POST['id']); // Fonctionne
+            header('Location: /pages');
+        } else {
+            Database::updateOneRow('page', 'visible', 1, 'id', $_POST['id']); // Fonctionne
+            header('Location: /pages');
+        }
+    }
+
     public function createPageAction()
     {
         $view = new View("page", "page");

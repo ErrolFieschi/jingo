@@ -141,6 +141,16 @@
   action: updatePage
   auth: false
 
+/pages/delete:
+  controller: Page
+  action: deletePages
+  auth: true
+
+/pages/visible:
+  controller: Page
+  action: visiblePages
+  auth: true
+
 /navbar:
   controller: Navbar
   action: navEdit

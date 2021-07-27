@@ -4,7 +4,9 @@
     <?php endforeach;
     if ($code['code'] == null): ?>
         <div class="navbar">
-            <a class="site-title ml-10" style="color: white" href="#">JINGO</a>
+            <a class="site-title ml-10" style="color: white" href="/dashboard"><?= TITLE ?></a>
+            <a href="/page/accueil">Accueil</a>
+            <a href="/courses">Formations</a>
             <div id="placement_nav"></div>
         </div>
     <?php else: ?>
