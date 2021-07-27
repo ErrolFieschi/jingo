@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Core\Database;
 use App\Core\FormValidator;
 use App\Core\View;
 use App\Models\Lesson;
@@ -12,6 +13,37 @@ class Main{
 	public function statsAction(){
 
 		$view = new View("stats","back");
+
+        $userCtrl = new User();
+
+        $view->assign('nbUsers', $userCtrl->countRowWithoutCondition('user')[0]);
+        $view->assign('nbPages', $userCtrl->countRowWithoutCondition('page')[0]);
+        $view->assign('nbTrainings', $userCtrl->countRowWithoutCondition('training')[0]);
+        $view->assign('nbLessons', $userCtrl->countRowWithoutCondition('lesson')[0]);
+
+        $users = $userCtrl->customSelectFromATable('user', '*');
+        
+        $arr = array(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12);
+
+        foreach($arr as $index) {
+            $usersByDate[$index] = 0;
+        }
+
+        foreach($users as $user) {
+            $usersByDate[(int) date('m', strtotime($user['createdAt']))]++;
+        }
+
+        $view->assign('usersByDate', $usersByDate);
+
+        $trainingsByTag = $userCtrl->innerJoinGroupBy('training', 'training_tag', 'training_tag_id', 'name');
+
+        foreach($trainingsByTag as $key => $trainingByTag) {
+            $trainingsByTagName[$key] = $trainingByTag[0];
+            $trainingsByTagData[$key] = $trainingByTag[1];
+        }
+        
+        $view->assign('trainingsByTagName', $trainingsByTagName);
+        $view->assign('trainingsByTagData', $trainingsByTagData);
 	}
 
 	public function settingsAction(){

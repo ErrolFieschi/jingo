@@ -161,6 +161,22 @@ class Database
 
         return $query->fetch();
     }
+    
+    public function countRowWithoutCondition($table){
+        $query = $this->bdd->pdo->prepare("SELECT COUNT(*) FROM ".DBPREFIXE.$table." ;");
+
+        $query->execute();
+
+        return $query->fetch();
+    }
+
+    public function innerJoinGroupBy($table, $joinTable, $joinId, $joinName){
+        $query = $this->bdd->pdo->prepare("SELECT ".DBPREFIXE.$joinTable.".".$joinName.", COUNT(".$joinId.") FROM ".DBPREFIXE.$table." INNER JOIN ".DBPREFIXE.$joinTable." ON ".$joinId." = ".DBPREFIXE.$joinTable.".id GROUP BY ".DBPREFIXE.$joinTable.".".$joinName." ;");
+
+        $query->execute();
+
+        return $query->fetchAll();
+    }
 
     public function countRow($table, $search, $whereCondition, $whereValue){
         $query = $this->bdd->pdo->prepare("SELECT " . $search . " FROM ".DBPREFIXE.$table." WHERE ".$whereCondition. " = :find LIMIT 1;");
