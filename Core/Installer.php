@@ -2,6 +2,7 @@
 
 namespace App\Core;
 
+use App\Models\Page;
 use App\Models\User;
 use PDO;
 
@@ -66,6 +67,15 @@ class Installer {
                   $user->setCountry($_POST["country"]??$user->getCountry()??'FR');
                   $user->setRole(1);
                   $user->save();
+
+                  $page = new Page() ;
+                  $page->setName('Accueil');
+                  $page->setUrl(Helpers::stringify($page->getName()));
+                  $page->setActive(1);
+                  $page->setTitle('Bienvenue sur l\'accueil');
+                  $page->setCreateBy(1);
+                  $page->setMeta('Formation en ligne, formation, jingo');
+                  $page->save();
 
                   header('Location: /unistallInstaller');
               } else $view->assign('errors', $errors);
