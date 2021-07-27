@@ -11,6 +11,10 @@ require 'vendor/autoload.php';
 class Helpers
 {
 
+    /**
+     * @param String $string
+     * @return string
+     */
     public static function stringify(String $string) : string {
         $string = mb_strtolower($string) ;
         $string = str_replace(" ","_",$string) ;
@@ -19,6 +23,11 @@ class Helpers
         return $string ;
     }
 
+    /**
+     * @param $str
+     * @param string $charset
+     * @return string
+     */
     public static function remove_accents($str, $charset='utf-8') :string
     {
         $str = htmlentities($str, ENT_NOQUOTES, $charset);
@@ -29,10 +38,18 @@ class Helpers
         return $str;
     }
 
+    /**
+     * @param String $id
+     * @param String $url
+     * @return string
+     */
     public static function generateUrl(String $id, String $url) :string {
         return $id . "-" . $url ;
     }
 
+    /**
+     * @param $object
+     */
     public static function generateUrlAndSave($object)  {
         $class = explode("\\",get_class($object));
         $class = mb_strtolower($class[2]) ;
@@ -45,11 +62,20 @@ class Helpers
         }
     }
 
+    /**
+     * @return false|string[]
+     */
     public static function getUrlAsArray() {
        // $uri = substr($_SERVER["REQUEST_URI"],1) ;
         return explode("/",substr($_SERVER["REQUEST_URI"],1) ) ;
     }
 
+    /**
+     * @param String $objet
+     * @param String $contenu
+     * @param String $destinataire
+     * @throws Exception
+     */
     public static function sendMail(String $objet, String $contenu , String $destinataire) {
 
         $mail = new PHPMailer(true);

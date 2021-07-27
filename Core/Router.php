@@ -5,15 +5,20 @@ use App\Models\User;
 
 class Router
 {
-	private $routes = [];
-	private $uri;
-	private $routesPath = "routes.yml";
-	private $controller;
-	private $action;
-	private $auth;
+
+    private $routes = [];
+    private $uri;
+    private $routesPath = "routes.yml";
+    private $controller;
+    private $action;
+    private $auth;
 	private $role;
 
-	public function __construct($uri){
+    /**
+     * Router constructor.
+     * @param $uri
+     */
+    public function __construct($uri){
 		$this->setUri($uri);
 		if(file_exists($this->routesPath)){
 			//[/] => Array ( [controller] => Global [action] => default )
@@ -154,36 +159,58 @@ class Router
 		}
 	}
 
-	public function setUri($uri){
+    /**
+     * @param $uri
+     */
+    public function setUri($uri){
 		$this->uri = trim(mb_strtolower($uri));
 
 	}
 
-	public function redirect404() {
+    /**
+     *
+     */
+    public function redirect404() {
         header("HTTP/1.0 404 Not Found");
 	    new View('404') ;
         die();
     }
+
+    /**
+     *
+     */
     public static function redicrection404() {
         (new Router(''))->redirect404();
     }
 
-	public function setController($controller){
+    /**
+     * @param $controller
+     */
+    public function setController($controller){
 		$this->controller = $controller;
 	}
 
 
-	public function setAction($action){
+    /**
+     * @param $action
+     */
+    public function setAction($action){
 		$this->action = $action."Action";
 	}
 
 
-	public function getController(){
+    /**
+     * @return mixed
+     */
+    public function getController(){
 		return $this->controller;
 	}
 
 
-	public function getAction(){
+    /**
+     * @return mixed
+     */
+    public function getAction(){
 		return $this->action;
 	}
 
