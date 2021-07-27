@@ -14,20 +14,71 @@ class Training
 {
 
     //Suppression Formation
+    /**
+     *
+     */
     public function trainingDeleteAction()
     {
         if (!empty($_GET['id'] && isset($_GET['id']))) {
-            //get id of lesson
-            //get id of part
-            //$getIdPart = Database::customSelectFromATable('page', '*');
-            Database::deleteFromId('lesson', 'part_id', $_GET['id']);
-            Database::deleteFromId('part', 'training_id', $_GET['id']);
+
+            $parts = Database::customSelectFromATable('part','*','training_id',$_GET['id']) ;
+            $lessons = [] ;
+            foreach ($parts as $part) {
+                $lessons[] = Database::customSelectFromATable('lesson','*','part_id',$part['id']) ;
+            }
+            foreach ($lessons as $lesson) {
+                Database::deleteFromId('lesson','id',$lesson[0]['id']);
+            }
+            foreach ($parts as $part) {
+                Database::deleteFromId('part','id',$part['id']);
+            }
+
             Database::deleteFromId('training', 'id', $_GET['id']);
         }
         header('Location: /training');
     }
 
+    /**
+     * Updating a training
+     */
+    public function trainingUpdateAction() {
+        $view = new View('trainingUpdate','back');
+        $train = new \App\Models\Training() ;
+
+
+        if(!empty($_POST)) {
+
+            if (isset($_POST['id']) ) {
+                $training = Database::customSelectFromATable('training', '*', 'id', $_POST['id'], true);
+
+                $form = $train->formTrainingUpdate($training, '/training');
+                $view->assign('form', $form);
+
+            }
+            if ( isset($_POST['uri'])) {
+                $errors = FormValidator::check($form, $_POST);
+                if(empty($errors)) {
+                    $train->setId($_POST['id']);
+                    $train->setTitle(str_replace("'" ,"\'",$_POST['title'] ?? $training['title']));
+                    $train->setDescription(str_replace( "'","\'",$_POST['description']??$training['description']));
+                    $train->setTrainingTagId($_POST['themes']??$training['training_tag_id']) ;
+                    $train->setActive($_POST['active']??$training['active']);
+                    $train->setTemplate($_POST['template']??$training['template']);
+                    $train->setCreateby($training['createby']);
+                    $train->setUrl($training['url']);
+
+                    $train->save();
+                    header('Location: /training');
+                }else $view->assign('errors', $errors);
+            }
+        }
+    }
+
     //Afficher ou cacher formation
+
+    /**
+     *
+     */
     public function trainingVisibleAction()
     {
         if (isset($_GET['visible']) && isset($_GET['id'])) {
@@ -41,6 +92,9 @@ class Training
         header('Location: /training');
     }
 
+    /**
+     *
+     */
     public function trainingAction()
     {
 
@@ -100,6 +154,9 @@ class Training
         $view->assign("formTraining", $formTraining);
     }
 
+    /**
+     *
+     */
     public function showAction()
     {
         $uri = Helpers::getUrlAsArray();
@@ -140,6 +197,9 @@ class Training
         }
     }
 
+    /**
+     *
+     */
     public function showFrontAction()
     {
         $uri = Helpers::getUrlAsArray();
@@ -159,6 +219,9 @@ class Training
         $view->assign("form", $form);
     }
 
+    /**
+     *
+     */
     public function listAction()
     {
 

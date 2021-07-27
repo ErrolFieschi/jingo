@@ -49,10 +49,7 @@
                     <div class="d-flex justify-content-center h-100">
                         <div class="searchbar">
                             <input class="search_input" type="text" name="" placeholder="Rechercher une leçon">
-                            <button id="words_bt" class="dib bk-green-1 padctn-05" type="button" name="submit-search" onclick="SendWord(this)" style="border-radius: 0px 5px 5px 0px">
-                                <img class="dib" src="design/icones/arrows/search_white.png" height="22px">
-                            </button>
-                            <div id="suggestion" class="bk-white-1 padctn-05 pa wdt-2 shadow-1 zid-13 mt3 b_rad-5 dn"></div>
+
                             <a href="#" class="search_icon"><i class="fas fa-search"></i></a>
                         </div>
                     </div>
