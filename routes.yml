@@ -154,8 +154,7 @@
 /lesson/display:
   controller: Lessons
   action: display
-  auth: true
-  role: admin
+  auth: false
 
 /installer-delete:
   controller: Security

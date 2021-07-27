@@ -1,0 +1,107 @@
+
+/* Border */
+
+.border-left-1 {
+    border-left: #4e4e4e solid 0.5px;
+}
+
+/* Titre */
+
+.chap-title {
+    display: none;
+}
+
+.chap-link:hover .chap-title{
+    display: block;
+}
+
+.courses-title {
+    font-size: 2.5rem;
+}
+
+/* color */
+
+
+
+.bck-c-white {
+    background-color: white;
+}
+
+.bck-c-grey-1 {
+    background-color: #dde6f0;
+}
+
+.bck-c-grey-2 {
+    background-color: #6a22b3;
+}
+
+
+.bck-c-grey-3 {
+    background-color: #333;
+}
+
+/* Border */
+
+.b-r-10 {
+    border-radius: 10px;
+}
+
+.b-r-bg-bd {
+    border-radius: 0px 0px 10px 10px;
+}
+
+.color-white {
+    color: white;
+}
+
+
+/* Animation */
+
+.chap-animation-title {
+    -webkit-transition: all .1s;
+    -moz-transition: all .1s;
+    transition: all .1s;
+}
+
+.chap-animation-title:hover {
+    font-size: 1.15em; color: rebeccapurple;
+}
+
+/* Pour le FRONT */
+
+.content-container a {
+    font-family: "Lato", sans-serif;
+    color: teal;
+}
+
+.content-container figcaption {
+    font-family: "Lato", sans-serif;
+    font-style: italic;
+}
+
+.content-container p {
+    font-family: "Lato", sans-serif;
+}
+
+.content-container h1 {
+    color: #6a22b3;
+    font-family: "Lato", sans-serif;
+}
+
+.content-container h2 {
+    color: black;
+    font-family: "Lato", sans-serif;
+}
+
+.content-container h3 {
+    color: #6a22b3;
+    font-family: "Lato", sans-serif;
+}
+
+.content-container img {
+    width: 90%;
+    display: flex;
+    text-align: center;
+    text-align: -moz-center;
+    text-align: -webkit-center;
+}

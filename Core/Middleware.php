@@ -62,6 +62,8 @@ class Middleware
     }
 
     /**
+     * this method is testing if a part exist in current context. A part is include into a training
+     * In many differents trainings a part can exist so we have to verify all training too in which part name is equal
      * @param String $partName
      * @param String $formationName
      * @return bool
@@ -91,6 +93,7 @@ class Middleware
     }
 
     /**
+     * This method testing if a training is existing
      * @param String $formationName
      * @return bool
      */
@@ -101,6 +104,7 @@ class Middleware
     }
 
     /**
+     * Return Lesson controller name
      * @return string
      */
     public static function getControllerLesson() :string {
@@ -108,6 +112,7 @@ class Middleware
     }
 
     /**
+     * Return Part controller name
      * @return string
      */
     public static function getControllerPart() :string {
@@ -115,6 +120,7 @@ class Middleware
     }
 
     /**
+     * Return Formation controller name
      * @return string
      */
     public static function getControllerFormation() :string {
@@ -122,6 +128,7 @@ class Middleware
     }
 
     /**
+     * Return back action name to display Training, part and lessons list
      * @return string
      */
     public static function getAction() :string {
@@ -129,6 +136,7 @@ class Middleware
     }
 
     /**
+     * Return front action to display Training, part and lessons list
      * @return string
      */
     public static function getFrontAction() :string {
@@ -136,6 +144,8 @@ class Middleware
     }
 
     /**
+     * Check if Training, Part, Lessons needs connection
+     * All TPL doesn't need connection > return false
      * @return bool
      */
     public static function isAuthNeeded() :bool {
@@ -143,6 +153,7 @@ class Middleware
     }
 
     /**
+     * Checking if page exist
      * @param String $pageUrl
      * @return bool
      */
