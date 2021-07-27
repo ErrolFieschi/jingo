@@ -103,7 +103,8 @@ class Security{
 		}
 		$view->assign("form", $form);
 	}
-    public function unistallInstaller() {
+    public function uninstallInstallerAction() {
+        echo 'test' ;
         Secu::deleteInstaller();
 
         header('Status: 301 Permanently', false, 301);

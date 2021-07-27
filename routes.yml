@@ -150,7 +150,7 @@
   action: display
   auth: false
 
-/unistallInstaller:
+/installer-delete:
   controller: Security
-  action: unistallInstaller
+  action: uninstallInstaller
   auth: false
