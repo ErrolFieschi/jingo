@@ -12,6 +12,9 @@ class Helpers
 {
 
     /**
+     * Stringify string
+     * This method transform Title into valid url for Training / pages / part and lesson
+     * It removes also accented char and replace by none accented
      * @param String $string
      * @return string
      */
@@ -24,6 +27,7 @@ class Helpers
     }
 
     /**
+     * This method replace accented char by none accented
      * @param $str
      * @param string $charset
      * @return string
@@ -39,6 +43,7 @@ class Helpers
     }
 
     /**
+     * Generate url for lesson
      * @param String $id
      * @param String $url
      * @return string
@@ -48,6 +53,7 @@ class Helpers
     }
 
     /**
+     * Generate Url after creating lesson cuz we need ID inside
      * @param $object
      */
     public static function generateUrlAndSave($object)  {
@@ -63,6 +69,7 @@ class Helpers
     }
 
     /**
+     * Split uri into array and return it
      * @return false|string[]
      */
     public static function getUrlAsArray() {
@@ -71,6 +78,7 @@ class Helpers
     }
 
     /**
+     * This method send a email to someone
      * @param String $objet
      * @param String $contenu
      * @param String $destinataire
@@ -126,6 +134,22 @@ class Helpers
             header('Status: 301 Permanently', false, 301);
             header('Location: /login');
         }
+    }
+
+
+    static function extractKeywords($str) {
+        $min_word_length = 3;
+        $strip_arr = ["," ,"." ,";" ,":", "\"", "'", "“","”","(",")", "!","?"];
+        $str_clean = str_replace( $strip_arr, "", $str);
+        $str_arr = explode(' ', $str_clean);
+        $clean_arr = [];
+        foreach($str_arr as $word) {
+            if(strlen($word) > $min_word_length) {
+                $word = strtolower($word);
+                $clean_arr[] = $word;
+            }
+        }
+        return implode(',', $clean_arr);
     }
 
 }

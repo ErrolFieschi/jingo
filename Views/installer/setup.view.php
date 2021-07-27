@@ -8,6 +8,7 @@
                     <li style="color:red"><?= $error; ?></li>
                 <?php endforeach;
             endif; ?>
+            <a href="/install/2">Etape précédente</a>
             <h2>Installation - Etape 3/3</h2>
         </div>
 

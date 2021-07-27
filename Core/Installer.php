@@ -4,6 +4,7 @@ namespace App\Core;
 
 use App\Models\Page;
 use App\Models\User;
+use http\Client\Request;
 use PDO;
 
 class Installer {
@@ -49,7 +50,7 @@ class Installer {
         if(isset($_SESSION['isStepOneOk']) && $_SESSION['isStepOneOk'] == true
             && isset($_SESSION['isStepTwoOk']) && $_SESSION['isStepTwoOk'])
         {
-            $view = new View('installer/setup');
+            $view = new View('installer/setup','installer');
             $form = $this->formSettingsSite();
             $view->assign('form', $form);
 
@@ -89,8 +90,10 @@ class Installer {
     }
 
     public function setupMailingAction(){
+        if(isset($_SESSION['isStepTwoOk']))
+            unset($_SESSION['isStepTwoOk']) ;
         if(isset($_SESSION['isStepOneOk']) && $_SESSION['isStepOneOk'] == true) {
-            $view = new View('installer/setupMailing');
+            $view = new View('installer/setupMailing','installer');
             $form = $this->formSettingMailing();
             $view->assign('form', $form);
 
@@ -109,7 +112,14 @@ class Installer {
     }
 
     public function setupAction(){
-        $view = new View("installer/setupDB");
+        if($_SERVER["REQUEST_URI"] != '/install/1') {
+            header('Location: /install/1');
+        }
+
+        if(isset($_SESSION['isStepOneOk']))
+            unset($_SESSION['isStepOneOk']) ;
+
+        $view = new View("installer/setupDB",'installer');
         $form = $this->formSettingsDatabase();
         $view->assign("form", $form);
 
@@ -117,29 +127,28 @@ class Installer {
             $errors = FormValidator::check($form, $_POST);
             if (empty($errors)) {
 
-                $newInstaller = new Installer($_POST["DBHOST"], $_POST['DBNAME'], $_POST['DBUSER'], $_POST['DBPWD']);
+                if($newInstaller = new Installer($_POST["DBHOST"], $_POST['DBNAME'], $_POST['DBUSER'], $_POST['DBPWD'])) {
+                    if($newInstaller->pdo != null) {
+                        $newInstaller->createDatabase($newInstaller->db_name);
+                        $newInstaller->addNewUser($newInstaller->db_user_root, $newInstaller->db_user_pwd, $newInstaller->db_host);
+                        $newInstaller->grantPermissionsToUser($newInstaller->db_host);
 
-                $newInstaller->createDatabase($newInstaller->db_name);
-                $newInstaller->addNewUser($newInstaller->db_user_root, $newInstaller->db_user_pwd, $newInstaller->db_host);
-                $newInstaller->grantPermissionsToUser($newInstaller->db_host);
+                        $newInstaller->useDb($newInstaller->db_name);
 
-                $newInstaller->useDb($newInstaller->db_name);
+                        if( $sql = file_get_contents('Core/data.sql')) {
 
+                            $sql = str_replace('PREFIXE',$_POST['DBPREFIXE'],$sql);
 
-                if( $sql = file_get_contents('Core/data.sql')) {
+                            $query = $newInstaller->pdo->prepare($sql);
+                            $query->execute() ;
 
-                    $sql = str_replace('PREFIXE',$_POST['DBPREFIXE'],$sql);
+                        }
+                        $this->writeEnv($_POST);
 
-                    $query = $newInstaller->pdo->prepare($sql);
-                    $query->execute() ;
-
-
+                        $_SESSION['isStepOneOk'] = true;
+                        header('Location: /install/2');
+                    } else $view->assign('errors','echec de la connexion à la base de données');
                 }
-
-                $this->writeEnv($_POST);
-
-                $_SESSION['isStepOneOk'] = true;
-                header('Location: /install/2');
             } else {
                 $view->assign("errors", $errors);
             }

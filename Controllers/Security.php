@@ -16,6 +16,18 @@ class Security{
     public function adminAction(){
 
         $view = new View("dashboard","back");
+
+        $userCtrl = new User();
+
+        $trainingsByTag = $userCtrl->innerJoinGroupBy('training', 'training_tag', 'training_tag_id', 'name');
+
+        foreach($trainingsByTag as $key => $trainingByTag) {
+            $trainingsByTagName[$key] = $trainingByTag[0];
+            $trainingsByTagData[$key] = $trainingByTag[1];
+        }
+        
+        $view->assign('trainingsByTagName', $trainingsByTagName);
+        $view->assign('trainingsByTagData', $trainingsByTagData);
     }
 
 	public function loginAction(){

@@ -18,7 +18,7 @@
 <div class="container-back">
     <nav class="nav vertical-nav">
         <div class="nav-brand">
-            <a href="#">JINGO</a>
+            <a href="/dashboard">JINGO</a>
         </div>
         <ul>
             <li class="nav-item">
@@ -43,18 +43,6 @@
                 <a class="nav-link" href="/training">
                 <img src="/Content/svg/formation.svg" alt="icon">
                     <span>Formations</span>
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link " href="/lesson">
-                <img src="/Content/svg/lecon.svg" alt="icon">
-                    <span>Leçons</span>
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link " href="#">
-                <img src="/Content/svg/article.svg" alt="icon">
-                    <span>Articles</span>
                 </a>
             </li>
             <li class="nav-item">

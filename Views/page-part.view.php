@@ -1,4 +1,5 @@
 <div class="container-front">
+    <h1> <?= $title ?> </h1>
     <section>
         <ul class="p-0" id="columns">
             <?php foreach ($data as $rowData): ?>

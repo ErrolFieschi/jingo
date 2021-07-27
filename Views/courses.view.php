@@ -1,4 +1,5 @@
 <div class="container-front">
+    <h1> Mes cours </h1>
     <section class="mt-10">
         <?php
         foreach ($data as $rowData): ?>
