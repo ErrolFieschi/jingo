@@ -56,6 +56,8 @@ class Page
                     $page->setUrl($page->getTitle());
                     $page->setName($_POST["name"]);
                     $page->setMeta($_POST["meta"]);
+                    $page->setVisible($_POST['visible']);
+
                     $page->save();
 
                 } else {
@@ -66,6 +68,8 @@ class Page
                     $page->setUrl($_POST["name"]);
                     $page->setName($_POST["name"]);
                     $page->setMeta($_POST["meta"]);
+                    $page->setVisible($_POST['visible']);
+
                     $page->save();
                 }
             } else {

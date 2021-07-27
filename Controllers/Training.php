@@ -17,6 +17,11 @@ class Training
     public function trainingDeleteAction()
     {
         if (!empty($_GET['id'] && isset($_GET['id']))) {
+            //get id of lesson
+            //get id of part
+            //$getIdPart = Database::customSelectFromATable('page', '*');
+            Database::deleteFromId('lesson', 'part_id', $_GET['id']);
+            Database::deleteFromId('part', 'training_id', $_GET['id']);
             Database::deleteFromId('training', 'id', $_GET['id']);
         }
         header('Location: /training');
