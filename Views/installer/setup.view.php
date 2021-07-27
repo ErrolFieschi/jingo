@@ -8,7 +8,7 @@
                     <li style="color:red"><?= $error; ?></li>
                 <?php endforeach;
             endif; ?>
-            <h2>Installation - Etape 1/3</h2>
+            <h2>Installation - Etape 3/3</h2>
         </div>
 
     </div>

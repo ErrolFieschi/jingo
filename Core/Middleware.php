@@ -57,6 +57,10 @@ class Middleware
         return "show" ;
     }
 
+    public static function getFrontAction() :string {
+        return 'showFront' ;
+    }
+
     public static function isAuthNeeded() :bool {
         return false ; // ON NE GERE PAS POUR LE MOMENT
     }
