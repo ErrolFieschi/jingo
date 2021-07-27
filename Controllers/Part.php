@@ -29,6 +29,7 @@ class Part
         $view->assign("data", $lessons[0]);
         $view->assign("uri", $uri[1]);
         $view->assign("back", $uri[0]);
+        $view->assign("partId", $parts[0]['id']);
         $view->assign("title", $parts[0]['title']);
         $view->assign("form", $form);
 
@@ -112,6 +113,25 @@ class Part
         foreach ($orderlist as $k => $order) {
             Database::updateOneRow('part', 'order_part', $k, 'id', $order);
             echo 'La sauvegarde a bien été effectuée !';
+        }
+    }
+
+    public function searchAction(){
+
+        if (isset($_POST['query'])) {
+            $inpText = htmlspecialchars($_POST['query']);
+            $trainingId = htmlspecialchars($_POST['checkId']);
+            $uri = htmlspecialchars($_POST['uri']);
+            $part = new Lesson();
+            $part = $part->globalFind('SELECT id, title, url FROM wlms_part WHERE title LIKE :value AND training_id = :trainingId', ['value' => '%'.$inpText.'%', 'trainingId' => $trainingId]);
+
+            if ($part) {
+                foreach ($part as $row) {
+                    echo '<a href="'. '/' . $uri . '/' .$row['url'] .'" class="list-group-item list-group-item-action border-1" style="padding: 15px 0;">' . $row['title'] . '</a>';
+                }
+            } else {
+                echo '<p class="list-group-item border-1">Aucun chapitre trouvé</p>';
+            }
         }
     }
 
