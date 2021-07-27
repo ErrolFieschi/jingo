@@ -67,6 +67,7 @@ class Installer {
                   $user->setRole(1);
                   $user->save();
 
+                  header('Location: /login');
               } else $view->assign('errors', $errors);
           }
       } else Router::redicrection404();
@@ -113,11 +114,10 @@ class Installer {
                 if( $sql = file_get_contents('Core/data.sql')) {
 
                     $sql = str_replace('PREFIXE',$_POST['DBPREFIXE'],$sql);
-                    echo '<pre>' . $sql ;
 
                     $query = $newInstaller->pdo->prepare($sql);
                     $query->execute() ;
-                    echo 'YES' ;
+
 
                 }
 
@@ -130,6 +130,7 @@ class Installer {
             }
         }
   }
+
 
   private function writeEnv(Array $post) {
           foreach ($post as $key => $value) {
