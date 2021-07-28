@@ -53,6 +53,15 @@ create table PREFIXEtraining_tag
     name varchar(200) null
 );
 
+
+INSERT INTO PREFIXEtraining_tag (id, name) VALUES (1, 'Developpement');
+INSERT INTO PREFIXEtraining_tag (id, name) VALUES (2, 'Marketing');
+INSERT INTO PREFIXEtraining_tag (id, name) VALUES (3, 'Communication');
+INSERT INTO PREFIXEtraining_tag (id, name) VALUES (4, 'Sciences');
+INSERT INTO PREFIXEtraining_tag (id, name) VALUES (5, 'Sport');
+INSERT INTO PREFIXEtraining_tag (id, name) VALUES (6, 'Jeux videos');
+
+
 create table PREFIXEtraining
 (
     id              int auto_increment
@@ -107,11 +116,5 @@ create table PREFIXElesson
         foreign key (part_id) references PREFIXEpart (id)
 );
 
-INSERT INTO PREFIXEtraining_tag (id, name) VALUES (1, 'Developpement');
-INSERT INTO PREFIXEtraining_tag (id, name) VALUES (2, 'Marketing');
-INSERT INTO PREFIXEtraining_tag (id, name) VALUES (3, 'Communication');
-INSERT INTO PREFIXEtraining_tag (id, name) VALUES (4, 'Sciences');
-INSERT INTO PREFIXEtraining_tag (id, name) VALUES (5, 'Sport');
-INSERT INTO PREFIXEtraining_tag (id, name) VALUES (6, 'Jeux vidÃ©os');
 
 
