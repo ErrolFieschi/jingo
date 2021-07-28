@@ -82,7 +82,7 @@
                             </div>
                         </a>
                         <div class="card-block">
-                            <a href="<?= $rowData['url'] ?>">
+                            <a href="/page/<?= $rowData['url'] ?>">
                                 <h4 class="card-title"><?= $rowData['title'] ?></h4>
                             </a>
                             <a href="#" style="color: #c56f43;"><?= $rowData['name'] ?></a>
@@ -129,12 +129,6 @@
                                 </form>
                             </div>
 
-                        </div>
-
-                        <div class="card-button-validate" onclick="window.location='<?= $rowData['url'] ?>';">
-                            <div class="card-icon">
-                                <i class="fas fa-arrow-circle-right" style="color: #3b3b3b;"></i>
-                            </div>
                         </div>
                     </div>
                 </div>
