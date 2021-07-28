@@ -15,25 +15,6 @@
                 </div>
                 <p>Ajouter une leçon</p>
             </div>
-            <div class="col-xl-3 col-md-3 col-sm-12 card--inverse">
-                <div class="card-center card--shadow">
-                    <img class="svg-dashboard--formation" src="/Content/Images/create_lesson.svg" alt="lesson">
-                </div>
-                <p>Leçon favoris</p>
-            </div>
-
-            <div class="col-xl-3 col-md-3 col-sm-12 card--inverse">
-                <div class="card-center card--shadow">
-                    <img class="svg-dashboard--formation" src="/Content/Images/create_page.svg" alt="import page">
-                </div>
-                <p>Dernière leçon modifiée</p>
-            </div>
-            <div class="col-xl-3 col-md-3 col-sm-12 card--inverse">
-                <div class="card-center card--shadow">
-                    <img class="svg-dashboard--formation" src="/Content/Images/import_file.svg" alt="files">
-                </div>
-                <p>Leçon à la une</p>
-            </div>
         </div>
     </section>
     <section>
@@ -62,7 +43,9 @@
             </div>
         </div>
 
-        <?php foreach ($data as $rowData): ?>
+        <?php
+        if(empty($data)){echo 'Aucune lesson à afficher, il faut en créer une !';} else{
+        foreach ($data as $rowData): ?>
         <div class="row mb-4">
             <div class="col-sm-12">
                 <div class="card flex-row flex-nowrap card--shadow justify-content-between">
@@ -103,7 +86,7 @@
                 </div>
             </div>
         </div>
-        <?php endforeach; ?>
+        <?php endforeach;} ?>
     </section>
 </div>
 

@@ -4,7 +4,7 @@
              style="background-image: url('https://i.pinimg.com/originals/26/ae/12/26ae1241ca65ba8e8ff4a4d442c92566.png');">
             <div class="bg">
                 <h4>Ma leçon</h4>
-                <p class="my-0">L’endroit pour visionner ou modifier une leçon</p>
+                <p class="my-0">L’endroit pour visionner une leçon</p>
             </div>
         </div>
     </section>

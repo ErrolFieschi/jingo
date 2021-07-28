@@ -25,7 +25,7 @@
     <section>
         <div class="banner banner--text banner--header" style="background-image: url('https://i.pinimg.com/originals/26/ae/12/26ae1241ca65ba8e8ff4a4d442c92566.png');">
             <div class="bg">
-                <h4>List de chapitre</h4>
+                <h4>Liste des chapitre</h4>
                 <p class="my-0">L’endroit pour créer, modifier ou supprimer des chapitres</p>
             </div>
         </div>
@@ -37,25 +37,6 @@
                     <a href="javascript:void(0);"><img class="svg-dashboard--formation" src="/Content/Images/create_courses.svg" alt="register"></a>
                 </div>
                 <p>Ajouter un chapitre</p>
-            </div>
-            <div class="col-xl-3 col-md-3 col-sm-12 card--inverse">
-                <div class="card-center card--shadow">
-                    <img class="svg-dashboard--formation" src="/Content/Images/create_lesson.svg" alt="lesson">
-                </div>
-                <p>Chapitre favoris</p>
-            </div>
-
-            <div class="col-xl-3 col-md-3 col-sm-12 card--inverse">
-                <div class="card-center card--shadow">
-                    <img class="svg-dashboard--formation" src="/Content/Images/create_page.svg" alt="import page">
-                </div>
-                <p>Dernière chapitre modifiée</p>
-            </div>
-            <div class="col-xl-3 col-md-3 col-sm-12 card--inverse">
-                <div class="card-center card--shadow">
-                    <img class="svg-dashboard--formation" src="/Content/Images/import_file.svg" alt="files">
-                </div>
-                <p>Chapitre à la une</p>
             </div>
         </div>
     </section>
@@ -88,7 +69,9 @@
             </div>
         </div>
         <ul class="p-0" id="columns">
-        <?php foreach ($data as $rowData): ?>
+
+        <?php if(empty($data)){echo 'Aucun Chapitre à afficher, il faut en créer un !';} else{
+        foreach ($data as $rowData): ?>
         <li style="list-style: none;" id="Element_<?= $rowData['id'] ?>" data-article-id="<?= $rowData['id'] ?>" draggable="true" class="column">
             <div class="row mb-4">
                 <div class="col-sm-12">
@@ -120,7 +103,7 @@
                 </div>
             </div>
         </li>
-        <?php endforeach; ?>
+        <?php endforeach; } ?>
         </ul>
     </section>
 </div>
