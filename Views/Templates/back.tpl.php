@@ -18,7 +18,7 @@
 <div class="container-back">
     <nav class="nav vertical-nav">
         <div class="nav-brand">
-            <a href="/dashboard">JINGO</a>
+            <a href="/page/accueil">JINGO</a>
         </div>
         <ul>
             <li class="nav-item">
