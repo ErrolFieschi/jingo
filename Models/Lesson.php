@@ -202,14 +202,6 @@ class Lesson extends Database
                     "class" => "form-control",
                     "placeholder" => "Tapez votre résumé ici"
                 ],
-                "icon" => [
-                    "type" => "text",
-                    "label" => "Mes icons",
-                    "id" => "icon",
-                    "class" => "form-control",
-                    "placeholder" => "Tapez votre cours ici",
-                    "required" => true
-                ],
                 "code" => [
                     "type" => "textarea",
                     "label" => "Ma leçon",
@@ -260,14 +252,6 @@ class Lesson extends Database
                     "id" => "resume",
                     "value" => $data[0]['resume'],
                     "class" => "form-control"
-                ],
-                "icon" => [
-                    "type" => "text",
-                    "label" => "Mes icons",
-                    "id" => "icon",
-                    "value" => $data[0]['icon'],
-                    "class" => "form-control",
-                    "required" => true
                 ],
                 "code" => [
                     "type" => "textarea",

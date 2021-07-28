@@ -60,7 +60,7 @@
                     </div>
                 <div class="col-md-5 list-display">
                     <div class="list-group" id="show-list">
-                        <!-- liste des lessons par recherche -->
+                        <!-- liste des chapitres par recherche -->
                     </div>
                 </div>
             </div>
@@ -108,7 +108,7 @@
     </section>
 </div>
 <div class="modal fade show" id="modal" tabindex="-1" role="dialog" aria-labelledby="modal-form" aria-modal="true" style="display: none;">
-    <div class="modal-dialog modal- modal-dialog-centered modal-sm" role="document">
+    <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content" id="modal-content">
             <button type="button" class="close" aria-label="Close">
                 <span aria-hidden="true">&times;</span>

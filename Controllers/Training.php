@@ -186,7 +186,6 @@ class Training
                     $part->setCreateby('user');
                     $part->setTitle($_POST["title"]);
                     $part->setOrderPart(1);
-                    $part->setIcon($_POST["icon"]);
                     $part->setUrl($part->getTitle());
                     $part->setTrainingId($trainingId['id']);
 
