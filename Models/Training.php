@@ -74,7 +74,7 @@ class Training extends Database
      */
     public function setDescription($description): void
     {
-        $this->description = $description;
+        $this->description = htmlspecialchars($description);
     }
 
 
@@ -158,7 +158,7 @@ class Training extends Database
      */
     public function setTitle($title): void
     {
-        $this->title = trim($title);
+        $this->title = trim(htmlspecialchars($title));
     }
 
     /**

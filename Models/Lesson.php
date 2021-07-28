@@ -72,7 +72,7 @@ class Lesson extends Database
      */
     public function setResume($resume)
     {
-        $this->resume = $resume;
+        $this->resume = htmlspecialchars($resume);
     }
 
     /**
@@ -120,7 +120,7 @@ class Lesson extends Database
      */
     public function setTitle($title)
     {
-        $this->title = trim($title);
+        $this->title = trim(htmlspecialchars($title));
     }
 
     /**
@@ -136,7 +136,7 @@ class Lesson extends Database
      */
     public function setIcon($icon)
     {
-        $this->icon = $icon;
+        $this->icon = htmlspecialchars($icon);
     }
 
     /**

@@ -54,7 +54,7 @@ class Part extends Database
      */
     public function setTitle($title): void
     {
-        $this->title = trim($title);
+        $this->title = trim(htmlspecialchars($title));
     }
 
     /**
@@ -86,7 +86,7 @@ class Part extends Database
      */
     public function setIcon($icon): void
     {
-        $this->icon = $icon;
+        $this->icon = htmlspecialchars($icon);
     }
 
     /**
