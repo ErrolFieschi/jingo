@@ -19,7 +19,8 @@ class Part
 
         $parts = new P();
         $training = Database::customSelectFromATable('training', 'id, title', 'url', $uri[0], true);
-        $parts = $parts->globalFind('SELECT id, title FROM wlms_part WHERE url = :url AND training_id = :training_id', ['url' => $uri[1], 'training_id' =>$training['id']]);
+        $table = DBPREFIXE . 'part' ;
+        $parts = $parts->globalFind('SELECT id, title FROM '.$table.' WHERE url = :url AND training_id = :training_id', ['url' => $uri[1], 'training_id' =>$training['id']]);
         array_push($lessons, Database::customSelectFromATable("lesson", 'id,title,resume,image,url', 'part_id', $parts[0]['id']));
 
         $view = new View("lesson-list", "back");
@@ -69,7 +70,8 @@ class Part
 
         $parts = new P();
         $training = Database::customSelectFromATable('training', 'id, title', 'url', $uri[1], true);
-        $parts = $parts->globalFind('SELECT id, title FROM wlms_part WHERE url = :url AND training_id = :training_id', ['url' => $uri[2], 'training_id' =>$training['id']]);
+        $t = DBPREFIXE . 'part' ;
+        $parts = $parts->globalFind('SELECT id, title FROM '.$t.' WHERE url = :url AND training_id = :training_id', ['url' => $uri[2], 'training_id' =>$training['id']]);
         array_push($lessons, Database::customSelectFromATable("lesson", 'id,title,resume,image,url', 'part_id', $parts[0]['id']));
         $code = Database::customSelectFromATable('lesson', 'id, code', 'id', $lessons[0][0]['id']);
 
@@ -121,7 +123,8 @@ class Part
             $trainingId = htmlspecialchars($_POST['checkId']);
             $uri = htmlspecialchars($_POST['uri']);
             $part = new Lesson();
-            $part = $part->globalFind('SELECT id, title, url FROM wlms_part WHERE title LIKE :value AND training_id = :trainingId', ['value' => '%'.$inpText.'%', 'trainingId' => $trainingId]);
+            $talbe = DBPREFIXE . 'part' ;
+            $part = $part->globalFind('SELECT id, title, url FROM '.$talbe .' WHERE title LIKE :value AND training_id = :trainingId', ['value' => '%'.$inpText.'%', 'trainingId' => $trainingId]);
 
             if ($part) {
                 foreach ($part as $row) {

@@ -119,7 +119,7 @@ class Training
         $training_table.active,
         $training_table.url,
         $training_table.image
-        FROM wlms_training LEFT JOIN $training_tag_table
+        FROM DBPREFIXE.training LEFT JOIN $training_tag_table
         ON $training_table.training_tag_id = $training_tag_table.id ORDER BY $training_table.update_date", []);
         // ne pas afficher la premiere donnée qui est la donnée référence
 
@@ -248,7 +248,7 @@ class Training
         $training_table.active,
         $training_table.url,
         $training_table.image
-        FROM wlms_training LEFT JOIN $training_tag_table
+        FROM DBPREFIXE.training LEFT JOIN $training_tag_table
         ON $training_table.training_tag_id = $training_tag_table.id WHERE $training_table.active = 1 ORDER BY $training_table.update_date", []);
         // ne pas afficher la premiere donnée qui est la donnée référence
 

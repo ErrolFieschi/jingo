@@ -48,7 +48,8 @@ class Lessons
             $partId = htmlspecialchars($_POST['checkId']);
             $uri = htmlspecialchars($_POST['uri']);
             $lesson = new Lesson();
-            $lesson = $lesson->globalFind('SELECT id, title, url FROM wlms_lesson WHERE title LIKE :value AND part_id = :partId', ['value' => '%'.$inpText.'%', 'partId' => $partId]);
+            $table = DBPREFIXE . 'lesson' ;
+            $lesson = $lesson->globalFind('SELECT id, title, url FROM '.$table.' WHERE title LIKE :value AND part_id = :partId', ['value' => '%'.$inpText.'%', 'partId' => $partId]);
 
             if ($lesson) {
                 foreach ($lesson as $row) {

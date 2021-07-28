@@ -19,7 +19,7 @@ class User
         $user = new U();
 
         $formUpdateUser = $user->formUpdateUser();
-
+        $table = DBPREFIXE."user" ;
         $data = $user->globalFind("SELECT 
         id,
         firstname,
@@ -33,7 +33,7 @@ class User
         isDeleted,
         DATE_FORMAT(createdAt, '%d/%m/%Y') as createdAt,
         DATE_FORMAT(updatedAt, '%d/%m/%Y') as updatedAt
-        FROM wlms_user", []);
+        FROM $table ", []);
 
         $view->assign("data", $data);
         $view->assign("rolesUser", $user->rolesUser());
