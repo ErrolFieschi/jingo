@@ -25,7 +25,7 @@
     <section>
         <div class="banner banner--text banner--header" style="background-image: url('https://i.pinimg.com/originals/26/ae/12/26ae1241ca65ba8e8ff4a4d442c92566.png');">
             <div class="bg">
-                <h4>Liste des chapitre</h4>
+                <h4>Liste des chapitres</h4>
                 <p class="my-0">L’endroit pour créer, modifier ou supprimer des chapitres</p>
             </div>
         </div>
@@ -53,7 +53,7 @@
             </div>
             <div class="mb-4 ml-2">
                     <div class="input-group">
-                        <input type="text" name="search" id="search" class="form-control form-control-lg" placeholder="Rechercher une leçon..." autocomplete="off" required>
+                        <input type="text" name="search" id="search" class="form-control form-control-lg" placeholder="Rechercher un chapitre..." autocomplete="off" required>
                         <div class="input-group-append">
                             <button class="btn rounded-0" type="submit" name="submit"><i class="fas fa-search"></i></button>
                         </div>

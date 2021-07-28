@@ -160,17 +160,6 @@ class Part extends Database
                     "error" => "Le nom de la page doit faire entre 2 et 55 caractères",
                     "required" => true
                 ],
-                "icon" => [
-                    "type" => "text",
-                    "label" => "Icon du chapitre",
-                    "minLength" => 2,
-                    "maxLength" => 55,
-                    "id" => "part_icon",
-                    "class" => "popup_form_input",
-                    "placeholder" => "",
-                    "error" => "Le nom de la page doit faire entre 2 et 55 caractères",
-                    "required" => true
-                ],
             ],
         ];
     }
