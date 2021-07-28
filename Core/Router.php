@@ -20,8 +20,6 @@ class Router
      */
     public function __construct($uri){
 		$this->setUri($uri);
-		if($this->uri == "/")
-		    header('Location: /page/accueil');
 		if(file_exists($this->routesPath)){
 			//[/] => Array ( [controller] => Global [action] => default )
 			$this->routes = yaml_parse_file($this->routesPath);
