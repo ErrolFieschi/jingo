@@ -161,6 +161,10 @@ class Installer {
 
     private function writeEnv(Array $post) {
         foreach ($post as $key => $value) {
+            if($value == 'ENV') {
+                $file = '.env.' . $value ;
+                file_put_contents($file,'#Creation du fichier',FILE_TEXT) ;
+            }
             file_put_contents('.env',$key.'='.$value.PHP_EOL,FILE_APPEND) ;
         }
     }
