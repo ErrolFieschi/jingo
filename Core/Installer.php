@@ -85,7 +85,7 @@ class Installer {
                     system('cmd /c npm run');
                     system('cmd /c sass Content/scss/main.scss:Content/dist/main.css') ;
 
-                    //header('Location: /installer-delete');
+                    header('Location: /installer-delete');
                 } else $view->assign('errors', $errors);
             }
         } else Router::redicrection404();
