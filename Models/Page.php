@@ -55,7 +55,7 @@ class Page extends Database
      */
     public function setMeta($meta): void
     {
-        $this->meta = $meta;
+        $this->meta = Helpers::extractKeywords($meta);
     }
 
     /**

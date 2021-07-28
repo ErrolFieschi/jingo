@@ -121,14 +121,16 @@
                             </div>
 
                             <div class="card-icon">
-                                <form method="post" id="<?=$rowData['id']?>" action="/pages/delete">
+                                <form method="post" id="<?=$rowData['id']+1?>" action="/pages/delete">
                                     <input type="hidden" name="id" value="<?= $rowData['id'] ?>">
-                                    <a href="javascript:(0)" onclick="document.getElementById(<?=$rowData['id']?>).submit()">
+                                    <a href="javascript:(0)" onclick="document.getElementById(<?=$rowData['id']+1?>).submit()">
                                         <img src="/Content/svg/trash.svg" alt="edit button">
                                     </a>
                                 </form>
                             </div>
+
                         </div>
+
                         <div class="card-button-validate" onclick="window.location='<?= $rowData['url'] ?>';">
                             <div class="card-icon">
                                 <i class="fas fa-arrow-circle-right" style="color: #3b3b3b;"></i>

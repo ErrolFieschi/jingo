@@ -14,6 +14,7 @@ class Page
 {
     public function deletePagesAction()
     {
+        var_dump($_POST['id']);
         $check_accueil = Database::customSelectFromATable('page', '*', 'id', $_POST['id']);
         if ($check_accueil[0][1] == "accueil") {
             header('Location: /pages?error=accueil_delete');
