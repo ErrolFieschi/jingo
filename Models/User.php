@@ -78,7 +78,7 @@ class User extends Database
      */
     public function setFirstname($firstname)
     {
-        $this->firstname = $firstname;
+        $this->firstname = htmlspecialchars($firstname);
     }
 
     /**
@@ -94,7 +94,7 @@ class User extends Database
      */
     public function setLastname($lastname)
     {
-        $this->lastname = $lastname;
+        $this->lastname = htmlspecialchars($lastname);
     }
 
     /**
@@ -110,7 +110,7 @@ class User extends Database
      */
     public function setEmail($email)
     {
-        $this->email = mb_strtolower($email);
+        $this->email = mb_strtolower(htmlspecialchars($email));
     }
 
     /**
@@ -142,7 +142,7 @@ class User extends Database
      */
     public function setCountry(string $country)
     {
-        $this->country = $country;
+        $this->country = htmlspecialchars($country);
     }
 
     /**

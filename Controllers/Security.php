@@ -26,8 +26,8 @@ class Security{
             $trainingsByTagData[$key] = $trainingByTag[1];
         }
         
-        $view->assign('trainingsByTagName', $trainingsByTagName);
-        $view->assign('trainingsByTagData', $trainingsByTagData);
+        $view->assign('trainingsByTagName', $trainingsByTagName??null);
+        $view->assign('trainingsByTagData', $trainingsByTagData??null);
     }
 
 	public function loginAction(){

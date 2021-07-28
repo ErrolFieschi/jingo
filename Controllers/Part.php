@@ -48,7 +48,6 @@ class Part
                     $lesson->setCreateby('user');
                     $lesson->setTitle($_POST["title"]);
                     $lesson->setResume($_POST["resume"]);
-                    $lesson->setIcon($_POST["icon"]);
                     $lesson->setImage($link);
                     $lesson->setUrl($lesson->getTitle());
                     $lesson->setCode($_POST["code"]);
@@ -98,7 +97,6 @@ class Part
 
             $lesson->setTitle($_POST["title"]);
             $lesson->setResume($_POST["resume"]);
-            $lesson->setIcon($_POST["icon"]);
             $lesson->setCode($_POST["code"]);
             $lesson->setId($_POST["id"]);
             $lesson->save();

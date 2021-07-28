@@ -4,7 +4,6 @@ namespace App\Core;
 
 use App\Models\Page;
 use App\Models\User;
-use http\Client\Request;
 use PDO;
 
 class Installer {
@@ -59,6 +58,7 @@ class Installer {
                 if (empty($errors)) {
 
                     file_put_contents('.env','TITLE='.$_POST['TITLE'],FILE_APPEND);
+
                     $user = new User();
                     $user->setFirstname(htmlspecialchars($_POST["firstname"]));
                     $user->setLastname(htmlspecialchars($_POST["lastname"]));
@@ -68,6 +68,8 @@ class Installer {
                     $user->setCountry($_POST["country"]??$user->getCountry()??'FR');
                     $user->setRole(1);
                     $user->save();
+
+                    echo 'user' ;
 
                     $page = new Page() ;
                     $page->setName('Accueil');
@@ -145,6 +147,7 @@ class Installer {
                         }
                         $this->writeEnv($_POST);
 
+
                         $_SESSION['isStepOneOk'] = true;
                         header('Location: /install/2');
                     } else $view->assign('errors','echec de la connexion à la base de données');
@@ -158,6 +161,10 @@ class Installer {
 
     private function writeEnv(Array $post) {
         foreach ($post as $key => $value) {
+            if($value == 'ENV') {
+                $file = '.env.' . $value ;
+                file_put_contents($file,'#Creation du fichier',FILE_TEXT) ;
+            }
             file_put_contents('.env',$key.'='.$value.PHP_EOL,FILE_APPEND) ;
         }
     }
@@ -184,6 +191,12 @@ class Installer {
                     'type'=>'password',
                     'label'=>'Mot de passe de l\'adresse email',
                     'id'=>'pwd_mailing',
+                    'class'=>'form_input',
+                    'required'=>true
+                ],
+                'ENV'=>[
+                    'type'=>'text',
+                    'label'=>'Environement (dev,prod)',
                     'class'=>'form_input',
                     'required'=>true
                 ]
@@ -248,6 +261,12 @@ class Installer {
                     "class"=>"form_input",
                     "error"=>"Votre host doit faire entre 4 et 15 caractères",
                     "required"=>true
+                ],
+                'DBDRIVER'=>[
+                    'type'=>'text',
+                    'label'=>'Driver',
+                    'class'=>'form_input',
+                    'required'=>true
                 ],
                 "DBPORT"=>[
                     "type"=>"number",

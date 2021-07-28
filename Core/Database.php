@@ -63,7 +63,6 @@ class Database
 				VALUES ( :".
 					implode(",:", array_keys($columns))
 				." );");
-
             $query->execute($columns);
 
 		}else{

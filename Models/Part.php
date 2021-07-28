@@ -54,7 +54,7 @@ class Part extends Database
      */
     public function setTitle($title): void
     {
-        $this->title = trim($title);
+        $this->title = trim(htmlspecialchars($title));
     }
 
     /**
@@ -86,7 +86,7 @@ class Part extends Database
      */
     public function setIcon($icon): void
     {
-        $this->icon = $icon;
+        $this->icon = htmlspecialchars($icon);
     }
 
     /**
@@ -155,17 +155,6 @@ class Part extends Database
                     "minLength" => 2,
                     "maxLength" => 55,
                     "id" => "part_name",
-                    "class" => "popup_form_input",
-                    "placeholder" => "",
-                    "error" => "Le nom de la page doit faire entre 2 et 55 caractères",
-                    "required" => true
-                ],
-                "icon" => [
-                    "type" => "text",
-                    "label" => "Icon du chapitre",
-                    "minLength" => 2,
-                    "maxLength" => 55,
-                    "id" => "part_icon",
                     "class" => "popup_form_input",
                     "placeholder" => "",
                     "error" => "Le nom de la page doit faire entre 2 et 55 caractères",

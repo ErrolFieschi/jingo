@@ -103,7 +103,7 @@ class Page extends Database
      */
     public function setTitle($title): void
     {
-        $this->title = $title;
+        $this->title = htmlspecialchars($title);
     }
 
     /**
@@ -135,7 +135,7 @@ class Page extends Database
      */
     public function setName($name): void
     {
-        $this->name = $name;
+        $this->name = htmlspecialchars($name);
     }
 
     /**

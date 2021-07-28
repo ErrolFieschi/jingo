@@ -25,7 +25,7 @@
     <section>
         <div class="banner banner--text banner--header" style="background-image: url('https://i.pinimg.com/originals/26/ae/12/26ae1241ca65ba8e8ff4a4d442c92566.png');">
             <div class="bg">
-                <h4>List de chapitre</h4>
+                <h4>Liste des chapitres</h4>
                 <p class="my-0">L’endroit pour créer, modifier ou supprimer des chapitres</p>
             </div>
         </div>
@@ -38,25 +38,6 @@
                 </div>
                 <p>Ajouter un chapitre</p>
             </div>
-            <div class="col-xl-3 col-md-3 col-sm-12 card--inverse">
-                <div class="card-center card--shadow">
-                    <img class="svg-dashboard--formation" src="/Content/Images/create_lesson.svg" alt="lesson">
-                </div>
-                <p>Chapitre favoris</p>
-            </div>
-
-            <div class="col-xl-3 col-md-3 col-sm-12 card--inverse">
-                <div class="card-center card--shadow">
-                    <img class="svg-dashboard--formation" src="/Content/Images/create_page.svg" alt="import page">
-                </div>
-                <p>Dernière chapitre modifiée</p>
-            </div>
-            <div class="col-xl-3 col-md-3 col-sm-12 card--inverse">
-                <div class="card-center card--shadow">
-                    <img class="svg-dashboard--formation" src="/Content/Images/import_file.svg" alt="files">
-                </div>
-                <p>Chapitre à la une</p>
-            </div>
         </div>
     </section>
     <input type="hidden" id="checkId" value="<?= $trainingId ?>">
@@ -65,23 +46,21 @@
     <section>
         <div class="row col-sm-12">
             <div class="mb-4">
-                <a class="btn" href="training"><i class="fas fa-angle-double-left"></i> RETOUR</a>
+                <a class="btn" href="training"><i class="fas fa-angle-double-left"></i> Retour aux formations</a>
             </div>
             <div class="mb-4 ml-3">
                 <span class="btn btn--disable"><i class="fas fa-street-view pr-12" style="font-size: 15px;"></i> <?= mb_strtoupper($title); ?></span>
             </div>
             <div class="mb-4 ml-2">
-                <form action="#" method="post" class="">
                     <div class="input-group">
-                        <input type="text" name="search" id="search" class="form-control form-control-lg" placeholder="Rechercher une leçon..." autocomplete="off" required>
+                        <input type="text" name="search" id="search" class="form-control form-control-lg" placeholder="Rechercher un chapitre..." autocomplete="off" required>
                         <div class="input-group-append">
                             <button class="btn rounded-0" type="submit" name="submit"><i class="fas fa-search"></i></button>
                         </div>
                     </div>
-                </form>
                 <div class="col-md-5 list-display">
                     <div class="list-group" id="show-list">
-                        <!-- liste des lessons par recherche -->
+                        <!-- liste des chapitres par recherche -->
                     </div>
                 </div>
             </div>
@@ -90,7 +69,9 @@
             </div>
         </div>
         <ul class="p-0" id="columns">
-        <?php foreach ($data as $rowData): ?>
+
+        <?php if(empty($data)){echo 'Aucun Chapitre à afficher, il faut en créer un !';} else{
+        foreach ($data as $rowData): ?>
         <li style="list-style: none;" id="Element_<?= $rowData['id'] ?>" data-article-id="<?= $rowData['id'] ?>" draggable="true" class="column">
             <div class="row mb-4">
                 <div class="col-sm-12">
@@ -122,12 +103,12 @@
                 </div>
             </div>
         </li>
-        <?php endforeach; ?>
+        <?php endforeach; } ?>
         </ul>
     </section>
 </div>
 <div class="modal fade show" id="modal" tabindex="-1" role="dialog" aria-labelledby="modal-form" aria-modal="true" style="display: none;">
-    <div class="modal-dialog modal- modal-dialog-centered modal-sm" role="document">
+    <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content" id="modal-content">
             <button type="button" class="close" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
