@@ -133,7 +133,9 @@ class FormBuilder
             (!empty($configInput["required"]) ? "required" : "") . ">";
 
         foreach ($configInput["options"] as $key => $value) {
-            $html .= "<option ". ($configInput["value"] == $key ? "selected='selected' " : "") ." value='" . $key . "'>" . $value . "</option>";
+            if(!empty($value)) {
+                $html .= "<option ". ($configInput["value"] == $key ? "selected='selected' " : "") ." value='" . $key . "'>" . $value . "</option>";
+            }
         }
         $html .= "</select>";
 

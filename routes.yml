@@ -1,8 +1,4 @@
 
-/:
-  controller: Main
-  action: default
-  auth: false
 
 /admin:
   controller: Security
@@ -186,4 +182,14 @@
 /installer-delete:
   controller: Security
   action: uninstallInstaller
+  auth: false
+
+/lesson/search:
+  controller: Lessons
+  action: search
+  auth: false
+
+/part/search:
+  controller: Part
+  action: search
   auth: false

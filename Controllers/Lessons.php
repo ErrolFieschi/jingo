@@ -40,5 +40,24 @@ class Lessons
         $view->assign("chapitre", $uri[2]);
         $view->assign("back", $uri[0] . '/' . $uri[1]);
     }
+
+    public function searchAction(){
+
+        if (isset($_POST['query'])) {
+            $inpText = htmlspecialchars($_POST['query']);
+            $partId = htmlspecialchars($_POST['checkId']);
+            $uri = htmlspecialchars($_POST['uri']);
+            $lesson = new Lesson();
+            $lesson = $lesson->globalFind('SELECT id, title, url FROM wlms_lesson WHERE title LIKE :value AND part_id = :partId', ['value' => '%'.$inpText.'%', 'partId' => $partId]);
+
+            if ($lesson) {
+                foreach ($lesson as $row) {
+                    echo '<a href="'. '/' . $uri . '/' .$row['url'] .'" class="list-group-item list-group-item-action border-1" style="padding: 15px 0;">' . $row['title'] . '</a>';
+                }
+            } else {
+                echo '<p class="list-group-item border-1">Aucune leçon trouvée</p>';
+            }
+        }
+    }
 }
 

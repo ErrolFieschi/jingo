@@ -48,7 +48,7 @@ class Security{
         }
 
 		$user = new User();
-		$view = new View("login");
+		$view = new View("login",'installer');
 		$formLogin = $user->formLogin();
 
 		if(!empty($_POST)){
@@ -94,7 +94,7 @@ class Security{
 
 	public function registerAction(){
 		$user = new User();
-		$view = new View("register");
+		$view = new View("register",'installer');
 		$form = $user->formRegister();
 
 		if(!empty($_POST)){
@@ -116,10 +116,10 @@ class Security{
 		$view->assign("form", $form);
 	}
     public function uninstallInstallerAction() {
-        echo 'test' ;
+        session_destroy();
         Secu::deleteInstaller();
 
-        header('Status: 301 Permanently', false, 301);
+//        header('Status: 301 Permanently', false, 301);
         header('Location: /login');
     }
 
@@ -134,7 +134,7 @@ class Security{
 
 	public function forgetPasswordAction() {
         $user = new User();
-        $view = new View("forgetPWD") ;
+        $view = new View("forgetPWD",'installer') ;
         $form = $user->formForgetPassword();
 
         if(!empty($_POST)) {

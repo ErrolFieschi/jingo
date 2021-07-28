@@ -18,7 +18,7 @@ Autoload::register();
 new ConstantMaker();
 
 
-if(file_exists('Core/data.sql')) {
+if(file_exists('Core/data.sql') && $_SERVER['REQUEST_URI'] != '/installer-delete') {
 
     $controller = new Installer() ;
     if(!isset($_SESSION['isStepOneOk']) || $_SERVER['REQUEST_URI'] == '/install/1')
@@ -55,7 +55,7 @@ if(file_exists('Core/data.sql')) {
                         $controllerObjet->$action();
                     } else {
                         header('Location: /login');
-//                    header("location : /"); // RIEN A FOUTRE
+//                    header("location : /");
                     }
                 } else {
                     $controllerObjet->$action();

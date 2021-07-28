@@ -44,14 +44,21 @@
             <div class="mb-4 ml-2">
                 <span class="btn btn--disable"><i class="fas fa-street-view" style="font-size: 15px; padding-right: 10px;"></i> <?= mb_strtoupper($title); ?></span>
             </div>
+            <input type="hidden" id="checkId" value="<?= $partId ?>">
+            <input type="hidden" id="uri" value="<?= $back . '/' . $uri ?>">
+            <input type="hidden" id="url" value="/lesson/search">
             <div class="mb-4 ml-2">
-                <div class="container h-100">
-                    <div class="d-flex justify-content-center h-100">
-                        <div class="searchbar">
-                            <input class="search_input" type="text" name="" placeholder="Rechercher une leçon">
-
-                            <a href="#" class="search_icon"><i class="fas fa-search"></i></a>
+                <form action="#" method="post" class="">
+                    <div class="input-group">
+                        <input type="text" name="search" id="search" class="form-control form-control-lg" placeholder="Rechercher une leçon..." autocomplete="off" required>
+                        <div class="input-group-append">
+                            <button class="btn rounded-0" type="submit" name="submit"><i class="fas fa-search"></i></button>
                         </div>
+                    </div>
+                </form>
+                <div class="col-md-5 list-display">
+                    <div class="list-group" id="show-list">
+                        <!-- liste des lessons par recherche -->
                     </div>
                 </div>
             </div>
@@ -101,8 +108,6 @@
         <?php endforeach; ?>
     </section>
 </div>
-
-
 
 <?php if(isset($update) && !empty($update)){ ?>
 <div class="modal" id="modal1" role="dialog" aria-modal="true" style="display: block; padding-right: 16px;">
