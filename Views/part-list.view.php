@@ -65,20 +65,18 @@
     <section>
         <div class="row col-sm-12">
             <div class="mb-4">
-                <a class="btn" href="training"><i class="fas fa-angle-double-left"></i> RETOUR</a>
+                <a class="btn" href="training"><i class="fas fa-angle-double-left"></i> Retour aux formations</a>
             </div>
             <div class="mb-4 ml-3">
                 <span class="btn btn--disable"><i class="fas fa-street-view pr-12" style="font-size: 15px;"></i> <?= mb_strtoupper($title); ?></span>
             </div>
             <div class="mb-4 ml-2">
-                <form action="#" method="post" class="">
                     <div class="input-group">
                         <input type="text" name="search" id="search" class="form-control form-control-lg" placeholder="Rechercher une leçon..." autocomplete="off" required>
                         <div class="input-group-append">
                             <button class="btn rounded-0" type="submit" name="submit"><i class="fas fa-search"></i></button>
                         </div>
                     </div>
-                </form>
                 <div class="col-md-5 list-display">
                     <div class="list-group" id="show-list">
                         <!-- liste des lessons par recherche -->

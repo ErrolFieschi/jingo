@@ -48,14 +48,12 @@
             <input type="hidden" id="uri" value="<?= $back . '/' . $uri ?>">
             <input type="hidden" id="url" value="/lesson/search">
             <div class="mb-4 ml-2">
-                <form action="#" method="post" class="">
                     <div class="input-group">
                         <input type="text" name="search" id="search" class="form-control form-control-lg" placeholder="Rechercher une leçon..." autocomplete="off" required>
                         <div class="input-group-append">
                             <button class="btn rounded-0" type="submit" name="submit"><i class="fas fa-search"></i></button>
                         </div>
                     </div>
-                </form>
                 <div class="col-md-5 list-display">
                     <div class="list-group" id="show-list">
                         <!-- liste des lessons par recherche -->
