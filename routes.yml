@@ -1,5 +1,4 @@
 
-
 /admin:
   controller: Security
   action: default

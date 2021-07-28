@@ -83,9 +83,11 @@ class Security{
 
 	private function setTokenWhenConnectionOK(User $user) {
         $tmp = $user->searchOneColWithOneRow("user","id","email",$user->getEmail()) ;
-
         $user->setToken() ;
         $user->setId($tmp['id']) ;
+
+        $role = $user->searchOneColWithOneRow("user",'role','email',$user->getEmail()) ;
+        $user->setRole($role['role']) ;
 
         $user->save() ;
         $_SESSION['token'] = $user->getToken() ;
