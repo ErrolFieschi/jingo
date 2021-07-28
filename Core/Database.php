@@ -63,7 +63,7 @@ class Database
 				VALUES ( :".
 					implode(",:", array_keys($columns))
 				." );");
-
+			echo DBPREFIXE ;
             $query->execute($columns);
 
 		}else{
