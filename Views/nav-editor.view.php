@@ -7,6 +7,8 @@
             <a class="site-title ml-10" style="color: white" href="/dashboard"><?= TITLE ?></a>
             <a href="/page/accueil">Accueil</a>
             <a href="/courses">Formations</a>
+            <a href="/login">Connexion</a>
+            <a href="/logout">Deconnexion</a>
             <div id="placement_nav"></div>
         </div>
     <?php else: ?>
